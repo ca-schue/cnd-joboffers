@@ -1,0 +1,3 @@
+rootProject.name = 'authservice'
+include 'application'
+

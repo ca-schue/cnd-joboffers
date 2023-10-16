@@ -3,11 +3,12 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/auth-service" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/authservice" />
         <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/auth-service" />
+            <option value="$PROJECT_DIR$/authservice" />
+            <option value="$PROJECT_DIR$/authservice/application" />
           </set>
         </option>
       </GradleProjectSettings>
