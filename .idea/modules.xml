@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/authservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/authservice.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/authservice.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/authservice.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/authservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/authservice.primary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/authservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/authservice.secondary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/cnd-joboffers.iml" filepath="$PROJECT_DIR$/.idea/cnd-joboffers.iml" />
     </modules>
   </component>

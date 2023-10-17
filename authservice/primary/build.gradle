@@ -1,0 +1,59 @@
+plugins {
+    id "org.openapi.generator" version "6.6.0"
+}
+
+group = 'thi.cnd.authservice'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // TODO:
+    implementation project(':core')
+    implementation project(':secondary')
+
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.1.3'
+    implementation 'org.springframework.security:spring-security-oauth2-client'
+    implementation 'org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "build/generate-resources/main/src/main/java"
+        }
+    }
+}
+
+compileJava.dependsOn tasks.openApiGenerate
+
+openApiValidate {
+    inputSpec.set("$projectDir/src/main/resources/auth-service-rest-api-spec.yaml")
+}
+
+openApiGenerate {
+    inputSpec.set("$projectDir/src/main/resources/auth-service-rest-api-spec.yaml")
+    generatorName = "spring"
+    library = "spring-boot"
+    modelNameSuffix = "DTO"
+    modelPackage = "thi.cnd.authservice.api.generated.model"
+    apiPackage = "thi.cnd.authservice.api.generated"
+    typeMappings = [
+            "OffsetDateTime": "Instant"
+    ]
+    importMappings = [
+            "java.time.OffsetDateTime": "java.time.Instant"
+    ]
+    additionalProperties = [
+            "useSpringBoot3"      : true,
+            "useSpringController" : true,
+            "useTags"             : true,
+            "useResponseEntity"   : true,
+            "useOptional"         : true,
+            "openApiNullable"     : false,
+            "interfaceOnly"       : true,
+            "skipDefaultInterface": true
+    ]
+}

@@ -5,18 +5,73 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7baefe96-aa6a-46d1-8d3a-0092437b1fa4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/core/authservice.core.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/primary/authservice.primary.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/secondary/authservice.secondary.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/application/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountJwtProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/ClientJwtProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/ClientPasswordGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/ClientService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/JwtConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/JwtConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/PasswordEncoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/PasswordValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/exceptions/AccountAlreadyExistsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/exceptions/AccountNotFoundByEmailException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/exceptions/AccountNotFoundByIdException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/exceptions/ClientAlreadyExistsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/exceptions/ClientNotFoundByNameException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/exceptions/InternalServerException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/exceptions/WrongProviderException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/Account.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/AccountAccessToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/AccountId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/AccountProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/ClientWithPlaintextPassword.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/ports/primary/AccountServicePort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/ports/primary/ClientServicePort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/ports/secondary/AccountRepositoryPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/ports/secondary/ClientRepositoryPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/AccountController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/ClientController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/TestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/model/AccountLoginApiMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/model/ClientApiMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/AccountDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/AccountDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/AuthenticatedAccount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/AuthenticatedClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/AuthenticatedOidcIdToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/CustomRegisteredClientRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/FilterChains.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/resources/auth-service-rest-api-spec.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/secondary/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/mongodb/account/AccountMongoDBRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/mongodb/account/AccountMongoDBRepositoryComplex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/mongodb/account/AccountMongoDBRepositoryComplexImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/mongodb/account/AccountRepositoryAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/mongodb/account/model/AccountDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/mongodb/account/model/AccountDAOMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/mongodb/clients/ClientMongoDBRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/mongodb/clients/ClientRepositoryAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/mongodb/clients/model/ClientDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/mongodb/clients/model/ClientDaoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/thi/cnd/authservice/Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/test/java/thi/cnd/authservice/ApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/application/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/application/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +86,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/authservice">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -39,6 +97,17 @@
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package.json" />
+        <option value="Enum" />
+        <option value="Record" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -50,20 +119,111 @@
   "associatedIndex": 7
 }]]></component>
   <component name="ProjectId" id="2Wpw01iky95UVRC10QmyAWTc6Ch" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "20",
     "last_opened_file_path": "E:/.Persönliche Dateien/.Studium/.Master/CASE/CND/Repos/cnd-joboffers",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.18850575",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\.Persönliche Dateien\.Studium\.Master\CASE\CND\Repos\cnd-joboffers\authservice\primary\src\main\java\rest\security" />
+      <recent name="E:\.Persönliche Dateien\.Studium\.Master\CASE\CND\Repos\cnd-joboffers\authservice\primary\src\main\java\rest\controllers" />
+      <recent name="E:\.Persönliche Dateien\.Studium\.Master\CASE\CND\Repos\cnd-joboffers\authservice\primary\src\main\java" />
+      <recent name="E:\.Persönliche Dateien\.Studium\.Master\CASE\CND\Repos\cnd-joboffers\authservice\primary\src\main\rest\security" />
+      <recent name="E:\.Persönliche Dateien\.Studium\.Master\CASE\CND\Repos\cnd-joboffers\authservice\primary\src\main\rest" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="thi.cnd.authservice.secondary.databases.mongodb.accounts" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration name="authservice [openApiGenerate]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/authservice" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="openApiGenerate" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="authservice.application.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="thi.cnd.authservice.application.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="auth-service-rest-api-spec.yaml" type="SwaggerCodegen" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="customTemplatesPath" value="" />
+      <option name="envs">
+        <map />
+      </option>
+      <option name="generateToPath" value="E:\.Persönliche Dateien\.Studium\.Master\CASE\CND\Repos\cnd-joboffers\authservice\primary\src\main\gen" />
+      <option name="generationParameters">
+        <list />
+      </option>
+      <option name="generatorType" value="OPENAPI_GENERATOR_V6" />
+      <option name="jdkPath" value="D:\JetBrains\IntelliJ IDEA 2023.2.3\jbr\bin\java.exe" />
+      <option name="language" value="java" />
+      <option name="passParentEnvs" value="true" />
+      <option name="programParameters" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <option name="specificationPath" value="E:\.Persönliche Dateien\.Studium\.Master\CASE\CND\Repos\cnd-joboffers\authservice\primary\src\main\resources\auth-service-rest-api-spec.yaml" />
+      <option name="workingDirectory" value="E:\.Persönliche Dateien\.Studium\.Master\CASE\CND\Repos\cnd-joboffers\authservice\primary\src\main\resources" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.authservice [openApiGenerate]" />
+        <item itemvalue="OpenAPI/Swagger Code Generator.auth-service-rest-api-spec.yaml" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -72,11 +232,77 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1697442602452</updated>
-      <workItem from="1697442603471" duration="20000" />
+      <workItem from="1697442603471" duration="56281000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/AccountController.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/authservice/primary/build/generate-resources/main/src/main/java/thi/cnd/authservice/api/generated/AccountManagementApi.java</url>
+          <line>99</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-oauth2-client/6.1.4/b8bdbcac585598677bda6722aa711b28dc67e080/spring-security-oauth2-client-6.1.4-sources.jar!/org/springframework/security/oauth2/client/web/OAuth2LoginAuthenticationFilter.java</url>
+          <line>163</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-web/6.1.4/2ae6ad66bb0f3f5518e4df11b09b370f47a6a8dc/spring-security-web-6.1.4-sources.jar!/org/springframework/security/web/authentication/UsernamePasswordAuthenticationFilter.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/authservice/primary/build/generate-resources/main/src/main/java/thi/cnd/authservice/api/generated/AccountManagementApi.java</url>
+          <line>103</line>
+          <properties class="thi.cnd.authservice.api.generated.AccountManagementApi" method="registerInternalAccount">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-oauth2-client/6.1.4/b8bdbcac585598677bda6722aa711b28dc67e080/spring-security-oauth2-client-6.1.4-sources.jar!/org/springframework/security/oauth2/client/web/OAuth2LoginAuthenticationFilter.java</url>
+          <line>161</line>
+          <properties class="org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter" method="attemptAuthentication">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-web/6.1.4/2ae6ad66bb0f3f5518e4df11b09b370f47a6a8dc/spring-security-web-6.1.4-sources.jar!/org/springframework/security/web/authentication/UsernamePasswordAuthenticationFilter.java</url>
+          <line>71</line>
+          <properties class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" method="attemptAuthentication">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.apache.coyote.Response" memberName="status" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="((ResponseFacade) ((FirewalledResponse) response).response).response.coyoteResponse.status == 401" language="JAVA" custom="org.springframework.security.web.firewall.FirewalledResponse,org.apache.catalina.connector.ResponseFacade" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

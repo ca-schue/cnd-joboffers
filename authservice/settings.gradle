@@ -1,3 +1,6 @@
 rootProject.name = 'authservice'
 include 'application'
+include 'primary'
+include 'secondary'
+include 'core'
 

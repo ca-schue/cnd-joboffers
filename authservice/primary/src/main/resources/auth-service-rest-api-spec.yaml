@@ -1,0 +1,320 @@
+openapi: 3.0.0
+info:
+  title: Auth-Service
+  description: |
+    The api for the auth-service. This service creates users and clients to authenticate against the internal
+    applications of this project.
+  version: 1.0.0
+paths:
+  /accounts/loginInternalAccount:
+    post:
+      summary: Login to an internal account with basic auth. Returns access token.
+      operationId: loginInternalAccount
+      tags:
+        - Account Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalAccountLoginRequest'
+      responses:
+        '200':
+          description: Login to interal Account was successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+        '401':
+          description: Wrong credentials
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+  /accounts/loginOIDCAccount:
+    post:
+      summary: Login with OIDC via ID-Token as Bearer Token. Creates new account if email does not exist. Returns access token.
+      operationId: loginOIDCAccount
+      tags:
+        - Account Login
+      responses:
+        '200':
+          description: Login with OIDC was successful. Account exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+        '201':
+          description: Login with OIDC was successful. New Account created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+        '401':
+          description: Unsupported OIDC identity provider (ID-Token issuer).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+  /accounts/registerInternalAccount:
+    put:
+      summary: Registers a new internal account with the provided credentials.
+      operationId: registerInternalAccount
+      tags:
+        - Account Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalAccountRegistrationRequest'
+      responses:
+        '201':
+          description: Interal account registration was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '409':
+          description: Account with the email already exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+  #  /accounts/{accountID}/update-email:
+  #    post:
+  #      description: Updates the login email of the provided account
+  #      operationId: updateUserEmail
+  #      tags:
+  #        - Account Management
+  #      parameters:
+  #        - $ref: '#/components/parameters/UserId'
+  #      requestBody:
+  #        required: true
+  #        content:
+  #          application/json:
+  #            schema:
+  #              $ref: '#/components/schemas/UserEmailLoginUpdateRequest'
+  #      responses:
+  #        '200':
+  #          description: Update was successful
+  #          content:
+  #            application/json:
+  #              schema:
+  #               $ref: '#/components/schemas/User'
+  #        '404':
+  #          description: User not found for id.
+  /accounts/{accountId}:
+    delete:
+      description: Deletes the account.
+      operationId: deleteAccount
+      tags:
+        - Account Management
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      responses:
+        '204':
+          description: User was deleted.
+        '404':
+          description: User not found for id.
+  /clients/create:
+    put:
+      summary: Creates a new client.
+      operationId: createNewClient
+      tags:
+        - Client Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientCreationRequest'
+      responses:
+        '200':
+          description: Client was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCreationResponse'
+  /clients/{clientId}/reset-password:
+    post:
+      summary: Resets the password to a new random one.
+      operationId: resetPassword
+      tags:
+        - Client Management
+      parameters:
+        - in: path
+          name: clientId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Password was successfully reset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCreationResponse'
+  /token-introspection:
+    get:
+      summary: Get the account or client data from the provided access token.
+      operationId: tokenIntrospection
+      tags:
+        - Auth Endpoints
+      responses:
+        '200':
+          description: Token is valid and user data could be retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticatedSubjectResponse'
+
+components:
+  parameters:
+    AccountId:
+      in: path
+      name: accountId
+      schema:
+        $ref: '#/components/schemas/UUID'
+      required: true
+  schemas:
+    Account:
+      type: object
+      required:
+        - type
+        - provider
+        - id
+        - email
+      properties:
+        type:
+          type: string
+        provider:
+          type: string
+        id:
+          $ref: '#/components/schemas/UUID'
+        email:
+          type: string
+    InternalAccountRegistrationRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    InternalAccountLoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    #    AccountEmailLoginUpdateRequest:
+    #      type: object
+    #      required:
+    #        - email
+    #      properties:
+    #        email:
+    #          type: string
+
+    Client:
+      type: object
+      required:
+        - type
+        - name
+        - audiences
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+        audiences:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        last_password_change:
+          type: string
+          format: date-time
+    ClientCreationRequest:
+      type: object
+      required:
+        - name
+        - audiences
+      properties:
+        name:
+          type: string
+        audiences:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        scopes:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+    ClientCreationResponse:
+      type: object
+      required:
+        - name
+        - password
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+        audiences:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+
+    AccessTokenResponse:
+      type: object
+      required:
+        - access_token
+      properties:
+        access_token:
+          type: string
+    AuthenticatedSubjectResponse:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/Account'
+        - $ref: '#/components/schemas/Client'
+      discriminator:
+        propertyName: type
+        mapping:
+          Account: '#/components/schemas/Account'
+          Client: '#/components/schemas/Client'
+
+    UUID:
+      type: string
+      format: UUID
+    ThrowableProblem:
+      type: object
+      description: Response object, which is returned if an error occurred while processing the request.
+      properties:
+        title:
+          type: string
+        status:
+          type: string
+        detail:
+          type: string
+        error_code:
+          type: string
+        params:
+          type: array
+          items:
+            type: string
