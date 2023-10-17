@@ -1,10 +1,9 @@
 package thi.cnd.authservice.core.domain;
 
 import lombok.AllArgsConstructor;
-import thi.cnd.authservice.core.exceptions.AccountAlreadyExistsException;
-import thi.cnd.authservice.core.exceptions.AccountNotFoundByEmailException;
-import thi.cnd.authservice.core.exceptions.AccountNotFoundByIdException;
-import thi.cnd.authservice.core.exceptions.WrongProviderException;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+import thi.cnd.authservice.core.exceptions.*;
 import thi.cnd.authservice.core.model.Account;
 import thi.cnd.authservice.core.model.AccountAccessToken;
 import thi.cnd.authservice.core.model.AccountId;
@@ -12,6 +11,8 @@ import thi.cnd.authservice.core.model.AccountProvider;
 import thi.cnd.authservice.core.ports.primary.AccountServicePort;
 import thi.cnd.authservice.core.ports.secondary.AccountRepositoryPort;
 
+@Service
+@Validated
 @AllArgsConstructor
 public class AccountService implements AccountServicePort {
 
@@ -20,7 +21,7 @@ public class AccountService implements AccountServicePort {
     private final AccountFactory accountFactory;
 
     @Override
-    public Account registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException {
+    public Account registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException {
         Account account = accountFactory.buildInternal(email, password);
         return accountRepositoryPort.save(account);
     }

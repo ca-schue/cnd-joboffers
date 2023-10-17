@@ -1,6 +1,7 @@
 package thi.cnd.authservice.core.domain;
 
 import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class AccountJwtProvider {
 
     private final JwtConfig jwtConfig;
-    private final JwtBuilder jwtBuilder;
+    private final JwtBuilder jwtBuilder = Jwts.builder();
     public AccountAccessToken createJwt(Account account) {
         var now = Instant.now();
         var issuedAt = Date.from(now);

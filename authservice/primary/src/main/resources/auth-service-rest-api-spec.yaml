@@ -12,12 +12,6 @@ paths:
       operationId: loginInternalAccount
       tags:
         - Account Login
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/InternalAccountLoginRequest'
       responses:
         '200':
           description: Login to interal Account was successful

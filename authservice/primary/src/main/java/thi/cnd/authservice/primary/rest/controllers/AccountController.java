@@ -12,10 +12,7 @@ import thi.cnd.authservice.api.generated.model.AccessTokenResponseDTO;
 import thi.cnd.authservice.api.generated.model.AccountDTO;
 import thi.cnd.authservice.api.generated.model.InternalAccountLoginRequestDTO;
 import thi.cnd.authservice.api.generated.model.InternalAccountRegistrationRequestDTO;
-import thi.cnd.authservice.core.exceptions.AccountAlreadyExistsException;
-import thi.cnd.authservice.core.exceptions.AccountNotFoundByEmailException;
-import thi.cnd.authservice.core.exceptions.AccountNotFoundByIdException;
-import thi.cnd.authservice.core.exceptions.WrongProviderException;
+import thi.cnd.authservice.core.exceptions.*;
 import thi.cnd.authservice.core.model.Account;
 import thi.cnd.authservice.core.model.AccountAccessToken;
 import thi.cnd.authservice.core.model.AccountId;
@@ -39,12 +36,17 @@ public class AccountController implements AccountLoginApi, AccountManagementApi 
             account = accountServicePort.registerNewInternalAccount(requestDTO.getEmail(), requestDTO.getPassword());
         } catch (AccountAlreadyExistsException ex) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+        } catch (InvalidPasswordException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
         return ResponseEntity.ok(accountLoginApiMapper.toDTO(account));
     }
 
     @Override
-    public ResponseEntity<AccessTokenResponseDTO> loginInternalAccount(InternalAccountLoginRequestDTO requestDTO) {
+    public ResponseEntity<AccessTokenResponseDTO> loginInternalAccount() {
+        // TODO: temp
+        return ResponseEntity.ok(new AccessTokenResponseDTO("someToken"));
+        /*
         try {
             AccountAccessToken accessToken = accountServicePort.mintAccessTokenInternalProvider(requestDTO.getEmail());
             return ResponseEntity.ok(accountLoginApiMapper.toDTO(accessToken));
@@ -52,7 +54,7 @@ public class AccountController implements AccountLoginApi, AccountManagementApi 
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (WrongProviderException e) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
-        }
+        }*/
     }
 
     @Override

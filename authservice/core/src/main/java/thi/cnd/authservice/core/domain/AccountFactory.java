@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
+import thi.cnd.authservice.core.exceptions.InvalidPasswordException;
 import thi.cnd.authservice.core.model.Account;
 import thi.cnd.authservice.core.model.AccountId;
 import thi.cnd.authservice.core.model.AccountProvider;
@@ -28,7 +29,7 @@ public class AccountFactory {
         );
     }
 
-    public Account buildInternal(String email, String password) {
+    public Account buildInternal(String email, String password) throws InvalidPasswordException {
             return new Account(
                     new AccountId(),
                     AccountProvider.INTERNAL,
@@ -38,11 +39,11 @@ public class AccountFactory {
                     );
     }
 
-    private String validatePasswordAndEncode(String cleartextPassword) {
+    private String validatePasswordAndEncode(String cleartextPassword) throws InvalidPasswordException {
         if (passwordValidator.isCleartextPasswordValid(cleartextPassword)) {
             return passwordEncoder.encode(cleartextPassword);
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password must fulfill security requirements.");
+            throw new InvalidPasswordException("Password must fulfill security requirements.");
         }
     }
 
