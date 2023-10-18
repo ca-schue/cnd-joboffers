@@ -19,6 +19,7 @@ import thi.cnd.authservice.core.ports.secondary.ClientRepositoryPort;
 
 import java.security.interfaces.RSAPublicKey;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Configuration
 @AllArgsConstructor
@@ -55,6 +56,7 @@ public class ClientJwtProvider {
                 }
                 context.getClaims()
                         .audience(client.audiences().stream().toList()) // Add audiences to the token
+                        .claim(JwtConstants.SCOPE_TYPE_CLAIM_NAME, client.scopes().stream().collect(Collectors.joining(" ")))
                         .claim(JwtConstants.SUBJECT_TYPE_CLAIM_NAME, JwtConstants.CLIENT); // Add the 'client' type to the jwt token to identify client tokens
             }
         });

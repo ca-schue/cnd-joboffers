@@ -1,6 +1,7 @@
 package thi.cnd.authservice.primary.rest.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
@@ -48,9 +49,14 @@ public class CustomRegisteredClientRepository implements RegisteredClientReposit
     }
     private RegisteredClient findClientByNameAndUpdateLastLogin(String clientId) throws ClientNotFoundByNameException {
         Client client = port.findByNameAndUpdateLastLogin(clientId);
-        return RegisteredClient
+        RegisteredClient regClient =  RegisteredClient
                 .withId(client.name())
-                .scopes(scopes -> scopes.addAll(client.scopes())).build();
+                .clientId(client.name())
+                .clientSecret(client.encryptedPassword())
+                .scopes(scopes -> scopes.addAll(client.scopes()))
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .build();
+        return regClient;
     }
 
 }

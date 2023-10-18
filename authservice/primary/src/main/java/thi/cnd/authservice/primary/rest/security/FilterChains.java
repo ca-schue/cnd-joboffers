@@ -18,6 +18,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -32,13 +33,13 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import thi.cnd.authservice.core.domain.JwtConfig;
 import thi.cnd.authservice.core.domain.JwtConstants;
+import thi.cnd.authservice.core.domain.PasswordEncoder;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Configuration
-@EnableWebSecurity
 public class FilterChains {
 
     private final JwtConfig jwtConfig;
@@ -46,26 +47,62 @@ public class FilterChains {
     private final boolean csrfActive = false;
     private final boolean corsActive = false;
 
+    private final DaoAuthenticationProvider daoAuthenticationProvider;
+
+
     @Autowired
-    public FilterChains(JwtConfig jwtConfig) {
+    public FilterChains(JwtConfig jwtConfig, AccountDetailsService accountDetailsService, PasswordEncoder passwordEncoder) {
         this.jwtConfig = jwtConfig;
+        this.daoAuthenticationProvider = new DaoAuthenticationProvider();
+        this.daoAuthenticationProvider.setUserDetailsService(accountDetailsService);
+        this.daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
     }
 
+
     @Bean
-    @Order(1)
+    @Order(0)
     SecurityFilterChain internalAccountLoginFilterChain(HttpSecurity http) throws Exception {
         http
+                .securityMatcher("/accounts/loginInternalAccount")
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-                    //.requestMatchers("accounts/loginInternalAccount").permitAll()
-                    .requestMatchers("/accounts/registerInternalAccount").permitAll()
-                )
-                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .anyRequest().authenticated()
-                );
+                )
+                .authenticationProvider(this.daoAuthenticationProvider)
+                .httpBasic(Customizer.withDefaults());
         http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(AbstractHttpConfigurer::disable);
         return http.build();
+    }
+
+    @Bean
+    @Order(1)
+    SecurityFilterChain appFilterChain(HttpSecurity http) throws Exception {
+        http
+                .securityMatcher("/token-introspection", "/clients/{clientId}/reset-password", "/accounts/{accountId}")
+                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
+                        .anyRequest().authenticated()
+                )
+                .oauth2ResourceServer(oauth2 -> oauth2 // Only takes access tokens issued by this authorization server
+                        .jwt(jwtConfig -> jwtConfig
+                                .jwtAuthenticationConverter(new AccessTokenAuthenticationConverter())));
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.cors(AbstractHttpConfigurer::disable);
+        return http.build();
+    }
+
+    class AccessTokenAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
+        @Override
+        public AbstractAuthenticationToken convert(Jwt source) {
+            String subjectType = source.getClaimAsString(JwtConstants.SUBJECT_TYPE_CLAIM_NAME);
+            if (subjectType.equals(JwtConstants.USER)) {
+                return new AuthenticatedAccount(source);
+            } else if (subjectType.equals(JwtConstants.CLIENT)) {
+                return new AuthenticatedClient(source);
+            } else {
+                throw new RuntimeException("Unsupported subject type " + subjectType);
+            }
+        }
     }
 
     @Bean
@@ -83,6 +120,9 @@ public class FilterChains {
     }
 
 
+
+
+    // Auth server
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE) // Handles Client registration + login
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -96,21 +136,9 @@ public class FilterChains {
                 .issuer(jwtConfig.getIssuer())
                 .build();
     }
+
     /*
-
-    @Bean
-    @Order(1)
-    SecurityFilterChain internalAccountLoginFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-                        //.requestMatchers("accounts/loginInternalAccount").permitAll()
-                        .anyRequest().permitAll());
-                //.authenticationProvider(new DaoAuthenticationProvider())
-                //.httpBasic(Customizer.withDefaults()); // Only allows Basic Authentication
-        return http.build();
-    }
-
-
-
+    // OIDC
     @Bean
     @Order(2)
     SecurityFilterChain oidcAccountLoginFilterChain(HttpSecurity http) throws Exception {
@@ -155,31 +183,6 @@ public class FilterChains {
         }
     }
 
-    @Bean
-    @Order(3)
-    SecurityFilterChain appFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-                .requestMatchers("/token-introspection").permitAll()
-                .requestMatchers(HttpMethod.DELETE, "/accounts/{accountId}").authenticated()
-                .anyRequest().permitAll()
-                )
-                .oauth2ResourceServer(oauth2 -> oauth2 // Only takes access tokens issued by this authorization server
-                        .jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(new AccessTokenAuthenticationConverter())));
-        return http.build();
-    }
-
-    class AccessTokenAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
-        @Override
-        public AbstractAuthenticationToken convert(Jwt source) {
-            String subjectType = source.getClaimAsString(JwtConstants.SUBJECT_TYPE_CLAIM_NAME);
-            if (subjectType.equals(JwtConstants.USER)) {
-                return new AuthenticatedAccount(source);
-            } else if (subjectType.equals(JwtConstants.CLIENT)) {
-                return new AuthenticatedClient(source);
-            } else {
-                throw new RuntimeException("Unsupported subject type " + subjectType);
-            }
-        }
-    }*/
+*/
 
 }

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import thi.cnd.authservice.core.exceptions.AccountAlreadyExistsException;
 import thi.cnd.authservice.core.model.Account;
@@ -21,6 +22,7 @@ import java.time.Instant;
 @SpringBootApplication
 @EnableConfigurationProperties
 @EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
+@ComponentScan(basePackages = {"thi.cnd.authservice.api", "thi.cnd.authservice.core", "thi.cnd.authservice.primary", "thi.cnd.authservice.secondary"})
 @ConfigurationPropertiesScan
 public class Application {
 

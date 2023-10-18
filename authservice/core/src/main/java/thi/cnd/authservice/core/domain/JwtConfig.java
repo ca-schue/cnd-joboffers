@@ -1,12 +1,10 @@
 package thi.cnd.authservice.core.domain;
 
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -26,7 +24,7 @@ public class JwtConfig {
     private final String keyId;
     private final long validityInSeconds;
     private final String keyAlgorithm;
-    private final String signingAlgorithm;
+    private final SignatureAlgorithm signingAlgorithm;
     private final PublicKey publicKey;
     private final PrivateKey privateKey;
 
@@ -38,10 +36,11 @@ public class JwtConfig {
         this.keyId = keyId;
         this.validityInSeconds = validityInSeconds;
         this.keyAlgorithm = keyAlgorithm;
-        this.signingAlgorithm = signingAlgorithm;
+        this.signingAlgorithm = SignatureAlgorithm.valueOf(signingAlgorithm);
         this.oidcIssuers = oidcIssuers;
         this.publicKey = buildPublicKey(getPublicKeyBase64(), getKeyAlgorithm());
         this.privateKey = buildPrivateKey(getPrivateKeyBase64(), getKeyAlgorithm());
+
     }
 
     private static PublicKey buildPublicKey(String publicKey, String keyAlgorithm) {

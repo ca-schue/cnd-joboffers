@@ -24,7 +24,7 @@ public class AccountFactory {
                 new AccountId(),
                 AccountProvider.OIDC,
                 email,
-                "",
+                "", // No PW for OIDC Account
                 Instant.now()
         );
     }

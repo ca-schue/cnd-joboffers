@@ -3,6 +3,7 @@ package thi.cnd.authservice.primary.rest.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,6 +19,7 @@ import thi.cnd.authservice.core.model.AccountAccessToken;
 import thi.cnd.authservice.core.model.AccountId;
 import thi.cnd.authservice.core.ports.primary.AccountServicePort;
 import thi.cnd.authservice.primary.rest.model.AccountLoginApiMapper;
+import thi.cnd.authservice.primary.rest.security.AccountDetails;
 import thi.cnd.authservice.primary.rest.security.AuthenticatedOidcIdToken;
 
 import java.util.UUID;
@@ -44,17 +46,17 @@ public class AccountController implements AccountLoginApi, AccountManagementApi 
 
     @Override
     public ResponseEntity<AccessTokenResponseDTO> loginInternalAccount() {
-        // TODO: temp
-        return ResponseEntity.ok(new AccessTokenResponseDTO("someToken"));
-        /*
+        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        AccountDetails accountDetails = (AccountDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Account account = accountDetails.account();
         try {
-            AccountAccessToken accessToken = accountServicePort.mintAccessTokenInternalProvider(requestDTO.getEmail());
+            AccountAccessToken accessToken = accountServicePort.mintAccessTokenInternalProvider(account.email());
             return ResponseEntity.ok(accountLoginApiMapper.toDTO(accessToken));
         } catch (AccountNotFoundByEmailException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (WrongProviderException e) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage());
-        }*/
+        }
     }
 
     @Override
