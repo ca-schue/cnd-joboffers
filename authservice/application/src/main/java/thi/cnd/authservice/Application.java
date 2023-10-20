@@ -26,6 +26,7 @@ import java.time.Instant;
 @ConfigurationPropertiesScan
 public class Application {
 
+
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
         /*Account account = new Account(new AccountId(), AccountProvider.INTERNAL, "email", "pw", Instant.now());

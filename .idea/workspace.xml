@@ -5,21 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7baefe96-aa6a-46d1-8d3a-0092437b1fa4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/accessTokenAuthentication/AccessTokenAuthenticationConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/accessTokenAuthentication/SecuredEndpointsFilterChainConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/authorization/AuthenticationTypeAuthorizationManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/authorization/IdMatcherAuthorizationManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/loginAuthentication/ClientLoginFilterChainConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/loginAuthentication/InternalAccountLoginFilterChainConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/loginAuthentication/OidcLoginFilterChainConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/authservice/application/src/main/java/thi/cnd/authservice/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/application/src/main/java/thi/cnd/authservice/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountJwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountJwtProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/ClientJwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/ClientJwtProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/JwtConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/JwtConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/PasswordValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/PasswordValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/AccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/AuthenticatedAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/AuthenticatedAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/AuthenticatedClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/AuthenticatedClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/CustomRegisteredClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/CustomRegisteredClientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/FilterChains.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/FilterChains.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/resources/auth-service-rest-api-spec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/resources/auth-service-rest-api-spec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/FilterChains.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,8 +48,8 @@
         <option value="Enum" />
         <option value="Record" />
         <option value="JavaScript File" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -99,7 +94,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "20",
-    "last_opened_file_path": "C:/.Studium/CND/repos/simon/cloud-dev/auth-service",
+    "last_opened_file_path": "C:/.Studium/CND/repos/cnd-test/auth-service-test-jdk17",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -131,7 +126,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="OpenAPI/Swagger Code Generator.auth-service-rest-api-spec.yaml (1)">
+  <component name="RunManager" selected="Spring Boot.Application ">
     <configuration name="authservice [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -277,7 +272,7 @@
       <updated>1697442602452</updated>
       <workItem from="1697442603471" duration="56281000" />
       <workItem from="1697527049562" duration="17913000" />
-      <workItem from="1697556433901" duration="30171000" />
+      <workItem from="1697556433901" duration="41638000" />
     </task>
     <servers />
   </component>
@@ -340,6 +335,11 @@
           <line>48</line>
           <option name="timeStamp" value="112" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/authorization/IdMatcherAuthorizationManager.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="135" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/authservice/primary/build/generate-resources/main/src/main/java/thi/cnd/authservice/api/generated/AccountManagementApi.java</url>
           <line>107</line>
@@ -366,6 +366,33 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/6.1.4/1e3f4e172ee774b3dc0a10a2e6bf2273a369fb5/spring-security-core-6.1.4-sources.jar!/org/springframework/security/authorization/AuthenticatedAuthorizationManager.java</url>
+          <line>144</line>
+          <properties class="org.springframework.security.authorization.AuthenticatedAuthorizationManager.FullyAuthenticatedAuthorizationStrategy" method="isGranted">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/6.1.4/1e3f4e172ee774b3dc0a10a2e6bf2273a369fb5/spring-security-core-6.1.4-sources.jar!/org/springframework/security/authorization/AuthenticatedAuthorizationManager.java</url>
+          <line>153</line>
+          <properties class="org.springframework.security.authorization.AuthenticatedAuthorizationManager.AnonymousAuthorizationStrategy" method="isGranted">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/6.1.4/1e3f4e172ee774b3dc0a10a2e6bf2273a369fb5/spring-security-core-6.1.4-sources.jar!/org/springframework/security/authorization/AuthenticatedAuthorizationManager.java</url>
+          <line>162</line>
+          <properties class="org.springframework.security.authorization.AuthenticatedAuthorizationManager.RememberMeAuthorizationStrategy" method="isGranted">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="131" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
