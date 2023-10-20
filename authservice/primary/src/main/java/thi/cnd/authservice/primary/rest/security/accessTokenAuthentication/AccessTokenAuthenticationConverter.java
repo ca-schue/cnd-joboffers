@@ -11,7 +11,7 @@ public class AccessTokenAuthenticationConverter implements Converter<Jwt, Abstra
     @Override
     public AbstractAuthenticationToken convert(Jwt source) {
         String subjectType = source.getClaimAsString(JwtConstants.SUBJECT_TYPE_CLAIM_NAME);
-        if (subjectType.equals(JwtConstants.USER)) {
+        if (subjectType.equals(JwtConstants.ACCOUNT)) {
             return new AuthenticatedAccount(source);
         } else if (subjectType.equals(JwtConstants.CLIENT)) {
             return new AuthenticatedClient(source);

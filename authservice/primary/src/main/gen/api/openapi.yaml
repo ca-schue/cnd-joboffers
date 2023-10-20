@@ -1,0 +1,371 @@
+openapi: 3.0.0
+info:
+  description: |
+    The api for the auth-service. This service creates users and clients to authenticate against the internal
+    applications of this project.
+  title: Auth-Service
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /accounts/loginInternalAccount:
+    post:
+      description: Login to an internal account with basic auth. Returns an access
+        token with claim "subject-type = account"
+      operationId: loginInternalAccount
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+          description: Login to interal Account was successful
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+          description: Wrong credentials
+      security:
+      - internalAccountBasicAuth: []
+      tags:
+      - Account Login
+      x-accepts: application/json
+  /accounts/loginOIDCAccount:
+    post:
+      description: Login with via ID-token provided by OIDC provider (issuer must
+        be supported by auth. server). Creates new account if email does not exist.
+        Returns access token with access token with claim "subject-type = account".
+      operationId: loginOIDCAccount
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+          description: Login with OIDC was successful. Account exists.
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+          description: Login with OIDC was successful. New Account created.
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+          description: Unsupported OIDC identity provider (ID-Token issuer).
+      security:
+      - oidcIdToken: []
+      tags:
+      - Account Login
+      x-accepts: application/json
+  /accounts/registerInternalAccount:
+    put:
+      description: Registers a new internal account with the provided credentials.
+      operationId: registerInternalAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalAccountRegistrationRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: Interal account registration was successful.
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+          description: Account with the email already exists.
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+          description: Returned if any error occurred during the request.
+      tags:
+      - Account Management
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}:
+    delete:
+      description: "Deletes the account. {accountId} must match account id in access\
+        \ token"
+      operationId: deleteAccount
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+        style: simple
+      responses:
+        "204":
+          description: User was deleted.
+        "404":
+          description: User not found for id.
+      security:
+      - accountAccessToken: []
+      tags:
+      - Account Management
+      x-accepts: application/json
+  /clients/create:
+    put:
+      description: Creates a new client.
+      operationId: createNewClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientCreationRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCreationResponse'
+          description: Client was successfully created.
+      tags:
+      - Client Management
+      x-content-type: application/json
+      x-accepts: application/json
+  /clients/{clientId}/reset-password:
+    post:
+      description: "Resets the password to a new random one. {clientId} must match\
+        \ client id in access token"
+      operationId: resetPassword
+      parameters:
+      - explode: false
+        in: path
+        name: clientId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCreationResponse'
+          description: Password was successfully reset.
+      security:
+      - clientAccessToken: []
+      tags:
+      - Client Management
+      x-accepts: application/json
+  /token-introspection:
+    get:
+      description: Get detailed account or client data from the provided access token.
+      operationId: tokenIntrospection
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticatedSubjectResponse'
+          description: Token is valid and user data could be retrieved.
+      security:
+      - accountAccessToken: []
+      - clientAccessToken: []
+      tags:
+      - Auth Endpoints
+      x-accepts: application/json
+components:
+  parameters:
+    AccountId:
+      explode: false
+      in: path
+      name: accountId
+      required: true
+      schema:
+        $ref: '#/components/schemas/UUID'
+      style: simple
+  schemas:
+    Account:
+      example:
+        provider: provider
+        id: id
+        type: type
+        email: email
+      properties:
+        type:
+          type: string
+        provider:
+          type: string
+        id:
+          format: UUID
+          type: string
+        email:
+          type: string
+      required:
+      - email
+      - id
+      - provider
+      - type
+      type: object
+    InternalAccountRegistrationRequest:
+      example:
+        password: password
+        email: email
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+      - email
+      - password
+      type: object
+    InternalAccountLoginRequest:
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+      - email
+      - password
+      type: object
+    Client:
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+        audiences:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        last_password_change:
+          format: date-time
+          type: string
+      required:
+      - audiences
+      - name
+      - type
+      type: object
+    ClientCreationRequest:
+      example:
+        name: name
+        audiences:
+        - audiences
+        - audiences
+        scopes:
+        - scopes
+        - scopes
+      properties:
+        name:
+          type: string
+        audiences:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        scopes:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      required:
+      - audiences
+      - name
+      type: object
+    ClientCreationResponse:
+      example:
+        password: password
+        name: name
+        audiences:
+        - audiences
+        - audiences
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+        audiences:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      required:
+      - name
+      - password
+      type: object
+    AccessTokenResponse:
+      example:
+        access_token: access_token
+      properties:
+        access_token:
+          type: string
+      required:
+      - access_token
+      type: object
+    AuthenticatedSubjectResponse:
+      discriminator:
+        mapping:
+          Account: '#/components/schemas/Account'
+          Client: '#/components/schemas/Client'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/Account'
+      - $ref: '#/components/schemas/Client'
+      type: object
+    UUID:
+      format: UUID
+      type: string
+    ThrowableProblem:
+      description: "Response object, which is returned if an error occurred while\
+        \ processing the request."
+      properties:
+        title:
+          type: string
+        status:
+          type: string
+        detail:
+          type: string
+        error_code:
+          type: string
+        params:
+          items:
+            type: string
+          type: array
+      type: object
+  securitySchemes:
+    accountAccessToken:
+      bearerFormat: JWT
+      description: Access token issued by this auth. server at /accounts/loginInternalAccount
+        or /accounts/loginOIDCAccount. Used by external frontend for accessing microservice
+        endpoints. Identified by claim "subject-type = account"
+      scheme: bearer
+      type: http
+    clientAccessToken:
+      bearerFormat: JWT
+      description: Enriched access token issued by this auth. server using the client_credentials
+        OAuth2 flow. Used by internal microservices (clients) for accessing other
+        microservice endpoints. Identified by claim "subject-type = client"
+      scheme: bearer
+      type: http
+    internalAccountBasicAuth:
+      description: Basic Auhtentication used to login into an internal account. Will
+        be exchanged into access token with claim "subject-type = account"
+      scheme: basic
+      type: http
+    oidcIdToken:
+      bearerFormat: JWT
+      description: Identity token provided by an OIDC provider which must be supported
+        by this authentication server. Will be exchanged into access token with claim
+        "subject-type = account"
+      scheme: bearer
+      type: http
+

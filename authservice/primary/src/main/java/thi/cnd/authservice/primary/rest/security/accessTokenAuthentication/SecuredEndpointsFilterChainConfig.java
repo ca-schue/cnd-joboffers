@@ -17,6 +17,7 @@ import thi.cnd.authservice.primary.rest.security.authorization.IdMatcherAuthoriz
 public class SecuredEndpointsFilterChainConfig {
 
 
+
     @Bean
     SecurityFilterChain appFilterChain(HttpSecurity http) throws Exception {
         http

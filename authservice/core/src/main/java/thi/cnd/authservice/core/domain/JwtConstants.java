@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class JwtConstants {
-    public static final String USER = "user";
+    public static final String ACCOUNT = "account";
     public static final String CLIENT = "client";
 
     public static final String SUBJECT_TYPE_CLAIM_NAME = "subject-type";

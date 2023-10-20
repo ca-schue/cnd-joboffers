@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/authservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/authservice.primary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/authservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/authservice.secondary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/cnd-joboffers.iml" filepath="$PROJECT_DIR$/.idea/cnd-joboffers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/userservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/userservice.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/userservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/userservice.primary.main.iml" />
     </modules>
   </component>
 </project>

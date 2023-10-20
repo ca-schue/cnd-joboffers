@@ -20,7 +20,7 @@ public interface AccountLoginApiMapper {
     @Mapping(target = "type", ignore = true)
     @Mapping(target = "provider", source = "provider")
     @BeanMapping(ignoreUnmappedSourceProperties = { "encryptedPassword", "lastLogin" })
-    AccountDTO toDTO(Account user);
+    AccountDTO toDTO(Account account);
 
     default AccessTokenResponseDTO toDTO(AccountAccessToken token) {
         return new AccessTokenResponseDTO(token.accessToken());
