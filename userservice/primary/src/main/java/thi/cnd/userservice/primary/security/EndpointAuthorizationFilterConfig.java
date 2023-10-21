@@ -22,8 +22,10 @@ public class EndpointAuthorizationFilterConfig {
         http
                 //.securityMatcher("/token-introspection", "/clients/{clientId}/reset-password", "/accounts/{accountId}")
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-                        .requestMatchers("/users/register").access(AuthorizationManagers.allOf(
-                                AuthorityAuthorizationManager.hasRole(SecurityConstants.ACCOUNT)))
+                        .requestMatchers("/users/register").permitAll()
+                        .requestMatchers("/**").permitAll()
+                        //.access(AuthorizationManagers.allOf(
+                        //        AuthorityAuthorizationManager.hasRole(SecurityConstants.ACCOUNT)))
                 )
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2 // Only takes access tokens issued by this authorization server

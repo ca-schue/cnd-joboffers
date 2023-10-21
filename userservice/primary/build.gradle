@@ -43,8 +43,8 @@ openApiGenerate {
     generatorName = "spring"
     library = "spring-boot"
     modelNameSuffix = "DTO"
-    modelPackage = "info.thale.userservice.api.generated.model"
-    apiPackage = "info.thale.userservice.api.generated"
+    modelPackage = "thi.cnd.userservice.api.generated.model"
+    apiPackage = "thi.cnd.userservice.api.generated"
     typeMappings = [
             "OffsetDateTime": "Instant"
     ]
@@ -53,7 +53,7 @@ openApiGenerate {
     ]
     additionalProperties = [
             "useSpringBoot3"      : true,
-            "useSpringController" : true,
+            "useSpringController" : false,
             "useTags"             : true,
             "useResponseEntity"   : true,
             "useOptional"         : true,

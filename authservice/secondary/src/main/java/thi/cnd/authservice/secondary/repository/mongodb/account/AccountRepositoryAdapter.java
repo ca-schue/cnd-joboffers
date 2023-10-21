@@ -26,8 +26,8 @@ public class AccountRepositoryAdapter implements AccountRepositoryPort {
     @Override
     public Account save(Account account) throws AccountAlreadyExistsException {
         try {
-            var dao = mapper.toDAO(account);
-            var savedDao = repository.save(dao);
+            AccountDAO dao = mapper.toDAO(account);
+            AccountDAO savedDao = repository.save(dao);
             return mapper.toAccount(savedDao);
         } catch (DuplicateKeyException e) {
             throw new AccountAlreadyExistsException("Account ID already exists or email is already linked to existing account.");

@@ -86,10 +86,10 @@ paths:
                 $ref: '#/components/schemas/PublicUserProfile'
         '404':
           description: User not found for id.
-  /users/{user-id}/update-user-profile-email:
+  /users/{user-id}/update-user-settings:
     post:
-      description: Update the user profile email associated to this user.
-      operationId: updateUserProfileEmail
+      description: Update the user settings associated with this user.
+      operationId: updateUserSettings
       tags:
         - User
       parameters:
@@ -99,7 +99,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateUserProfileEmailRequest'
+              $ref: '#/components/schemas/UpdateUserSettingsRequest'
       responses:
         '200':
           description: User data was updated.
@@ -109,10 +109,10 @@ paths:
                 $ref: '#/components/schemas/User'
         '404':
           description: User not found for id.
-  /users/{user-id}/update-user-data:
+  /users/{user-id}/update-user-profile:
     post:
-      description: Update the user data associated with this user.
-      operationId: updateUserData
+      description: Update the user profile associated with this user.
+      operationId: updateUserProfile
       tags:
         - User
       parameters:
@@ -122,7 +122,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateUserDataRequest'
+              $ref: '#/components/schemas/UpdateUserProfileRequest'
       responses:
         '200':
           description: User data was updated.
@@ -455,26 +455,15 @@ components:
       properties:
         company_id:
           $ref: '#/components/schemas/UUID'
-    UpdateUserProfileEmailRequest:
-      type: object
-      required:
-        - user_profile_email
-      properties:
-        user_profile_email:
-          type: string
-    UpdateUserDataRequest:
-      type: object
-      properties:
-        user_profile:
-          $ref: '#/components/schemas/UpdateUserProfileRequest'
-        settings:
-          $ref: '#/components/schemas/UpdateUserSettingsRequest'
     UpdateUserProfileRequest:
       type: object
       required:
+        - user_profile_email
         - first_name
         - last_name
       properties:
+        user_profile_email:
+          type: string
         first_name:
           type: string
         last_name:

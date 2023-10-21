@@ -23,9 +23,9 @@ jar {
 
 dependencies {
     implementation project(':application')
-    //implementation project(':core')
-    //implementation project(':primary')
-    //implementation project(':secondary')
+    implementation project(':core')
+    implementation project(':primary')
+    implementation project(':secondary')
 }
 
 repositories {
@@ -55,6 +55,10 @@ subprojects {
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         implementation 'io.swagger.core.v3:swagger-annotations:2.2.15'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
+        implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+        implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+        annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
     }
 
 

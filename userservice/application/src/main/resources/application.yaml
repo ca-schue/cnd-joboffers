@@ -1,4 +1,9 @@
 spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/user-service
+      auto-index-creation: true
+      uuid-representation: standard
   security:
     oauth2:
       resourceserver:
