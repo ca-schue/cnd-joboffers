@@ -1,14 +1,12 @@
 package thi.cnd.authservice.core.domain;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.ietf.jgss.Oid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
+import thi.cnd.authservice.core.domain.password.PasswordValidator;
 import thi.cnd.authservice.core.exceptions.InvalidPasswordException;
-import thi.cnd.authservice.core.model.Account;
-import thi.cnd.authservice.core.model.AccountId;
-import thi.cnd.authservice.core.model.AccountProvider;
+import thi.cnd.authservice.core.model.account.*;
 
 import java.time.Instant;
 
@@ -19,23 +17,22 @@ public class AccountFactory {
     private final PasswordEncoder passwordEncoder;
     private final PasswordValidator passwordValidator;
 
-    public Account buildOidc(String email) {
-        return new Account(
+    public OidcAccount buildOidc(String subject) {
+        return new OidcAccount(
                 new AccountId(),
                 AccountProvider.OIDC,
-                email,
-                "", // No PW for OIDC Account
-                Instant.now()
+                Instant.now(),
+                subject
         );
     }
 
-    public Account buildInternal(String email, String password) throws InvalidPasswordException {
-            return new Account(
+    public InternalAccount buildInternal(String email, String password) throws InvalidPasswordException {
+            return new InternalAccount(
                     new AccountId(),
                     AccountProvider.INTERNAL,
+                    Instant.now(),
                     email,
-                    validatePasswordAndEncode(password),
-                    Instant.now()
+                    validatePasswordAndEncode(password)
                     );
     }
 

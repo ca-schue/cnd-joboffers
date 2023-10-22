@@ -30,7 +30,7 @@ public class Company {
 
     public Company(@NotNull UserId creator, @NotNull CompanyDetails details, @NotNull CompanyLinks links) {
         this(
-            new CompanyId(),
+            CompanyId.generateCompanyId(),
             creator,
             Set.of(creator),
             details,

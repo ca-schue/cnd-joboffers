@@ -15,8 +15,8 @@ import thi.cnd.userservice.core.model.company.CompanyDetails;
 import thi.cnd.userservice.core.model.company.CompanyId;
 import thi.cnd.userservice.core.model.company.CompanyLinks;
 import thi.cnd.userservice.core.model.user.UserId;
-import thi.cnd.userservice.core.ports.primary.CompanyServicePort;
-import thi.cnd.userservice.core.ports.primary.UserServicePort;
+import thi.cnd.userservice.core.port.primary.CompanyServicePort;
+import thi.cnd.userservice.core.port.primary.UserServicePort;
 
 import java.util.Optional;
 import java.util.Set;
@@ -50,6 +50,7 @@ public class CompanyController implements CompanyApi {
 
     @Override
     public ResponseEntity<Void> deleteCompany(UUID companyId) {
+        // TODO: Delete member/assocciations of all users
         try {
             companyServicePort.deleteCompanyById(new CompanyId(companyId));
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

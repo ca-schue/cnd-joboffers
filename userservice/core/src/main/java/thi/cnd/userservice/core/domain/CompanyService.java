@@ -15,12 +15,11 @@ import thi.cnd.userservice.core.model.company.CompanyId;
 import thi.cnd.userservice.core.model.company.CompanyLinks;
 import thi.cnd.userservice.core.model.user.User;
 import thi.cnd.userservice.core.model.user.UserId;
-import thi.cnd.userservice.core.ports.primary.CompanyServicePort;
-import thi.cnd.userservice.core.ports.secondary.CompanyRepositoryPort;
-import thi.cnd.userservice.core.ports.secondary.UserRepositoryPort;
+import thi.cnd.userservice.core.port.primary.CompanyServicePort;
+import thi.cnd.userservice.core.port.secondary.CompanyRepositoryPort;
+import thi.cnd.userservice.core.port.secondary.UserRepositoryPort;
 
 import java.util.Set;
-import java.util.function.Consumer;
 
 @Service
 @AllArgsConstructor
@@ -76,7 +75,8 @@ public class CompanyService implements CompanyServicePort {
 
     @Override
     public void deleteCompanyById(CompanyId companyId) throws CompanyNotFoundByIdException {
-        companyRepositoryPort.deleteCompanyById(companyId);
+        //companyRepositoryPort.deleteCompanyById(companyId);
+        userRepositoryPort.removeCompanyFromUser(companyId);
         // TODO: eventService.sendEvent(new CompanyDeletedEvent(companyId));
     }
 

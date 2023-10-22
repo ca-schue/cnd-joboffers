@@ -14,8 +14,8 @@ import thi.cnd.userservice.core.model.user.User;
 import thi.cnd.userservice.core.model.user.UserId;
 import thi.cnd.userservice.core.model.user.UserProfile;
 import thi.cnd.userservice.core.model.user.UserSettings;
-import thi.cnd.userservice.core.ports.primary.UserServicePort;
-import thi.cnd.userservice.primary.security.model.AuthenticatedAccount;
+import thi.cnd.userservice.core.port.primary.UserServicePort;
+import thi.cnd.userservice.primary.security.authentication.AuthenticatedAccount;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -103,8 +103,10 @@ public class UserController implements UserApi {
                             updateUserProfileRequestDTO.getLastName()
                     ));
             return ResponseEntity.ok(userApiMapper.toDTO(updatedUser));
-        } catch (UserNotFoundByIdException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (EmailAlreadyInUseException e1) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, e1.getMessage());
+        } catch (UserNotFoundByIdException e2) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e2.getMessage());
         }
     }
 

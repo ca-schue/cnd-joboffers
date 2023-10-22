@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import thi.cnd.userservice.core.model.company.Company;
 import thi.cnd.userservice.core.model.company.CompanyId;
 import thi.cnd.userservice.core.exception.*;
-import thi.cnd.userservice.core.ports.primary.CompanyServicePort;
-import thi.cnd.userservice.core.ports.primary.UserServicePort;
-import thi.cnd.userservice.core.ports.secondary.UserRepositoryPort;
+import thi.cnd.userservice.core.port.primary.CompanyServicePort;
+import thi.cnd.userservice.core.port.primary.UserServicePort;
+import thi.cnd.userservice.core.port.secondary.UserRepositoryPort;
 import thi.cnd.userservice.core.model.user.User;
 import thi.cnd.userservice.core.model.user.UserId;
 import thi.cnd.userservice.core.model.user.UserProfile;
@@ -44,11 +44,21 @@ public class UserService implements UserServicePort {
     }
 
     @Override
-    public User updateUserProfile(UserId userId, UserProfile userProfile) throws UserNotFoundByIdException {
+    public User updateUserProfile(UserId userId, UserProfile updatedUserProfile) throws UserNotFoundByIdException, EmailAlreadyInUseException {
         // TODO: Input verification?
         User user = userRepositoryPort.findUserById(userId);
-        user.setProfile(userProfile);
-        return userRepositoryPort.updateOrSaveUser(user);
+
+        // Input verification:
+        String newUserProfileEmail = updatedUserProfile.getEmail();
+        try {
+            userRepositoryPort.findUserByEmail(newUserProfileEmail);
+            throw new EmailAlreadyInUseException(newUserProfileEmail);
+        } catch (UserNotFoundByEmailException e) {
+            user.setProfile(updatedUserProfile);
+            return userRepositoryPort.updateOrSaveUser(user);
+        }
+
+
     }
 
     @Override

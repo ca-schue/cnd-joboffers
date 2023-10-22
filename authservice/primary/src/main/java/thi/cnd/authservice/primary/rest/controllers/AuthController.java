@@ -11,16 +11,19 @@ import thi.cnd.authservice.api.generated.AuthEndpointsApi;
 import thi.cnd.authservice.api.generated.model.AccountDTO;
 import thi.cnd.authservice.api.generated.model.AuthenticatedSubjectResponseDTO;
 import thi.cnd.authservice.api.generated.model.ClientDTO;
-import thi.cnd.authservice.core.domain.ClientService;
+import thi.cnd.authservice.api.generated.model.InternalAccountDTO;
 import thi.cnd.authservice.core.exceptions.AccountNotFoundByIdException;
 import thi.cnd.authservice.core.exceptions.ClientNotFoundByNameException;
-import thi.cnd.authservice.core.model.Account;
-import thi.cnd.authservice.core.model.AccountId;
-import thi.cnd.authservice.core.model.Client;
+import thi.cnd.authservice.core.model.account.Account;
+import thi.cnd.authservice.core.model.account.AccountId;
+import thi.cnd.authservice.core.model.account.InternalAccount;
+import thi.cnd.authservice.core.model.account.OidcAccount;
+import thi.cnd.authservice.core.model.client.Client;
 import thi.cnd.authservice.core.ports.secondary.AccountRepositoryPort;
 import thi.cnd.authservice.core.ports.secondary.ClientRepositoryPort;
-import thi.cnd.authservice.primary.rest.security.AuthenticatedAccount;
-import thi.cnd.authservice.primary.rest.security.AuthenticatedClient;
+import thi.cnd.authservice.primary.rest.account.AccountLoginApiMapper;
+import thi.cnd.authservice.primary.security.authentication.accessTokenAuthentication.AuthenticatedAccount;
+import thi.cnd.authservice.primary.security.authentication.accessTokenAuthentication.AuthenticatedClient;
 
 @RestController
 @AllArgsConstructor
@@ -28,6 +31,7 @@ public class AuthController implements AuthEndpointsApi {
 
     private final ClientRepositoryPort clientRepositoryPort;
     private final AccountRepositoryPort accountRepositoryPort;
+    private final AccountLoginApiMapper accountLoginApiMapper;
 
     @Override
     public ResponseEntity<AuthenticatedSubjectResponseDTO> tokenIntrospection() {
@@ -46,7 +50,11 @@ public class AuthController implements AuthEndpointsApi {
                 try {
                     AccountId accountId = authAcc.getAccountId();
                     Account account = accountRepositoryPort.findAccountById(accountId);
-                    yield ResponseEntity.ok(new AccountDTO("ACCOUNT", account.provider().name(), accountId.id(), account.email()));
+                    switch (account) {
+                        case InternalAccount ia -> { yield ResponseEntity.ok(accountLoginApiMapper.toInternalDTO(ia)); }
+                        case OidcAccount oa -> { yield ResponseEntity.ok(accountLoginApiMapper.toOidcDTO(oa)); }
+                        default -> throw new AccountNotFoundByIdException("Unknown account type: Neither internal nor oidc account.");
+                    }
                 } catch (AccountNotFoundByIdException e) {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "TODO");
                 }

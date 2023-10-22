@@ -16,7 +16,7 @@ public interface UserApiMapper {
 
     default UserDTO toDTO(User user) {
         return new UserDTO()
-                .id(user.getId().id())
+                .id(user.getId().getId())
                 .profile(
                         new UserProfileDTO()
                                 .userProfileEmail(user.getEmail())
@@ -25,8 +25,8 @@ public interface UserApiMapper {
                         )
                 .associations(
                         new UserCompanyAssociationDTO()
-                                .memberOf(user.getAssociations().memberOf().stream().map(CompanyId::id).collect(Collectors.toList()))
-                                .invitedTo(user.getAssociations().invitedTo().stream().map(CompanyId::id).collect(Collectors.toList()))
+                                .memberOf(user.getAssociations().memberOf().stream().map(CompanyId::getId).collect(Collectors.toList()))
+                                .invitedTo(user.getAssociations().invitedTo().stream().map(CompanyId::getId).collect(Collectors.toList()))
                         )
                 .settings(
                         new UserSettingsDTO()
@@ -41,7 +41,7 @@ public interface UserApiMapper {
 
     default PublicUserProfileDTO toPublicProfileDTO(User user) {
         return new PublicUserProfileDTO()
-                .id(user.getId().id())
+                .id(user.getId().getId())
                 .firstName(user.getProfile().getFirstName())
                 .lastName(user.getProfile().getLastName());
     }

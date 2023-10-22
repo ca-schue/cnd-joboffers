@@ -43,10 +43,10 @@ public interface CompanyApiMapper {
                 .content(page.map(this::toPublicProfileDTO).getContent());
     }
 
-    default UUID toUUID(CompanyId companyId) { return companyId.id(); }
+    default UUID toUUID(CompanyId companyId) { return companyId.getId(); }
 
     default UUID toUUID(UserId userId) {
-        return userId.id();
+        return userId.getId();
     }
 
 }

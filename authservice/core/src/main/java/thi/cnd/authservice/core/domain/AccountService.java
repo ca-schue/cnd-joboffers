@@ -3,11 +3,9 @@ package thi.cnd.authservice.core.domain;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import thi.cnd.authservice.core.domain.jwt.AccountJwtProvider;
 import thi.cnd.authservice.core.exceptions.*;
-import thi.cnd.authservice.core.model.Account;
-import thi.cnd.authservice.core.model.AccountAccessToken;
-import thi.cnd.authservice.core.model.AccountId;
-import thi.cnd.authservice.core.model.AccountProvider;
+import thi.cnd.authservice.core.model.account.*;
 import thi.cnd.authservice.core.ports.primary.AccountServicePort;
 import thi.cnd.authservice.core.ports.secondary.AccountRepositoryPort;
 
@@ -21,23 +19,40 @@ public class AccountService implements AccountServicePort {
     private final AccountFactory accountFactory;
 
     @Override
-    public Account registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException {
-        Account account = accountFactory.buildInternal(email, password);
-        return accountRepositoryPort.save(account);
-    }
-
-    private Account registerNewOidcAccount(String email) throws AccountAlreadyExistsException {
-        Account account = accountFactory.buildOidc(email);
-        return accountRepositoryPort.save(account);
+    public InternalAccount registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException {
+        InternalAccount internalAccount = accountFactory.buildInternal(email, password);
+        accountRepositoryPort.saveInternalAccount(internalAccount);
+        return internalAccount;
     }
 
     @Override
-    public AccountAccessToken mintAccessTokenInternalProvider(String email) throws AccountNotFoundByEmailException, WrongProviderException {
-        Account account = getValidatedAccount(AccountProvider.INTERNAL, email);
+    public OidcAccount registerNewOidcAccount(String subject) throws AccountAlreadyExistsException {
+        OidcAccount oidcAccount = accountFactory.buildOidc(subject);
+        accountRepositoryPort.saveOidcAccount(oidcAccount);
+        return oidcAccount;
+    }
+
+    @Override
+    public InternalAccount updateInternalAccountEmail(AccountId accountId, String email) throws EmailAlreadyInUserException, AccountNotFoundByIdException {
+        try {
+            accountRepositoryPort.findInternalAccountByEmail(email);
+            throw new EmailAlreadyInUserException("Email " + email + " already in use by another account");
+        } catch (AccountNotFoundByEmailException e) {
+            return accountRepositoryPort.updateInternalAccountEmail(accountId, email);
+        }
+    }
+
+    @Override
+    public AccountAccessToken mintAccessToken(Account account) {
         return accountJwtProvider.createJwt(account);
     }
 
     @Override
+    public void deleteAccount(AccountId accountId) throws AccountNotFoundByIdException {
+        accountRepositoryPort.delete(accountId);
+    }
+
+    /*@Override
     public AccountAccessToken mintAccessTokenOidcProvider(String email) throws WrongProviderException {
         Account account;
         try {
@@ -50,8 +65,9 @@ public class AccountService implements AccountServicePort {
             }
         }
         return accountJwtProvider.createJwt(account);
-    }
+    }*/
 
+    /*
     private Account getValidatedAccount(AccountProvider accountProvider, String email) throws AccountNotFoundByEmailException, WrongProviderException {
         Account account = accountRepositoryPort.findAccountByEmail(email);
         if (account.provider() != accountProvider) {
@@ -59,11 +75,8 @@ public class AccountService implements AccountServicePort {
         } else {
             return account;
         }
-    }
+    }*/
 
-    @Override
-    public void deleteAccount(AccountId accountId) throws AccountNotFoundByIdException {
-        accountRepositoryPort.delete(accountId);
-    }
+
 
 }

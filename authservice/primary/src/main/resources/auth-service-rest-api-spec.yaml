@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Auth-Service
   description: |
-    The api for the auth-service. This service creates users and clients to authenticate against the internal
+    The api for the auth-service. This service creates accounts and clients to authenticate against the internal
     applications of this project.
   version: 1.0.0
 paths:
@@ -23,10 +23,6 @@ paths:
                 $ref: '#/components/schemas/AccessTokenResponse'
         '401':
           description: Wrong credentials
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ThrowableProblem'
   /accounts/loginOIDCAccount:
     post:
       description: Login with via ID-token provided by OIDC provider (issuer must be supported by auth. server). Creates new account if email does not exist. Returns access token with access token with claim "subject-type = account".
@@ -42,20 +38,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessTokenResponse'
-        '201':
-          description: Login with OIDC was successful. New Account created.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessTokenResponse'
+        #        '201':
+        #          description: Login with OIDC was successful. New Account created.
+        #          content:
+        #            application/json:
+        #              schema:
+        #                $ref: '#/components/schemas/AccessTokenResponse'
         '401':
           description: Unsupported OIDC identity provider (ID-Token issuer).
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ThrowableProblem'
   /accounts/registerInternalAccount:
-    put:
+    post:
       description: Registers a new internal account with the provided credentials.
       operationId: registerInternalAccount
       tags:
@@ -75,39 +67,31 @@ paths:
                 $ref: '#/components/schemas/Account'
         '409':
           description: Account with the email already exists.
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ThrowableProblem'
         default:
           description: Returned if any error occurred during the request.
+  /accounts/{accountId}/update-email:
+    put:
+      description: Updates the login email of the provided account
+      operationId: updateAccountEmail
+      tags:
+        - Account Management
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountEmailUpdateRequest'
+      responses:
+        '200':
+          description: Update was successful
           content:
-            application/problem+json:
+            application/json:
               schema:
-                $ref: '#/components/schemas/ThrowableProblem'
-  #  /accounts/{accountID}/update-email:
-  #    post:
-  #      description: Updates the login email of the provided account
-  #      operationId: updateUserEmail
-  #      tags:
-  #        - Account Management
-  #      parameters:
-  #        - $ref: '#/components/parameters/UserId'
-  #      requestBody:
-  #        required: true
-  #        content:
-  #          application/json:
-  #            schema:
-  #              $ref: '#/components/schemas/UserEmailLoginUpdateRequest'
-  #      responses:
-  #        '200':
-  #          description: Update was successful
-  #          content:
-  #            application/json:
-  #              schema:
-  #               $ref: '#/components/schemas/User'
-  #        '404':
-  #          description: User not found for id.
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: Account not found for id.
   /accounts/{accountId}:
     delete:
       description: Deletes the account. {accountId} must match account id in access token
@@ -118,13 +102,14 @@ paths:
         - $ref: '#/components/parameters/AccountId'
       responses:
         '204':
-          description: User was deleted.
+          description: Account was deleted.
         '404':
-          description: User not found for id.
+          description: Account not found for id.
       security:
         - accountAccessToken: []
+
   /clients/create:
-    put:
+    post:
       description: Creates a new client.
       operationId: createNewClient
       tags:
@@ -143,17 +128,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ClientCreationResponse'
   /clients/{clientId}/reset-password:
-    post:
+    put:
       description: Resets the password to a new random one. {clientId} must match client id in access token
       operationId: resetPassword
       tags:
         - Client Management
       parameters:
-        - in: path
-          name: clientId
-          schema:
-            type: string
-          required: true
+        - $ref: '#/components/parameters/ClientId'
       security:
         - clientAccessToken: []
       responses:
@@ -163,6 +144,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ClientCreationResponse'
+  /clients/{clientId}:
+    delete:
+      description: Deletes the client. {clientId} must match clientId id in access token
+      operationId: deleteClient
+      tags:
+        - Client Management
+      parameters:
+        - $ref: '#/components/parameters/ClientId'
+      responses:
+        '204':
+          description: Client was deleted.
+        '404':
+          description: Client not found for id.
+      security:
+        - clientAccessToken: []
+
   /token-introspection:
     get:
       description: Get detailed account or client data from the provided access token.
@@ -174,7 +171,7 @@ paths:
         - clientAccessToken: []
       responses:
         '200':
-          description: Token is valid and user data could be retrieved.
+          description: Token is valid and data could be retrieved.
           content:
             application/json:
               schema:
@@ -188,14 +185,20 @@ components:
       schema:
         $ref: '#/components/schemas/UUID'
       required: true
+    ClientId:
+      in: path
+      name: clientId
+      schema:
+        type: string
+      required: true
+
   schemas:
     Account:
       type: object
       required:
         - type
-        - provider
         - id
-        - email
+        - provider
       properties:
         type:
           type: string
@@ -203,8 +206,47 @@ components:
           type: string
         id:
           $ref: '#/components/schemas/UUID'
+      oneOf:
+        - $ref: '#/components/schemas/InternalAccount'
+        - $ref: '#/components/schemas/OidcAccount'
+      discriminator:
+        propertyName: type
+        mapping:
+          InternalAccount: '#/components/schemas/InternalAccount'
+          OidcAccount: '#/components/schemas/OidcAccount'
+
+    InternalAccount:
+      type: object
+      required:
+        - email
+      properties:
         email:
           type: string
+
+    OidcAccount:
+      type: object
+      required:
+        - subject
+      properties:
+        subject:
+          type: string
+
+    #    Account:
+    #      type: object
+    #      required:
+    #        - type
+    #        - provider
+    #        - id
+    #        - email
+    #      properties:
+    #        type:
+    #          type: string
+    #        provider:
+    #          type: string
+    #        id:
+    #          $ref: '#/components/schemas/UUID'
+    #        email:
+    #          type: string
     InternalAccountRegistrationRequest:
       type: object
       required:
@@ -215,23 +257,13 @@ components:
           type: string
         password:
           type: string
-    InternalAccountLoginRequest:
+    AccountEmailUpdateRequest:
       type: object
       required:
         - email
-        - password
       properties:
         email:
           type: string
-        password:
-          type: string
-    #    AccountEmailLoginUpdateRequest:
-    #      type: object
-    #      required:
-    #        - email
-    #      properties:
-    #        email:
-    #          type: string
 
     Client:
       type: object
@@ -307,22 +339,7 @@ components:
     UUID:
       type: string
       format: UUID
-    ThrowableProblem:
-      type: object
-      description: Response object, which is returned if an error occurred while processing the request.
-      properties:
-        title:
-          type: string
-        status:
-          type: string
-        detail:
-          type: string
-        error_code:
-          type: string
-        params:
-          type: array
-          items:
-            type: string
+
   securitySchemes:
     accountAccessToken:
       type: http
