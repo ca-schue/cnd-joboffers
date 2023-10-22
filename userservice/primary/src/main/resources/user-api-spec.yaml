@@ -283,10 +283,10 @@ paths:
           description: Invitation was sent.
         '404':
           description: Company not found for id.
-  /companies/{company-id}/update-company-data:
+  /companies/{company-id}/update-company-details:
     post:
-      description: Overrides the current company data with the provided data.
-      operationId: updateCompanyData
+      description: Overrides the current company details with the provided data.
+      operationId: updateCompanyDetails
       tags:
         - Company
       parameters:
@@ -296,7 +296,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateCompanyDataRequest'
+              $ref: '#/components/schemas/UpdateCompanyDetailsRequest'
+      responses:
+        '200':
+          description: Registration was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '404':
+          description: Company not found for id.
+  /companies/{company-id}/update-company-links:
+    post:
+      description: Overrides the current company links with the provided data.
+      operationId: updateCompanyLinks
+      tags:
+        - Company
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCompanyLinksRequest'
       responses:
         '200':
           description: Registration was successful.
@@ -594,10 +617,10 @@ components:
     CompanyRegistrationRequest:
       type: object
       required:
-        - owner
+        - owner_id
         - details
       properties:
-        owner:
+        owner_id:
           $ref: '#/components/schemas/UUID'
         details:
           $ref: '#/components/schemas/CompanyDetails'

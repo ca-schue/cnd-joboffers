@@ -27,9 +27,9 @@ public interface UserServicePort {
 
     void deleteUser(UserId userId) throws UserNotFoundByIdException;
 
-    void inviteUserToCompany(CompanyId companyId, String userEmail) throws UserNotFoundByEmailException, UserAlreadyMemberOfCompanyException, UserNotFoundByIdException;
+    void inviteUserToCompany(CompanyId companyId, String userEmail) throws UserNotFoundByEmailException, UserAlreadyMemberOfCompanyException, UserNotFoundByIdException, CompanyNotFoundByIdException;
 
-    void acceptCompanyInvitation(UserId userId, CompanyId companyId) throws UserNotFoundByIdException, UserAlreadyMemberOfCompanyException, UserNotInvitedException;
+    void acceptCompanyInvitation(UserId userId, CompanyId companyId) throws UserNotFoundByIdException, UserAlreadyMemberOfCompanyException, UserNotInvitedException, CompanyNotFoundByIdException;
 
     User updateEmail(UserId userId, String email) throws UserNotFoundByIdException;
 

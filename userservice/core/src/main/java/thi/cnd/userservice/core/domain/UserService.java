@@ -79,8 +79,8 @@ public class UserService implements UserServicePort {
     }
 
     @Override
-    public void inviteUserToCompany(CompanyId companyId, String userEmail) throws UserNotFoundByEmailException, UserAlreadyMemberOfCompanyException {
-        Company company = companyServicePort.findCompanyById(companyId);
+    public void inviteUserToCompany(CompanyId companyId, String userEmail) throws UserNotFoundByEmailException, CompanyNotFoundByIdException, UserAlreadyMemberOfCompanyException {
+        Company company = companyServicePort.findCompanyById(companyId); // Verification if company exists TODO: Redundant?
         User user = userRepositoryPort.findUserByEmail(userEmail);
         user.addInvitationToCompany(companyId);
         userRepositoryPort.updateOrSaveUser(user);
@@ -88,7 +88,7 @@ public class UserService implements UserServicePort {
     }
 
     @Override
-    public void acceptCompanyInvitation(UserId userId, CompanyId companyId) throws UserNotFoundByIdException, UserAlreadyMemberOfCompanyException, UserNotInvitedException {
+    public void acceptCompanyInvitation(UserId userId, CompanyId companyId) throws UserNotFoundByIdException, CompanyNotFoundByIdException, UserNotInvitedException  {
         User user = userRepositoryPort.findUserById(userId);
         user.acceptCompanyInvitation(companyId);
         companyServicePort.addMember(companyId, userId);

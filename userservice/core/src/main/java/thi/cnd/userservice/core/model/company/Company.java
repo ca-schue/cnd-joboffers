@@ -3,12 +3,14 @@ package thi.cnd.userservice.core.model.company;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
 import thi.cnd.userservice.core.model.user.UserId;
 
 import java.util.Set;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @Validated
 public class Company {

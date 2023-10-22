@@ -16,9 +16,8 @@ import thi.cnd.userservice.secondary.user.model.UserDaoMapper;
 @RequiredArgsConstructor
 public class UserRepositoryAdapter implements UserRepositoryPort {
 
-    private final UserDaoMapper mapper;
     private final UserMongoDBRepository repository;
-
+    private final UserDaoMapper mapper;
     @Override
     public User findUserById(UserId userId) throws UserNotFoundByIdException {
         return repository
@@ -55,7 +54,6 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public void deleteUserByEmail(String email) throws UserNotFoundByEmailException {
         repository.deleteOneByProfileEmail(email).orElseThrow(() -> new UserNotFoundByEmailException(email));
-
     }
 
     @Override

@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import thi.cnd.userservice.core.exception.UserAlreadyExistsException;
-import thi.cnd.userservice.core.exception.UserNotFoundByIdException;
+import thi.cnd.userservice.core.exception.*;
+import thi.cnd.userservice.core.model.company.CompanyId;
 import thi.cnd.userservice.core.model.user.User;
 import thi.cnd.userservice.core.model.user.UserId;
 import thi.cnd.userservice.core.model.user.UserProfile;
@@ -29,8 +29,16 @@ public class UserController implements UserApi {
     private final UserApiMapper userApiMapper;
 
     @Override
-    public ResponseEntity<Void> acceptInvitation(UUID userId, AcceptCompanyInvitationRequestDTO acceptCompanyInvitationRequestDTO) {
-        return null;
+    public ResponseEntity<Void> acceptInvitation(UUID userId, AcceptCompanyInvitationRequestDTO requestDTO) {
+        try {
+            userServicePort.acceptCompanyInvitation(new UserId(userId), new CompanyId(requestDTO.getCompanyId()));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (UserNotFoundByIdException | CompanyNotFoundByIdException e1) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e1.getMessage());
+        } catch (UserAlreadyMemberOfCompanyException | UserNotInvitedException e2) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, e2.getMessage());
+        }
+
     }
 
     @Override
