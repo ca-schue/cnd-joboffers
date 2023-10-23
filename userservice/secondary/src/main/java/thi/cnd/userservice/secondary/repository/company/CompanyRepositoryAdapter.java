@@ -10,7 +10,7 @@ import thi.cnd.userservice.core.exception.CompanyAlreadyExistsException;
 import thi.cnd.userservice.core.exception.CompanyNotFoundByIdException;
 import thi.cnd.userservice.core.model.company.Company;
 import thi.cnd.userservice.core.model.company.CompanyId;
-import thi.cnd.userservice.core.port.secondary.CompanyRepositoryPort;
+import thi.cnd.userservice.core.port.secondary.repository.CompanyRepositoryPort;
 import thi.cnd.userservice.secondary.repository.company.model.CompanyDAO;
 import thi.cnd.userservice.secondary.repository.company.model.CompanyDaoMapper;
 

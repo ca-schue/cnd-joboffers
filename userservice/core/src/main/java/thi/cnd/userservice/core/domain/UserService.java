@@ -7,11 +7,15 @@ import thi.cnd.userservice.core.model.company.CompanyId;
 import thi.cnd.userservice.core.exception.*;
 import thi.cnd.userservice.core.port.primary.CompanyServicePort;
 import thi.cnd.userservice.core.port.primary.UserServicePort;
-import thi.cnd.userservice.core.port.secondary.UserRepositoryPort;
+import thi.cnd.userservice.core.port.secondary.event.user.UserEventPort;
+import thi.cnd.userservice.core.port.secondary.repository.UserRepositoryPort;
 import thi.cnd.userservice.core.model.user.User;
 import thi.cnd.userservice.core.model.user.UserId;
 import thi.cnd.userservice.core.model.user.UserProfile;
 import thi.cnd.userservice.core.model.user.UserSettings;
+import thi.cnd.userservice.core.port.secondary.event.user.UserDeletedEvent;
+import thi.cnd.userservice.core.port.secondary.event.user.UserInvitedToCompanyEvent;
+import thi.cnd.userservice.core.port.secondary.event.user.UserRegisteredEvent;
 
 import java.time.Duration;
 
@@ -21,6 +25,7 @@ public class UserService implements UserServicePort {
 
     private final UserRepositoryPort userRepositoryPort;
     private final CompanyServicePort companyServicePort;
+    private final UserEventPort userEventPort;
 
     @Override
     public User findUserById(UserId userId) throws UserNotFoundByIdException {
@@ -38,7 +43,7 @@ public class UserService implements UserServicePort {
         User newUser = new User(userId, email, firstName, lastName);
         User savedUser = userRepositoryPort.saveUser(newUser);
 
-        // TODO: eventService.sendEvent(new UserRegisteredEvent(savedUser));
+        userEventPort.sendEvent(new UserRegisteredEvent(savedUser));
 
         return savedUser;
     }
@@ -85,7 +90,7 @@ public class UserService implements UserServicePort {
     @Override
     public void deleteUser(UserId userId) throws UserNotFoundByIdException {
         userRepositoryPort.deleteUserById(userId);
-        // TODO: eventService.sendEvent(new UserDeletedEvent(userId));
+        userEventPort.sendEvent(new UserDeletedEvent(userId));
     }
 
     @Override
@@ -94,7 +99,7 @@ public class UserService implements UserServicePort {
         User user = userRepositoryPort.findUserByEmail(userEmail);
         user.addInvitationToCompany(companyId);
         userRepositoryPort.updateOrSaveUser(user);
-        // TODO: eventService.sendEvent(new UserInvitedToCompanyEvent(user, company));
+        userEventPort.sendEvent(new UserInvitedToCompanyEvent(user, company));
     }
 
     @Override
@@ -105,9 +110,4 @@ public class UserService implements UserServicePort {
         userRepositoryPort.updateOrSaveUser(user);
     }
 
-    @Override
-    public void deleteUser(String email) throws UserNotFoundByEmailException {
-        userRepositoryPort.deleteUserByEmail(email);
-        // TODO: eventService.sendEvent(new UserDeletedEvent(userId));
-    }
 }

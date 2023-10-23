@@ -1,4 +1,4 @@
-package thi.cnd.userservice.core.port.secondary;
+package thi.cnd.userservice.core.port.secondary.repository;
 
 import jakarta.validation.constraints.NotNull;
 import thi.cnd.userservice.core.exception.UserAlreadyExistsException;

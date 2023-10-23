@@ -10,9 +10,11 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
+import com.nimbusds.jose.proc.SecurityContext;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.oauth2.jose.jws.JwsAlgorithm;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
@@ -30,9 +32,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class JwtProvider {
 
-
     private final JwtConfig jwtConfig;
-
+    private final JwtKeys jwtKeys;
 
     public AccountAccessToken createAccountAccessToken(Account account) {
         JwtClaimsSet accountJwtClaims = createAccountClaims(account);
@@ -68,10 +69,7 @@ public class JwtProvider {
         Instant now = Instant.now();
         Instant expiration = now.plusSeconds(jwtConfig.getValidityInSeconds() * 1000);
 
-        RSAKey rsaKeyJwk = jwtConfig.getRsaJwk();
-        JWKSet jwkSet = new JWKSet(rsaKeyJwk);
-        ImmutableJWKSet jwkSource = new ImmutableJWKSet<>(jwkSet);
-        NimbusJwtEncoder nimbusJwtEncoder = new NimbusJwtEncoder(jwkSource);
+        NimbusJwtEncoder nimbusJwtEncoder = new NimbusJwtEncoder(jwtKeys.jwkSource());
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.from(jwtConfig.getSigningAlgorithm());
         JwsHeader jwsHeader = JwsHeader.with(signatureAlgorithm).build();

@@ -43,7 +43,12 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<Void> deleteUser(UUID userId) {
-        return null;
+        try {
+            userServicePort.deleteUser(new UserId(userId));
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (UserNotFoundByIdException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
     }
 
     @Override

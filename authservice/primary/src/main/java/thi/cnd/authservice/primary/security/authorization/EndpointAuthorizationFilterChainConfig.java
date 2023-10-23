@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authorization.AuthorizationManagers;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,6 +37,7 @@ public class EndpointAuthorizationFilterChainConfig {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2 // Only takes access tokens issued by this authorization server
                         .jwt(jwtConfig -> jwtConfig
+                                //.jwkSetUri("http://localhost:8081")
                                 .jwtAuthenticationConverter(new AccessTokenAuthenticationConverter())));
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(Customizer.withDefaults());

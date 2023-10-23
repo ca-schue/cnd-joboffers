@@ -16,8 +16,12 @@ import thi.cnd.userservice.core.model.company.CompanyLinks;
 import thi.cnd.userservice.core.model.user.User;
 import thi.cnd.userservice.core.model.user.UserId;
 import thi.cnd.userservice.core.port.primary.CompanyServicePort;
-import thi.cnd.userservice.core.port.secondary.CompanyRepositoryPort;
-import thi.cnd.userservice.core.port.secondary.UserRepositoryPort;
+import thi.cnd.userservice.core.port.secondary.event.company.CompanyDeletedEvent;
+import thi.cnd.userservice.core.port.secondary.event.company.CompanyEventPort;
+import thi.cnd.userservice.core.port.secondary.event.company.CompanyNameChangedEvent;
+import thi.cnd.userservice.core.port.secondary.event.company.CompanyRegisteredEvent;
+import thi.cnd.userservice.core.port.secondary.repository.CompanyRepositoryPort;
+import thi.cnd.userservice.core.port.secondary.repository.UserRepositoryPort;
 
 import java.util.Set;
 
@@ -27,6 +31,7 @@ public class CompanyService implements CompanyServicePort {
 
     private final CompanyRepositoryPort companyRepositoryPort;
     private final UserRepositoryPort userRepositoryPort;
+    private final CompanyEventPort companyEventPort;
 
     @Override
     public Company findCompanyById(CompanyId companyId) throws CompanyNotFoundByIdException {
@@ -50,7 +55,7 @@ public class CompanyService implements CompanyServicePort {
 
         Company savedCompany = companyRepositoryPort.saveCompany(newCompany);
         userRepositoryPort.updateOrSaveUser(owner);
-        // TODO: eventService.sendEvent(new CompanyRegisteredEvent(savedCompany.getId(), owner, savedCompany.getDetails().name()));
+        companyEventPort.sendEvent(new CompanyRegisteredEvent(savedCompany.getId(), owner, savedCompany.getDetails().name()));
         return savedCompany;
     }
 
@@ -59,9 +64,16 @@ public class CompanyService implements CompanyServicePort {
             @NotNull CompanyId companyId,
             @NotNull CompanyDetails updatedCompanyDetails
     ) throws CompanyNotFoundByIdException {
-        Company company = companyRepositoryPort.findCompanyById(companyId);
-        company.setDetails(updatedCompanyDetails); // TODO: Input verification?
-        return companyRepositoryPort.updateOrSaveCompany(company);
+        Company oldCompany = companyRepositoryPort.findCompanyById(companyId);
+
+        boolean nameChanged = oldCompany.getDetails().name().equals(updatedCompanyDetails.name());
+
+        oldCompany.setDetails(updatedCompanyDetails); // TODO: Input verification?
+
+        if(nameChanged) {
+            companyEventPort.sendEvent(new CompanyNameChangedEvent(companyId, updatedCompanyDetails.name()));
+        }
+        return companyRepositoryPort.updateOrSaveCompany(oldCompany);
     }
 
     public @NotNull Company updateCompanyLinks(
@@ -77,7 +89,7 @@ public class CompanyService implements CompanyServicePort {
     public void deleteCompanyById(CompanyId companyId) throws CompanyNotFoundByIdException {
         //companyRepositoryPort.deleteCompanyById(companyId);
         userRepositoryPort.removeCompanyFromUser(companyId);
-        // TODO: eventService.sendEvent(new CompanyDeletedEvent(companyId));
+        companyEventPort.sendEvent(new CompanyDeletedEvent(companyId));
     }
 
     @Override

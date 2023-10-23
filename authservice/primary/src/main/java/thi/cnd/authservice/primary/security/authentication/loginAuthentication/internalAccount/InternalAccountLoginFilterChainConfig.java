@@ -3,6 +3,7 @@ package thi.cnd.authservice.primary.security.authentication.loginAuthentication.
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -25,7 +26,7 @@ public class InternalAccountLoginFilterChainConfig {
     }
 
     @Bean
-    @Order(1)
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     SecurityFilterChain internalAccountLoginFilterChain(HttpSecurity http) throws Exception {
         http
                 .securityMatcher("/accounts/loginInternalAccount")

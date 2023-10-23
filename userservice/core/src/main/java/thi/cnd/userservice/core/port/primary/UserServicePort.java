@@ -33,6 +33,5 @@ public interface UserServicePort {
 
     User updateEmail(UserId userId, String email) throws UserNotFoundByIdException;
 
-    void deleteUser(@Email String email) throws UserNotFoundByEmailException, UserNotFoundByIdException;
 
 }

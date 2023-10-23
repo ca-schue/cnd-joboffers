@@ -7,7 +7,7 @@ import thi.cnd.userservice.core.exception.UserAlreadyExistsException;
 import thi.cnd.userservice.core.exception.UserNotFoundByEmailException;
 import thi.cnd.userservice.core.exception.UserNotFoundByIdException;
 import thi.cnd.userservice.core.model.company.CompanyId;
-import thi.cnd.userservice.core.port.secondary.UserRepositoryPort;
+import thi.cnd.userservice.core.port.secondary.repository.UserRepositoryPort;
 import thi.cnd.userservice.core.model.user.User;
 import thi.cnd.userservice.core.model.user.UserId;
 import thi.cnd.userservice.secondary.repository.user.model.UserDAO;

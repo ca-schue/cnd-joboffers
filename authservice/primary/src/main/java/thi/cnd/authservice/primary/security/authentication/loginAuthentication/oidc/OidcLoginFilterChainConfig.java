@@ -31,7 +31,7 @@ public class OidcLoginFilterChainConfig {
 
     // OIDC
     @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @Order(3)
     SecurityFilterChain oidcAccountLoginFilterChain(HttpSecurity http) throws Exception {
         Map<String, AuthenticationManager> authenticationManagers = new HashMap<>();
         JwtIssuerAuthenticationManagerResolver authenticationManagerResolver =

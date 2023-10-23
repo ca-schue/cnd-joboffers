@@ -4,9 +4,15 @@ spring:
       uri: mongodb://localhost:27017/user-service
       auto-index-creation: true
       uuid-representation: standard
+  kafka:
+    producer:
+      retries: 5
+    bootstrap-servers: http://localhost:9092
+    consumer:
+      group-id: user-service
   security:
     oauth2:
-      resourceserver:
+      resource-server:
         jwt:
           #issuer-uri: http://localhost:8081
           jwk-set-uri: http://localhost:8081/oauth2/jwks
@@ -17,3 +23,27 @@ server:
 security:
   csrfActive: false
   corsActive: false
+
+event:
+  kafka:
+    topics:
+      user-service_user-registered:
+        name: user-service_user-registered
+        partitions: 1
+        replicas: 1
+      user-service_company-registered:
+        name: user-service_company-registered
+        partitions: 1
+        replicas: 1
+      user-service_user-invited-to-company:
+        name: user-service_user-invited-to-company
+        partitions: 1
+        replicas: 1
+      user-service_company-name-changed:
+        name: user-service_company-name-changed
+        partitions: 1
+        replicas: 1
+      user-service_company-deleted:
+        name: user-service_company-deleted
+        partitions: 1
+        replicas: 1

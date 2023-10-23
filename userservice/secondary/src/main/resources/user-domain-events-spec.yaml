@@ -1,0 +1,179 @@
+openapi: 3.0.0
+info:
+  title: User-Service
+  description: API.
+  version: 0.0.1
+paths:
+  /user-service_user-registered:
+    post:
+      summary: User was registered.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegisteredEvent'
+      responses:
+        '200':
+          description: Registration was successful.
+  /user-service_user-deleted:
+    post:
+      summary: User was deleted.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegisteredEvent'
+      responses:
+        '200':
+          description: Deletion was successful.
+  /user-service_company-registered:
+    post:
+      summary: Company was registered.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyRegisteredEvent'
+      responses:
+        '200':
+          description: Registration was successful.
+  /user-service_user-invited-to-company:
+    post:
+      summary: User was invited to join a company as a member.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInvitedToCompanyEvent'
+      responses:
+        '200':
+          description: Registration was successful.
+  /user-service_company-name-changed:
+    post:
+      summary: Company was registered.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyNameChangedEvent'
+      responses:
+        '200':
+          description: Registration was successful.
+  /user-service_company-deleted:
+    post:
+      summary: Company was registered.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyDeletedEvent'
+      responses:
+        '200':
+          description: Registration was successful.
+components:
+  schemas:
+    ExternalUserEvent:
+      oneOf:
+        - $ref: '#/components/schemas/UserRegisteredEvent'
+        - $ref: '#/components/schemas/UserDeletedEvent'
+        - $ref: '#/components/schemas/CompanyRegisteredEvent'
+        - $ref: '#/components/schemas/UserInvitedToCompanyEvent'
+        - $ref: '#/components/schemas/CompanyNameChangedEvent'
+        - $ref: '#/components/schemas/CompanyDeletedEvent'
+      discriminator:
+        propertyName: type
+        mapping:
+          UserRegisteredEvent: '#/components/schemas/UserRegisteredEvent'
+          UserDeletedEvent: '#/components/schemas/UserDeletedEvent'
+          CompanyRegisteredEvent: '#/components/schemas/CompanyRegisteredEvent'
+          UserInvitedToCompanyEvent: '#/components/schemas/UserInvitedToCompanyEvent'
+          CompanyNameChangedEvent: '#/components/schemas/CompanyNameChangedEvent'
+          CompanyDeletedEvent: '#/components/schemas/CompanyDeletedEvent'
+    UserRegisteredEvent:
+      type: object
+      properties:
+        type:
+          type: string
+          x-extensible-enum:
+            - UserRegisteredEvent
+        user_id:
+          type: string
+          format: UUID
+        email:
+          type: string
+        first_name:
+          type: string
+    UserDeletedEvent:
+      type: object
+      properties:
+        type:
+          type: string
+          x-extensible-enum:
+            - UserDeletedEvent
+        user_id:
+          type: string
+          format: UUID
+    CompanyRegisteredEvent:
+      type: object
+      properties:
+        type:
+          type: string
+          x-extensible-enum:
+            - CompanyRegisteredEvent
+        company_id:
+          type: string
+          format: UUID
+        owner_id:
+          type: string
+          format: UUID
+        owner_email:
+          type: string
+        company_name:
+          type: string
+    UserInvitedToCompanyEvent:
+      type: object
+      properties:
+        type:
+          type: string
+          x-extensible-enum:
+            - UserInvitedToCompanyEvent
+        user_id:
+          type: string
+          format: UUID
+        user_email:
+          type: string
+        user_first_name:
+          type: string
+        company_id:
+          type: string
+          format: UUID
+        company_name:
+          type: string
+    CompanyDeletedEvent:
+      type: object
+      properties:
+        type:
+          type: string
+          x-extensible-enum:
+            - CompanyDeletedEvent
+        company_id:
+          type: string
+          format: UUID
+    CompanyNameChangedEvent:
+      type: object
+      properties:
+        type:
+          type: string
+          x-extensible-enum:
+            - CompanyDeletedEvent
+        company_id:
+          type: string
+          format: UUID
+        name:
+          type: string

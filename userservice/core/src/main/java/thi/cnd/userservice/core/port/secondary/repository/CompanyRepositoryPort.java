@@ -1,4 +1,4 @@
-package thi.cnd.userservice.core.port.secondary;
+package thi.cnd.userservice.core.port.secondary.repository;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
