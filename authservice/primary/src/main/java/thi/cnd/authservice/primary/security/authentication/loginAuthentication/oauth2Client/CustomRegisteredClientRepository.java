@@ -31,7 +31,8 @@ public class CustomRegisteredClientRepository implements RegisteredClientReposit
         try {
             return findClientByNameAndUpdateLastLogin(id);
         } catch (ClientNotFoundByNameException e) {
-            throw new RuntimeException(e); // Must be runtime! (Handled by OAuth2 lib)
+            return null;
+            //throw new RuntimeException(e); // Must be runtime! (Handled by OAuth2 lib)
         }
     }
 
@@ -40,19 +41,16 @@ public class CustomRegisteredClientRepository implements RegisteredClientReposit
         try {
             return findClientByNameAndUpdateLastLogin(clientId); // TODO: change to login-attempt
         } catch (ClientNotFoundByNameException e) {
-            throw new RuntimeException(e); // Must be runtime! (Handled by OAuth2 lib)
+            return null;
+            // throw new RuntimeException(e); // Must be runtime! (Handled by OAuth2 lib)
         }
     }
     private RegisteredClient findClientByNameAndUpdateLastLogin(String clientId) throws ClientNotFoundByNameException {
         Client client = port.findByNameAndUpdateLastLogin(clientId);
-        RegisteredClient regClient =  RegisteredClient
-                .withId(client.name())
-                .clientId(client.name())
-                .clientSecret(client.encryptedPassword())
-                .scopes(scopes -> scopes.addAll(client.scopes()))
-                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .build();
-        return regClient;
+        CustomRegisteredClient customRegisteredClient = new CustomRegisteredClient(
+                client
+        );
+        return customRegisteredClient;
     }
 
 }

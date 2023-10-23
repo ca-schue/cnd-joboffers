@@ -1,6 +1,5 @@
 package thi.cnd.authservice.core.ports.primary;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 import thi.cnd.authservice.core.exceptions.*;
@@ -11,7 +10,7 @@ public interface AccountServicePort {
 
 
 
-    public AccountAccessToken mintAccessToken(Account account);
+    public AccountAccessToken mintAccountAccessToken(Account account);
     void deleteAccount (@NotNull AccountId accountId) throws AccountNotFoundByIdException;
 
     InternalAccount registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException;

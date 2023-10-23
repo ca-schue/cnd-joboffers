@@ -3,11 +3,13 @@ package thi.cnd.authservice.core.domain;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import thi.cnd.authservice.core.domain.jwt.JwtProvider;
 import thi.cnd.authservice.core.domain.password.PasswordEncoder;
 import thi.cnd.authservice.core.domain.password.PasswordGenerator;
 import thi.cnd.authservice.core.exceptions.ClientAlreadyExistsException;
 import thi.cnd.authservice.core.exceptions.ClientNotFoundByNameException;
 import thi.cnd.authservice.core.model.client.Client;
+import thi.cnd.authservice.core.model.client.ClientAccessToken;
 import thi.cnd.authservice.core.model.client.ClientWithPlaintextPassword;
 import thi.cnd.authservice.core.ports.primary.ClientServicePort;
 import thi.cnd.authservice.core.ports.secondary.ClientRepositoryPort;
@@ -22,6 +24,7 @@ public class ClientService implements ClientServicePort {
     private final ClientRepositoryPort port;
     private final PasswordEncoder encoder;
     private final PasswordGenerator passwordGenerator;
+    private final JwtProvider jwtProvider;
 
     @Override
     public ClientWithPlaintextPassword createNewClient(String name, Set<String> audiences, Set<String> scopes) throws ClientAlreadyExistsException {
@@ -32,6 +35,12 @@ public class ClientService implements ClientServicePort {
         Client client = new Client(name, encryptedPassword, audiences, scopes, now, now);
         return new ClientWithPlaintextPassword(port.register(client), password);
     }
+
+    @Override
+    public ClientAccessToken mintClientAccessToken(Client client) {
+        return jwtProvider.createClientAccessToken(client);
+    }
+
 
     @Override
     public ClientWithPlaintextPassword setNewRandomPassword(@NotBlank String name) throws ClientNotFoundByNameException {

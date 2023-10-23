@@ -25,7 +25,7 @@ public class InternalAccountLoginFilterChainConfig {
     }
 
     @Bean
-    @Order(0)
+    @Order(1)
     SecurityFilterChain internalAccountLoginFilterChain(HttpSecurity http) throws Exception {
         http
                 .securityMatcher("/accounts/loginInternalAccount")

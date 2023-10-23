@@ -4,9 +4,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
+import org.springframework.security.oauth2.jwt.Jwt;
 import thi.cnd.authservice.api.generated.model.ClientCreationResponseDTO;
 import thi.cnd.authservice.api.generated.model.ClientDTO;
 import thi.cnd.authservice.core.model.client.Client;
+import thi.cnd.authservice.core.model.client.ClientAccessToken;
 import thi.cnd.authservice.core.model.client.ClientWithPlaintextPassword;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
@@ -29,5 +31,7 @@ public interface ClientApiMapper {
                 .audiences(client.audiences())
                 .lastPasswordChange(client.lastPasswordChange());
     }
-
+    default Jwt toJwt(ClientAccessToken clientAccessToken) {
+        return clientAccessToken.signedClientJwt();
+    }
 }

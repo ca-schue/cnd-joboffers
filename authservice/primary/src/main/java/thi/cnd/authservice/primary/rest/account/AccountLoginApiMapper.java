@@ -31,7 +31,7 @@ public interface AccountLoginApiMapper {
     OidcAccountDTO toOidcDTO(OidcAccount oidcAccount);
 
     default AccessTokenResponseDTO toDTO(AccountAccessToken token) {
-        return new AccessTokenResponseDTO(token.accessToken());
+        return new AccessTokenResponseDTO(token.signedAccountJwt().getTokenValue());
         // TODO: Valid until including? -> Info in JWT
     }
 

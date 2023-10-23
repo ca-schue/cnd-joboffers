@@ -55,7 +55,7 @@ public class AccountController implements AccountLoginApi, AccountManagementApi 
     public ResponseEntity<AccessTokenResponseDTO> loginInternalAccount() {
         InternalAccountDetails accountDetails = (InternalAccountDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         InternalAccount internalAccount = accountDetails.internalAccount();
-        AccountAccessToken accessToken = accountServicePort.mintAccessToken(internalAccount);
+        AccountAccessToken accessToken = accountServicePort.mintAccountAccessToken(internalAccount);
         return ResponseEntity.ok(accountLoginApiMapper.toDTO(accessToken));
     }
 
@@ -70,8 +70,7 @@ public class AccountController implements AccountLoginApi, AccountManagementApi 
                 throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
             }
         }
-        String email = authenticatedOidcIdToken.getEmail(); // extract email from Authenticated object / ID-Token
-        AccountAccessToken accessToken = accountServicePort.mintAccessToken(oidcAccount);
+        AccountAccessToken accessToken = accountServicePort.mintAccountAccessToken(oidcAccount);
         return ResponseEntity.ok(accountLoginApiMapper.toDTO(accessToken));
     }
 

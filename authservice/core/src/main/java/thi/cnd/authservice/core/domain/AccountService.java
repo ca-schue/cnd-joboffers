@@ -3,7 +3,7 @@ package thi.cnd.authservice.core.domain;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import thi.cnd.authservice.core.domain.jwt.AccountJwtProvider;
+import thi.cnd.authservice.core.domain.jwt.JwtProvider;
 import thi.cnd.authservice.core.exceptions.*;
 import thi.cnd.authservice.core.model.account.*;
 import thi.cnd.authservice.core.ports.primary.AccountServicePort;
@@ -14,7 +14,7 @@ import thi.cnd.authservice.core.ports.secondary.AccountRepositoryPort;
 @AllArgsConstructor
 public class AccountService implements AccountServicePort {
 
-    private final AccountJwtProvider accountJwtProvider;
+    private final JwtProvider jwtProvider;
     private final AccountRepositoryPort accountRepositoryPort;
     private final AccountFactory accountFactory;
 
@@ -43,8 +43,8 @@ public class AccountService implements AccountServicePort {
     }
 
     @Override
-    public AccountAccessToken mintAccessToken(Account account) {
-        return accountJwtProvider.createJwt(account);
+    public AccountAccessToken mintAccountAccessToken(Account account) {
+        return jwtProvider.createAccountAccessToken(account);
     }
 
     @Override

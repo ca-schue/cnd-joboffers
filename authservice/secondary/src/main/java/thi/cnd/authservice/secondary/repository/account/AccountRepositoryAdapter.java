@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import thi.cnd.authservice.core.exceptions.AccountAlreadyExistsException;
 import thi.cnd.authservice.core.exceptions.AccountNotFoundByEmailException;
 import thi.cnd.authservice.core.exceptions.AccountNotFoundByIdException;
+import thi.cnd.authservice.core.exceptions.AccountNotFoundBySubjectException;
 import thi.cnd.authservice.core.model.account.Account;
 import thi.cnd.authservice.core.model.account.AccountId;
 import thi.cnd.authservice.core.model.account.InternalAccount;
@@ -51,6 +52,14 @@ public class AccountRepositoryAdapter implements AccountRepositoryPort {
         } catch (DuplicateKeyException e) {
             throw new AccountAlreadyExistsException("Account ID already exists or email/subject is already linked to existing account.");
         }
+    }
+
+    @Override
+    public OidcAccount findOidcAccountBySubjectAndUpdateLastLogin(String subject) throws AccountNotFoundBySubjectException {
+        OidcAccountDAO oidcAccountDAO = oidcAccountRepository
+                .findBySubjectAndUpdateLastLogin(subject)
+                .orElseThrow(() -> new AccountNotFoundBySubjectException("No account linked to subject " + subject));
+        return mapper.toOidcAccount(oidcAccountDAO);
     }
 
     @Override

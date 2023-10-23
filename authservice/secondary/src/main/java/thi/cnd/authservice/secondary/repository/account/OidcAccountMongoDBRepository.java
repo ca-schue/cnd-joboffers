@@ -7,7 +7,8 @@ import thi.cnd.authservice.secondary.repository.account.model.OidcAccountDAO;
 
 import java.util.Optional;
 
-public interface OidcAccountMongoDBRepository extends MongoRepository<OidcAccountDAO, AccountId> {
+public interface OidcAccountMongoDBRepository extends MongoRepository<OidcAccountDAO, AccountId>, OidcAccountMongoDBRepositoryComplex {
 
     Optional<OidcAccountDAO> findBySubject(String subject);
+
 }
