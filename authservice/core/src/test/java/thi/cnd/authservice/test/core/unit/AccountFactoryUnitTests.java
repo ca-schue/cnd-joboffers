@@ -1,4 +1,4 @@
-package thi.cnd.authservice.test.core;
+package thi.cnd.authservice.test.core.unit;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
