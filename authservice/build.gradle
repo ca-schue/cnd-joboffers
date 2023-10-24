@@ -66,6 +66,10 @@ subprojects {
 
 		// https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305
 		implementation 'com.google.code.findbugs:jsr305:3.0.2'
+
+		testImplementation 'org.junit.jupiter:junit-jupiter-api'
+		testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+		testImplementation 'org.mockito:mockito-junit-jupiter'
 	}
 
 	tasks.named('test') {

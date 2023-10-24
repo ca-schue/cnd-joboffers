@@ -12,11 +12,9 @@ public class PasswordValidator {
      * Require at least 8 characters, one letter, one digit, and one special character
      */
     public static final Pattern PASSWORD_REGEX = Pattern.compile(
-            "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{" + PASSWORD_MIN_LENGTH + ",}$"
-    );
+    "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@#$%^&+=!?_{}\\\"§$%&/()]).{" + PASSWORD_MIN_LENGTH + ",}$");
 
     public boolean isCleartextPasswordValid(String password) {
-        return true; // TODO: temp!
-        //return password.length() >= PASSWORD_MIN_LENGTH && PASSWORD_REGEX.matcher(password).matches();
+        return password.length() >= PASSWORD_MIN_LENGTH && PASSWORD_REGEX.matcher(password).matches();
     }
 }
