@@ -1,0 +1,6 @@
+rootProject.name = 'notificationservice'
+include 'application'
+include 'core'
+include 'primary'
+include 'secondary'
+

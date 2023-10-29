@@ -1,0 +1,42 @@
+spring:
+  profiles:
+    default: local
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_empty
+    property-naming-strategy: SNAKE_CASE
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER:http://localhost:9092}
+    consumer:
+      group-id: notification-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+server:
+  port: 8987
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker

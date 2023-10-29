@@ -1,0 +1,65 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
+plugins {
+    id "org.openapi.generator" version "6.6.0"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "build/generate-resources/src/main/java"
+        }
+    }
+}
+
+dependencies {
+    implementation project(':core')
+    implementation project(':secondary')
+
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.1.3'
+
+    implementation 'org.springframework.kafka:spring-kafka'
+}
+
+tasks.register('careerApiSpecGenerate', GenerateTask) {
+    inputSpec.set("$projectDir/src/main/resources/career-api-spec.yaml")
+    outputDir = "$projectDir/build/generate-resources"
+    validateSpec = true
+    generatorName = "spring"
+    library = "spring-boot"
+    modelNameSuffix = "DTO"
+    modelPackage = "thi.cnd.careerservice.api.generated.model"
+    apiPackage = "thi.cnd.careerservice.api.generated"
+    additionalProperties = [
+            "useSpringBoot3"      : true,
+            "useSpringController" : true,
+            "useTags"             : true,
+            "useResponseEntity"   : true,
+            "useOptional"         : true,
+            "openApiNullable"     : false,
+            "interfaceOnly"       : true,
+            "skipDefaultInterface": true
+    ]
+}
+
+
+tasks.register('userDomainEventsSpecGenerate', GenerateTask) {
+    inputSpec.set("$projectDir/src/main/resources/external-events/publishing-user-domain-events-spec.yaml")
+    outputDir = "$projectDir/build/generate-resources"
+    generatorName = "java"
+    modelNameSuffix = "DTO"
+    validateSpec = true
+    generatorName = "java"
+    library = "webclient"
+    modelPackage = "thi.cnd.careerservice.event.userservice.generated.model"
+    apiPackage = "thi.cnd.careerservice.event.userservice.generated"
+    additionalProperties = [
+            "useOptional"         : true,
+            "openApiNullable"     : false,
+            "interfaceOnly"       : true,
+            "skipDefaultInterface": true,
+    ]
+}
+
+compileJava.dependsOn careerApiSpecGenerate, userDomainEventsSpecGenerate
+

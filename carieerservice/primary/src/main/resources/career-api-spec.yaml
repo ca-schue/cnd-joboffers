@@ -1,0 +1,666 @@
+openapi: 3.0.0
+info:
+  title: ApiService
+  description: API.
+  version: 0.0.1
+paths:
+  /available-job-offers:
+    get:
+      summary: Returns a list of all available job offers.
+      operationId: searchAvailableJobOffers
+      tags:
+        - JobOfferQuery
+      parameters:
+        - $ref: '#/components/parameters/Skip'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/TitleFilter'
+        - $ref: '#/components/parameters/CompanyIdsFilter'
+      responses:
+        '200':
+          description: List of all job offers available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedJobOffersResponse'
+  /companies/{company-id}/available-job-offers:
+    get:
+      summary: Returns a list of available job offers for a specific company.
+      operationId: getAvailableJobOffersByCompanyId
+      tags:
+        - JobOfferQuery
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+      responses:
+        '200':
+          description: List of all job offers for an user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobOffersResponse'
+  /companies/{company-id}/job-offers:
+    get:
+      summary: Returns a list of all job offers for a specific company.
+      operationId: getAllJobOffersByCompanyId
+      tags:
+        - JobOfferQuery
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+      responses:
+        '200':
+          description: List of all job offers for an user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobOffersResponse'
+    post:
+      summary: Create a new job offer for the logged in user.
+      operationId: createJobOffer
+      tags:
+        - JobOfferCommand
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobOfferCreationRequest'
+      responses:
+        '200':
+          description: Job offer created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobOfferCreationResponse'
+  /companies/{company-id}/available-job-offers/{job-offer-id}:
+    get:
+      summary: Returns a specific available job offer
+      operationId: getAvailableJobOffer
+      tags:
+        - JobOfferQuery
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+        - $ref: '#/components/parameters/JobOfferId'
+        - $ref: '#/components/parameters/IF-None-Match'
+      responses:
+        '200':
+          description: The requested job offer if found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobOfferResponse'
+  /companies/{company-id}/job-offers/{job-offer-id}:
+    get:
+      summary: Returns a specific job offer
+      operationId: getJobOffer
+      tags:
+        - JobOfferQuery
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+        - $ref: '#/components/parameters/JobOfferId'
+        - $ref: '#/components/parameters/IF-None-Match'
+      responses:
+        '200':
+          description: The requested job offer if found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobOfferResponse'
+    delete:
+      summary: Deletes a specific job offer
+      operationId: deleteJobOffer
+      tags:
+        - JobOfferCommand
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+        - $ref: '#/components/parameters/JobOfferId'
+        - $ref: '#/components/parameters/IF-Match'
+      responses:
+        '204':
+          description: Job Offer was deleted
+  /companies/{company-id}/job-offers/{job-offer-id}/update:
+    post:
+      summary: Update an existing job offer
+      operationId: updateJobOfferAttributes
+      tags:
+        - JobOfferCommand
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+        - $ref: '#/components/parameters/JobOfferId'
+        - $ref: '#/components/parameters/IF-Match'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobOfferUpdateRequest'
+      responses:
+        '204':
+          description: Request was successful and applied to the domain model
+  /companies/{company-id}/job-offers/{job-offer-id}/publish:
+    post:
+      summary: Publishes the job offer
+      operationId: publishJobOffer
+      tags:
+        - JobOfferCommand
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+        - $ref: '#/components/parameters/JobOfferId'
+        - $ref: '#/components/parameters/IF-Match'
+      responses:
+        '204':
+          description: Request was successful and applied to the domain model
+  /companies/{company-id}/job-offers/{job-offer-id}/close:
+    post:
+      summary: Closes the job offer
+      operationId: closeJobOffer
+      tags:
+        - JobOfferCommand
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+        - $ref: '#/components/parameters/JobOfferId'
+        - $ref: '#/components/parameters/IF-Match'
+      responses:
+        '204':
+          description: Request was successful and applied to the domain model
+  /companies/{company-id}/job-offers/{job-offer-id}/job-applications:
+    get:
+      summary: Returns a list of all job applications for a specific job offer.
+      operationId: getAllPublishedJobApplicationsByJobOffer
+      tags:
+        - JobApplicationQuery
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+        - $ref: '#/components/parameters/JobOfferId'
+      responses:
+        '200':
+          description: List of all job applications for an user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobApplicationsResponse'
+  /companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}:
+    get:
+      summary: Get a specific job application for a job offer
+      operationId: getJobApplicationForCompany
+      tags:
+        - JobApplicationQuery
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+        - $ref: '#/components/parameters/JobOfferId'
+        - $ref: '#/components/parameters/JobApplicationId'
+        - $ref: '#/components/parameters/IF-None-Match'
+      responses:
+        '200':
+          description: A specific job application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobApplicationResponse'
+  /companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}/accept:
+    post:
+      summary: Accepts the job application
+      operationId: acceptJobApplication
+      tags:
+        - JobApplicationCommand
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+        - $ref: '#/components/parameters/JobOfferId'
+        - $ref: '#/components/parameters/JobApplicationId'
+        - $ref: '#/components/parameters/IF-Match'
+      responses:
+        '204':
+          description: Request was successful and applied to the domain model
+  /companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}/deny:
+    post:
+      summary: Denies the job application
+      operationId: denyJobApplication
+      tags:
+        - JobApplicationCommand
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+        - $ref: '#/components/parameters/JobOfferId'
+        - $ref: '#/components/parameters/JobApplicationId'
+        - $ref: '#/components/parameters/IF-Match'
+      responses:
+        '204':
+          description: Request was successful and applied to the domain model
+
+
+  /users/{user-id}/job-applications:
+    get:
+      summary: Returns a list of all applications for a specific user.
+      operationId: getAllJobApplicationsByUserId
+      tags:
+        - JobApplicationQuery
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: List of all job applications for an user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobApplicationsResponse'
+  /users/{user-id}/job-offers/{job-offer-id}/job-application:
+    get:
+      summary: Returns the job application for a specific user and job offer
+      operationId: getJobApplicationByUserAndJobOffer
+      tags:
+        - JobApplicationQuery
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/JobOfferId'
+        - $ref: '#/components/parameters/IF-None-Match'
+      responses:
+        '200':
+          description: The existing job application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobApplicationResponse'
+  /users/{user-id}/job-offers/{job-offer-id}/create-job-applications:
+    post:
+      summary: Creates a new job application
+      operationId: createJobApplication
+      tags:
+        - JobApplicationCommand
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/JobOfferId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobApplicationCreationRequest'
+      responses:
+        '200':
+          description: The newly created job application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobApplicationCreationResponse'
+  /users/{user-id}/job-applications/{job-application-id}:
+    get:
+      summary: Get a specific job application for a job offer
+      operationId: getJobApplicationForUser
+      tags:
+        - JobApplicationQuery
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/JobApplicationId'
+        - $ref: '#/components/parameters/IF-None-Match'
+      responses:
+        '200':
+          description: A specific job application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobApplicationResponse'
+    delete:
+      summary: Deletes a specific job application
+      operationId: deletedJobApplication
+      tags:
+        - JobApplicationCommand
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/JobApplicationId'
+        - $ref: '#/components/parameters/IF-Match'
+      responses:
+        '204':
+          description: Request was successful and job application was deleted
+  /users/{user-id}/job-applications/{job-application-id}/publish:
+    post:
+      summary: Closes the job application
+      operationId: publishJobApplication
+      tags:
+        - JobApplicationCommand
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/JobApplicationId'
+        - $ref: '#/components/parameters/IF-Match'
+      responses:
+        '204':
+          description: Request was successful and applied to the domain model
+  /users/{user-id}/job-applications/{job-application-id}/update:
+    post:
+      summary: Update the job application content
+      operationId: updateJobApplication
+      tags:
+        - JobApplicationCommand
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/JobApplicationId'
+        - $ref: '#/components/parameters/IF-Match'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobApplicationUpdateRequest'
+      responses:
+        '204':
+          description: Request was successful and applied to the domain model
+
+
+components:
+  parameters:
+    UserId:
+      in: path
+      name: user-id
+      schema:
+        $ref: '#/components/schemas/UUID'
+      required: true
+    CompanyId:
+      in: path
+      name: company-id
+      schema:
+        $ref: '#/components/schemas/UUID'
+      required: true
+    JobOfferId:
+      in: path
+      name: job-offer-id
+      schema:
+        $ref: '#/components/schemas/UUID'
+      required: true
+    JobApplicationId:
+      in: path
+      name: job-application-id
+      schema:
+        $ref: '#/components/schemas/UUID'
+      required: true
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+      required: false
+    Skip:
+      in: query
+      name: skip
+      schema:
+        type: integer
+        minimum: 0
+      required: false
+    TitleFilter:
+      in: query
+      name: title
+      schema:
+        type: string
+    JobOfferIdFilter:
+      in: query
+      name: job-offer-id
+      schema:
+        $ref: '#/components/schemas/UUID'
+      required: false
+    CompanyIdsFilter:
+      in: query
+      name: company-ids
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/UUID'
+    IF-Match:
+      in: header
+      name: IF-Match
+      schema:
+        type: string
+      required: true
+    IF-None-Match:
+      in: header
+      name: IF-None-Match
+      schema:
+        type: string
+  schemas:
+    PaginatedJobOffersResponse:
+      type: object
+      required:
+        - pagination
+        - content
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobOfferResponse'
+    Pagination:
+      type: object
+      required:
+        - total_pages
+        - current_page
+        - total_item_count
+        - item_count
+      properties:
+        total_pages:
+          type: integer
+        current_page:
+          type: integer
+        total_item_count:
+          type: integer
+          format: int64
+        item_count:
+          type: integer
+    JobOffersResponse:
+      type: object
+      required:
+        - job_offers
+      properties:
+        job_offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobOfferResponse'
+    JobOfferResponse:
+      type: object
+      required:
+        - id
+        - company_id
+        - created_by
+        - title
+        - description
+        - status
+        - tags
+        - version
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        company_id:
+          $ref: '#/components/schemas/UUID'
+        created_by:
+          $ref: '#/components/schemas/UUID'
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/JobOfferStatus'
+        tags:
+          type: array
+          items:
+            type: string
+        salary_range:
+          $ref: '#/components/schemas/SalaryRange'
+        version:
+          type: number
+          format: int64
+    JobApplicationsResponse:
+      type: object
+      required:
+        - job_applications
+      properties:
+        job_applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobApplicationResponse'
+    JobApplicationResponse:
+      type: object
+      required:
+        - id
+        - company
+        - user_id
+        - status
+        - job_offer
+        - content
+        - version
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        company:
+          $ref: '#/components/schemas/JobApplicationCompanyResponse'
+        user_id:
+          $ref: '#/components/schemas/UUID'
+        status:
+          $ref: '#/components/schemas/JobApplicationStatus'
+        job_offer:
+          $ref: '#/components/schemas/JobApplicationJobOfferResponse'
+        content:
+          type: string
+        version:
+          type: number
+          format: int64
+    JobApplicationCompanyResponse:
+      type: object
+      required:
+        - id
+        - name
+        - location
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        name:
+          type: string
+        location:
+          type: string
+    JobApplicationJobOfferResponse:
+      type: object
+      required:
+        - id
+        - title
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        title:
+          type: string
+    JobApplicationStatus:
+      type: string
+      x-extensible-enum:
+        - DRAFT
+        - SEND
+        - DENIED
+        - ACCEPTED
+    JobApplicationCreationRequest:
+      type: object
+      required:
+        - company_id
+        - status
+        - content
+      properties:
+        company_id:
+          $ref: '#/components/schemas/UUID'
+        status:
+          $ref: '#/components/schemas/JobApplicationStatus'
+        content:
+          type: string
+    JobOfferCreationRequest:
+      type: object
+      required:
+        - company_id
+        - created_by
+        - status
+        - title
+        - description
+        - tags
+      properties:
+        company_id:
+          $ref: '#/components/schemas/UUID'
+        created_by:
+          $ref: '#/components/schemas/UUID'
+        status:
+          $ref: '#/components/schemas/JobOfferStatus'
+        title:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        salary_range:
+          $ref: '#/components/schemas/SalaryRange'
+    JobOfferUpdateRequest:
+      type: object
+      required:
+        - title
+        - description
+        - tags
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        salary_range:
+          $ref: '#/components/schemas/SalaryRange'
+    JobApplicationUpdateRequest:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+    JobOfferStatus:
+      type: string
+      x-extensible-enum:
+        - DRAFT
+        - OPEN
+        - CLOSED
+    SalaryRange:
+      type: object
+      required:
+        - lower_bound
+        - upper_bound
+      properties:
+        lower_bound:
+          $ref: '#/components/schemas/Money'
+        upper_bound:
+          $ref: '#/components/schemas/Money'
+    Money:
+      type: object
+      description: A monetary value.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Amount of money.
+          example: 123.45
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          description: Currency code (ISO 4217).
+          example: EUR
+    JobOfferCreationResponse:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+    JobApplicationCreationResponse:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+    UUID:
+      type: string
+      format: UUID

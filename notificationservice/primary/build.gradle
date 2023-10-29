@@ -1,0 +1,50 @@
+plugins {
+    id "org.openapi.generator" version "6.6.0"
+}
+
+dependencies {
+    implementation project(':core')
+    implementation project(':secondary')
+
+    implementation 'org.springframework.kafka:spring-kafka'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "build/generate-resources/main/src/main/java"
+        }
+    }
+}
+
+compileJava.dependsOn tasks.openApiGenerate
+
+openApiValidate {
+    inputSpec.set("$projectDir/src/main/resources/publishing-user-domain-events-spec.yaml")
+}
+
+openApiGenerate {
+    inputSpec.set("$projectDir/src/main/resources/publishing-user-domain-events-spec.yaml")
+    generatorName = "spring"
+    library = "spring-boot"
+    modelNameSuffix = "DTO"
+    modelPackage = "thi.cnd.notificationservice.api.generated.model"
+    apiPackage = "thi.cnd.notificationservice.api.generated"
+    typeMappings = [
+            "OffsetDateTime": "Instant"
+    ]
+    importMappings = [
+            "java.time.OffsetDateTime": "java.time.Instant"
+    ]
+    additionalProperties = [
+            "useSpringBoot3"      : true,
+            "useSpringController" : false,
+            "useTags"             : true,
+            "useResponseEntity"   : false,
+            "useOptional"         : true,
+            "openApiNullable"     : false,
+            "interfaceOnly"       : true,
+            "skipDefaultInterface": true
+    ]
+
+}

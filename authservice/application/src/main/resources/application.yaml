@@ -13,7 +13,7 @@ logging:
       springframework: debug
 
 jwt-config:
-  issuer: http://localhost:8080
+  issuer: http://localhost:8081
   oidcIssuersDiscoveryEndpoints:
     - https://accounts.google.com
 #    - https://idp.example.org/issuerOne

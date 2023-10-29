@@ -1,0 +1,44 @@
+plugins {
+    id "org.openapi.generator" version "6.6.0"
+}
+
+dependencies {
+    implementation project(':core')
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "build/generate-resources/main/src/main/java"
+        }
+    }
+}
+
+openApiValidate {
+    inputSpec.set("$projectDir/src/main/resources/user-api-spec.yaml")
+}
+
+openApiGenerate {
+    inputSpec.set("$projectDir/src/main/resources/user-api-spec.yaml")
+    generatorName = "java"
+    library = "webclient"
+    modelNameSuffix = "DTO"
+    modelPackage = "thi.cnd.careerservice.api.generated.model"
+    apiPackage = "thi.cnd.careerservice.api.generated"
+    typeMappings = [
+            "OffsetDateTime": "Instant"
+    ]
+    importMappings = [
+            "java.time.OffsetDateTime": "java.time.Instant"
+    ]
+    additionalProperties = [
+            "useTags"             : true,
+            "useOptional"         : true,
+            "openApiNullable"     : false,
+            "useOneOfInterfaces"  : true,
+            "skipDefaultInterface": true
+    ]
+
+}
+
+compileJava.dependsOn tasks.openApiGenerate

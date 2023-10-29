@@ -1,0 +1,51 @@
+plugins {
+    id "org.openapi.generator" version "6.6.0"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "build/test-generate-resources/src/main/java"
+        }
+    }
+}
+
+dependencies {
+    implementation project(':core')
+    implementation project(':primary')
+    implementation project(':secondary')
+
+    testImplementation 'org.testcontainers:testcontainers:1.19.1'
+    testImplementation 'org.testcontainers:kafka:1.19.1'
+    testImplementation 'org.testcontainers:junit-jupiter:1.19.1'
+    testImplementation 'org.testcontainers:mongodb:1.19.1'
+    testImplementation 'org.wiremock:wiremock-standalone:3.2.0'
+
+    // First dependency is for IDEA
+    testCompileOnly files { project(':core').sourceSets.test.java.srcDirs }
+    // Second is for Gradle
+    testImplementation project(':core').sourceSets.test.output
+}
+
+openApiGenerate {
+    inputSpec.set("$rootDir/primary/src/main/resources/career-api-spec.yaml")
+    outputDir = "$projectDir/build/test-generate-resources"
+    validateSpec = true
+    generatorName = "java"
+    library = "webclient"
+    modelNameSuffix = "DTO"
+    modelPackage = "thi.cnd.careerservice.test.api.generated.model"
+    apiPackage = "thi.cnd.careerservice.test.api.generated"
+    additionalProperties = [
+            "useSpringBoot3"      : true,
+            "useSpringController" : true,
+            "useTags"             : false,
+            "useResponseEntity"   : true,
+            "useOptional"         : true,
+            "openApiNullable"     : false,
+            "interfaceOnly"       : true,
+            "skipDefaultInterface": true
+    ]
+}
+
+compileJava.dependsOn tasks.openApiGenerate

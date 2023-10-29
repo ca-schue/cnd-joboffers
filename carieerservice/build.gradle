@@ -1,0 +1,113 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.1.2'
+    id 'io.spring.dependency-management' version '1.1.2'
+}
+
+group 'thi.cnd'
+version '1.0-SNAPSHOT'
+
+springBoot {
+    mainClass = 'thi.cnd.careerservice.Application'
+}
+
+jar {
+    manifest {
+        attributes('Main-Class': 'thi.cnd.careerservice.Application')
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':application')
+    implementation project(':core')
+    implementation project(':primary')
+    implementation project(':secondary')
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        sourceCompatibility = '21'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-jetty'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+        implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.1.3'
+        implementation 'org.springframework.security:spring-security-oauth2-client'
+
+        implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
+
+        implementation 'io.grpc:grpc-core:1.58.0'
+
+        implementation 'com.eventstore:db-client-java:4.3.0'
+
+        implementation 'org.springframework:spring-webflux:6.0.11'
+        implementation 'org.eclipse.jetty:jetty-reactive-httpclient:3.0.8'
+
+        // Escaping strings
+        implementation 'org.apache.commons:commons-text:1.10.0'
+
+        // Bimap
+        implementation 'com.google.guava:guava:32.1.2-jre'
+
+        implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+
+        implementation 'org.zalando:problem-spring-web:0.29.1'
+        implementation 'org.zalando:jackson-datatype-problem:0.27.1'
+        implementation 'org.zalando:jackson-datatype-money:1.3.0'
+
+        implementation 'io.swagger.core.v3:swagger-annotations:2.2.15'
+
+        implementation 'javax.money:money-api:1.1'
+        implementation 'org.javamoney.moneta:moneta-core:1.4.2'
+
+        implementation 'org.springframework.retry:spring-retry:2.0.2'
+
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+        implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+        implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+
+        implementation 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor 'org.projectlombok:lombok:1.18.30'
+        implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+        implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+        annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.security:spring-security-test'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    tasks.withType(Test).configureEach {
+        maxParallelForks = 1
+    }
+
+    bootJar {
+        enabled = false
+    }
+}

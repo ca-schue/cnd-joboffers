@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="!prod">
+        <appender name="ConsoleLoggerStdOut" class="ch.qos.logback.core.ConsoleAppender">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>%d{HH:mm:ss.SSS} %blue(%-6marker) %highlight(%-5level) %logger{50} | %gray(%M) %-3line -
+                    %msg%n%rEx
+                </Pattern>
+            </layout>
+        </appender>
+    </springProfile>
+
+    <springProfile name="prod">
+        <appender name="ConsoleLoggerStdOut" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="ConsoleLoggerStdOut"/>
+    </root>
+
+</configuration>

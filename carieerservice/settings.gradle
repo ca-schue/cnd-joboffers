@@ -1,0 +1,6 @@
+rootProject.name = 'carieerservice'
+include 'application'
+include 'core'
+include 'primary'
+include 'secondary'
+
