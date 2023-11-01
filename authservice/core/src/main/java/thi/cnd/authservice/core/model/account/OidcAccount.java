@@ -15,7 +15,7 @@ public class OidcAccount extends Account {
     private final String subject;
     final AccountProvider provider = AccountProvider.OIDC;
 
-    public OidcAccount(@NotNull AccountId id, @NotNull AccountProvider provider, @NotNull Instant lastLogin, @NotNull String subject, @NotNull boolean verified) {
+    public OidcAccount(@NotNull AccountId id, @NotNull Instant lastLogin, @NotNull String subject, @NotNull boolean verified) {
         this.setId(id);
         this.setLastLogin(lastLogin);
         this.subject = subject;

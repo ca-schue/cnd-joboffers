@@ -21,6 +21,6 @@ public interface UserRepositoryPort {
 
     @NotNull User saveUser(@NotNull User user) throws UserAlreadyExistsException;
 
-    void removeCompanyFromUser(CompanyId companyId);
+    void removeCompanyFromUser(CompanyId companyId, UserId ownerId) throws UserNotFoundByIdException;
 
 }

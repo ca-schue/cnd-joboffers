@@ -30,9 +30,11 @@ public class EndpointAuthorizationFilterChainConfig {
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
                         .requestMatchers("/accounts/registerInternalAccount").permitAll()
                         .requestMatchers("/clients/create").permitAll()
-                        .requestMatchers("/accounts/{accountId}").access(AuthorizationManagers.allOf(
+                        .requestMatchers("/accounts/{accountId}/update-internal-password").permitAll()
+                        .requestMatchers("/accounts/{accountId}").permitAll()
+                        /*.access(AuthorizationManagers.allOf(
                                 AuthenticationTypeAuthorizationManager.isAccount(),
-                                IdMatcherAuthorizationManager.matchesId("accountId")))
+                                IdMatcherAuthorizationManager.matchesId("accountId")))*/
                 )
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2 // Only takes access tokens issued by this authorization server
@@ -40,7 +42,7 @@ public class EndpointAuthorizationFilterChainConfig {
                                 //.jwkSetUri("http://localhost:8081")
                                 .jwtAuthenticationConverter(new AccessTokenAuthenticationConverter())));
         http.csrf(AbstractHttpConfigurer::disable);
-        http.cors(Customizer.withDefaults());
+        http.cors(AbstractHttpConfigurer::disable);
         return http.build();
     }
 

@@ -13,9 +13,9 @@ public class InternalAccount extends Account {
 
     @NotBlank String email;
     String encryptedPassword;
-    static AccountProvider provider = AccountProvider.INTERNAL;
+    final AccountProvider provider = AccountProvider.INTERNAL;
 
-    public InternalAccount(@NotNull AccountId id, @NotNull AccountProvider provider, @NotNull Instant lastLogin, @NotNull String email, @NotNull String encryptedPassword, @NotNull boolean verified) {
+    public InternalAccount(@NotNull AccountId id, @NotNull Instant lastLogin, @NotNull String email, @NotNull String encryptedPassword, @NotNull boolean verified) {
         this.setId(id);
         this.setLastLogin(lastLogin);
         this.setVerified(verified);

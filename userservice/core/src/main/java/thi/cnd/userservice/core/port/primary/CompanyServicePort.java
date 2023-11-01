@@ -4,10 +4,7 @@ import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import thi.cnd.userservice.core.exception.CompanyAlreadyExistsException;
-import thi.cnd.userservice.core.exception.CompanyAlreadyPartnerProgramSubscriberException;
-import thi.cnd.userservice.core.exception.CompanyNotFoundByIdException;
-import thi.cnd.userservice.core.exception.UserNotFoundByIdException;
+import thi.cnd.userservice.core.exception.*;
 import thi.cnd.userservice.core.model.company.*;
 import thi.cnd.userservice.core.model.user.UserId;
 
@@ -27,7 +24,7 @@ public interface CompanyServicePort {
             @NotNull UserId ownerId,
             @NotNull CompanyDetails details,
             @NotNull CompanyLinks links
-    ) throws UserNotFoundByIdException, CompanyAlreadyExistsException;
+    ) throws UserNotFoundByIdException, CompanyAlreadyExistsException, UserAlreadyOwnerOfCompanyException;
 
     @NotNull Company updateCompanyDetails(
             @NotNull CompanyId companyId,
@@ -43,7 +40,7 @@ public interface CompanyServicePort {
             @NotNull CompanyId companyId
     ) throws CompanyNotFoundByIdException, CompanyAlreadyPartnerProgramSubscriberException;
 
-    void deleteCompanyById(@NotNull CompanyId companyId) throws CompanyNotFoundByIdException;
+    void deleteCompanyById(@NotNull CompanyId companyId) throws CompanyNotFoundByIdException, UserNotFoundByIdException;
 
     @NotNull Company addMember(CompanyId companyId, UserId userId) throws CompanyNotFoundByIdException;
 }

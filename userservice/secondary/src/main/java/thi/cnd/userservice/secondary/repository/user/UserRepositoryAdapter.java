@@ -7,11 +7,14 @@ import thi.cnd.userservice.core.exception.UserAlreadyExistsException;
 import thi.cnd.userservice.core.exception.UserNotFoundByEmailException;
 import thi.cnd.userservice.core.exception.UserNotFoundByIdException;
 import thi.cnd.userservice.core.model.company.CompanyId;
+import thi.cnd.userservice.core.model.user.UserCompanyAssociation;
 import thi.cnd.userservice.core.port.secondary.repository.UserRepositoryPort;
 import thi.cnd.userservice.core.model.user.User;
 import thi.cnd.userservice.core.model.user.UserId;
 import thi.cnd.userservice.secondary.repository.user.model.UserDAO;
 import thi.cnd.userservice.secondary.repository.user.model.UserDaoMapper;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,10 +32,14 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
 
     @Override
     public User findUserByEmail(String email) throws UserNotFoundByEmailException {
-        return repository
-                .findByProfileEmail(email)
-                .map(mapper::toUser)
-                .orElseThrow(() -> new UserNotFoundByEmailException(email));
+        List<UserDAO> foundUsers = repository.customFindByEmail(email);
+        if (foundUsers.isEmpty()) {
+            throw new UserNotFoundByEmailException(email);
+        } else if (foundUsers.size() > 1) {
+            throw new RuntimeException("Index violation: > 1 User with same user profile mail");
+        } else {
+            return mapper.toUser(foundUsers.get(0));
+        }
     }
 
     @Override
@@ -69,7 +76,12 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     }
 
     @Override
-    public void removeCompanyFromUser(CompanyId companyId) {
+    public void removeCompanyFromUser(CompanyId companyId, UserId ownerId) throws UserNotFoundByIdException {
+        User owner = findUserById(ownerId);
+        UserCompanyAssociation oca = owner.getAssociations();
+        oca.setOwnerOf(null);
+        owner.setAssociations(oca);
+        updateOrSaveUser(owner);
         repository.removeCompanyFromAllMembers(companyId);
         repository.removeCompanyFromAllInvitedUsers(companyId);
     }
