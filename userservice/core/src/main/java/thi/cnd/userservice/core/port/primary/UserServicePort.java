@@ -25,7 +25,7 @@ public interface UserServicePort {
 
     @NotNull User extendUserSubscription(UserId userId, Duration extendBy) throws UserNotFoundByIdException;
 
-    void deleteUser(UserId userId) throws UserNotFoundByIdException;
+    void deleteUser(UserId userId) throws UserNotFoundByIdException, CompanyNotFoundByIdException;
 
     void inviteUserToCompany(CompanyId companyId, String userEmail) throws UserNotFoundByEmailException, UserAlreadyMemberOfCompanyException, UserNotFoundByIdException, CompanyNotFoundByIdException;
 

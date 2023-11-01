@@ -8,10 +8,14 @@ import thi.cnd.userservice.core.exception.CompanyAlreadyExistsException;
 import thi.cnd.userservice.core.exception.CompanyNotFoundByIdException;
 import thi.cnd.userservice.core.model.company.Company;
 import thi.cnd.userservice.core.model.company.CompanyId;
+import thi.cnd.userservice.core.model.user.UserId;
 
+import java.util.List;
 import java.util.Set;
 
 public interface CompanyRepositoryPort {
+
+    List<Company> findAllCompaniesWithUserMember(@NotNull UserId userId);
 
     @NotNull Company findCompanyById(@NotNull CompanyId companyId) throws CompanyNotFoundByIdException;
 

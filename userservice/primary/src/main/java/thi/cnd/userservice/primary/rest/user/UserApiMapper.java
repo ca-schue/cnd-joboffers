@@ -41,10 +41,12 @@ public interface UserApiMapper {
     }
 
     default PublicUserProfileDTO toPublicProfileDTO(User user) {
-        return new PublicUserProfileDTO()
-                .id(user.getId().getId())
-                .firstName(user.getProfile().getFirstName())
-                .lastName(user.getProfile().getLastName());
+        return new PublicUserProfileDTO(
+                user.getId().getId(),
+                user.getProfile().getFirstName(),
+                user.getProfile().getLastName(),
+                user.getEmail()
+        );
     }
 
 }
