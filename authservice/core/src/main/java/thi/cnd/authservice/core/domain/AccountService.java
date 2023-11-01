@@ -21,24 +21,29 @@ public class AccountService implements AccountServicePort {
     @Override
     public InternalAccount registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException {
         InternalAccount internalAccount = accountFactory.buildInternal(email, password);
-        accountRepositoryPort.saveInternalAccount(internalAccount);
-        return internalAccount;
+        return accountRepositoryPort.saveInternalAccount(internalAccount);
     }
 
     @Override
     public OidcAccount registerNewOidcAccount(String subject) throws AccountAlreadyExistsException {
         OidcAccount oidcAccount = accountFactory.buildOidc(subject);
-        accountRepositoryPort.saveOidcAccount(oidcAccount);
-        return oidcAccount;
+        return accountRepositoryPort.saveOidcAccount(oidcAccount);
     }
 
     @Override
-    public InternalAccount updateInternalAccountEmail(AccountId accountId, String email) throws EmailAlreadyInUserException, AccountNotFoundByIdException {
+    public InternalAccount updateInternalAccountEmail(AccountId accountId, String email) throws EmailAlreadyInUserException, AccountNotFoundByIdException, WrongProviderException {
         try {
             accountRepositoryPort.findInternalAccountByEmail(email);
             throw new EmailAlreadyInUserException("Email " + email + " already in use by another account");
         } catch (AccountNotFoundByEmailException e) {
-            return accountRepositoryPort.updateInternalAccountEmail(accountId, email);
+            Account account = accountRepositoryPort.findAccountById(accountId);
+            if(! (account instanceof InternalAccount internalAccount)) {
+                throw new AccountNotFoundByIdException("Account providers do not match. AccountId belongs to OIDC Account");
+            } else {
+                internalAccount.setEmail(email);
+                InternalAccount updatedAccount = accountRepositoryPort.updateInternalAccount(internalAccount);
+                return updatedAccount;
+            }
         }
     }
 
@@ -52,31 +57,10 @@ public class AccountService implements AccountServicePort {
         accountRepositoryPort.delete(accountId);
     }
 
-    /*@Override
-    public AccountAccessToken mintAccessTokenOidcProvider(String email) throws WrongProviderException {
-        Account account;
-        try {
-            account = getValidatedAccount(AccountProvider.OIDC, email);
-        } catch (AccountNotFoundByEmailException e) {
-            try {
-                account = this.registerNewOidcAccount(email);
-            } catch (AccountAlreadyExistsException ex) {
-                throw new RuntimeException("Race condition error. Please try again.");
-            }
-        }
-        return accountJwtProvider.createJwt(account);
-    }*/
-
-    /*
-    private Account getValidatedAccount(AccountProvider accountProvider, String email) throws AccountNotFoundByEmailException, WrongProviderException {
-        Account account = accountRepositoryPort.findAccountByEmail(email);
-        if (account.provider() != accountProvider) {
-            throw new WrongProviderException("Account linked to email " + email + "requires an access token provided by an " + accountProvider.name() + " itentiy provider");
-        } else {
-            return account;
-        }
-    }*/
-
-
-
+    @Override
+    public void updateInternalAccountPassword(AccountId accountId, String newPlaintextPassword) throws AccountNotFoundByIdException, InvalidPasswordException, WrongProviderException {
+        InternalAccount internalAccountWithOldPassword = accountRepositoryPort.findInternalAccountById(accountId);
+        InternalAccount updatedInternalAccount = accountFactory.updatePassword(internalAccountWithOldPassword, newPlaintextPassword);
+        accountRepositoryPort.updateInternalAccount(updatedInternalAccount);
+    }
 }

@@ -7,12 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import thi.cnd.userservice.core.exception.CompanyAlreadyExistsException;
+import thi.cnd.userservice.core.exception.CompanyAlreadyPartnerProgramSubscriberException;
 import thi.cnd.userservice.core.exception.CompanyNotFoundByIdException;
 import thi.cnd.userservice.core.exception.UserNotFoundByIdException;
-import thi.cnd.userservice.core.model.company.Company;
-import thi.cnd.userservice.core.model.company.CompanyDetails;
-import thi.cnd.userservice.core.model.company.CompanyId;
-import thi.cnd.userservice.core.model.company.CompanyLinks;
+import thi.cnd.userservice.core.model.company.*;
 import thi.cnd.userservice.core.model.user.User;
 import thi.cnd.userservice.core.model.user.UserId;
 import thi.cnd.userservice.core.port.primary.CompanyServicePort;
@@ -23,6 +21,7 @@ import thi.cnd.userservice.core.port.secondary.event.company.CompanyRegisteredEv
 import thi.cnd.userservice.core.port.secondary.repository.CompanyRepositoryPort;
 import thi.cnd.userservice.core.port.secondary.repository.UserRepositoryPort;
 
+import java.time.Instant;
 import java.util.Set;
 
 @Service
@@ -83,6 +82,19 @@ public class CompanyService implements CompanyServicePort {
         Company company = companyRepositoryPort.findCompanyById(companyId);
         company.setLinks(updatedCompanylinks); // TODO: Input verification?
         return companyRepositoryPort.updateOrSaveCompany(company);
+    }
+
+    @Override
+    public Company subscribeToPartnerProgram(CompanyId companyId) throws CompanyNotFoundByIdException, CompanyAlreadyPartnerProgramSubscriberException {
+        Company company = companyRepositoryPort.findCompanyById(companyId);
+        if (company.getPartnerProgram().isPartnered()) {
+            throw new CompanyAlreadyPartnerProgramSubscriberException("Company " + company.getId() + " already subscriber to partner program until " + company.getPartnerProgram().partnerUntil());
+        } else {
+            company.setPartnerProgram(
+                    new CompanyPartnerProgram(Instant.now().plusSeconds(60 * 60 * 24 * 30)) // 1 Month
+            );
+            return companyRepositoryPort.updateOrSaveCompany(company);
+        }
     }
 
     @Override

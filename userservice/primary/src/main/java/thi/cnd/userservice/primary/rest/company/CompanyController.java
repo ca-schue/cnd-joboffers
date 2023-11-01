@@ -34,6 +34,7 @@ public class CompanyController implements CompanyApi {
 
     @Override
     public ResponseEntity<CompanyDTO> createNewCompany(CompanyRegistrationRequestDTO requestDTO) {
+        // Author. = Member
         try {
             Company company = companyServicePort.registerNewCompany(
                     new UserId(requestDTO.getOwnerId()),
@@ -50,6 +51,7 @@ public class CompanyController implements CompanyApi {
 
     @Override
     public ResponseEntity<Void> deleteCompany(UUID companyId) {
+        // Author. = Owner
         // TODO: Delete member/assocciations of all users
         try {
             companyServicePort.deleteCompanyById(new CompanyId(companyId));
@@ -61,6 +63,7 @@ public class CompanyController implements CompanyApi {
 
     @Override
     public ResponseEntity<CompanyDTO> getCompany(UUID companyId) {
+        // Author. = member
         try {
             Company company = companyServicePort.findCompanyById(new CompanyId(companyId));
             return ResponseEntity.ok(companyApiMapper.toCompanyDTO(company));
@@ -71,6 +74,7 @@ public class CompanyController implements CompanyApi {
 
     @Override
     public ResponseEntity<PublicCompanyProfileDTO> getPublicCompanyProfile(UUID companyId) {
+        // Author. = offen
         try {
             Company company = companyServicePort.findCompanyById(new CompanyId(companyId));
             return ResponseEntity.ok(companyApiMapper.toPublicProfileDTO(company));
@@ -81,6 +85,7 @@ public class CompanyController implements CompanyApi {
 
     @Override
     public ResponseEntity<Void> inviteUserToCompany(UUID companyId, CompanyInviteUserRequestDTO requestDTO) {
+        // Author. = Member
         try {
             userServicePort.inviteUserToCompany(new CompanyId(companyId), requestDTO.getUserProfileEmail());
             return new ResponseEntity<>(HttpStatus.OK);
@@ -97,12 +102,25 @@ public class CompanyController implements CompanyApi {
             Optional<Set<String>> tags,
             Optional<Integer> page,
             Optional<Integer> size) {
+        // Author. = offen
         var resultList = companyServicePort.searchCompanies(
                 name.orElse(null),
                 tags.orElse(Set.of()),
                 createPageRequest(page, size)
             );
         return ResponseEntity.ok(companyApiMapper.toPaginatedCompaniesDTO(resultList));
+    }
+
+    @Override
+    public ResponseEntity<CompanyDTO> subscribeToPartnerProgram(UUID companyId) {
+        try {
+            Company subscribedCompany = companyServicePort.subscribeToPartnerProgram(CompanyId.of(companyId.toString()));
+            return ResponseEntity.ok(companyApiMapper.toCompanyDTO(subscribedCompany));
+        } catch (CompanyAlreadyPartnerProgramSubscriberException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+        } catch (CompanyNotFoundByIdException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
     }
 
     private PageRequest createPageRequest(Optional<Integer> page, Optional<Integer> size) {
@@ -115,6 +133,7 @@ public class CompanyController implements CompanyApi {
 
     @Override
     public ResponseEntity<CompanyDTO> updateCompanyDetails(UUID companyId, UpdateCompanyDetailsRequestDTO requestDTO) {
+        // Author. = Member
         try {
             Company company = companyServicePort.updateCompanyDetails(
                     new CompanyId(companyId),
@@ -133,6 +152,7 @@ public class CompanyController implements CompanyApi {
 
     @Override
     public ResponseEntity<CompanyDTO> updateCompanyLinks(UUID companyId, UpdateCompanyLinksRequestDTO requestDTO) {
+        // Author. = Member
         try {
             Company company = companyServicePort.updateCompanyLinks(
                     new CompanyId(companyId),

@@ -11,7 +11,7 @@ paths:
       description: Login to an internal account with basic auth. Returns an access token with claim "subject-type = account"
       operationId: loginInternalAccount
       tags:
-        - Account Login
+        - Account Management
       security:
         - internalAccountBasicAuth: []
       responses:
@@ -20,7 +20,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessTokenResponse'
+                $ref: '#/components/schemas/AccountLoginResponse'
         '401':
           description: Wrong credentials
   /accounts/loginOIDCAccount:
@@ -30,14 +30,14 @@ paths:
       security:
         - oidcIdToken: []
       tags:
-        - Account Login
+        - Account Management
       responses:
         '200':
           description: Login with OIDC was successful. Account exists.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessTokenResponse'
+                $ref: '#/components/schemas/AccountLoginResponse'
         #        '201':
         #          description: Login with OIDC was successful. New Account created.
         #          content:
@@ -64,15 +64,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Account'
+                $ref: '#/components/schemas/AccountLoginResponse'
         '409':
           description: Account with the email already exists.
         default:
           description: Returned if any error occurred during the request.
-  /accounts/{accountId}/update-email:
+  /accounts/{accountId}/update-internal-email:
     put:
-      description: Updates the login email of the provided account
-      operationId: updateAccountEmail
+      description: Updates the login email of the provided internal account
+      operationId: updateInternalAccountEmail
       tags:
         - Account Management
       parameters:
@@ -82,19 +82,40 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountEmailUpdateRequest'
+              $ref: '#/components/schemas/InternalAccountEmailUpdateRequest'
       responses:
         '200':
           description: Update was successful
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Account'
+                $ref: '#/components/schemas/InternalAccount'
         '404':
           description: Account not found for id.
+  /accounts/{accountId}/update-internal-password:
+    put:
+      description: Updates the login password of the provided internal account
+      operationId: updateInternalAccountPassword
+      tags:
+        - Account Management
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalAccountPasswordUpdateRequest'
+      responses:
+        '200':
+          description: Update was successful
+        '404':
+          description: Account not found for id.
+      security:
+        - accountAccessToken: []
   /accounts/{accountId}:
     delete:
-      description: Deletes the account. {accountId} must match account id in access token
+      description: Deletes the account and the user profile if available. {accountId} must match account id in access token
       operationId: deleteAccount
       tags:
         - Account Management
@@ -160,22 +181,38 @@ paths:
       security:
         - clientAccessToken: []
 
-  /token-introspection:
+
+  /token-introspection/account:
     get:
-      description: Get detailed account or client data from the provided access token.
-      operationId: tokenIntrospection
+      description: Get detailed account data from the provided access token.
+      operationId: tokenIntrospectionAccount
+      tags:
+       - Auth Endpoints
+      responses:
+        '200':
+          description: Token is valid and data could be retrieved.
+          content:
+           application/json:
+             schema:
+                 $ref: '#/components/schemas/Account'
+      security:
+        - accountAccessToken: [ ]
+
+  /token-introspection/client:
+    get:
+      description: Get detailed client data from the provided access token.
+      operationId: tokenIntrospectionClient
       tags:
         - Auth Endpoints
-      security:
-        - accountAccessToken: []
-        - clientAccessToken: []
       responses:
         '200':
           description: Token is valid and data could be retrieved.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthenticatedSubjectResponse'
+                  $ref: '#/components/schemas/Client'
+      security:
+        - clientAccessToken: [ ]
 
 components:
   parameters:
@@ -194,40 +231,37 @@ components:
 
   schemas:
     Account:
-      type: object
-      required:
-        - type
-        - id
-        - provider
-      properties:
-        type:
-          type: string
-        provider:
-          type: string
-        id:
-          $ref: '#/components/schemas/UUID'
       oneOf:
         - $ref: '#/components/schemas/InternalAccount'
         - $ref: '#/components/schemas/OidcAccount'
       discriminator:
-        propertyName: type
-        mapping:
-          InternalAccount: '#/components/schemas/InternalAccount'
-          OidcAccount: '#/components/schemas/OidcAccount'
+        propertyName: accountType
 
     InternalAccount:
       type: object
       required:
+        - accountType
+        - id
         - email
       properties:
+        accountType:
+          type: string
+        id:
+          $ref: '#/components/schemas/UUID'
         email:
           type: string
 
     OidcAccount:
       type: object
       required:
+        - accountType
+        - id
         - subject
       properties:
+        accountType:
+          type: string
+        id:
+          $ref: '#/components/schemas/UUID'
         subject:
           type: string
 
@@ -257,12 +291,21 @@ components:
           type: string
         password:
           type: string
-    AccountEmailUpdateRequest:
+
+    InternalAccountPasswordUpdateRequest:
       type: object
       required:
-        - email
+        - new_plaintext_password
       properties:
-        email:
+        new_plaintext_password:
+          type: string
+
+    InternalAccountEmailUpdateRequest:
+      type: object
+      required:
+        - new_email
+      properties:
+        new_email:
           type: string
 
     Client:
@@ -318,23 +361,16 @@ components:
           items:
             type: string
 
-    AccessTokenResponse:
+    AccountLoginResponse:
       type: object
       required:
+        - account
         - access_token
       properties:
+        account:
+          $ref: '#/components/schemas/Account'
         access_token:
           type: string
-    AuthenticatedSubjectResponse:
-      type: object
-      oneOf:
-        - $ref: '#/components/schemas/Account'
-        - $ref: '#/components/schemas/Client'
-      discriminator:
-        propertyName: type
-        mapping:
-          Account: '#/components/schemas/Account'
-          Client: '#/components/schemas/Client'
 
     UUID:
       type: string

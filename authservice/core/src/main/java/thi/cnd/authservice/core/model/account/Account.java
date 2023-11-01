@@ -11,9 +11,10 @@ import java.time.Instant;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class Account {
+//@AllArgsConstructor
+public abstract class Account {
     @NotNull AccountId id;
     @NotNull AccountProvider provider;
     @NotNull Instant lastLogin;
+    @NotNull boolean verified;
 }

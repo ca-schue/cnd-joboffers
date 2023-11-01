@@ -15,7 +15,7 @@ public interface CompanyRepositoryPort {
 
     @NotNull Company findCompanyById(@NotNull CompanyId companyId) throws CompanyNotFoundByIdException;
 
-    @NotNull Company updateOrSaveCompany(Company updatedCompany);
+    @NotNull Company updateOrSaveCompany(Company updatedCompany); // TODO: do like Auth service => strict update!
 
     Page<Company> searchCompaniesByName(@Nullable String name, @NotNull Set<String> tags, Pageable pageable);
 

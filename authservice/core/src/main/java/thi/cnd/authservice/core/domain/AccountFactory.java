@@ -22,7 +22,8 @@ public class AccountFactory {
                 new AccountId(),
                 AccountProvider.OIDC,
                 Instant.now(),
-                subject
+                subject,
+                false
         );
     }
 
@@ -32,8 +33,20 @@ public class AccountFactory {
                     AccountProvider.INTERNAL,
                     Instant.now(),
                     email,
-                    validatePasswordAndEncode(password)
+                    validatePasswordAndEncode(password),
+                    false
                     );
+    }
+
+    public InternalAccount updatePassword(InternalAccount internalAccount, String newPlainTextPassword) throws InvalidPasswordException {
+        return new InternalAccount(
+                internalAccount.getId(),
+                internalAccount.getProvider(),
+                internalAccount.getLastLogin(),
+                internalAccount.getEmail(),
+                validatePasswordAndEncode(newPlainTextPassword),
+                internalAccount.isVerified()
+        );
     }
 
     private String validatePasswordAndEncode(String cleartextPassword) throws InvalidPasswordException {

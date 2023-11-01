@@ -1,5 +1,6 @@
 package thi.cnd.authservice.secondary.repository.account.model;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,12 +12,11 @@ import thi.cnd.authservice.core.model.account.AccountId;
 
 import java.time.Instant;
 
-@AllArgsConstructor
 @Getter
 @Setter
 @Validated
 @Document(collection = "Accounts")
-public class AccountDAO {
+public abstract class AccountDAO {
         @Id
         private AccountId id;
 
@@ -25,5 +25,8 @@ public class AccountDAO {
 
         @Indexed
         private Instant lastLogin;
+
+        @NotNull
+        private boolean verified;
 }
 

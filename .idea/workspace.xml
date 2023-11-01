@@ -5,242 +5,145 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7baefe96-aa6a-46d1-8d3a-0092437b1fa4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/application/userservice.application.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/primary/userservice.primary.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/.github/workflows/maven.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/.openapi-generator-ignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/.openapi-generator/FILES" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/.openapi-generator/VERSION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/api/openapi.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/build.sbt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/AccessTokenResponse.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/Account.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/AccountLoginApi.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/AccountManagementApi.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/AuthEndpointsApi.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/AuthenticatedSubjectResponse.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/Client.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/ClientCreationRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/ClientCreationResponse.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/ClientManagementApi.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/InternalAccountLoginRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/InternalAccountRegistrationRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/ThrowableProblem.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/git_push.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiCallback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/Configuration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/GzipRequestInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/JSON.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/Pair.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ProgressRequestBody.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ProgressResponseBody.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ServerConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ServerVariable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/StringUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/api/AccountLoginApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/api/AccountManagementApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/api/AuthEndpointsApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/api/ClientManagementApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/ApiKeyAuth.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/Authentication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/HttpBasicAuth.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/HttpBearerAuth.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/AbstractOpenApiSchema.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/AccessTokenResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/Account.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/AuthenticatedSubjectResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/ClientCreationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/ClientCreationResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/InternalAccountLoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/InternalAccountRegistrationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/ThrowableProblem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/api/AccountLoginApiTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/api/AccountManagementApiTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/api/AuthEndpointsApiTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/api/ClientManagementApiTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/AccessTokenResponseTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/AccountTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/AuthenticatedSubjectResponseTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/ClientCreationRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/ClientCreationResponseTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/ClientTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/InternalAccountLoginRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/InternalAccountRegistrationRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/ThrowableProblemTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/application/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/application/src/main/java/thi/cnd/userservice/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/application/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/core/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/.github/workflows/maven.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/.openapi-generator-ignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/.openapi-generator/FILES" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/.openapi-generator/VERSION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/api/openapi.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/build.sbt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/AcceptCompanyInvitationRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/AuthApi.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/Company.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/CompanyApi.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/CompanyDetails.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/CompanyInviteUserRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/CompanyLinks.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/CompanyPartnerProgram.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/CompanyRegistrationRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/DeleteUserByUserProfileEmailRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/ExtendUserSubscriptionRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/PaginatedPublicCompanyProfileResponse.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/Pagination.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/PublicCompanyProfile.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/PublicUserProfile.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UpdateCompanyDataRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UpdateCompanyDetailsRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UpdateCompanyLinksRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UpdateUserDataRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UpdateUserProfileEmailRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UpdateUserProfileRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UpdateUserSettingsRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/User.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UserApi.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UserCompanyAssociation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UserProfile.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UserRegistrationRequest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UserSettings.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/docs/UserSubscription.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/git_push.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiCallback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/Configuration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/GzipRequestInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/JSON.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/Pair.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/ProgressRequestBody.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/ProgressResponseBody.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/ServerConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/ServerVariable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/StringUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/api/AuthApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/api/CompanyApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/api/UserApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/ApiKeyAuth.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/Authentication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/HttpBasicAuth.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/HttpBearerAuth.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/AbstractOpenApiSchema.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/AcceptCompanyInvitationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/Company.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/CompanyDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/CompanyInviteUserRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/CompanyLinks.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/CompanyPartnerProgram.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/CompanyRegistrationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/DeleteUserByUserProfileEmailRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/ExtendUserSubscriptionRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/PaginatedPublicCompanyProfileResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/Pagination.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/PublicCompanyProfile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/PublicUserProfile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UpdateCompanyDataRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UpdateCompanyDetailsRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UpdateCompanyLinksRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UpdateUserDataRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UpdateUserProfileEmailRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UpdateUserProfileRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UpdateUserSettingsRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UserCompanyAssociation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UserProfile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UserRegistrationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UserSettings.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/UserSubscription.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/api/AuthApiTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/api/CompanyApiTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/api/UserApiTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/AcceptCompanyInvitationRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/CompanyDetailsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/CompanyInviteUserRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/CompanyLinksTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/CompanyPartnerProgramTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/CompanyRegistrationRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/CompanyTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/DeleteUserByUserProfileEmailRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/ExtendUserSubscriptionRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/PaginatedPublicCompanyProfileResponseTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/PaginationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/PublicCompanyProfileTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/PublicUserProfileTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UpdateCompanyDataRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UpdateCompanyDetailsRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UpdateCompanyLinksRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UpdateUserDataRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UpdateUserProfileEmailRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UpdateUserProfileRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UpdateUserSettingsRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UserCompanyAssociationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UserProfileTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UserRegistrationRequestTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UserSettingsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UserSubscriptionTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/UserTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/rest/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/security/EndpointAuthorizationFilterConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/security/SecurityConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/security/authorizationManagers/AuthenticationTypeAuthorizationManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/security/authorizationManagers/IdMatcherAuthorizationManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/security/model/AuthenticatedAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/security/model/AuthenticatedClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/security/tokenProcessing/AccessTokenAuthenticationConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/primary/src/main/resources/user-api-spec.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/secondary/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userservice/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/core/userservice.core.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/secondary/userservice.secondary.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/public/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/App.test.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/App.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/Message.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/components/Alert.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/components/Button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/components/ListGroup.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/react-app-env.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/reportWebVitals.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/src/setupTests.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend-test/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/userservice/core/src/main/java/thi/cnd/userservice/core/exception/CompanyAlreadyPartnerProgramSubscriberException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/primary/userservice.primary.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/primary/userservice.primary.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/application/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/application/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountJwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountJwtProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/JwtConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/JwtConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/model/AccountLoginApiMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/model/AccountLoginApiMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/AccountDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/AccountDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/accessTokenAuthentication/AccessTokenAuthenticationConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/security/accessTokenAuthentication/AccessTokenAuthenticationConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authservice/secondary/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/secondary/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/domain/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/account/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/account/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/account/AccountProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/account/AccountProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/account/InternalAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/account/InternalAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/account/OidcAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/model/account/OidcAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/ports/primary/AccountServicePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/ports/primary/AccountServicePort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/ports/secondary/AccountRepositoryPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/core/src/main/java/thi/cnd/authservice/core/ports/secondary/AccountRepositoryPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/.github/workflows/maven.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/.openapi-generator-ignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/.openapi-generator/FILES" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/.openapi-generator/VERSION" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/api/openapi.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/build.sbt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/AccessTokenResponse.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/Account.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/AccountLoginApi.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/AccountManagementApi.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/AuthEndpointsApi.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/AuthenticatedSubjectResponse.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/Client.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/ClientCreationRequest.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/ClientCreationResponse.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/ClientManagementApi.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/InternalAccountLoginRequest.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/InternalAccountRegistrationRequest.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/docs/ThrowableProblem.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/git_push.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiCallback.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ApiResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/Configuration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/GzipRequestInterceptor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/JSON.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/Pair.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ProgressRequestBody.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ProgressResponseBody.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ServerConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/ServerVariable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/StringUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/api/AccountLoginApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/api/AccountManagementApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/api/AuthEndpointsApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/api/ClientManagementApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/ApiKeyAuth.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/Authentication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/HttpBasicAuth.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/auth/HttpBearerAuth.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/AbstractOpenApiSchema.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/AccessTokenResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/AuthenticatedSubjectResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/ClientCreationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/ClientCreationResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/InternalAccountLoginRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/InternalAccountRegistrationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/main/java/org/openapitools/client/model/ThrowableProblem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/api/AccountLoginApiTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/api/AccountManagementApiTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/api/AuthEndpointsApiTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/api/ClientManagementApiTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/AccessTokenResponseTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/AccountTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/AuthenticatedSubjectResponseTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/ClientCreationRequestTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/ClientCreationResponseTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/ClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/InternalAccountLoginRequestTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/InternalAccountRegistrationRequestTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/gen/src/test/java/org/openapitools/client/model/ThrowableProblemTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/account/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/account/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/account/AccountLoginApiMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/account/AccountLoginApiMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/rest/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/security/authentication/loginAuthentication/oidc/AuthenticatedOidcIdToken.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/security/authentication/loginAuthentication/oidc/AuthenticatedOidcIdTokenService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/java/thi/cnd/authservice/primary/security/authentication/loginAuthentication/oidc/OidcLoginFilterChainConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/primary/src/main/resources/auth-service-rest-api-spec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/primary/src/main/resources/auth-service-rest-api-spec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/account/AccountRepositoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/account/AccountRepositoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/account/model/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/account/model/AccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/account/model/AccountDAOMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/account/model/AccountDAOMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/account/model/InternalAccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/account/model/InternalAccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/account/model/OidcAccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/authservice/secondary/src/main/java/thi/cnd/authservice/secondary/repository/account/model/OidcAccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userservice/core/src/main/java/thi/cnd/userservice/core/domain/CompanyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/userservice/core/src/main/java/thi/cnd/userservice/core/domain/CompanyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userservice/core/src/main/java/thi/cnd/userservice/core/port/primary/CompanyServicePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/userservice/core/src/main/java/thi/cnd/userservice/core/port/primary/CompanyServicePort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userservice/core/src/main/java/thi/cnd/userservice/core/port/secondary/repository/CompanyRepositoryPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/userservice/core/src/main/java/thi/cnd/userservice/core/port/secondary/repository/CompanyRepositoryPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/rest/company/CompanyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/rest/company/CompanyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/rest/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/userservice/primary/src/main/java/thi/cnd/userservice/primary/rest/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userservice/primary/src/main/resources/user-api-spec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/userservice/primary/src/main/resources/user-api-spec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,21 +226,24 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "20",
-    "last_opened_file_path": "E:/.Persönliche Dateien/.Studium/.Master/CASE/CND/Repos/cnd-joboffers/userservice",
+    "last_opened_file_path": "E:/.Persönliche Dateien/.Studium/.Master/CASE/CND/Repos/cnd-joboffers",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.30229884",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "ts.external.directory.path": "E:\\.Persönliche Dateien\\.Studium\\.Master\\CASE\\CND\\Repos\\cnd-joboffers\\frontend-test\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\.Persönliche Dateien\.Studium\.Master\CASE\CND\Repos\cnd-joboffers" />
       <recent name="E:\.Persönliche Dateien\.Studium\.Master\CASE\CND\Repos\cnd-joboffers\userservice\primary\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -361,11 +267,11 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="OpenAPI/Swagger Code Generator.user-api-spec.yaml">
-    <configuration name="authservice [openApiGenerate]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Spring Boot.Application ">
+    <configuration name="userservice [openApiGenerate]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/authservice" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/userservice" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -384,10 +290,10 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="authservice" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="userservice" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/authservice" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/userservice" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -402,6 +308,9 @@
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
     </configuration>
     <configuration name="Application " type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -496,8 +405,9 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.authservice" />
-      <item itemvalue="Gradle.authservice [openApiGenerate]" />
+      <item itemvalue="Gradle.userservice" />
+      <item itemvalue="Gradle.userservice [openApiGenerate]" />
+      <item itemvalue="JavaScript Debug.Debug Application" />
       <item itemvalue="OpenAPI/Swagger Code Generator.user-api-spec.yaml" />
       <item itemvalue="OpenAPI/Swagger Code Generator.auth-service-rest-api-spec.yaml" />
       <item itemvalue="OpenAPI/Swagger Code Generator.auth-service-rest-api-spec.yaml (1)" />
@@ -507,11 +417,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.userservice [openApiGenerate]" />
+        <item itemvalue="Gradle.userservice" />
         <item itemvalue="OpenAPI/Swagger Code Generator.user-api-spec.yaml" />
         <item itemvalue="OpenAPI/Swagger Code Generator.auth-service-rest-api-spec.yaml" />
         <item itemvalue="OpenAPI/Swagger Code Generator.auth-service-rest-api-spec.yaml (1)" />
-        <item itemvalue="Gradle.authservice [openApiGenerate]" />
-        <item itemvalue="Gradle.authservice" />
       </list>
     </recent_temporary>
   </component>
@@ -527,6 +437,9 @@
       <workItem from="1697527049562" duration="17913000" />
       <workItem from="1697556433901" duration="41638000" />
       <workItem from="1697822710513" duration="6872000" />
+      <workItem from="1698561072515" duration="14112000" />
+      <workItem from="1698648965921" duration="12644000" />
+      <workItem from="1698838032521" duration="1808000" />
     </task>
     <servers />
   </component>
@@ -649,6 +562,15 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="131" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/userservice/core/src/main/java/thi/cnd/userservice/core/port/primary/CompanyServicePort.java</url>
+          <line>41</line>
+          <properties class="thi.cnd.userservice.core.port.primary.CompanyServicePort" method="subscribeToPartnerProgram">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="137" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

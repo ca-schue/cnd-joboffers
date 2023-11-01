@@ -5,12 +5,10 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import thi.cnd.userservice.core.exception.CompanyAlreadyExistsException;
+import thi.cnd.userservice.core.exception.CompanyAlreadyPartnerProgramSubscriberException;
 import thi.cnd.userservice.core.exception.CompanyNotFoundByIdException;
 import thi.cnd.userservice.core.exception.UserNotFoundByIdException;
-import thi.cnd.userservice.core.model.company.Company;
-import thi.cnd.userservice.core.model.company.CompanyDetails;
-import thi.cnd.userservice.core.model.company.CompanyId;
-import thi.cnd.userservice.core.model.company.CompanyLinks;
+import thi.cnd.userservice.core.model.company.*;
 import thi.cnd.userservice.core.model.user.UserId;
 
 import java.util.Set;
@@ -40,6 +38,10 @@ public interface CompanyServicePort {
             @NotNull CompanyId companyId,
             @NotNull CompanyLinks updatedCompanyLinks
     ) throws CompanyNotFoundByIdException;
+
+    @NotNull Company subscribeToPartnerProgram(
+            @NotNull CompanyId companyId
+    ) throws CompanyNotFoundByIdException, CompanyAlreadyPartnerProgramSubscriberException;
 
     void deleteCompanyById(@NotNull CompanyId companyId) throws CompanyNotFoundByIdException;
 

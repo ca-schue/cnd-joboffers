@@ -30,6 +30,7 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<Void> acceptInvitation(UUID userId, AcceptCompanyInvitationRequestDTO requestDTO) {
+        // Author. = Uid
         try {
             userServicePort.acceptCompanyInvitation(new UserId(userId), new CompanyId(requestDTO.getCompanyId()));
             return new ResponseEntity<>(HttpStatus.OK);
@@ -38,11 +39,11 @@ public class UserController implements UserApi {
         } catch (UserAlreadyMemberOfCompanyException | UserNotInvitedException e2) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e2.getMessage());
         }
-
     }
 
     @Override
     public ResponseEntity<Void> deleteUser(UUID userId) {
+        // Author. = Uid
         try {
             userServicePort.deleteUser(new UserId(userId));
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -53,6 +54,7 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<PublicUserProfileDTO> getPublicUserProfile(UUID userId) {
+        // Author. = offen
         try {
             User user = userServicePort.findUserById(new UserId(userId));
             return ResponseEntity.ok(userApiMapper.toPublicProfileDTO(user));
@@ -63,6 +65,7 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<UserDTO> getUser(UUID userId) {
+        // Author. = Uid
         try {
             User user = userServicePort.findUserById(new UserId(userId));
             return ResponseEntity.ok(userApiMapper.toDTO(user));
@@ -73,6 +76,7 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<UserDTO> registerNewUser(UserRegistrationRequestDTO userRegistrationRequestDTO) {
+        // Author. = offen
         AuthenticatedAccount authAcc = (AuthenticatedAccount) SecurityContextHolder.getContext().getAuthentication();
         try {
             User registeredUser = userServicePort.registerNewUser(
@@ -88,10 +92,11 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<UserSubscriptionDTO> subscribe(UUID userId, ExtendUserSubscriptionRequestDTO extendUserSubscriptionRequestDTO) {
+    public ResponseEntity<UserDTO> subscribe(UUID userId, ExtendUserSubscriptionRequestDTO extendUserSubscriptionRequestDTO) {
+        // Author. = Uid
         try {
             User user = userServicePort.extendUserSubscription(new UserId(userId), Duration.of(extendUserSubscriptionRequestDTO.getExtendByInDays(), ChronoUnit.DAYS));
-            return ResponseEntity.ok(userApiMapper.toDTO(user).getSubscription());
+            return ResponseEntity.ok(userApiMapper.toDTO(user));
         } catch (UserNotFoundByIdException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
@@ -99,6 +104,7 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<UserDTO> updateUserProfile(UUID userId, UpdateUserProfileRequestDTO updateUserProfileRequestDTO) {
+        // Author. = Uid
         try {
             User updatedUser = userServicePort.updateUserProfile(
                     new UserId(userId),
@@ -117,6 +123,7 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<UserDTO> updateUserSettings(UUID userId, UpdateUserSettingsRequestDTO updateUserSettingsRequestDTO) {
+        // Author. = Uid
         try {
             User updatedUser = userServicePort.updateUserSettings(
                     new UserId(userId),
