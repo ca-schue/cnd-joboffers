@@ -12,7 +12,9 @@ import java.util.Optional;
 
 public interface UserMongoDBRepository extends MongoRepository<UserDAO, UserId> {
 
-    Optional<UserDAO> findByProfileEmail(String email);
+
+    @Query("{'profile.email': ?0}")
+    List<UserDAO> customFindByEmail(String email);
 
     Optional<UserDAO> deleteOneById(UserId id);
 

@@ -11,7 +11,8 @@ public class UserDaoMapper {
                 dao.id(),
                 new UserCompanyAssociation(
                         dao.associations().memberOf(),
-                        dao.associations().invitedTo()
+                        dao.associations().invitedTo(),
+                        dao.associations().ownerOf()
                 ),
                 new UserProfile(
                         dao.profile().email(),
@@ -35,8 +36,9 @@ public class UserDaoMapper {
                     user.getProfile().getLastName()
                 ),
                 new UserCompanyAssociationDAO(
-                    user.getAssociations().memberOf(),
-                    user.getAssociations().invitedTo()
+                    user.getAssociations().getMemberOf(),
+                    user.getAssociations().getInvitedTo(),
+                    user.getAssociations().getOwnerOf()
                 ),
                 new UserSettingsDAO(
                     user.getSettings().nightModeActive()

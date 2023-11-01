@@ -25,8 +25,9 @@ public interface UserApiMapper {
                         )
                 .associations(
                         new UserCompanyAssociationDTO()
-                                .memberOf(user.getAssociations().memberOf().stream().map(CompanyId::getId).collect(Collectors.toList()))
-                                .invitedTo(user.getAssociations().invitedTo().stream().map(CompanyId::getId).collect(Collectors.toList()))
+                                .memberOf(user.getAssociations().getMemberOf().stream().map(CompanyId::getId).collect(Collectors.toList()))
+                                .invitedTo(user.getAssociations().getInvitedTo().stream().map(CompanyId::getId).collect(Collectors.toList()))
+                                .ownerOf(user.getAssociations().getOwnerOf() != null ? user.getAssociations().getOwnerOf().getId() : null)
                         )
                 .settings(
                         new UserSettingsDTO()

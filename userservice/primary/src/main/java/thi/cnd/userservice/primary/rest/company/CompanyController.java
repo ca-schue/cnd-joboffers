@@ -44,7 +44,7 @@ public class CompanyController implements CompanyApi {
             return ResponseEntity.ok(companyApiMapper.toCompanyDTO(company));
         } catch (UserNotFoundByIdException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (CompanyAlreadyExistsException e) {
+        } catch (CompanyAlreadyExistsException | UserAlreadyOwnerOfCompanyException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
         }
     }
@@ -56,7 +56,7 @@ public class CompanyController implements CompanyApi {
         try {
             companyServicePort.deleteCompanyById(new CompanyId(companyId));
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (CompanyNotFoundByIdException e) {
+        } catch (CompanyNotFoundByIdException | UserNotFoundByIdException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }

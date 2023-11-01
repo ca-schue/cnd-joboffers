@@ -6,10 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import thi.cnd.userservice.core.exception.CompanyAlreadyExistsException;
-import thi.cnd.userservice.core.exception.CompanyAlreadyPartnerProgramSubscriberException;
-import thi.cnd.userservice.core.exception.CompanyNotFoundByIdException;
-import thi.cnd.userservice.core.exception.UserNotFoundByIdException;
+import thi.cnd.userservice.core.exception.*;
 import thi.cnd.userservice.core.model.company.*;
 import thi.cnd.userservice.core.model.user.User;
 import thi.cnd.userservice.core.model.user.UserId;
@@ -47,11 +44,13 @@ public class CompanyService implements CompanyServicePort {
             @NotNull UserId ownerId,
             @NotNull CompanyDetails details,
             @NotNull CompanyLinks links
-    ) throws UserNotFoundByIdException, CompanyAlreadyExistsException {
+    ) throws UserNotFoundByIdException, CompanyAlreadyExistsException, UserAlreadyOwnerOfCompanyException {
         User owner = userRepositoryPort.findUserById(ownerId);
+        if (owner.getAssociations().getOwnerOf() != null) {
+            throw new UserAlreadyOwnerOfCompanyException("User already owner of company '" + owner.getAssociations().getOwnerOf().toString() + "'");
+        }
         Company newCompany = new Company(ownerId, details, links);
         owner.addOwnershipOfCompany(newCompany.getId());
-
         Company savedCompany = companyRepositoryPort.saveCompany(newCompany);
         userRepositoryPort.updateOrSaveUser(owner);
         companyEventPort.sendEvent(new CompanyRegisteredEvent(savedCompany.getId(), owner, savedCompany.getDetails().name()));
@@ -98,9 +97,11 @@ public class CompanyService implements CompanyServicePort {
     }
 
     @Override
-    public void deleteCompanyById(CompanyId companyId) throws CompanyNotFoundByIdException {
-        //companyRepositoryPort.deleteCompanyById(companyId);
-        userRepositoryPort.removeCompanyFromUser(companyId);
+    public void deleteCompanyById(CompanyId companyId) throws CompanyNotFoundByIdException, UserNotFoundByIdException {
+        Company companyTbd = companyRepositoryPort.findCompanyById(companyId);
+        UserId ownerId = companyTbd.getOwner();
+        companyRepositoryPort.deleteCompanyById(companyId);
+        userRepositoryPort.removeCompanyFromUser(companyId, ownerId);
         companyEventPort.sendEvent(new CompanyDeletedEvent(companyId));
     }
 

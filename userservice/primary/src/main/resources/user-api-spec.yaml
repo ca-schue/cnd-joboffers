@@ -398,8 +398,6 @@ components:
           type: string
         last_name:
           type: string
-        owner_of:
-          $ref: '#/components/schemas/UUID'
     User:
       type: object
       required:
@@ -447,6 +445,8 @@ components:
         invited_to:
           type: array
           items:
+            $ref: '#/components/schemas/UUID'
+        owner_of:
             $ref: '#/components/schemas/UUID'
     UserSettings:
       type: object

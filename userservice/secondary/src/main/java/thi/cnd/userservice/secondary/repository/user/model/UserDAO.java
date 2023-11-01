@@ -2,6 +2,7 @@ package thi.cnd.userservice.secondary.repository.user.model;
 
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import thi.cnd.userservice.core.model.user.UserId;
 

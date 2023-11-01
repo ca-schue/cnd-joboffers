@@ -20,7 +20,6 @@ public class AccountFactory {
     public OidcAccount buildOidc(String subject) {
         return new OidcAccount(
                 new AccountId(),
-                AccountProvider.OIDC,
                 Instant.now(),
                 subject,
                 false
@@ -30,7 +29,6 @@ public class AccountFactory {
     public InternalAccount buildInternal(String email, String password) throws InvalidPasswordException {
             return new InternalAccount(
                     new AccountId(),
-                    AccountProvider.INTERNAL,
                     Instant.now(),
                     email,
                     validatePasswordAndEncode(password),
@@ -41,7 +39,6 @@ public class AccountFactory {
     public InternalAccount updatePassword(InternalAccount internalAccount, String newPlainTextPassword) throws InvalidPasswordException {
         return new InternalAccount(
                 internalAccount.getId(),
-                internalAccount.getProvider(),
                 internalAccount.getLastLogin(),
                 internalAccount.getEmail(),
                 validatePasswordAndEncode(newPlainTextPassword),
