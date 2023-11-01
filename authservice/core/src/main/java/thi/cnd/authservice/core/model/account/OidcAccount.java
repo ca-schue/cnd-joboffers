@@ -13,9 +13,12 @@ import java.time.Instant;
 public class OidcAccount extends Account {
 
     private final String subject;
+    final AccountProvider provider = AccountProvider.OIDC;
 
-    public OidcAccount(@NotNull AccountId id, @NotNull AccountProvider provider, @NotNull Instant lastLogin, @NotNull String subject) {
-        super(id, provider, lastLogin);
+    public OidcAccount(@NotNull AccountId id, @NotNull AccountProvider provider, @NotNull Instant lastLogin, @NotNull String subject, @NotNull boolean verified) {
+        this.setId(id);
+        this.setLastLogin(lastLogin);
         this.subject = subject;
+        this.setVerified(verified);
     }
 }

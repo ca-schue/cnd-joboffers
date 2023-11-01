@@ -1,5 +1,6 @@
 package thi.cnd.authservice.secondary.repository.account.model;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,9 +18,13 @@ public class InternalAccountDAO extends AccountDAO {
 
     private String encryptedPassword;
 
-    public InternalAccountDAO(AccountId id, String provider, Instant lastLogin, String email, String encryptedPassword) {
-        super(id, provider, lastLogin);
+    public InternalAccountDAO(AccountId id, String provider, Instant lastLogin, String email, String encryptedPassword, boolean verified) {
+        this.setId(id);
+        this.setProvider(provider);
+        this.setLastLogin(lastLogin);
+        this.setVerified(verified);
         this.email = email;
         this.encryptedPassword = encryptedPassword;
     }
+
 }

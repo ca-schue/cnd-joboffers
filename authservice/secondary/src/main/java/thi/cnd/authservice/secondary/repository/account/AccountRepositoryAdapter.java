@@ -7,14 +7,8 @@ import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
-import thi.cnd.authservice.core.exceptions.AccountAlreadyExistsException;
-import thi.cnd.authservice.core.exceptions.AccountNotFoundByEmailException;
-import thi.cnd.authservice.core.exceptions.AccountNotFoundByIdException;
-import thi.cnd.authservice.core.exceptions.AccountNotFoundBySubjectException;
-import thi.cnd.authservice.core.model.account.Account;
-import thi.cnd.authservice.core.model.account.AccountId;
-import thi.cnd.authservice.core.model.account.InternalAccount;
-import thi.cnd.authservice.core.model.account.OidcAccount;
+import thi.cnd.authservice.core.exceptions.*;
+import thi.cnd.authservice.core.model.account.*;
 import thi.cnd.authservice.core.ports.secondary.AccountRepositoryPort;
 import thi.cnd.authservice.secondary.repository.account.model.AccountDAO;
 import thi.cnd.authservice.secondary.repository.account.model.AccountDAOMapper;
@@ -33,25 +27,105 @@ public class AccountRepositoryAdapter implements AccountRepositoryPort {
     private final AccountDAOMapper mapper;
 
     @Override
-    public InternalAccount saveInternalAccount(InternalAccount internalAccount) throws AccountAlreadyExistsException {
+    public Account saveAccount(Account account) throws AccountAlreadyExistsException {
         try {
-            InternalAccountDAO dao = mapper.toInternalAccountDAO(internalAccount);
-            InternalAccountDAO savedDao = accountRepository.save(dao);
-            return mapper.toInternalAccount(savedDao);
+            AccountDAO dao = mapper.toAccountDAO(account);
+            AccountDAO savedDao = accountRepository.save(dao);
+            return mapper.toAccount(savedDao);
         } catch (DuplicateKeyException e) {
             throw new AccountAlreadyExistsException("Account ID already exists or email/subject is already linked to existing account.");
         }
     }
 
     @Override
-    public OidcAccount saveOidcAccount(OidcAccount oidcAccount) throws AccountAlreadyExistsException {
-        try {
-            OidcAccountDAO dao = mapper.toOidcAccountDAO(oidcAccount);
-            OidcAccountDAO savedDao = accountRepository.save(dao);
-            return mapper.toOidcAccount(savedDao);
-        } catch (DuplicateKeyException e) {
-            throw new AccountAlreadyExistsException("Account ID already exists or email/subject is already linked to existing account.");
+    public InternalAccount saveInternalAccount(InternalAccount internalAccount) throws AccountAlreadyExistsException {
+        Account savedUpdatedAccount = this.saveAccount(internalAccount);
+        if (savedUpdatedAccount.getProvider().equals(internalAccount.getProvider())) {
+            return (InternalAccount) savedUpdatedAccount;
+        } else {
+            throw new RuntimeException("Internal error: An " + savedUpdatedAccount.getProvider().name() + " Account was saved, but an " + internalAccount.getProvider().name() + " Account was given");
         }
+    }
+
+    @Override
+    public OidcAccount saveOidcAccount(OidcAccount oidcAccount) throws AccountAlreadyExistsException {
+        Account savedUpdatedAccount = this.saveAccount(oidcAccount);
+        if (savedUpdatedAccount.getProvider().equals(oidcAccount.getProvider())) {
+            return (OidcAccount) savedUpdatedAccount;
+        } else {
+            throw new RuntimeException("Internal error: An " + savedUpdatedAccount.getProvider().name() + " Account was saved, but an " + oidcAccount.getProvider().name() + " Account was given");
+        }
+    }
+
+
+    @Override
+    public Account updateAccount(Account updatedAccount) throws AccountNotFoundByIdException, WrongProviderException {
+        // 1. ID of updatedAccount must exist
+        Account foundAccount = findAccountById(updatedAccount.getId());
+        // 2. Existing account must have same provider as given Account to be updated
+        if (foundAccount.getProvider().equals(updatedAccount.getProvider())) {
+            AccountDAO updatedAccountDAO = mapper.toAccountDAO(updatedAccount);
+            AccountDAO savedUpdatedAccountDAO = accountRepository.save(updatedAccountDAO);
+            // 3. Returned save account must have same provider as given Account to be updated
+            return mapper.toAccount(savedUpdatedAccountDAO);
+        } else {
+            throw new WrongProviderException("Account providers do not match. AccountId of existing Account belongs to OIDC Account");
+        }
+    }
+
+    @Override
+    public InternalAccount updateInternalAccount(InternalAccount updatedInternalAccount) throws AccountNotFoundByIdException, WrongProviderException {
+        Account savedUpdatedAccount = this.updateAccount(updatedInternalAccount);
+        if(savedUpdatedAccount.getProvider().equals(updatedInternalAccount.getProvider())) {
+            return (InternalAccount) savedUpdatedAccount;
+        } else {
+            throw new RuntimeException("Internal error: An " + savedUpdatedAccount.getProvider().name() + " Account was saved, but an " + updatedInternalAccount.getProvider().name() + " Account was given");
+        }
+    }
+
+    @Override
+    public OidcAccount updateOidcAccount(OidcAccount updatedOidcAccount) throws AccountNotFoundByIdException, WrongProviderException {
+        Account savedUpdatedAccount = this.updateAccount(updatedOidcAccount);
+        if(savedUpdatedAccount.getProvider().equals(updatedOidcAccount.getProvider())) {
+            return (OidcAccount) savedUpdatedAccount;
+        } else {
+            throw new RuntimeException("Internal error: An " + savedUpdatedAccount.getProvider().name() + " Account was saved, but an " + updatedOidcAccount.getProvider().name() + " Account was given");
+        }
+    }
+
+
+    @Override
+    public InternalAccount findInternalAccountById(AccountId accountId) throws AccountNotFoundByIdException, WrongProviderException {
+        Account foundAccount = findAccountById(accountId);
+        if((foundAccount instanceof InternalAccount internalAccount) && foundAccount.getProvider().equals(AccountProvider.INTERNAL)) {
+            return internalAccount;
+        } else {
+            throw new WrongProviderException("Account providers do not match. AccountId belongs to OIDC Account");
+        }
+    }
+
+    @Override
+    public OidcAccount findOidcAccountById(AccountId accountId) throws AccountNotFoundByIdException, WrongProviderException {
+        Account foundAccount = findAccountById(accountId);
+        if((foundAccount instanceof OidcAccount oidcAccount) && foundAccount.getProvider().equals(AccountProvider.OIDC)) {
+            return oidcAccount;
+        } else {
+            throw new WrongProviderException("Account providers do not match. AccountId belongs to Internal Account");
+        }
+    }
+
+
+    @Override
+    public Account findAccountById(AccountId accountId) throws AccountNotFoundByIdException {
+        AccountDAO accountDao = accountRepository
+                .findById(accountId)
+                .orElseThrow(() -> new AccountNotFoundByIdException("No account linked to id " + accountId.toString()));
+        return mapper.toAccount(accountDao);
+    }
+
+    @Override
+    public void delete(AccountId id) throws AccountNotFoundByIdException{
+        accountRepository.deleteOneById(id).orElseThrow(() -> new AccountNotFoundByIdException("Could not delete account. No account linked to email"));
     }
 
     @Override
@@ -71,20 +145,6 @@ public class AccountRepositoryAdapter implements AccountRepositoryPort {
     }
 
     @Override
-    public Account findAccountById(AccountId accountId) throws AccountNotFoundByIdException {
-        AccountDAO accountDao = accountRepository
-                .findById(accountId)
-                .orElseThrow(() -> new AccountNotFoundByIdException("No account linked to id " + accountId.toString()));
-        return mapper.toAccount(accountDao);
-
-    }
-
-    @Override
-    public void delete(AccountId id) throws AccountNotFoundByIdException{
-        accountRepository.deleteOneById(id).orElseThrow(() -> new AccountNotFoundByIdException("Could not delete account. No account linked to email"));
-    }
-
-    @Override
     public InternalAccount findInternalAccountByEmail(String email) throws AccountNotFoundByEmailException {
         InternalAccountDAO accountDAO = internalAccountRepository
                 .findByEmail(email)
@@ -92,12 +152,4 @@ public class AccountRepositoryAdapter implements AccountRepositoryPort {
         return mapper.toInternalAccount(accountDAO);
     }
 
-    @Override
-    public InternalAccount updateInternalAccountEmail(AccountId userId, String email) throws AccountNotFoundByIdException {
-        InternalAccountDAO updatedInternalAccountDAO = internalAccountRepository.findByIdAndUpdateEmail(userId, email)
-                .orElseThrow(() -> new AccountNotFoundByIdException("Could not find user for id " + userId));
-        InternalAccount internalAccount = mapper.toInternalAccount(updatedInternalAccountDAO);
-        return  internalAccount;
-
-    }
 }

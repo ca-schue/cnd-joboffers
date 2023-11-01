@@ -152,7 +152,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserSubscription'
+                $ref: '#/components/schemas/User'
   /users/{user-id}/accept-company-invitation:
     post:
       summary: Accepts the invitation to be a member of a company.
@@ -283,6 +283,23 @@ paths:
           description: Invitation was sent.
         '404':
           description: Company not found for id.
+  /companies/{company-id}/partner-program:
+    post:
+      description: Subscribes to partner program
+      operationId: subscribeToPartnerProgram
+      tags:
+        - Company
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+      responses:
+        '201':
+          description: Successfully subscribed to partner program.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '404':
+          description: Company not found for id.
   /companies/{company-id}/update-company-details:
     post:
       description: Overrides the current company details with the provided data.
@@ -381,6 +398,8 @@ components:
           type: string
         last_name:
           type: string
+        owner_of:
+          $ref: '#/components/schemas/UUID'
     User:
       type: object
       required:
@@ -400,6 +419,8 @@ components:
           $ref: '#/components/schemas/UserSettings'
         subscription:
           $ref: '#/components/schemas/UserSubscription'
+        owner_of:
+          $ref: '#/components/schemas/UUID'
     UserProfile:
       type: object
       required:
@@ -430,9 +451,9 @@ components:
     UserSettings:
       type: object
       required:
-        - nightModeActive
+        - night_mode_active
       properties:
-        nightModeActive:
+        night_mode_active:
           type: boolean
     UserSubscription:
       type: object

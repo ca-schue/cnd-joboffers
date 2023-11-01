@@ -1,8 +1,8 @@
 package thi.cnd.authservice.primary.rest.account;
 
 import org.mapstruct.*;
-import thi.cnd.authservice.api.generated.model.AccessTokenResponseDTO;
 import thi.cnd.authservice.api.generated.model.AccountDTO;
+import thi.cnd.authservice.api.generated.model.AccountLoginResponseDTO;
 import thi.cnd.authservice.api.generated.model.InternalAccountDTO;
 import thi.cnd.authservice.api.generated.model.OidcAccountDTO;
 import thi.cnd.authservice.core.model.account.*;
@@ -14,25 +14,23 @@ import java.util.UUID;
         unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface AccountLoginApiMapper {
 
+    default AccountDTO toAccountDTO(Account account) {
+        return switch (account.getProvider()) {
+            case OIDC -> toOidcDTO((OidcAccount) account);
+            case INTERNAL -> toInternalDTO((InternalAccount) account);
+        };
+    }
 
-    /*
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "type", ignore = true)
-    @Mapping(target = "provider", source = "provider")
-    @BeanMapping(ignoreUnmappedSourceProperties = { "encryptedPassword", "lastLogin" })
-    AccountDTO toDTO(Account account);*/
-
-    @Mapping(target = "type", ignore = true)
-    @BeanMapping(ignoreUnmappedSourceProperties = { "encryptedPassword", "lastLogin" })
+    @Mapping(source = "provider", target = "accountType")
+    @BeanMapping(ignoreUnmappedSourceProperties = { "encryptedPassword", "lastLogin", "verified" })
     InternalAccountDTO toInternalDTO(InternalAccount internalAccount);
 
-    @Mapping(target = "type", ignore = true)
-    @BeanMapping(ignoreUnmappedSourceProperties = { "lastLogin" })
+    @Mapping(source = "provider", target = "accountType")
+    @BeanMapping(ignoreUnmappedSourceProperties = { "lastLogin", "verified" })
     OidcAccountDTO toOidcDTO(OidcAccount oidcAccount);
 
-    default AccessTokenResponseDTO toDTO(AccountAccessToken token) {
-        return new AccessTokenResponseDTO(token.signedAccountJwt().getTokenValue());
-        // TODO: Valid until including? -> Info in JWT
+    default AccountLoginResponseDTO toLoginResponseDTO(AccountDTO accountDTO, AccountAccessToken token) {
+        return new AccountLoginResponseDTO(accountDTO, token.signedAccountJwt().getTokenValue());
     }
 
     default UUID toUUID(AccountId accountId) {

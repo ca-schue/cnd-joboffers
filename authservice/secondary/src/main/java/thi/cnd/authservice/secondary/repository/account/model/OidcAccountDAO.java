@@ -12,8 +12,12 @@ public class OidcAccountDAO extends AccountDAO {
 
     private String subject;
 
+    // TODO: Set provider here as final
+
     public OidcAccountDAO(AccountId id, String provider, Instant lastLogin, String subject) {
-        super(id, provider, lastLogin);
+        this.setId(id);
+        this.setProvider(provider);
+        this.setLastLogin(lastLogin);
         this.subject = subject;
     }
 }
