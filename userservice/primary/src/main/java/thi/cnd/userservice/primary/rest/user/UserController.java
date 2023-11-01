@@ -47,7 +47,7 @@ public class UserController implements UserApi {
         try {
             userServicePort.deleteUser(new UserId(userId));
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (UserNotFoundByIdException e) {
+        } catch (UserNotFoundByIdException | CompanyNotFoundByIdException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }

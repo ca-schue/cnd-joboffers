@@ -88,7 +88,12 @@ public class UserService implements UserServicePort {
     }
 
     @Override
-    public void deleteUser(UserId userId) throws UserNotFoundByIdException {
+    public void deleteUser(UserId userId) throws UserNotFoundByIdException, CompanyNotFoundByIdException {
+        User userTbd = userRepositoryPort.findUserById(userId);
+        if(userTbd.getAssociations().getOwnerOf() != null) {
+            companyServicePort.deleteCompanyById(userTbd.getAssociations().getOwnerOf());
+        }
+        companyServicePort.deleteUserFromAllCompanies(userId);
         userRepositoryPort.deleteUserById(userId);
         userEventPort.sendEvent(new UserDeletedEvent(userId));
     }

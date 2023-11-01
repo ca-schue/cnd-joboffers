@@ -19,6 +19,7 @@ import thi.cnd.userservice.core.port.secondary.repository.CompanyRepositoryPort;
 import thi.cnd.userservice.core.port.secondary.repository.UserRepositoryPort;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -93,6 +94,17 @@ public class CompanyService implements CompanyServicePort {
                     new CompanyPartnerProgram(Instant.now().plusSeconds(60 * 60 * 24 * 30)) // 1 Month
             );
             return companyRepositoryPort.updateOrSaveCompany(company);
+        }
+    }
+
+    @Override
+    public void deleteUserFromAllCompanies(@NotNull UserId userId) {
+        List<Company> companyList = companyRepositoryPort.findAllCompaniesWithUserMember(userId);
+        for (Company company : companyList) {
+            Set<UserId> members = company.getMembers();
+            members.remove(userId);
+            company.setMembers(members);
+            companyRepositoryPort.updateOrSaveCompany(company);
         }
     }
 

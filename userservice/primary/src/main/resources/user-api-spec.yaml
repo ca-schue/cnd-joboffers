@@ -391,12 +391,15 @@ components:
         - id
         - first_name
         - last_name
+        - user_profile_email
       properties:
         id:
           $ref: '#/components/schemas/UUID'
         first_name:
           type: string
         last_name:
+          type: string
+        user_profile_email:
           type: string
     User:
       type: object

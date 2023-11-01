@@ -10,11 +10,14 @@ import thi.cnd.userservice.core.exception.CompanyAlreadyExistsException;
 import thi.cnd.userservice.core.exception.CompanyNotFoundByIdException;
 import thi.cnd.userservice.core.model.company.Company;
 import thi.cnd.userservice.core.model.company.CompanyId;
+import thi.cnd.userservice.core.model.user.UserId;
 import thi.cnd.userservice.core.port.secondary.repository.CompanyRepositoryPort;
 import thi.cnd.userservice.secondary.repository.company.model.CompanyDAO;
 import thi.cnd.userservice.secondary.repository.company.model.CompanyDaoMapper;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +25,13 @@ public class CompanyRepositoryAdapter implements CompanyRepositoryPort {
 
     private final CompanyMongoDBRepository repository;
     private final CompanyDaoMapper mapper;
+
+
+    @Override
+    public List<Company> findAllCompaniesWithUserMember(UserId memberId) {
+        return repository.findByMembersContains(memberId)
+                .stream().map(mapper::toCompany).collect(Collectors.toList());
+    }
 
     @Override
     public Company findCompanyById(CompanyId companyId) throws CompanyNotFoundByIdException {

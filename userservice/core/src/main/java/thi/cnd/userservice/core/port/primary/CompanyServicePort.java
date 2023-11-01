@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import thi.cnd.userservice.core.exception.*;
 import thi.cnd.userservice.core.model.company.*;
+import thi.cnd.userservice.core.model.user.User;
 import thi.cnd.userservice.core.model.user.UserId;
 
 import java.util.Set;
@@ -41,6 +42,8 @@ public interface CompanyServicePort {
     ) throws CompanyNotFoundByIdException, CompanyAlreadyPartnerProgramSubscriberException;
 
     void deleteCompanyById(@NotNull CompanyId companyId) throws CompanyNotFoundByIdException, UserNotFoundByIdException;
+
+    void deleteUserFromAllCompanies(@NotNull UserId userId);
 
     @NotNull Company addMember(CompanyId companyId, UserId userId) throws CompanyNotFoundByIdException;
 }
