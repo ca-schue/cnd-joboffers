@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import thi.cnd.authservice.core.model.client.Client;
 
 import java.time.Instant;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class CustomRegisteredClient extends RegisteredClient {
                 .withId(client.name())
                 .clientId(client.name())
                 .clientSecret(client.encryptedPassword())
-                .scopes(scopes -> scopes.addAll(client.scopes()))
+                .scopes(scopes -> scopes.addAll(client.scopes() == null ? Collections.emptySet() : client.scopes()))
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .build();
         this.audiences = client.audiences();

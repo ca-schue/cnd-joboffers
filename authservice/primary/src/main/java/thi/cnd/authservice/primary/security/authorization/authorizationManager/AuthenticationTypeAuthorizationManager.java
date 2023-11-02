@@ -1,11 +1,13 @@
 package thi.cnd.authservice.primary.security.authorization.authorizationManager;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.authorization.AuthorityAuthorizationManager;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
+import thi.cnd.authservice.core.domain.jwt.JwtConstants;
 import thi.cnd.authservice.primary.security.authentication.accessTokenAuthentication.AuthenticatedAccount;
 import thi.cnd.authservice.primary.security.authentication.accessTokenAuthentication.AuthenticatedClient;
 
@@ -22,11 +24,18 @@ public class AuthenticationTypeAuthorizationManager implements AuthorizationMana
         return new AuthorizationDecision(classTypeToCheck.isInstance(authType));
     }
 
-    public static AuthenticationTypeAuthorizationManager isAccount() {
-        return new AuthenticationTypeAuthorizationManager(AuthenticatedAccount.class);
+    public static AuthorizationManager<RequestAuthorizationContext> isAccount() {
+        return AuthorityAuthorizationManager.hasRole(JwtConstants.ACCOUNT);
+        //return new AuthenticationTypeAuthorizationManager(AuthenticatedAccount.class);
     }
 
-    public static AuthenticationTypeAuthorizationManager isClient() {
-        return new AuthenticationTypeAuthorizationManager(AuthenticatedClient.class);
+    public static AuthorizationManager<RequestAuthorizationContext> isAccountVerified() {
+        Authentication authType = SecurityContextHolder.getContext().getAuthentication();
+        return (authentication, object) -> new AuthorizationDecision((authType instanceof AuthenticatedAccount authenticatedAccount) && authenticatedAccount.isVerified());
+    }
+
+    public static AuthorizationManager<RequestAuthorizationContext> isClient() {
+        return AuthorityAuthorizationManager.hasRole(JwtConstants.CLIENT);
+        //return new AuthenticationTypeAuthorizationManager(AuthenticatedAccount.class);
     }
 }

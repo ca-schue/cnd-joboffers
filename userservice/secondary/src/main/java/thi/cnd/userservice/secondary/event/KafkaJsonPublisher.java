@@ -9,9 +9,10 @@ import thi.cnd.userservice.core.port.secondary.event.EventTopics;
 @Component
 @AllArgsConstructor
 public class KafkaJsonPublisher {
-    private final KafkaTemplate<String, Object> kafkaTemplate;
+
+    private final KafkaTemplate<String, Object> userKafkaTemplate;
 
     public void sendEvent(EventTopics topic, ExternalUserEventDTO data) {
-        kafkaTemplate.send(topic.getName(), data);
+        userKafkaTemplate.send(topic.getName(), data);
     }
 }

@@ -324,6 +324,11 @@ components:
           uniqueItems: true
           items:
             type: string
+        scopes:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
         last_password_change:
           type: string
           format: date-time
@@ -356,6 +361,11 @@ components:
         password:
           type: string
         audiences:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        scopes:
           type: array
           uniqueItems: true
           items:

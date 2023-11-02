@@ -26,6 +26,9 @@ import thi.cnd.authservice.core.model.client.Client;
 import thi.cnd.authservice.core.model.client.ClientAccessToken;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 
 @Component
@@ -50,6 +53,8 @@ public class JwtProvider {
     private JwtClaimsSet createAccountClaims(Account account) {
         JwtClaimsSet accountJwtClaims = JwtClaimsSet.builder()
                 .claim(JwtConstants.SUBJECT_TYPE_CLAIM_NAME, JwtConstants.ACCOUNT)
+                .claim(JwtConstants.VERIFIED_CLAIM_NAME, account.isVerified())
+                .audience(Arrays.asList("user-service", "career-service", "auth-service", "notification-service"))
                 .subject(account.getId().id().toString())
                 .build();
         return accountJwtClaims;
@@ -60,7 +65,7 @@ public class JwtProvider {
                 .claim(JwtConstants.SUBJECT_TYPE_CLAIM_NAME, JwtConstants.CLIENT)
                 .subject(client.name())
                 .audience(client.audiences().stream().toList())
-                .claim("scope", client.scopes().stream().toList())
+                .claim("scope", client.scopes() == null ? Collections.emptyList() : client.scopes().stream().toList())
                 .build();
         return clientJwtClaims;
     }

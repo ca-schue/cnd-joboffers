@@ -124,7 +124,11 @@ public class AccountRepositoryAdapter implements AccountRepositoryPort {
     }
 
     @Override
-    public void delete(AccountId id) throws AccountNotFoundByIdException{
+    public void delete(AccountId id) throws AccountNotFoundByIdException, AccountStillVerifiedException {
+        Account account = findAccountById(id);
+        if (account.isVerified()) {
+            throw new AccountStillVerifiedException("User Profile linked to account. Please delete user profile first");
+        }
         accountRepository.deleteOneById(id).orElseThrow(() -> new AccountNotFoundByIdException("Could not delete account. No account linked to email"));
     }
 

@@ -56,14 +56,16 @@ public class UserService implements UserServicePort {
         // Input verification:
         String newUserProfileEmail = updatedUserProfile.getEmail();
         try {
-            userRepositoryPort.findUserByEmail(newUserProfileEmail);
-            throw new EmailAlreadyInUseException(newUserProfileEmail);
+            User userWithSameEmail = userRepositoryPort.findUserByEmail(newUserProfileEmail);
+            if (!userWithSameEmail.getId().toString().equals(userId.toString())) {
+                throw new EmailAlreadyInUseException(newUserProfileEmail);
+            } else {
+                throw new UserNotFoundByEmailException(""); // TODO: ugly solution
+            }
         } catch (UserNotFoundByEmailException e) {
             user.setProfile(updatedUserProfile);
             return userRepositoryPort.updateOrSaveUser(user);
         }
-
-
     }
 
     @Override
