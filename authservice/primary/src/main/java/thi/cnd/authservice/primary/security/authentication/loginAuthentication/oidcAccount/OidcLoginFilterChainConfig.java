@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtIssuerAuthenticationManagerResolver;
 import org.springframework.security.web.SecurityFilterChain;
 import thi.cnd.authservice.core.domain.jwt.JwtConfig;
+import thi.cnd.authservice.primary.security.cors.CorsConfig;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,8 @@ public class OidcLoginFilterChainConfig {
 
     private final JwtConfig jwtConfig;
     private final AuthenticatedOidcIdTokenService authenticatedOidcIdTokenService;
+    private final CorsConfig corsConfig;
+
 
     // OIDC
     @Bean
@@ -46,7 +49,7 @@ public class OidcLoginFilterChainConfig {
                 .oauth2ResourceServer(oauth2 -> oauth2 // Only takes ID-Tokens issued by supported OIDC providers (internal access tokens are denied)
                         .authenticationManagerResolver(authenticationManagerResolver));
         http.csrf(AbstractHttpConfigurer::disable);
-        http.cors(AbstractHttpConfigurer::disable);
+        http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfig.corsConfigurationSource()));
         return http.build();
     }
 
