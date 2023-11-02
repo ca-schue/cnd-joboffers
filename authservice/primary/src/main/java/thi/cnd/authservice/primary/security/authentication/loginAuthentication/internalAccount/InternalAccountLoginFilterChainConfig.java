@@ -9,20 +9,29 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import thi.cnd.authservice.core.domain.password.PasswordEncoder;
+import thi.cnd.authservice.primary.security.cors.CorsConfig;
+
+import java.util.List;
 
 @Configuration
 public class InternalAccountLoginFilterChainConfig {
 
     private final DaoAuthenticationProvider daoAuthenticationProvider;
+    private final CorsConfig corsConfig;
 
     @Autowired
-    public InternalAccountLoginFilterChainConfig(InternalAccountDetailsService accountDetailsService, PasswordEncoder passwordEncoder) {
+    public InternalAccountLoginFilterChainConfig(InternalAccountDetailsService accountDetailsService, PasswordEncoder passwordEncoder, CorsConfig corsConfig) {
         this.daoAuthenticationProvider = new DaoAuthenticationProvider();
         this.daoAuthenticationProvider.setUserDetailsService(accountDetailsService);
         this.daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+        this.corsConfig = corsConfig;
     }
 
     @Bean
@@ -37,8 +46,9 @@ public class InternalAccountLoginFilterChainConfig {
                 .httpBasic(Customizer.withDefaults());
         http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.csrf(AbstractHttpConfigurer::disable);
-        http.cors(AbstractHttpConfigurer::disable);
+        http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfig.corsConfigurationSource()));
         return http.build();
     }
+
 
 }

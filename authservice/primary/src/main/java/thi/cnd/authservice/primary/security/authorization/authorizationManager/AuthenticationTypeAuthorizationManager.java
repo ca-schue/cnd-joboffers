@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 import thi.cnd.authservice.primary.security.authentication.accessTokenAuthentication.AuthenticatedAccount;
+import thi.cnd.authservice.primary.security.authentication.accessTokenAuthentication.AuthenticatedClient;
 
 import java.util.function.Supplier;
 
@@ -23,5 +24,9 @@ public class AuthenticationTypeAuthorizationManager implements AuthorizationMana
 
     public static AuthenticationTypeAuthorizationManager isAccount() {
         return new AuthenticationTypeAuthorizationManager(AuthenticatedAccount.class);
+    }
+
+    public static AuthenticationTypeAuthorizationManager isClient() {
+        return new AuthenticationTypeAuthorizationManager(AuthenticatedClient.class);
     }
 }

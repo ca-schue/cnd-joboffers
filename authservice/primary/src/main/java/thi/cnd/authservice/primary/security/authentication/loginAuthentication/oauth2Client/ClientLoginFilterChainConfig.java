@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.web.SecurityFilterChain;
 import thi.cnd.authservice.core.domain.jwt.JwtConfig;
 import thi.cnd.authservice.primary.rest.client.ClientController;
+import thi.cnd.authservice.primary.security.cors.CorsConfig;
 
 @Configuration
 @AllArgsConstructor
@@ -22,6 +23,7 @@ public class ClientLoginFilterChainConfig {
 
     private final JwtConfig jwtConfig;
     private final ClientController clientController;
+    private final CorsConfig corsConfig;
 
     /*
     // Auth server
@@ -47,7 +49,7 @@ public class ClientLoginFilterChainConfig {
         http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
                 .anyRequest().authenticated());
         http.csrf(AbstractHttpConfigurer::disable);
-        http.cors(AbstractHttpConfigurer::disable);
+        http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfig.corsConfigurationSource()));
         return http.build();
     }
 
