@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authorization.AuthorityAuthorizationManager;
 import org.springframework.security.authorization.AuthorizationManagers;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import thi.cnd.authservice.core.domain.jwt.JwtConfig;
+import thi.cnd.authservice.core.domain.jwt.JwtConstants;
 import thi.cnd.authservice.primary.security.authentication.accessTokenAuthentication.AccessTokenAuthenticationConverter;
 import thi.cnd.authservice.primary.security.authorization.authorizationManager.AuthenticationTypeAuthorizationManager;
 import thi.cnd.authservice.primary.security.authorization.authorizationManager.IdMatcherAuthorizationManager;
@@ -41,7 +44,7 @@ public class EndpointAuthorizationFilterChainConfig {
                 )
                 .authorizeHttpRequests(authorization -> authorization
                         .requestMatchers(HttpMethod.PUT,
-                                "/accounts/{accountId}/update-internal-password",
+                                "/accounts/{accountId}/update-internal-email",
                                 "/accounts/{accountId}/update-internal-password")
                             .access(AuthorizationManagers.allOf(
                                     AuthenticationTypeAuthorizationManager.isAccount(),
@@ -49,8 +52,9 @@ public class EndpointAuthorizationFilterChainConfig {
                 )
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
                         .requestMatchers(HttpMethod.DELETE,"/accounts/{accountId}")
-                            .access(AuthorizationManagers.allOf(
+                        .access(AuthorizationManagers.allOf(
                                 AuthenticationTypeAuthorizationManager.isAccount(),
+                                //AuthenticationTypeAuthorizationManager.isAccountVerified(),
                                 IdMatcherAuthorizationManager.matchesId("accountId")))
                 )
                 .authorizeHttpRequests(authorization -> authorization

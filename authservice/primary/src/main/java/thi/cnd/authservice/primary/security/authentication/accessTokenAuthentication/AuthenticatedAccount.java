@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class AuthenticatedAccount extends AbstractAuthenticationToken {
 
     private final AccountId accountId;
-
+    private final boolean isVerified;
 
     public AuthenticatedAccount(Jwt jwt) {
         super(//Stream.concat(
@@ -24,10 +24,11 @@ public class AuthenticatedAccount extends AbstractAuthenticationToken {
                         .map(scope -> new SimpleGrantedAuthority("SCOPE_" + scope))
                 , */ // TODO: Concat with scopes, when implemented for accounts
                 Stream.of(
-                        new SimpleGrantedAuthority("ROLE_" + JwtConstants.CLIENT)
+                        new SimpleGrantedAuthority("ROLE_" + JwtConstants.ACCOUNT)
                         )
                 .collect(Collectors.toSet()));
-        this.accountId = AccountId.of(jwt.getClaim("sub"));
+        this.accountId = AccountId.of(jwt.getClaim(JwtConstants.SUBJECT_CLAIM_NAME).toString());
+        this.isVerified = jwt.getClaim(JwtConstants.VERIFIED_CLAIM_NAME);
         this.setAuthenticated(true);
     }
 

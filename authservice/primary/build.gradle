@@ -59,11 +59,10 @@ task generateAuthServiceRestApi(type: GenerateTask) {
 
 task generateKafkaEvents(type: GenerateTask) {
     inputSpec.set("$projectDir/src/main/resources/user-service-kafka-events-spec.yaml")
-    outputDir = "$projectDir/build/generated"
+    outputDir = "$projectDir/build/generate-resources"
     generatorName = "java"
     modelNameSuffix = "DTO"
     validateSpec = true
-    generatorName = "java"
     library = "webclient"
     modelPackage = "thi.cnd.authservice.events.generated.model"
     apiPackage = "thi.cnd.authservice.events.generated"

@@ -11,6 +11,8 @@ import thi.cnd.authservice.core.model.client.Client;
 import thi.cnd.authservice.core.model.client.ClientAccessToken;
 import thi.cnd.authservice.core.model.client.ClientWithPlaintextPassword;
 
+import java.util.Collections;
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedSourcePolicy = ReportingPolicy.ERROR,
         unmappedTargetPolicy = ReportingPolicy.ERROR)
@@ -22,13 +24,15 @@ public interface ClientApiMapper {
         return new ClientCreationResponseDTO()
                 .name(clientAndPassword.client().name())
                 .audiences(clientAndPassword.client().audiences())
-                .password(clientAndPassword.password());
+                .password(clientAndPassword.password())
+                .scopes(clientAndPassword.client().scopes() == null ? Collections.emptySet() : clientAndPassword.client().scopes());
     }
 
     default ClientDTO toDTO(Client client) {
         return new ClientDTO()
                 .name(client.name())
                 .audiences(client.audiences())
+                .scopes(client.scopes() == null ? Collections.emptySet() : client.scopes())
                 .lastPasswordChange(client.lastPasswordChange());
     }
     default Jwt toJwt(ClientAccessToken clientAccessToken) {

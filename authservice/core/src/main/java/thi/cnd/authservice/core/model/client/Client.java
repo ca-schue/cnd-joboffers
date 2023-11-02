@@ -11,7 +11,6 @@ public record Client (
         @NotNull String name,
         @NotEmpty String encryptedPassword,
         @NotNull Set<String> audiences,
-
         Set<String> scopes,
         @NotNull Instant lastLogin,
         @NotNull Instant lastPasswordChange

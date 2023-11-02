@@ -1,6 +1,8 @@
 package thi.cnd.authservice.core.domain;
 
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import thi.cnd.authservice.core.domain.jwt.JwtProvider;
@@ -17,6 +19,7 @@ public class AccountService implements AccountServicePort {
     private final JwtProvider jwtProvider;
     private final AccountRepositoryPort accountRepositoryPort;
     private final AccountFactory accountFactory;
+    private final Logger logger = LoggerFactory.getLogger(AccountService.class);
 
     @Override
     public InternalAccount registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException {
@@ -53,7 +56,29 @@ public class AccountService implements AccountServicePort {
     }
 
     @Override
-    public void deleteAccount(AccountId accountId) throws AccountNotFoundByIdException {
+    public void validateAccount(AccountId accountId) {
+        try {
+            Account account = accountRepositoryPort.findAccountById(accountId);
+            account.setVerified(true);
+            accountRepositoryPort.updateAccount(account);
+        } catch (Exception unhandled) {
+            logger.error("Exception while validating account with id '" + accountId.toString() + "; Exception: " + unhandled.getMessage());
+        }
+    }
+
+        @Override
+    public void invalidateAccount(AccountId accountId) {
+        try {
+            Account account = accountRepositoryPort.findAccountById(accountId);
+            account.setVerified(false);
+            accountRepositoryPort.updateAccount(account);
+        } catch (Exception unhandled) {
+            logger.error("Exception while invalidating account with id '" + accountId.toString() + "; Exception: " + unhandled.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteAccount(AccountId accountId) throws AccountNotFoundByIdException, AccountStillVerifiedException {
         accountRepositoryPort.delete(accountId);
     }
 

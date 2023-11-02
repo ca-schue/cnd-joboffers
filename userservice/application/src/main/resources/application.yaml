@@ -16,6 +16,12 @@ spring:
         jwt:
           #issuer-uri: http://localhost:8081
           jwk-set-uri: http://localhost:8081/oauth2/jwks
+          audiences: user-service
+
+logging:
+  level:
+    org:
+      springframework: debug
 
 server:
   port: 8082

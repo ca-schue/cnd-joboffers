@@ -1,4 +1,4 @@
-package thi.cnd.authservice.primary.security.authorization.authorizationManager;
+package thi.cnd.authservice.test.primary.integration;
 
 public class InternalAccountLoginIntegrationTests {
     // TODO: Test every login method simply on controller-level?

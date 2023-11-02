@@ -95,7 +95,9 @@ public class AccountController implements AccountManagementApi {
             accountServicePort.deleteAccount(new AccountId(accountId));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (AccountNotFoundByIdException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (AccountStillVerifiedException e2) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, e2.getMessage());
         }
     }
 

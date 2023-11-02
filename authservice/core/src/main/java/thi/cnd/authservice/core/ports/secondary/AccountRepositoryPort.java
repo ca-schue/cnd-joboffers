@@ -30,6 +30,6 @@ public interface AccountRepositoryPort {
     OidcAccount updateOidcAccount(OidcAccount updatedOidcAccount) throws AccountNotFoundByIdException, WrongProviderException;
 
 
-    void delete(@NotNull AccountId id) throws AccountNotFoundByIdException;
+    void delete(@NotNull AccountId id) throws AccountNotFoundByIdException, AccountStillVerifiedException;
 
 }

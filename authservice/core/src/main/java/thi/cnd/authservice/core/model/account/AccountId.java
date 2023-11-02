@@ -17,6 +17,8 @@ public record AccountId(
         return new AccountId(UUID.fromString(uuid));
     }
 
+    public static AccountId of(UUID uuid) {return new AccountId(uuid);}
+
     @Override
     public String toString() {
         return id.toString();

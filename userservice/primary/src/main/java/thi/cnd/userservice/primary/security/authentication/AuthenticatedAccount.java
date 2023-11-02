@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 public class AuthenticatedAccount extends AbstractAuthenticationToken {
 
     private final UUID accountId;
+    private final boolean isVerified;
 
     public AuthenticatedAccount(Jwt jwt) {
         super(//Stream.concat(
@@ -26,7 +27,8 @@ public class AuthenticatedAccount extends AbstractAuthenticationToken {
                         new SimpleGrantedAuthority("ROLE_" + SecurityConstants.ACCOUNT)
                         )
                 .collect(Collectors.toSet()));
-        this.accountId = UUID.fromString(jwt.getClaim("sub"));
+        this.accountId = UUID.fromString(jwt.getClaim(SecurityConstants.SUBJECT_CLAIM_NAME));
+        this.isVerified = jwt.getClaim(SecurityConstants.VERIFIED_CLAIM_NAME);
         this.setAuthenticated(true);
     }
 

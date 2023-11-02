@@ -6,6 +6,11 @@ spring:
       uri: mongodb://localhost:27017/auth-service
       auto-index-creation: true
       uuid-representation: standard
+  kafka:
+    bootstrap-servers: http://localhost:9092
+    consumer:
+      group-id: auth-service
+
 
 logging:
   level:

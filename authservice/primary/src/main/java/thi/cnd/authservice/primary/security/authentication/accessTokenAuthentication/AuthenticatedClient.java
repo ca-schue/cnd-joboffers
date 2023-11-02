@@ -25,7 +25,7 @@ public class AuthenticatedClient extends AbstractAuthenticationToken {
                         new SimpleGrantedAuthority("ROLE_" + JwtConstants.CLIENT)
                 )
         ).collect(Collectors.toSet()));
-        this.clientName = jwt.getClaimAsString("sub");
+        this.clientName = jwt.getClaimAsString(JwtConstants.SUBJECT_CLAIM_NAME);
         this.setAuthenticated(true);
     }
 
