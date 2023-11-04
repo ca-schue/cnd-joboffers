@@ -120,14 +120,22 @@ public class EndpointAuthorizationFilterChainConfig {
 
                 .authorizeHttpRequests(authorization -> authorization
                         .requestMatchers(HttpMethod.GET,"/companies/{company-id}")
-                        // Verified Account && ( Member || Invited )
-                        .access(AuthorizationManagers.allOf(
-                                AuthenticationTypeAuthorizationManager.isAccountAndVerified(),
-                                AuthorizationManagers.anyOf(
+                        // (Client && SCOPE_getCompany) || (Verified Account && ( Member || Invited ))
+                        .access(
+                            AuthorizationManagers.anyOf(
+                                AuthorizationManagers.allOf(
+                                    AuthenticationTypeAuthorizationManager.isClient(),
+                                    AuthorityAuthorizationManager.hasAuthority("SCOPE_getCompany")
+                                ),
+                                AuthorizationManagers.allOf(
+                                    AuthenticationTypeAuthorizationManager.isAccountAndVerified(),
+                                    AuthorizationManagers.anyOf(
                                         CompanyMemberAuthorizationManager.isMember("company-id"),
                                         UserInvitedAuthorizationManager.isInvited("company-id")
+                                    )
                                 )
-                        ))
+                            )
+                        )
                 )
 
                 .authorizeHttpRequests(authorization -> authorization

@@ -16,7 +16,7 @@ public enum JobApplicationStatus {
     DELETED;
 
     private static List<JobApplicationStatus> entries = List.of(values());
-    private static List<JobApplicationStatus> allExceptDeleted = entries.stream().filter(item -> item == DELETED).toList();
+    private static List<JobApplicationStatus> allExceptDeleted = entries.stream().filter(item -> item != DELETED).toList();
 
     public static Optional<JobApplicationStatus> parse(String value) {
         return entries.stream().filter(entry -> entry.name().equalsIgnoreCase(value)).findFirst();

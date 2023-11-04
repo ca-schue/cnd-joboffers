@@ -32,12 +32,8 @@ public class JobOfferQueryApiController implements JobOfferQueryApi {
     private final PaginationService paginationService;
 
     @Override
-    public ResponseEntity<PaginatedJobOffersResponseDTO> searchAvailableJobOffers(
-        Optional<@Min(0) Integer> skip,
-        Optional<@Min(1) @Max(200) Integer> limit,
-        Optional<String> title,
-        Optional<List<UUID>> companyIds
-    ) {
+    public ResponseEntity<PaginatedJobOffersResponseDTO> searchAvailableJobOffers(Optional<Integer> skip,
+        Optional<Integer> limit, Optional<String> title, Optional<List<UUID>> companyIds) {
         var searchFilter = new SearchAvailableJobOfferFilter(
             title,
             companyIds.orElse(List.of()).stream().map(CompanyId::new).toList(),

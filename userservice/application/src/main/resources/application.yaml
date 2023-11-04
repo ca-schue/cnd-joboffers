@@ -14,6 +14,7 @@ spring:
     oauth2:
       resource-server:
         jwt:
+          #issuer-uri: http://localhost:8081
           jwk-set-uri: http://localhost:8081/oauth2/jwks
           audiences: user-service
 
@@ -50,5 +51,9 @@ event:
         replicas: 1
       user-service_company-deleted:
         name: user-service_company-deleted
+        partitions: 1
+        replicas: 1
+      user-service_user-deleted:
+        name: user-service_user-deleted
         partitions: 1
         replicas: 1

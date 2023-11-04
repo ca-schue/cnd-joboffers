@@ -1,0 +1,21 @@
+{
+  "parser": "@babel/eslint-parser",
+  "plugins": ["react"],
+  "extends": [
+    "eslint:recommended"
+  ],
+  "rules": {
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "rules": {
+      }
+    }
+  ]
+}

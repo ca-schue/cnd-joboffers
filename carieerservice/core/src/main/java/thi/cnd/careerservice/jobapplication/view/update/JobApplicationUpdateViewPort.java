@@ -12,23 +12,23 @@ import jakarta.validation.constraints.NotNull;
 @Validated
 public interface JobApplicationUpdateViewPort {
 
-    @NotNull void createNewJobApplication(@NotNull JobApplicationView jobApplicationView);
+    void createNewJobApplication(@NotNull JobApplicationView jobApplicationView);
 
-    @NotNull void deleteJobApplication(@NotNull JobApplicationId id);
+    void deleteJobApplication(@NotNull JobApplicationId id);
 
-    @NotNull void updateJobOfferData(
+    void updateJobOfferData(
         @NotNull JobApplicationId id, @NotBlank String title, @NotNull RecordedEventMetadata recordedEventMetadata
     );
 
-    @NotNull void updateCompanyName(
+    void updateCompanyName(
         @NotNull JobApplicationId id, @NotBlank String name, @NotNull RecordedEventMetadata recordedEventMetadata
     );
 
-    @NotNull void updateStatus(
+    void updateStatus(
         @NotNull JobApplicationId id, @NotNull JobApplicationStatus status, @NotNull RecordedEventMetadata recordedEventMetadata
     );
 
-    @NotNull void updateContent(
+    void updateContent(
         @NotNull JobApplicationId id, @NotBlank String content, @NotNull RecordedEventMetadata recordedEventMetadata
     );
 }

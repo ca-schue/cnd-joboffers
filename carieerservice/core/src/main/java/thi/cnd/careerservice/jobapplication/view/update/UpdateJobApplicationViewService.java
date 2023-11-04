@@ -20,15 +20,15 @@ import thi.cnd.careerservice.shared.event.model.JobApplicationEvent;
 @Validated
 public interface UpdateJobApplicationViewService {
 
-    @NotNull void newJobApplicationCreated(@NotNull RecordedDomainEventWithMetadata<JobApplicationCreated> eventWithMetadata);
+    void newJobApplicationCreated(@NotNull RecordedDomainEventWithMetadata<JobApplicationCreated> eventWithMetadata);
 
-    @NotNull void deleteJobApplication(@NotNull RecordedDomainEventWithMetadata<JobApplicationDeleted> eventWithMetadata);
+    void deleteJobApplication(@NotNull RecordedDomainEventWithMetadata<JobApplicationDeleted> eventWithMetadata);
 
-    @NotNull void updateJobOfferData(@NotNull RecordedDomainEventWithMetadata<JobApplicationJobOfferUpdated> eventWithMetadata);
+    void updateJobOfferData(@NotNull RecordedDomainEventWithMetadata<JobApplicationJobOfferUpdated> eventWithMetadata);
 
-    @NotNull void updateCompanyName(@NotNull RecordedDomainEventWithMetadata<JobApplicationCompanyNameUpdated> eventWithMetadata);
+    void updateCompanyName(@NotNull RecordedDomainEventWithMetadata<JobApplicationCompanyNameUpdated> eventWithMetadata);
 
-    @NotNull void updateStatus(@NotNull RecordedDomainEventWithMetadata<JobApplicationStatusChanged> eventWithMetadata);
+    void updateStatus(@NotNull RecordedDomainEventWithMetadata<JobApplicationStatusChanged> eventWithMetadata);
 
-    @NotNull void updateContent(@NotNull RecordedDomainEventWithMetadata<JobApplicationContentChanged> eventWithMetadata);
+    void updateContent(@NotNull RecordedDomainEventWithMetadata<JobApplicationContentChanged> eventWithMetadata);
 }
