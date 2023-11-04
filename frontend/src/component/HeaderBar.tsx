@@ -38,7 +38,6 @@ const anonymousLoginOptions = [
 
 function HeaderBar() {
 
-    const dispatch = useAppDispatch()
     const logoutHook = useLogout()
 
     const userState = useAppSelector(state => state.user)

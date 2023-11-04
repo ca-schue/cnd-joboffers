@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import JobOffer from "../model/JobOffer";
 import { CompanyDTO } from "../../src/.generated/user-service";
 import {userApi} from "../api/apis";
+import {PublicCompanyProfile} from "../.generated/user-service/models/PublicCompanyProfile";
 
 interface JobOfferCardProps {
     jobOffer: JobOffer
@@ -12,14 +13,14 @@ interface JobOfferCardProps {
 
 function JobOfferCard(props: JobOfferCardProps) {
 
-    const [company, setCompany] = React.useState<null | CompanyDTO>(null);
+    const [company, setCompany] = React.useState<null | PublicCompanyProfile>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (props.jobOffer.companyId) {
-            userApi.fetchCompany(props.jobOffer.companyId)
+            userApi.fetchPublicCompanyProfile(props.jobOffer.companyId)
                 .then(company => setCompany(company))
-                // TODO: On error!
+            // TODO: On error!
         }
     }, [props.jobOffer.companyId]);
 

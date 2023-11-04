@@ -40,14 +40,9 @@ export class DefaultAuthApi implements AuthApi{
     }
 
     private setAccessToken() {
-        const authState = this.getAuthState()
-        if (this.getAuthState().accessToken === undefined) {
-            throw new Error("No Access token found. Re-Login recommended.")
-        } else {
-            AuthApiConfig.USERNAME = undefined
-            AuthApiConfig.PASSWORD = undefined
-            AuthApiConfig.TOKEN = authState.accessToken
-        }
+        AuthApiConfig.TOKEN = this.getAuthState().accessToken
+        AuthApiConfig.USERNAME = undefined
+        AuthApiConfig.PASSWORD = undefined
     }
 
     async deleteAccount(accountId: UUID): Promise<void> {

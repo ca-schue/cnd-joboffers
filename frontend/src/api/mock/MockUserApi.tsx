@@ -1,22 +1,37 @@
 import {
-    UserDTO,
-    UserIdDTO,
+    CompanyDetailsDTO,
     CompanyDTO,
     CompanyIdDTO,
-    PublicUserProfileDTO,
-    UserSubscriptionDTO,
-    UserService,
-    UserSettingsDTO,
-    UserProfileDTO,
-    CompanyDetailsDTO,
     CompanyLinksDTO,
-    CompanyService, CompanyPartnerProgramDTO, UpdateCompanyLinksRequestDTO
+    PublicCompanyProfileDTO,
+    PublicUserProfileDTO,
+    UpdateCompanyLinksRequestDTO,
+    UserDTO,
+    UserIdDTO,
+    UserProfileDTO,
+    UserSettingsDTO
 } from "../../.generated/user-service";
 import {UserApi} from "../UserApi";
 
-import { User as OidcUser} from "oidc-client-ts"
-
 export default class MockUserApi implements UserApi {
+
+    fetchPublicCompanyProfile(companyId: string): Promise<PublicCompanyProfileDTO> {
+        return new Promise<PublicCompanyProfileDTO>(resolve => {
+            const companyDto: PublicCompanyProfileDTO = {
+                id: companyId,
+                details: {
+                    name: "Example Company " + companyId,
+                    description: "aslakshgolaga",
+                    tags: ["test"]
+                },
+                links: {
+                    social_media: ["twitter", "instagram"],
+                    website_url: "testwebsite"
+                }
+            }
+            resolve(companyDto)
+        })
+    }
 
     async subscribeToPartnerProgram(companyId: CompanyIdDTO): Promise<CompanyDTO> {
         await new Promise(r => setTimeout(r, 1000 * 3))

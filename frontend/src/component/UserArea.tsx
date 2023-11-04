@@ -8,7 +8,10 @@ import {userApi} from "../api/apis";
 interface UpdateUserOnMountProps { }
 const UserArea = (props: PropsWithChildren<UpdateUserOnMountProps>) => {
 
+    const dispatch = useAppDispatch()
+
     const accountState = useAppSelector(state => state.account)
+    const userId = useAppSelector(state => state.user.user?.id)
 
     const navigate = useNavigate()
 
@@ -17,6 +20,13 @@ const UserArea = (props: PropsWithChildren<UpdateUserOnMountProps>) => {
             navigate("/")
         }
     }, [accountState])
+
+
+    useEffect(() => {
+        if (userId) {
+            userApi.fetchUser(userId).then(user => dispatch(updateUser({user: user})))
+        }
+    },[userId])
 
     return props.children
 }

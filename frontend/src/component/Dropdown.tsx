@@ -1,6 +1,6 @@
 import {Box, Menu, MenuItem, Typography} from "@mui/material";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import {BoxProps} from "@mui/material/Box/Box";
 
 interface DropdownProps {
@@ -44,12 +44,10 @@ const DropdownButton = (props: DropdownProps) => {
             setSelectedValue(value)
         }
         setAnchorEl(null)
-        console.log(anchorEl)
     };
 
     const handleClose = () => {
         setAnchorEl(null);
-        console.log(anchorEl)
     };
 
 
@@ -68,14 +66,6 @@ const DropdownButton = (props: DropdownProps) => {
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
-                anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                }}
-                transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                }}
             >
                 {
                     items.map(item =>
@@ -84,7 +74,8 @@ const DropdownButton = (props: DropdownProps) => {
                             disabled={selectedValue.value == item.value}
                             selected={selectedValue.value == item.value}
                             onClick={() => handleMenuItemClick(item)}
-                            sx={{width: "100%", "&:hover": {backgroundColor: "primary.light"}}}
+                            sx={{width: anchorEl?.clientWidth || "100%",
+                                "&:hover": {backgroundColor: "primary.light"}}}
                         >
                             {item.text}
                         </MenuItem>

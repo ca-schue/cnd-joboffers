@@ -58,7 +58,7 @@ const MyJobOffersView = (props: MyJobOfferViewProps) => {
 
 
             {!props.create && !atLeastOneJobOfferExists &&
-                <Typography marginTop={"40%"} fontSize={"1.2rem"}>
+                <Typography marginTop={"40%"} fontSize={"1.2rem"} sx={{textAlign: "center"}}>
                     Sie haben keine Job Angebote.
                 </Typography>
             }

@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import { Modal, Button} from "react-bootstrap";
-import { useAuth } from "react-oidc-context";
-import {useAppDispatch, useAppSelector, useLogout} from "../state/hooks";
+import {useAuth} from "react-oidc-context";
+import {useAppDispatch, useAppSelector} from "../state/hooks";
 import {authApi, userApi} from "../api/apis";
-import {AccountLoginResponseDTO, AccountDTO, InternalAccountDTO, OidcAccountDTO} from "../.generated/auth-service";
 import {setAccessToken} from "../state/reducer/AuthSlice";
 import {loginAccount, userProfileCreated} from "../state/reducer/AccountSlice";
 import {loginUser} from "../state/reducer/UserSlice";
-import store from "../state/Store";
-import {Box, CircularProgress} from "@mui/material";
+import {Box, Button, Dialog, TextField, Typography} from "@mui/material";
+import GoogleIcon from '@mui/icons-material/Google';
 
 
 interface ModalDialogProps {
@@ -16,29 +14,29 @@ interface ModalDialogProps {
     hideModal: () => void;
 }
 
-function ModalDialog({ isOpen, hideModal}: ModalDialogProps) {
+function AuthModal({isOpen, hideModal}: ModalDialogProps) {
 
-    const [loading, setLoading] = React.useState(false);
-
-    const [modalTitle, setModalTitle] = useState('Login or Create an Account');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [error, setError] = useState("");
     const accountState = useAppSelector(state => state.account)
     const [accountEmail, setAccountEmail] = useState("");
-    const [userProfileEmail, setUserProfileEmail] = useState("");
+
+    const [registerAccountEmail, setRegisterAccountEmail] = useState("");
+    const [registerPassword, setRegisterPassword] = useState('');
+
+    const [userProfileEmail, setUserProfileEmail] = useState(accountState.account && 'email' in accountState.account && accountState.account.email || "");
 
     const auth = useAuth();
-    const logout = useLogout()
 
     useEffect(() => {
-            if (isOpen) {
-                initStates()
-            } else {
-                cleanupStates();
-            }
-        },[isOpen]);
+        if (isOpen) {
+            initStates()
+        } else {
+            cleanupStates();
+        }
+    }, [isOpen]);
 
     const initStates = () => {
         if (!accountState.loggedIn || accountState.account === undefined) {
@@ -54,21 +52,11 @@ function ModalDialog({ isOpen, hideModal}: ModalDialogProps) {
     }
 
     const cleanupStates = () => {
-        setAccountEmail('');
-        setPassword('');
-        setFirstName('');
-        setLastName('');
-        setModalTitle('Login or Create an Account')
-        setError("")
-        setLoading(false)
     }
 
     const dispatch = useAppDispatch()
 
     const handleOidcLogin = async () => {
-
-        setLoading(true)
-
         auth.signinPopup()
             .then(user => {
 
@@ -94,31 +82,24 @@ function ModalDialog({ isOpen, hideModal}: ModalDialogProps) {
                         userApi.fetchUser(account.id)
                             .then(async user => {
                                 dispatch(loginUser({user: user}))
-                                dispatch(userProfileCreated({ userProfileCreated: true}))
+                                dispatch(userProfileCreated({userProfileCreated: true}))
 
-                                setModalTitle("Welcome back!")
-                                await new Promise(r => setTimeout(r, 1000 * 2))
-                                setLoading(false)
                                 hideModal()
                             })
                             .catch(() => {
-                                dispatch(userProfileCreated({ userProfileCreated: false}))
+                                dispatch(userProfileCreated({userProfileCreated: false}))
                                 console.log("No user fetched");
-                                setLoading(false)
-                    } )
+                            })
                     })
             })
             .catch(error => {
                     setError(error.message)
-                setLoading(false)
                 }
             );
 
     }
 
     const handleInternalLogin = async () => {
-        setLoading(true)
-
         authApi.loginInternalAccount(accountEmail, password)
             .then(accountLoginResponse => {
                 const account = accountLoginResponse.account;
@@ -136,32 +117,23 @@ function ModalDialog({ isOpen, hideModal}: ModalDialogProps) {
                 userApi.fetchUser(account.id)
                     .then(async user => {
                         dispatch(loginUser({user: user}))
-                        dispatch(userProfileCreated({ userProfileCreated: true}))
-
-                        setModalTitle("Welcome back!")
-                        await new Promise(r => setTimeout(r, 1000 * 2))
-                        setLoading(false)
+                        dispatch(userProfileCreated({userProfileCreated: true}))
                         hideModal()
 
                     })
                     .catch(() => {
-                        dispatch(userProfileCreated({ userProfileCreated: false}))
+                        dispatch(userProfileCreated({userProfileCreated: false}))
                         console.log("No user fetched");
                         setUserProfileEmail(account.email)
-                        setLoading(false)
                     })
             })
             .catch(error => {
-                setError(error.message)
-                setLoading(false)
-            }
-        );
+                    setError(error.message)
+                }
+            );
     }
 
     const handleInternalRegistration = async () => {
-
-        setLoading(true)
-
         authApi.registerNewInternalAccount(accountEmail, password)
             .then(accountLoginResponse => {
                 const account = accountLoginResponse.account;
@@ -176,119 +148,93 @@ function ModalDialog({ isOpen, hideModal}: ModalDialogProps) {
                 }
                 dispatch(setAccessToken({accessToken: accountLoginResponse.access_token}));
                 setUserProfileEmail(account.email)
-                setLoading(false)
             })
             .catch(error => {
                 setError(error.message)
-                setLoading(false)
             })
     };
 
-     const handleProfileCreation = () => {
+    const handleProfileCreation = () => {
 
-        setLoading(true)
 
-        userApi.createUserProfile(userProfileEmail,firstName,lastName)
+        userApi.createUserProfile(userProfileEmail, firstName, lastName)
             .then(async user => {
                 dispatch(loginUser({user: user}))
-                dispatch(userProfileCreated({ userProfileCreated: true}))
-
-                setModalTitle("New Profile created!");
-                await new Promise(r => setTimeout(r, 1000 * 2))
-                setLoading(false)
-                hideModal()
+                dispatch(userProfileCreated({userProfileCreated: true}))
                 //logout()
             })
             .catch(error => {
                 setError(error.message)
-                setLoading(false)
             });
     };
 
+    //if (!isOpen) {
+    //    return null;
+    //}
+
     return (
         <div>
-            {/*loading &&
-                <Box width="100%" height="100%" bgcolor="#484848ab" position="absolute" zIndex="10" display="flex" justifyContent="center" alignItems="center">
-                    <CircularProgress color="primary" size={"5rem"} sx={{marginTop: "-5%"}}/>
-                </Box>
-            */}
-            {(!accountState.loggedIn || accountState.account === undefined) && (
-                <Modal show={isOpen} onHide={hideModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Login or register account</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <input
-                            type="text"
-                            placeholder="Account Email"
-                            onChange={(e) => setAccountEmail(e.target.value)}
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        {error != "" && <p>{error}</p>}
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button
-                            className="me-2"
-                            onClick={handleOidcLogin}
-                        >
-                            Login with Google
-                        </Button>
-                        <Button
-                            className="me-2"
-                            onClick={handleInternalLogin}
-                        >
-                            Anmelden
-                        </Button>
-                        <Button
-                            onClick={handleInternalRegistration}
-                        >
-                            Account erstellen
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+            {(!accountState.loggedIn || accountState.account == undefined) && (
+                <Dialog onClose={hideModal} open={isOpen}
+                        PaperProps={{sx: {padding: "10px", borderRadius: "0px", width: "90%", maxWidth: "580px"}}}>
+                    <Typography variant="h5">Login:</Typography>
+                    <br/>
+                    <Box display="flex" flexDirection="row" flexWrap="wrap" rowGap="10px">
+                        <TextField type="email" sx={{width: "265px", marginRight: "20px"}} label={"Email"}
+                                   value={accountEmail} onChange={(event) => setAccountEmail(event.target.value)}/>
+                        <TextField type="password" sx={{width: "265px"}} label={"Password"} value={password}
+                                   onChange={(event) => setPassword(event.target.value)}/>
+                    </Box>
+                    {error && <Typography sx={{color: "red"}}>{error}</Typography>}
+                    <Box marginLeft="auto">
+                        <Button variant="contained"
+                                sx={{marginTop: "20px", width: "120px", padding: "5px 30px", marginRight: "10px"}}
+                                onClick={handleInternalRegistration}>Registrieren</Button>
+                        <Button variant="contained"
+                                sx={{marginTop: "20px", width: "120px", padding: "5px 30px", marginRight: "10px"}}
+                                onClick={handleInternalLogin}>Login</Button>
+                    </Box>
+                    <Box width="100%" display="flex" justifyContent="center" alignItems="center" gap="10px"
+                         padding="20px 20px 10px 20px">
+                        <Box width="20%" display="inline-block">
+                            <hr style={{borderTop: "1px solid black"}}/>
+                        </Box>
+                        <Typography display="inline-block">OIDC Login</Typography>
+                        <Box width="20%" display="inline-block">
+                            <hr style={{borderTop: "1px solid black"}}/>
+                        </Box>
+                    </Box>
+                    <Box width="100%" display="flex" justifyContent="center" alignItems="center">
+                        <Button onClick={handleOidcLogin} variant="contained"
+                                sx={{marginTop: "10px", padding: "5px 30px 5px 25px"}}><GoogleIcon
+                            sx={{margin: "0px 10px 0px 5px"}}/>Login mit Google</Button>
+                    </Box>
+                </Dialog>
+
             )}
-            { accountState.loggedIn && accountState.account != undefined && !accountState.userProfileCreated && (
-                <Modal show={isOpen} onHide={hideModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Use all features by completing your user profile</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <input
-                            type="text"
-                            placeholder="User Profile Email"
-                            value={userProfileEmail}
-                            onChange={(e) => setUserProfileEmail(e.target.value)}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Vorname"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Nachname"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
-                    </Modal.Body>
-                    {error != "" && <p>{error}</p>}
-                    <Modal.Footer>
-                        <Button
-                            variant="primary"
-                            onClick={handleProfileCreation}
-                        >
-                            Benutzerprofil anlegen
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+            {accountState.loggedIn && accountState.account != undefined && !accountState.userProfileCreated && (
+                <Dialog onClose={hideModal} open={isOpen}
+                        PaperProps={{sx: {padding: "10px", borderRadius: "0px", width: "90%", maxWidth: "580px"}}}>
+                    <Typography variant="h5">Schließe die Anmeldung ab:</Typography>
+                    <br/>
+                    <TextField type="email" sx={{width: "265px"}} label={"Profil Email"} value={userProfileEmail}
+                               onChange={(event) => setUserProfileEmail(event.target.value)}/>
+                    <Box display="flex" flexDirection="row" flexWrap="wrap" rowGap="10px">
+                        <TextField sx={{width: "265px", marginRight: "20px", marginTop: "10px"}} label={"Vorname"}
+                                   value={firstName} onChange={(event) => setFirstName(event.target.value)}/>
+                        <TextField sx={{width: "265px", marginTop: "10px"}} label={"Nachname"} value={lastName}
+                                   onChange={(event) => setLastName(event.target.value)}/>
+                    </Box>
+                    {error && <Typography sx={{color: "red"}}>{error}</Typography>}
+                    <Box marginLeft="auto">
+                        <Button variant="contained" sx={{marginTop: "30px", padding: "5px 30px", marginRight: "10px"}}
+                                onClick={handleProfileCreation}>Profil vervollständigen</Button>
+                    </Box>
+                </Dialog>
+
             )}
         </div>
     );
 }
 
-export default ModalDialog;
+export default AuthModal;

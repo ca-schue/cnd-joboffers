@@ -8,7 +8,12 @@ import {
     PublicUserProfileDTO,
     CompanyDTO,
     CompanyIdDTO,
-    UserSettingsDTO, UserProfileDTO, CompanyDetailsDTO, CompanyLinksDTO, UpdateCompanyLinksRequestDTO
+    UserSettingsDTO,
+    UserProfileDTO,
+    CompanyDetailsDTO,
+    CompanyLinksDTO,
+    UpdateCompanyLinksRequestDTO,
+    PublicCompanyProfileDTO
 } from "../.generated/user-service";
 import store from "../state/Store";
 import {UpdateCompanyLinksRequest} from "../.generated/user-service/models/UpdateCompanyLinksRequest";
@@ -17,6 +22,7 @@ export interface UserApi {
     fetchUser(userId: string) : Promise<UserDTO>
     fetchPublicUserProfile(userId: UserIdDTO) : Promise<PublicUserProfileDTO>
     fetchCompany(companyId: string) : Promise<CompanyDTO>
+    fetchPublicCompanyProfile(companyId: string) : Promise<PublicCompanyProfileDTO>
     createUserProfile(user_profile_email: string, first_name: string, last_name: string): Promise<UserDTO>
     deleteUser(userId: UserIdDTO) : Promise<void>
     subscribe(userId: UserIdDTO, subscription_days: number): Promise<UserDTO>
@@ -49,14 +55,9 @@ export class DefaultUserApi implements UserApi {
     }
 
     private setAccessToken() {
-        const authState = this.getAuthState()
-        if (this.getAuthState().accessToken === undefined) {
-            throw new Error("No Access token found. Re-Login recommended.")
-        } else {
-            UserApiConfig.USERNAME = undefined
-            UserApiConfig.PASSWORD = undefined
-            UserApiConfig.TOKEN = authState.accessToken
-        }
+        UserApiConfig.TOKEN = this.getAuthState().accessToken
+        UserApiConfig.USERNAME = undefined
+        UserApiConfig.PASSWORD = undefined
     }
 
     async subscribeToPartnerProgram(companyId: CompanyIdDTO): Promise<CompanyDTO> {
@@ -182,6 +183,12 @@ export class DefaultUserApi implements UserApi {
         this.initUserApiConfig()
         this.setAccessToken()
         return CompanyService.getCompany(companyId)
+    }
+
+    async fetchPublicCompanyProfile(companyId: string) : Promise<PublicCompanyProfileDTO> {
+        this.initUserApiConfig()
+        this.setAccessToken()
+        return CompanyService.getPublicCompanyProfile(companyId)
     }
 
 }

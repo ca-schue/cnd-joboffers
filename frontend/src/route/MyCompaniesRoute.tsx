@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from "react";
-import {Box, Button, CircularProgress, Typography} from "@mui/material";
+import {Badge, Box, Button, CircularProgress, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector, useLogout} from "../state/hooks";
 import {useNavigate} from "react-router-dom";
 import UserArea from "../component/UserArea";
@@ -25,9 +25,10 @@ import JobOfferView from "../component/JobOfferView";
 import {overwriteJobOffers, setSelectedCompany} from "../state/reducer/SelectedMemberCompanySlice";
 import CompanyInvitesView from "../component/CompanyInvitesView";
 import MemberCompanyDetailsView from "../component/MemberCompanyDetailsView";
+import {DefaultUserApi} from "../api/UserApi";
 
 interface MyCompanyRouteProps {
-    view: 'company' | 'company-invites' |'member-company-details' | 'job-offers' | 'edit-job-offer' | 'create-job-offer' | 'manage-companies' | 'job-offer-details'
+    view: 'company-invites' |'company-details' | 'job-offers' | 'edit-job-offer' | 'create-job-offer' | 'manage-companies' | 'job-offer-details'
 }
 
 const MyCompanyRoute = (props: MyCompanyRouteProps) => {
@@ -39,8 +40,7 @@ const MyCompanyRoute = (props: MyCompanyRouteProps) => {
 
     const userState = useAppSelector(state => state.user)
     const myCompaniesState = useAppSelector(state => state.myNewCompanies)
-    const myCompaniesMemberOfState = useAppSelector(state => state.myNewCompanies.member_of)
-    const myCompaniesInvitedToState = useAppSelector(state => state.myNewCompanies.invited_to)
+    const ownedCompanyId = useAppSelector(state => state.myNewCompanies.owner_of?.id)
     const selectedMemberCompanyState = useAppSelector(state => state.selectedMemberCompany)
 
     const [loading, setLoading] = React.useState(true);
@@ -77,7 +77,7 @@ const MyCompanyRoute = (props: MyCompanyRouteProps) => {
             .then(fetchedCompany => {
                 dispatch(updateMemberCompany({updatedMemberCompany: fetchedCompany}))
                 dispatch(setSelectedCompany({ company: fetchedCompany }));
-                routeTo("/my-companies/member-company-details");
+                routeTo("/my-companies/company-details");
                 setLoading(false)
             })
     }
@@ -141,9 +141,6 @@ const MyCompanyRoute = (props: MyCompanyRouteProps) => {
         }
     }
 
-    useEffect(() => {
-
-    }, [myCompaniesState.owner_of?.details.name]);
 
     useEffect(() => {
         if (userState.user === undefined) {
@@ -183,9 +180,12 @@ const MyCompanyRoute = (props: MyCompanyRouteProps) => {
 
     const componentToUse = () => {
         switch(props.view) {
-            case "company": return(<MyCompanyView loading={callbackLoading}/>)
             case "company-invites": return(<CompanyInvitesView loading={callbackLoading}/>)
-            case "member-company-details": return(<MemberCompanyDetailsView loading={callbackLoading}/>)
+            case "company-details": return (
+                selectedMemberCompanyState.selected_company?.id == ownedCompanyId
+                    && <MyCompanyView loading={callbackLoading}/>
+                    || <MemberCompanyDetailsView loading={callbackLoading}/>
+            )
             case "job-offers":
             case "edit-job-offer":
             case "create-job-offer":
@@ -212,16 +212,14 @@ const MyCompanyRoute = (props: MyCompanyRouteProps) => {
                 }
 
                 <SideMenu>
-                    <GenericButton text="My Company" onClick={() => routeTo("/my-companies")} selected={props.view == "company"} />
-                    <GenericButton text="Company Invites" onClick={() => routeTo("/my-companies/invites")} selected={props.view == "company-invites"} disabled={Object.keys(myCompaniesState.invited_to).length == 0} />
                     {Object.keys(myCompaniesState.member_of).length > 0 &&
                         <CompanySelector onChange={changeSelectedMemberCompany} companies={myCompaniesState.member_of}/>
                     }
                     {Object.keys(myCompaniesState.member_of).length > 0 &&
                         <GenericButton
                             text="Company Details"
-                            onClick={() => routeTo("/my-companies/member-company-details")}
-                            selected={props.view == "member-company-details"}
+                            onClick={() => routeTo("/my-companies/company-details")}
+                            selected={props.view == "company-details"}
                             disabled={selectedMemberCompanyState.selected_company === undefined}
                         />
                     }
@@ -232,6 +230,13 @@ const MyCompanyRoute = (props: MyCompanyRouteProps) => {
                             selected={props.view == "job-offers"}
                             disabled={selectedMemberCompanyState.selected_company === undefined}
                         />
+                    }
+                    {Object.keys(myCompaniesState.invited_to).length > 0 &&
+                        <GenericButton text="Einladungen" onClick={() => routeTo("/my-companies/invites")} selected={props.view == "company-invites"} topBorder
+                                       prefixElement={<Badge badgeContent={Object.keys(myCompaniesState.invited_to).length} color="primary" max={99} sx={{marginLeft: "18px", marginRight: "3px", left: "-13px", top: "-2px"}}/>}
+                        >
+
+                        </GenericButton>
                     }
                 </SideMenu>
 
