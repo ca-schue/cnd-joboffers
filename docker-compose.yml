@@ -19,11 +19,16 @@ services:
         condition: service_healthy
       notification-service:
         condition: service_healthy
+      frontend:
+        condition: service_healthy
     environment:
-      - WEB_SERVER_URL
-      - USER_SERVICE_URL
+      - FRONTEND_URL
       - AUTH_SERVICE_URL
+      - AUTH_NGINX_ENDPOINT
+      - USER_SERVICE_URL
+      - USER_NGINX_ENDPOINT
       - CAREER_SERVICE_URL
+      - CAREER_NGINX_ENDPOINT
 
   mongodb:
     image: mongo
@@ -86,7 +91,6 @@ services:
       retries: 10
       start_period: 20s
 
-
   eventstoredb:
     image: eventstore/eventstore:23.6.0-buster-slim
     # For ARM-based processors
@@ -109,6 +113,30 @@ services:
     networks:
       - my-network
 
+
+  frontend:
+    build: ./frontend/.
+    networks:
+      - my-network
+    expose:
+      - "8080"
+    environment:
+      AUTH_SERVICE_URL: ${NGINX_URL}${AUTH_NGINX_ENDPOINT}
+      USER_SERVICE_URL: ${NGINX_URL}${USER_NGINX_ENDPOINT}
+      CAREER_SERVICE_URL: ${NGINX_URL}${CAREER_NGINX_ENDPOINT}
+      APP_ENV: ${APP_ENV}
+      OIDC_PROVIDER_DISCOVERY_ENDPOINT: $OIDC_PROVIDER_DISCOVERY_ENDPOINT
+      OIDC_CLIENT_ID: $OIDC_CLIENT_ID
+      OIDC_CLIENT_SECRET: $OIDC_CLIENT_SECRET
+      OIDC_CLIENT_REDIRECT_URL: $OIDC_CLIENT_REDIRECT_URL
+    healthcheck:
+      test: "curl -sf http://localhost:8080 || exit 1"
+      interval: 20s
+      timeout: 10s
+      retries: 10
+      start_period: 40s
+
+
   auth-service:
     build: ./authservice/.
     networks:
@@ -125,7 +153,7 @@ services:
       - KAFKA_BOOTSTRAP_SERVER
       - USER_SERVICE_URL
       - AUTH_SERVICE_URL
-      - EXTERNAL_OIDC_PROVIDER_DISCOVERY_ENDPOINT
+      - OIDC_PROVIDER_DISCOVERY_ENDPOINT
       - JWT_PUBLIC_KEY_BASE64
       - JWT_PRIVATE_KEY_BASE64
       - JWT_KEY_ID

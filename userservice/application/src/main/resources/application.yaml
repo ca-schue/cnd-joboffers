@@ -17,6 +17,10 @@ spring:
           jwk-set-uri: "${AUTH_SERVICE_URL}/oauth2/jwks"
           audiences: user-service
 
+logging:
+  level:
+    org.springframework.web: DEBUG
+
 management:
   info:
     env:

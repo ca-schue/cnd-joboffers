@@ -19,8 +19,8 @@ import NotFoundPage from "./component/views/NotFoundPage";
 import ApiProvider from "./api/ApiProvider";
 import { AuthProvider } from "react-oidc-context";
 import { User as OidcUser } from "oidc-client-ts";
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import {config} from "./config/config";
 
 export { default as ReactFromModule } from 'react'
 
@@ -53,10 +53,10 @@ const router = createBrowserRouter(
 );
 
 const oidcConfig = {
-    authority: "https://accounts.google.com/",
-    client_id: "1059672486285-gea53vidspg5m9ff1d6mg5q5vjigva1t.apps.googleusercontent.com",
-    client_secret: "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",
-    redirect_uri: "http://localhost:3000",
+    authority: config.oidcProviderDiscoveryEndpoint,
+    client_id: config.oidcClientId,
+    client_secret: config.oidcClientSecret,
+    redirect_uri: config.oidcClientRedirectUrl,
 };
 
 createRoot(container).render(

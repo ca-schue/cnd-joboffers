@@ -22,7 +22,9 @@ management:
       probes:
         enabled: true
 
-
+logging:
+  level:
+    org.springframework.web: DEBUG
 
 password:
   minCharacterLength: 20
@@ -30,7 +32,7 @@ password:
 
 jwt-config:
   issuer: ${AUTH_SERVICE_URL}
-  oidcIssuerDiscoveryEndpoint: ${EXTERNAL_OIDC_PROVIDER_DISCOVERY_ENDPOINT}
+  oidcIssuerDiscoveryEndpoint: ${OIDC_PROVIDER_DISCOVERY_ENDPOINT}
   publicKeyBase64: ${JWT_PUBLIC_KEY_BASE64}
   privateKeyBase64: ${JWT_PRIVATE_KEY_BASE64}
   keyId: ${JWT_KEY_ID}
