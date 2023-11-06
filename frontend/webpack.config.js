@@ -8,7 +8,8 @@ const CopyPlugin = require("copy-webpack-plugin");
 module.exports = {
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js'
+        filename: '[name].[contenthash].bundle.js',
+        clean: true
     },
     resolve: {
         modules: [path.join(__dirname, 'src'), 'node_modules'],
@@ -65,7 +66,10 @@ module.exports = {
         }),
         new ESLintPlugin(),
         new NodePolyfillPlugin(),
-        new Dotenv()
+        new Dotenv({
+            systemvars: true,
+            expand: true
+        })
     ],
     devServer: {
         historyApiFallback: true
