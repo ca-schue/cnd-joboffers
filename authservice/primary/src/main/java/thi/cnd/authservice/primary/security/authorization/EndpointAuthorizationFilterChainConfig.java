@@ -40,6 +40,9 @@ public class EndpointAuthorizationFilterChainConfig {
     SecurityFilterChain appFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorization -> authorization
+                        .requestMatchers("/actuator/**").permitAll()
+                )
+                .authorizeHttpRequests(authorization -> authorization
                         .requestMatchers("/accounts/registerInternalAccount").permitAll()
                 )
                 .authorizeHttpRequests(authorization -> authorization

@@ -20,7 +20,6 @@ import thi.cnd.authservice.core.domain.jwt.JwtConfig;
 import thi.cnd.authservice.primary.security.cors.CorsConfig;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -39,8 +38,8 @@ public class OidcLoginFilterChainConfig {
         Map<String, AuthenticationManager> authenticationManagers = new HashMap<>();
         JwtIssuerAuthenticationManagerResolver authenticationManagerResolver =
                 new JwtIssuerAuthenticationManagerResolver(authenticationManagers::get);
-        List<String> oidcIssuersDiscoveryEndpoints = jwtConfig.getOidcIssuersDiscoveryEndpoints();
-        oidcIssuersDiscoveryEndpoints.forEach(oidcIssuersDiscoveryEndpoint -> addManager(authenticationManagers, oidcIssuersDiscoveryEndpoint));
+        String oidcIssuerDiscoveryEndpoint = jwtConfig.getOidcIssuerDiscoveryEndpoint();
+        addManager(authenticationManagers, oidcIssuerDiscoveryEndpoint);
 
         http
                 .securityMatcher("/accounts/loginOIDCAccount")

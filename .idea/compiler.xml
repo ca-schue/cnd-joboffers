@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="openapi-java-client (2)" />
+        <module name="openapi-java-client (1)" />
+        <module name="openapi-spring (2)" />
+        <module name="openapi-spring (1)" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.5.5.Final/897f6f115930b936287bef552bf5fe28cc64717d/mapstruct-processor-1.5.5.Final.jar" />
+        </processorPath>
+        <module name="userservice.secondary.main" />
+        <module name="userservice.core.main" />
+        <module name="userservice.primary.main" />
+        <module name="userservice.application.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="auth-service" target="21" />
+      <module name="carieerservice" target="21" />
+      <module name="carieerservice.application" target="21" />
+      <module name="carieerservice.application.main" target="21" />
+      <module name="carieerservice.application.test" target="21" />
+      <module name="carieerservice.core" target="21" />
+      <module name="carieerservice.core.main" target="21" />
+      <module name="carieerservice.core.test" target="21" />
+      <module name="carieerservice.main" target="21" />
+      <module name="carieerservice.primary" target="21" />
+      <module name="carieerservice.primary.main" target="21" />
+      <module name="carieerservice.primary.test" target="21" />
+      <module name="carieerservice.secondary" target="21" />
+      <module name="carieerservice.secondary.main" target="21" />
+      <module name="carieerservice.secondary.test" target="21" />
+      <module name="carieerservice.test" target="21" />
+      <module name="openapi-java-client" target="1.8" />
+      <module name="openapi-spring" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="openapi-java-client (2)" options="-Xlint:all -J-Xss4m" />
+      <module name="openapi-spring" options="-parameters" />
+      <module name="openapi-spring (1)" options="-parameters" />
+      <module name="openapi-spring (2)" options="-parameters" />
+    </option>
+  </component>
+</project>

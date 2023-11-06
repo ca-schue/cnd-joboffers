@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/authservice" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/authservice" />
+            <option value="$PROJECT_DIR$/authservice/application" />
+            <option value="$PROJECT_DIR$/authservice/core" />
+            <option value="$PROJECT_DIR$/authservice/primary" />
+            <option value="$PROJECT_DIR$/authservice/secondary" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/careerservice" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/careerservice" />
+            <option value="$PROJECT_DIR$/careerservice/application" />
+            <option value="$PROJECT_DIR$/careerservice/core" />
+            <option value="$PROJECT_DIR$/careerservice/primary" />
+            <option value="$PROJECT_DIR$/careerservice/secondary" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/notificationservice" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/notificationservice" />
+            <option value="$PROJECT_DIR$/notificationservice/application" />
+            <option value="$PROJECT_DIR$/notificationservice/core" />
+            <option value="$PROJECT_DIR$/notificationservice/primary" />
+            <option value="$PROJECT_DIR$/notificationservice/secondary" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/userservice" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/userservice" />
+            <option value="$PROJECT_DIR$/userservice/application" />
+            <option value="$PROJECT_DIR$/userservice/core" />
+            <option value="$PROJECT_DIR$/userservice/primary" />
+            <option value="$PROJECT_DIR$/userservice/secondary" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

@@ -1,34 +1,35 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/user-service
+      uri: ${MONGODB_URI}
       auto-index-creation: true
       uuid-representation: standard
   kafka:
     producer:
       retries: 5
-    bootstrap-servers: http://localhost:9092
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}
     consumer:
       group-id: user-service
   security:
     oauth2:
       resource-server:
         jwt:
-          #issuer-uri: http://localhost:8081
-          jwk-set-uri: http://localhost:8081/oauth2/jwks
+          jwk-set-uri: "${AUTH_SERVICE_URL}/oauth2/jwks"
           audiences: user-service
 
-logging:
-  level:
-    org:
-      springframework: debug
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    enabled-by-default: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
 
 server:
-  port: 8082
-
-security:
-  csrfActive: false
-  corsActive: false
+  port: 8080
 
 event:
   kafka:

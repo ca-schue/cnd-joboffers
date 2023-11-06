@@ -73,6 +73,9 @@ spring:
     activate:
       on-profile: docker
 
+server:
+  port: 8080
+
 security:
   csrfActive: false
   corsActive: false

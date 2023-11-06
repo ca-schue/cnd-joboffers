@@ -28,7 +28,7 @@ public class JwtProviderUnitTests {
     public void jwtConfigTest_AllValid() throws KeySourceException {
 
         String issue = "";
-        List<String> oidcIssuersDiscoveryEndpoints = null;
+        String oidcIssuerDiscoveryEndpoint = null;
         String publicKeyBase64 = "";
         String privateKeyBase64 = "";
         String keyId = "";
@@ -38,7 +38,7 @@ public class JwtProviderUnitTests {
 
         JwtConfig jwtConfig = new JwtConfig(
                 issue,
-                oidcIssuersDiscoveryEndpoints,
+                oidcIssuerDiscoveryEndpoint,
                 publicKeyBase64,
                 privateKeyBase64,
                 keyId,
@@ -62,7 +62,7 @@ public class JwtProviderUnitTests {
     public void jwtConfigTest_InvalidPublicKey() {
 
         String issue = "";
-        List<String> oidcIssuersDiscoveryEndpoints = null;
+        String oidcIssuerDiscoveryEndpoint = null;
         String publicKeyBase64 = "";
         String privateKeyBase64 = "";
         String keyId = "";
@@ -72,7 +72,7 @@ public class JwtProviderUnitTests {
 
         JwtConfig jwtConfig = new JwtConfig(
                 issue,
-                oidcIssuersDiscoveryEndpoints,
+                oidcIssuerDiscoveryEndpoint,
                 publicKeyBase64,
                 privateKeyBase64,
                 keyId,
@@ -89,7 +89,7 @@ public class JwtProviderUnitTests {
     public void jwtConfigTest_InvalidPrivateKey() {
 
         String issue = "";
-        List<String> oidcIssuersDiscoveryEndpoints = null;
+        String oidcIssuerDiscoveryEndpoint = null;
         String publicKeyBase64 = "";
         String privateKeyBase64 = "";
         String keyId = "";
@@ -99,7 +99,7 @@ public class JwtProviderUnitTests {
 
         JwtConfig jwtConfig = new JwtConfig(
                 issue,
-                oidcIssuersDiscoveryEndpoints,
+                oidcIssuerDiscoveryEndpoint,
                 publicKeyBase64,
                 privateKeyBase64,
                 keyId,
@@ -116,7 +116,7 @@ public class JwtProviderUnitTests {
     public void jwtConfigTest_InvalidKeyAlgorithm() {
 
         String issue = "";
-        List<String> oidcIssuersDiscoveryEndpoints = null;
+        String oidcIssuerDiscoveryEndpoint = null;
         String publicKeyBase64 = "";
         String privateKeyBase64 = "";
         String keyId = "";
@@ -126,7 +126,7 @@ public class JwtProviderUnitTests {
 
         JwtConfig jwtConfig = new JwtConfig(
                 issue,
-                oidcIssuersDiscoveryEndpoints,
+                oidcIssuerDiscoveryEndpoint,
                 publicKeyBase64,
                 privateKeyBase64,
                 keyId,
@@ -143,7 +143,7 @@ public class JwtProviderUnitTests {
     public void jwtConfigTest_InvalidSigningAlgorithm() {
 
         String issue = "";
-        List<String> oidcIssuersDiscoveryEndpoints = null;
+        String oidcIssuerDiscoveryEndpoint = null;
         String publicKeyBase64 = "";
         String privateKeyBase64 = "";
         String keyId = "";
@@ -153,7 +153,7 @@ public class JwtProviderUnitTests {
 
         JwtConfig jwtConfig = new JwtConfig(
                 issue,
-                oidcIssuersDiscoveryEndpoints,
+                oidcIssuerDiscoveryEndpoint,
                 publicKeyBase64,
                 privateKeyBase64,
                 keyId,

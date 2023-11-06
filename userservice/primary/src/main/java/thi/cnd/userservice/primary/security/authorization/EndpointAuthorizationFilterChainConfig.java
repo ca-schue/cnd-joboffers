@@ -28,7 +28,9 @@ public class EndpointAuthorizationFilterChainConfig {
     @Bean
     SecurityFilterChain authorizationFilterChain(HttpSecurity http) throws Exception {
         http
-
+                .authorizeHttpRequests(authorization -> authorization
+                        .requestMatchers("/actuator/**").permitAll()
+                )
                 .authorizeHttpRequests(authorization -> authorization
                         .requestMatchers(HttpMethod.PUT, "/users/register")
                         // unauthorized

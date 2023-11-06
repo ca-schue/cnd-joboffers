@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.Test
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.5'
@@ -6,10 +8,6 @@ plugins {
 
 group = 'thi.cnd'
 version = '0.0.1-SNAPSHOT'
-
-java {
-    sourceCompatibility = '20'
-}
 
 springBoot {
     mainClass = 'thi.cnd.userservice.Application'
@@ -32,14 +30,13 @@ repositories {
     mavenCentral()
 }
 
-
 subprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
     java {
-        sourceCompatibility = '20'
+        sourceCompatibility = '21'
     }
 
     repositories {
@@ -60,43 +57,20 @@ subprojects {
         annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
         implementation 'org.springframework.kafka:spring-kafka'
         implementation 'org.zalando:jackson-datatype-money:1.3.0'
-    }
 
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    }
 
     test {
         useJUnitPlatform()
     }
 
+    tasks.withType(Test).configureEach {
+        maxParallelForks = 1
+    }
+
     bootJar {
         enabled = false
-    }
-
-    tasks.withType(JavaCompile).configureEach {
-        options.compilerArgs += "--enable-preview"
-    }
-
-    tasks.withType(Test).configureEach {
-        jvmArgs += "--enable-preview"
-    }
-
-    tasks.withType(JavaExec).tap {
-        configureEach {
-            jvmArgs += '--enable-preview'
-        }
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.compilerArgs += "--enable-preview"
-}
-
-tasks.withType(Test).configureEach {
-    jvmArgs += "--enable-preview"
-}
-
-tasks.withType(JavaExec).tap {
-    configureEach {
-        jvmArgs += '--enable-preview'
     }
 }
 
