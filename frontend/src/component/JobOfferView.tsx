@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useAppSelector} from "../state/hooks";
 import CreateJobApplicationModal from "./CreateJobApplicationModal";
 import JobOffer from "../model/JobOffer";
-import { CompanyDTO } from "../../src/.generated/user-service";
+import {PublicCompanyProfileDTO} from "../../src/.generated/user-service";
 import JobOfferDetailsCard from "./JobOfferDetailsCard";
 import BackButton from "./BackButton";
 import {careerApi, userApi} from "../api/apis";
@@ -12,7 +12,6 @@ import JobApplication from "../model/JobApplication";
 
 interface JobOfferViewProps {
     jobOffer?: JobOffer
-    company?: CompanyDTO,
     companyId: string,
     jobOfferId: string,
     applyForJobOffer?: boolean
@@ -52,9 +51,7 @@ function JobOfferView(props: JobOfferViewProps) {
     const [jobOffer, setJobOffer] = React.useState<null | JobOffer>(
         props.jobOffer && props.jobOffer.id == props.jobOfferId && props.jobOffer || null
     );
-    const [company, setCompany] = React.useState<null | CompanyDTO>(
-        props.company && props.company.id == props.companyId && props.company || null
-    );
+    const [company, setCompany] = React.useState<null | PublicCompanyProfileDTO>(null);
 
     const hasAlreadyApplied = jobApplicationInLocalStore || existingJobApplication
 
@@ -71,7 +68,7 @@ function JobOfferView(props: JobOfferViewProps) {
 
     useEffect(() => {
         if (props.companyId) {
-            userApi.fetchCompany(props.companyId).then(company => setCompany(company))
+            userApi.fetchPublicCompanyProfile(props.companyId).then(company => setCompany(company))
         }
     }, [props.companyId]);
 

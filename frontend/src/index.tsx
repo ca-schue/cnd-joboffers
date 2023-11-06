@@ -33,6 +33,7 @@ const router = createBrowserRouter(
             <Route path="/" element={<HomeRoute/>}/>
             <Route path="/my-companies" element={<MyCompaniesRoute view="company-details"/>}/>
             <Route path="/my-companies/invites" element={<MyCompaniesRoute view="company-invites"/>}/>
+            <Route path="/my-companies/create" element={<MyCompaniesRoute view="create-company"/>}/>
             <Route path="/my-companies/company-details" element={<MyCompaniesRoute view="company-details"/>}/>
             <Route path="/my-companies/job-offers" element={<MyCompaniesRoute view="job-offers"/>}/>
             <Route path="/my-companies/job-offers/:jobOfferId" element={<MyCompaniesRoute view="job-offer-details"/>}/>

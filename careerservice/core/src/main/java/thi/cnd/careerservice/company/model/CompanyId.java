@@ -14,4 +14,8 @@ public class CompanyId extends BaseUUID {
         super(id);
     }
 
+    public CompanyId(String id) {
+        super(UUID.fromString(id));
+    }
+
 }

@@ -1,17 +1,16 @@
 import React, {Fragment, PropsWithChildren} from "react";
 import {Card, CardContent, Typography} from "@mui/material";
 import JobOffer from "../model/JobOffer";
-import { CompanyDTO } from "../../src/.generated/user-service";
+import {CompanyDTO, PublicCompanyProfileDTO} from "../../src/.generated/user-service";
 
 interface JobOfferDetailsCardProps {
     jobOffer: JobOffer
-    company: CompanyDTO
+    company: CompanyDTO | PublicCompanyProfileDTO
 }
 
 const JobOfferDetailsCard = (props: PropsWithChildren<JobOfferDetailsCardProps>) => {
 
-    const jobOffer = props.jobOffer
-    const company = props.company
+    const {jobOffer, company} = props
 
 
     return(

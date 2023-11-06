@@ -5,36 +5,35 @@ import JobOffer from "../model/JobOffer";
 import {careerApi} from "../api/apis";
 import catCrying from "../assets/cat-crying.gif"
 
-
 function JobOfferList() {
 
     const [availableJobOffers, setAvailableJobOffers] = React.useState<null | Array<JobOffer>>(null);
     const [loading, setLoading] = React.useState(true);
     const [page, setPage] = React.useState(0);
     const [entriesPerPage, setEntriesPerPage] = React.useState(10);
-    const [maxPageCount, setMaxPageCount] = React.useState(50);
+    const [maxCount, setMaxCount] = React.useState(50);
 
-    let displayJobOffers = availableJobOffers && [...availableJobOffers] || []
-    displayJobOffers = displayJobOffers.splice(entriesPerPage * page, entriesPerPage)
+    const displayJobOffers = availableJobOffers && [...availableJobOffers] || []
 
     useEffect(() => {
         if (displayJobOffers.length == 0) {
             setLoading(true)
         }
 
+
         careerApi.fetchAllAvailableJobOffers(page, entriesPerPage).then(jobOffers => {
+
             setAvailableJobOffers(jobOffers.content)
 
             if (page != jobOffers.pagination.currentPage) {
                 setPage(jobOffers.pagination.currentPage)
             }
 
-            setMaxPageCount(
-                Math.max(jobOffers.pagination.totalItemCount / entriesPerPage + (jobOffers.pagination.totalItemCount % entriesPerPage > 1 && 1 || 0), 1)
-            )
-            if (loading) {
-                setLoading(false)
-            }
+            setMaxCount(jobOffers.pagination.totalItemCount)
+
+            setLoading(false)
+        }).catch(() => {
+            setLoading(false)
         })
     }, [page, entriesPerPage]);
 
@@ -52,6 +51,7 @@ function JobOfferList() {
         setPage(0);
     };
 
+
     return (
         <Box width="100%" display="flex" flexDirection="column" alignItems="center">
             {loading &&
@@ -65,11 +65,16 @@ function JobOfferList() {
                     {displayJobOffers?.map(jobOffer => <JobOfferCard jobOffer={jobOffer} key={jobOffer.id}/>)}
                     <TablePagination
                         component="div"
-                        count={maxPageCount}
+                        count={maxCount}
                         page={page}
                         onPageChange={handleChangePage}
                         rowsPerPage={entriesPerPage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
+                        sx={{
+                            '& .MuiTablePagination-toolbar': {
+                                alignItems: "baseline"
+                            }
+                        }}
                     />
                 </Fragment>
             }

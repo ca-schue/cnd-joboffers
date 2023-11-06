@@ -28,7 +28,7 @@ import MemberCompanyDetailsView from "../component/MemberCompanyDetailsView";
 import {DefaultUserApi} from "../api/UserApi";
 
 interface MyCompanyRouteProps {
-    view: 'company-invites' |'company-details' | 'job-offers' | 'edit-job-offer' | 'create-job-offer' | 'manage-companies' | 'job-offer-details'
+    view: 'company-invites' |'company-details' | 'job-offers' | 'edit-job-offer' | 'create-job-offer' | 'manage-companies' | 'job-offer-details' | 'create-company'
 }
 
 const MyCompanyRoute = (props: MyCompanyRouteProps) => {
@@ -181,6 +181,7 @@ const MyCompanyRoute = (props: MyCompanyRouteProps) => {
     const componentToUse = () => {
         switch(props.view) {
             case "company-invites": return(<CompanyInvitesView loading={callbackLoading}/>)
+            case "create-company": return (<MyCompanyView loading={callbackLoading}/>)
             case "company-details": return (
                 selectedMemberCompanyState.selected_company?.id == ownedCompanyId
                     && <MyCompanyView loading={callbackLoading}/>
@@ -237,6 +238,14 @@ const MyCompanyRoute = (props: MyCompanyRouteProps) => {
                         >
 
                         </GenericButton>
+                    }
+                    {!ownedCompanyId &&
+                        <GenericButton
+                            text="Firma erstellen"
+                            onClick={() => routeTo("/my-companies/create")}
+                            selected={props.view == "create-company"}
+                            topBorder
+                        />
                     }
                 </SideMenu>
 

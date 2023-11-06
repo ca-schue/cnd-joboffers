@@ -62,20 +62,21 @@ public class JobOfferComplexQueryRepositoryImpl implements JobOfferComplexQueryR
     }
 
     private <T> Page<T> findPaginated(Query query, Pageable pagination, Class<T> clazz) {
+        var totalItemCount = mongoTemplate.count(query, clazz);
         var paginationQuery = applyPaginationToQuery(query, pagination);
         List<T> items = mongoTemplate.find(paginationQuery, clazz);
-        return buildPage(paginationQuery, clazz, pagination, items);
+        return buildPage(pagination, items, totalItemCount);
     }
 
     private Query applyPaginationToQuery(Query query, Pageable pagination) {
         return query
             .limit(pagination.getPageSize())
-            .skip(pagination.getPageNumber())
+            .skip((long) pagination.getPageNumber() * pagination.getPageSize())
             .with(pagination.getSort());
     }
 
-    private <T> Page<T> buildPage(Query query, Class<T> clazz, Pageable pagination, List<T> foundItems) {
-        LongSupplier totalCountSupplier = () -> mongoTemplate.count(query, clazz);
+    private <T> Page<T> buildPage(Pageable pagination, List<T> foundItems, long totalItemCount) {
+        LongSupplier totalCountSupplier = () -> totalItemCount;
         return PageableExecutionUtils.getPage(foundItems, pagination, totalCountSupplier);
     }
 

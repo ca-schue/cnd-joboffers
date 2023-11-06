@@ -2,6 +2,7 @@ import {CompanyDTO, CompanyIdDTO} from "../../../src/.generated/user-service";
 import React, {Fragment, useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
 import Dropdown from "../Dropdown";
+import {useAppSelector} from "../../state/hooks";
 
 interface CompanySelectorInterface {
     companies: { [company_id: string]: CompanyDTO; }
@@ -14,6 +15,8 @@ const CompanySelector = (props: CompanySelectorInterface) => {
     useEffect(() => {
 
     }, [props.companies]);
+
+    const ownedCompanyId = useAppSelector(state => state.myNewCompanies.owner_of?.id)
 
     //const companySearchParam = searchParams.get("company")
     //const selectedCompanyId = props.selectedCompanyId
@@ -62,10 +65,10 @@ const CompanySelector = (props: CompanySelectorInterface) => {
 
     return (
         <Dropdown items={
-            Object.values(props.companies).map(company => {
+            Object.values(props.companies).sort((a, b) => a.id != ownedCompanyId ? 1 : -1).map(company => {
                     return {
                         value: company.id,
-                        text: company.details.name
+                        text: company.id != ownedCompanyId ? company.details.name : company.details.name + " " + "(Deine Firma)",
                     }
                 }
             )

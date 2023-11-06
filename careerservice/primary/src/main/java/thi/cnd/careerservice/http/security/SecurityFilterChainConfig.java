@@ -5,20 +5,26 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.authorization.AuthorizationManager;
+import org.springframework.security.authorization.AuthorizationManagers;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import thi.cnd.careerservice.http.security.authentication.AccessTokenAuthenticationConverter;
+import thi.cnd.careerservice.http.security.authorization.AuthenticationTypeAuthorizationManager;
+import thi.cnd.careerservice.http.security.authorization.CompanyMemberAuthorizationManager;
+import thi.cnd.careerservice.http.security.authorization.IdMatcherAuthorizationManager;
 
+import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 
 /**
  * Security configuration for all http endpoints.
@@ -42,43 +48,41 @@ public class SecurityFilterChainConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            /*
             .authorizeHttpRequests(request -> request
-                .requestMatchers(GET, "/job-offers").permitAll()
-                .requestMatchers(GET, "/companies/{company-id}/job-offers").permitAll()
-                .requestMatchers(GET, "/companies/{company-id}/job-offers/{jobOfferId}").permitAll()
+                .requestMatchers(GET, "/available-job-offers").permitAll()
+                .requestMatchers(GET, "/companies/{company-id}/available-job-offers").permitAll()
+                .requestMatchers(GET, "/companies/{company-id}/job-offers/{job-offer-id}").permitAll()
             )
             .authorizeHttpRequests(request -> request
                 .requestMatchers(POST, "/companies/{company-id}/job-offers")
-                .access(av::verifyUserIsMemberOfCompany)
-                .requestMatchers(DELETE, "/companies/{company-id}/job-offers/{jobOfferId}")
-                .access(av::verifyUserIsMemberOfCompany)
-                .requestMatchers(POST, "/companies/{company-id}/job-offers/{jobOfferId}/update")
-                .access(av::verifyUserIsMemberOfCompany)
-                .requestMatchers(POST, "/companies/{company-id}/job-offers/{jobOfferId}/publish")
-                .access(av::verifyUserIsMemberOfCompany)
-                .requestMatchers(POST, "/companies/{company-id}/job-offers/{jobOfferId}/close")
-                .access(av::verifyUserIsMemberOfCompany)
-                .requestMatchers(GET, "/companies/{company-id}/job-offers/{jobOfferId}/job-applications")
-                .access(av::verifyUserIsMemberOfCompany)
-                .requestMatchers(GET, "/companies/{company-id}/job-offers/{jobOfferId}/job-applications/{jobApplicationId}")
-                .access(av::verifyUserIsMemberOfCompany)
-                .requestMatchers(POST, "/companies/{company-id}/job-offers/{jobOfferId}/job-applications/{jobApplicationId}/close")
-                .access(av::verifyUserIsMemberOfCompany)
+                .access(verifyUserIsMemberOfCompany())
+                .requestMatchers(DELETE, "/companies/{company-id}/job-offers/{job-offer-id}")
+                .access(verifyUserIsMemberOfCompany())
+                .requestMatchers(POST, "/companies/{company-id}/job-offers/{job-offer-id}/update")
+                .access(verifyUserIsMemberOfCompany())
+                .requestMatchers(POST, "/companies/{company-id}/job-offers/{job-offer-id}/publish")
+                .access(verifyUserIsMemberOfCompany())
+                .requestMatchers(POST, "/companies/{company-id}/job-offers/{job-offer-id}/close")
+                .access(verifyUserIsMemberOfCompany())
+                .requestMatchers(GET, "/companies/{company-id}/job-offers/{job-offer-id}/job-applications")
+                .access(verifyUserIsMemberOfCompany())
+                .requestMatchers(GET, "/companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}")
+                .access(verifyUserIsMemberOfCompany())
+                .requestMatchers(POST, "/companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}/close")
+                .access(verifyUserIsMemberOfCompany())
             )
             .authorizeHttpRequests(request -> request
                 .requestMatchers(GET, "/users/{user-id}/job-applications")
-                .access(av::verifyUserHasSameId)
-                .requestMatchers(POST, "/users/{user-id}/job-offers/{jobOfferId}/create-job-applications")
-                .access(av::verifyUserHasSameId)
-                .requestMatchers(GET, "/users/{user-id}/job-offers/{jobOfferId}/job-applications/{jobApplicationId}")
-                .access(av::verifyUserHasSameId)
-                .requestMatchers(DELETE, "/users/{user-id}/job-offers/{jobOfferId}/job-applications/{jobApplicationId}")
-                .access(av::verifyUserHasSameId)
-                .requestMatchers(POST, "/users/{user-id}/job-offers/{jobOfferId}/job-applications/{jobApplicationId}/update")
-                .access(av::verifyUserHasSameId)
-            )*/
-
+                .access(verifyUserHasSameId())
+                .requestMatchers(POST, "/users/{user-id}/job-offers/{job-offer-id}/create-job-applications")
+                .access(verifyUserHasSameId())
+                .requestMatchers(GET, "/users/{user-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}")
+                .access(verifyUserHasSameId())
+                .requestMatchers(DELETE, "/users/{user-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}")
+                .access(verifyUserHasSameId())
+                .requestMatchers(POST, "/users/{user-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}/update")
+                .access(verifyUserHasSameId())
+            )
             .authorizeHttpRequests(request -> request
                 .requestMatchers(GET, "/actuator/**").permitAll()
             )
@@ -94,6 +98,20 @@ public class SecurityFilterChainConfig {
         http.csrf(csrf -> setActive(csrf, csrfActive));
 
         return http.cors(Customizer.withDefaults()).build();
+    }
+
+    private AuthorizationManager<RequestAuthorizationContext> verifyUserIsMemberOfCompany() {
+        return AuthorizationManagers.allOf(
+            AuthenticationTypeAuthorizationManager.isAccountAndVerified(),
+            CompanyMemberAuthorizationManager.isMember("company-id")
+        );
+    }
+
+    private AuthorizationManager<RequestAuthorizationContext> verifyUserHasSameId() {
+        return AuthorizationManagers.allOf(
+            AuthenticationTypeAuthorizationManager.isAccountAndVerified(),
+            IdMatcherAuthorizationManager.matchesId("user-id")
+        );
     }
 
 
