@@ -5,9 +5,9 @@
   "main": "index.tsx",
   "scripts": {
     "start": "webpack-dev-server --mode=development --open --hot --port 3000",
-    "debug": "webpack --watch --config webpack.config.js --mode=development",
+    "debug": "webpack --watch --config webpack.common.js --mode=development",
     "debug2": "node --inspect webpack",
-    "build": "webpack --mode=production",
+    "build": "webpack --config webpack.prod.js",
     "dev-build": "webpack --mode=development",
     "lint": "eslint ./src/**/*.ts[x] --ignore-pattern '.build/*' --ignore-pattern '.node_modules/*'",
     "generate-auth-spec": "openapi --input ./external-apis/auth-api-spec.yaml --output ./src/.generated/auth-service --client axios --postfixModels DTO",
