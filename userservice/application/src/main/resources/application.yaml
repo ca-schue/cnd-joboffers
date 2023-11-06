@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: ${MONGODB_URI}
+      uri: ${USER_SERVICE_MONGODB_URI}
       auto-index-creation: true
       uuid-representation: standard
   kafka:

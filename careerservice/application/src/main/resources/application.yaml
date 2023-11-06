@@ -3,7 +3,7 @@ spring:
     default: local
   data:
     mongodb:
-      uri: ${MONGODB_URI:mongodb://localhost:27017/career-service?authSource=admin&readPreference=primary&directConnection=true&ssl=false}
+      uri: ${CAREER_SERVICE_MONGODB_URI:mongodb://localhost:27017/career-service?authSource=admin&readPreference=primary&directConnection=true&ssl=false}
       auto-index-creation: true
       uuid-representation: standard
   kafka:
@@ -17,6 +17,7 @@ spring:
       resource-server:
         jwt:
           jwk-set-uri: ${AUTH_SERVICE_URL:http://localhost:8081}/oauth2/jwks
+
 
 event:
   eventTypePrefix: career-service
@@ -35,8 +36,13 @@ joboffer:
 jobapplication:
   maxJobApplicationPerNonSubscribedUser: 50
 
+
 management:
+  info:
+    env:
+      enabled: true
   endpoints:
+    enabled-by-default: true
     web:
       exposure:
         include: '*'

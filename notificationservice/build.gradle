@@ -68,6 +68,7 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
     }
 
 

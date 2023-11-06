@@ -10,11 +10,20 @@ services:
       - ./templates:/etc/nginx/templates
     networks:
       - my-network
+    depends_on:
+      auth-service:
+        condition: service_healthy
+      user-service:
+        condition: service_healthy
+      career-service:
+        condition: service_healthy
+      notification-service:
+        condition: service_healthy
     environment:
-      WEB_SERVER_URL: http://auth-service:8080/
-      USER_SERVICE_URL: http://user-service:8080/
-      AUTH_SERVICE_URL: http://auth-service:8080/
-      CAREER_SERVICE_URL: http://career-service:8080/
+      - WEB_SERVER_URL
+      - USER_SERVICE_URL
+      - AUTH_SERVICE_URL
+      - CAREER_SERVICE_URL
 
   mongodb:
     image: mongo
@@ -26,9 +35,9 @@ services:
       - ./volumes/mongo-data:/data/db
       - ./auth-service/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-      MONGO_INITDB_DATABASE: auth-service
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
+      - MONGO_INITDB_DATABASE
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
       interval: 10s
@@ -39,8 +48,8 @@ services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
+      - ZOOKEEPER_CLIENT_PORT
+      - ZOOKEEPER_TICK_TIME
     networks:
       - my-network
     expose:
@@ -67,9 +76,9 @@ services:
     volumes:
       - ./volumes/kafka-broker/data:/var/lib/kafka/data
     environment:
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      - KAFKA_ZOOKEEPER_CONNECT
+      - KAFKA_ADVERTISED_LISTENERS
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
     healthcheck:
       test: nc -z localhost 9092 || exit -1
       interval: 5s
@@ -83,14 +92,14 @@ services:
     # For ARM-based processors
     # image: eventstore/eventstore:23.6.0-alpha-arm64v8
     environment:
-      - EVENTSTORE_CLUSTER_SIZE=1
-      - EVENTSTORE_RUN_PROJECTIONS=All
-      - EVENTSTORE_START_STANDARD_PROJECTIONS=true
-      - EVENTSTORE_EXT_TCP_PORT=1113
-      - EVENTSTORE_HTTP_PORT=2113
-      - EVENTSTORE_INSECURE=true
-      - EVENTSTORE_ENABLE_EXTERNAL_TCP=true
-      - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true
+      - EVENTSTORE_CLUSTER_SIZE
+      - EVENTSTORE_RUN_PROJECTIONS
+      - EVENTSTORE_START_STANDARD_PROJECTIONS
+      - EVENTSTORE_EXT_TCP_PORT
+      - EVENTSTORE_HTTP_PORT
+      - EVENTSTORE_INSECURE
+      - EVENTSTORE_ENABLE_EXTERNAL_TCP
+      - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP
     expose:
       - '1113'
       - '2113'
@@ -112,17 +121,18 @@ services:
       kafka:
         condition: service_healthy
     environment:
-      MONGODB_URI: mongodb://root:root@mongodb:27017/auth-service?authSource=admin&readPreference=primary&directConnection=true&ssl=false
-      KAFKA_BOOTSTRAP_SERVER: http://kafka:9092
-      USER_SERVICE_URL: http://user-service:8080
-      AUTH_SERVICE_URL: http://auth-service:8080
-      EXTERNAL_OIDC_PROVIDER_DISCOVERY_ENDPOINT: "https://accounts.google.com"
-      JWT_PUBLIC_KEY_BASE64: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhweBNtTB1Cp78qyBRuhvqVjcT/DwZYKcaakP3aR83OlQ3rwKhvlvH10afx1w0aSOaO/efUYvwAl+R6/4V+RJPLDXcrAwe7dTQ9Ba8dmFx/A9ge9NtPqyvmDbx9eKEIEjOHNYmSBauDnHCxQIkL58BoSipfKEZngXMrEvBL9MGNZ00gl3aLkqbbf/6yWRtpN3BFsUgTTsau/dcJqcSr92aRzJG77683PEX4UqJi2XeEci589+OeS9Xk3hf4UPMHiQjJOogDfaQg9z0ErIIJbumi0as9Pw0/m8BIHykL9LrJc+37Zs74YJbgbVWhrJ4cBhFdmITserae91YwJ9G3LrBwIDAQAB"
-      JWT_PRIVATE_KEY_BASE64: "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCHB4E21MHUKnvyrIFG6G+pWNxP8PBlgpxpqQ/dpHzc6VDevAqG+W8fXRp/HXDRpI5o7959Ri/ACX5Hr/hX5Ek8sNdysDB7t1ND0Frx2YXH8D2B7020+rK+YNvH14oQgSM4c1iZIFq4OccLFAiQvnwGhKKl8oRmeBcysS8Ev0wY1nTSCXdouSptt//rJZG2k3cEWxSBNOxq791wmpxKv3ZpHMkbvvrzc8RfhSomLZd4RyLnz3455L1eTeF/hQ8weJCMk6iAN9pCD3PQSsgglu6aLRqz0/DT+bwEgfKQv0uslz7ftmzvhgluBtVaGsnhwGEV2YhOx6tp73VjAn0bcusHAgMBAAECggEAAbusbRDnrfqfnaVDgYP75D9iOy/F/h+M32ROnP3T+8fjhFWt3ZP3rlOKbVrqNvP26feOMlXDc3e2ZGLTUVl6QSpUkZcbqt2BrECmh4J5ukUQnQl+b1YPvkF4VgUjs1jc+V1YTprWNJV1Qw9ORCwAY9sG9WdP9hAQ3X3dsyC7cCQnv1bI6YwVmThN10BMkkVzLdxNSCDdEnhV3fACs97ZPRTHZlyeGB9FVI9m/lIk93KcMqtCc88HOAja3b+8pfT5v3Lu7sC/Yd35siLQRMCOMyifqkqOShd+O2eYNSEWWG0kz0arTIUJ+E/ZlUf0AkCcw4/czhjHdi0IulXR+9+dxQKBgQC9XH11p4gK4YF0P+evz+tiM6pdQqZoJQmxNicP8z2oFYQfcGzlTxTMzAkVC+XZIPDHNF9f7x3TDUs/W2sqeTabWYh4I7zfvczUC4bc2VHDtKUDuNX6BYqpnSEdsSaMssi+YgYeo4AOb7j7Kr7JQUBucg/9F1aWdNIAFj6vFhTEJQKBgQC2jELWlvDDCZRqbawBeun8X6JRXNhPA3rXYwQ4BnyMW2cCskOxShLyjiOA30xFl4eQ7RKMPT1ldAmc1YzdDGJbu+P3FrtbHAREIO0voh5HCJWVw3v8mDnqt/q+B9T2T4g6q2WRWKbtpdjQqO6OFQZb/VNzL6fLXy24Cmd+LKXUuwKBgBkbFyMvOBFBPrmb82rS5UFa2j6NJKTwLC3LoTgzJryPRbopXLa2Wmqgrp+UuT+lZ2bx4adFe63MuGpJA5dZBM1p/Hb5PgRoFK0Ubif/xCBvZeVtbyk77Nt6ErbuEs9asNTVCDytrr+7PkpGq47hUNqT0tzaaEeAa4tJZ7ws8EnlAoGADcHWS6vGazxulfK78sSbm6xtZCpWFuZRPKg2qi469qzwv3BFz7egY+04Wb76VYhM7CwhqLX4yYuMKeiiHAqR4w3u6TEqX3xmCehdV6ilFX9dHpND5c5nFvxUhju63fEyeBFwrxp6QhCsnVUN3WFSQF6ACn896wK6RFNsZ0LgIH8CgYA8WXRiwIRm7iy1QkoWlbJYJNXSigrj6yl2n8Fa+WU/oCraI0iQYCwmHnTTICMjSWyMLxGv7FCXIa1MX1cHNdGgLyuMOJ+jafaQU4dVgOVB4OL/5mS2bFQxmpM7Lw0CLEATEtRncYh4ECU81UWvtJO3xmtQYkws2P0Q13cyzAqVkw=="
-      JWT_KEY_ID: 4dbacae9-3b24-46c0-8ecb-332b9bdd25ec
-      JWT_VALIDITY_IN_SECONDS: 86400
-      JWT_KEY_ALGORITHM: RSA
-      JWT_SIGNING_ALGORITHM: RS256
+      - AUTH_SERVICE_MONGODB_URI
+      - KAFKA_BOOTSTRAP_SERVER
+      - USER_SERVICE_URL
+      - AUTH_SERVICE_URL
+      - EXTERNAL_OIDC_PROVIDER_DISCOVERY_ENDPOINT
+      - JWT_PUBLIC_KEY_BASE64
+      - JWT_PRIVATE_KEY_BASE64
+      - JWT_KEY_ID
+      - JWT_VALIDITY_IN_SECONDS
+      - JWT_KEY_ALGORITHM
+      - JWT_SIGNING_ALGORITHM
+
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
@@ -144,10 +154,9 @@ services:
       auth-service:
           condition: service_healthy
     environment:
-      AUTH_SERVICE_URL: http://auth-service:8080
-      KAFKA_BOOTSTRAP_SERVER: 'http://kafka:9092'
-      MONGODB_URI: mongodb://root:root@mongodb:27017/user-service?authSource=admin&readPreference=primary&directConnection=true&ssl=false
-      # TODO: mongodb://localhost:27017/user-service
+      - AUTH_SERVICE_URL
+      - KAFKA_BOOTSTRAP_SERVER
+      - USER_SERVICE_MONGODB_URI
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
@@ -173,13 +182,13 @@ services:
       user-service:
         condition: service_healthy
     environment:
-      SPRING_PROFILES_ACTIVE: docker
-      KAFKA_BOOTSTRAP_SERVER: 'http://kafka:9092'
-      EVENT_STORE_URI: esdb://eventstoredb:2113?tls=false
-      MONGODB_URI: mongodb://root:root@mongodb:27017/career-service?authSource=admin&readPreference=primary&directConnection=true&ssl=false
-      CAREER_SERVICE_CLIENT_SECRET: "6ko*Y(kkMT>W,qWKU4nU5S"
-      AUTH_SERVICE_URL: http://auth-service:8080
-      USER_SERVICE_URL: http://user-service:8080
+      - SPRING_PROFILES_ACTIVE
+      - KAFKA_BOOTSTRAP_SERVER
+      - EVENT_STORE_URI
+      - CAREER_SERVICE_MONGODB_URI
+      - CAREER_SERVICE_CLIENT_SECRET
+      - AUTH_SERVICE_URL
+      - USER_SERVICE_URL
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
@@ -200,15 +209,14 @@ services:
       kafka:
         condition: service_healthy
     environment:
-      SPRING_PROFILES_ACTIVE: docker
-      KAFKA_BOOTSTRAP_SERVER: 'http://kafka:9092'
+      - SPRING_PROFILES_ACTIVE
+      - KAFKA_BOOTSTRAP_SERVER
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
       timeout: 10s
       retries: 10
       start_period: 20s
-
 
 networks:
   my-network:

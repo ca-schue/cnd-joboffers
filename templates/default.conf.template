@@ -1,15 +1,15 @@
 server {
     listen 80;
     location / {
-       proxy_pass ${WEB_SERVER_URL};
+       proxy_pass ${WEB_SERVER_URL}/;
     }
     location /auth/ {
-      proxy_pass ${AUTH_SERVICE_URL};
+      proxy_pass ${AUTH_SERVICE_URL}/;
     }
     location /user/ {
-      proxy_pass ${USER_SERVICE_URL};
+      proxy_pass ${USER_SERVICE_URL}/;
     }
     location /career/ {
-      proxy_pass ${CAREER_SERVICE_URL};
+      proxy_pass ${CAREER_SERVICE_URL}/;
     }
 }
