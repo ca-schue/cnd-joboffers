@@ -1,1 +1,4 @@
 /volumes/
+/k8s/volumes/kafka/
+/k8s/volumes/mongodb/
+/k8s/volumes/zookeeper/

@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mongodb
+  name: mongodb
+spec:
+  ports:
+    - port: 27017
+      protocol: TCP
+      targetPort: 27017
+  selector:
+    app: mongodb
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mongodb
+  name: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - image: mongo
+          name: mongodb
+          ports:
+            - containerPort: 27017
+          envFrom:
+            - configMapRef:
+                name: job-offers-config-map
+          volumeMounts:
+            - name: "mongo-mount"
+              mountPath: "/data/db"
+      volumes:
+        - name: "mongo-mount"
+          persistentVolumeClaim:
+            claimName: "mongodb-volume-claim"
+        - name: "mongo-init-database"
+          configMap:
+            name: init-mongodb-configmap
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongodb-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 500Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: ./volumes/mongodb
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-volume-claim
+  labels:
+    app: mongodb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+
+---
+
+apiVersion: v1
+data:
+  mongo-init.js: "let res = [\r\n    db.Clients.insertOne({\r\n        \"_id\": \"career-service\",\r\n
+    \       \"encryptedPassword\": \"$2a$10$1KgYAGEqhADDPvEzxZ7Q0OtPfPrKo8ZDTJAd1SG342YVdT9XNZQN6\",\r\n
+    \       \"audiences\": [\"user-service\", \"auth-service\", \"career-service\",
+    \"notification-service\"],\r\n        \"lastLogin\": ISODate(\"2023-10-11T12:58:47.275Z\"),\r\n
+    \       \"lastPasswordChange\": ISODate(\"2023-10-11T12:58:47.275Z\"),\r\n        \"_class\":
+    \"thi.cnd.authservice.secondary.repository.clients.model.ClientDAO\"\r\n    })\r\n\r\n]\r\n\r\nprintjson(res)\r\n\r\ndb.Clients.find()\r\n"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-11-06T20:13:43Z"
+  name: init-mongodb-configmap
+  namespace: default
+  resourceVersion: "66814"
+  uid: 8c7f6bbb-a59f-46d9-8a1a-49d2bee9f024

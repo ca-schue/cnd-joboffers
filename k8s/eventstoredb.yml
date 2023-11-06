@@ -1,0 +1,110 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: eventstoredb
+  name: eventstoredb
+spec:
+  ports:
+    - name: eventstoredb-port-1113
+      port: 1113
+      protocol: TCP
+      targetPort: 1113
+    - name: eventstoredb-port-2113
+      port: 2113
+      protocol: TCP
+      targetPort: 2113
+  selector:
+    app: eventstoredb
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: eventstoredb
+  name: eventstoredb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventstoredb
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: eventstoredb
+    spec:
+      containers:
+        - image: eventstore/eventstore:23.6.0-buster-slim
+          # For ARM-based processors
+          # image: eventstore/eventstore:23.6.0-alpha-arm64v8
+          name: eventstoredb
+          ports:
+            - containerPort: 1113
+            - containerPort: 2113
+          envFrom:
+            - configMapRef:
+                name: job-offers-config-map
+          volumeMounts:
+            - name: "eventstoredb-data"
+              mountPath: "/var/lib/eventstoredb/data"
+            - name: "eventstoredb-data"
+              mountPath: "/var/lib/eventstoredb/logs"
+      volumes:
+        - name: "eventstoredb-data"
+          persistentVolumeClaim:
+            claimName: "eventstoredb-data-claim"
+        - name: "eventstoredb-log"
+          persistentVolumeClaim:
+            claimName: "eventstoredb-log-claim"
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: eventstoredb-data-claim
+  labels:
+    app: eventstoredb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: eventstoredb-log-claim
+  labels:
+    app: eventstoredb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: eventstoredb-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 500Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: ./volumes/eventstoredb
+
