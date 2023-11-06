@@ -1,4 +1,4 @@
-rootProject.name = 'carieerservice'
+rootProject.name = 'careerservice'
 include 'application'
 include 'core'
 include 'primary'
