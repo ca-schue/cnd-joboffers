@@ -100,11 +100,15 @@ subprojects {
     }
 
     test {
-        useJUnitPlatform()
+        useJUnitPlatform {
+            exclude "**/*IT.class"
+        }
     }
 
-    tasks.withType(Test).configureEach {
-        maxParallelForks = 1
+    tasks.register('integrationTest', Test) {
+        useJUnitPlatform {
+            include "**/*IT.class"
+        }
     }
 
     bootJar {
