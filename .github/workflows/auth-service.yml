@@ -4,6 +4,7 @@ on:
   push:
     branches: main
     paths:
+      - .github/workflows/auth-service.yml
       - authservice/**
 
 defaults:
