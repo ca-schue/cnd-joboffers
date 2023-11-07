@@ -5,6 +5,8 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/authservice" />
+        <option name="gradleHome" value="D:/gradle-8.4" />
+        <option name="gradleJvm" value="21" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/authservice" />
@@ -17,6 +19,7 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/careerservice" />
+        <option name="gradleHome" value="D:/gradle-8.4" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/careerservice" />
@@ -29,6 +32,7 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/notificationservice" />
+        <option name="gradleHome" value="D:/gradle-8.4" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/notificationservice" />
@@ -41,6 +45,7 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/userservice" />
+        <option name="gradleHome" value="D:/gradle-8.4" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/userservice" />

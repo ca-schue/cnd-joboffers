@@ -17,6 +17,14 @@
         <option value="$PROJECT_DIR$/userservice/secondary/build/generate-resources/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/authservice/primary/build/generate-resources/pom.xml" />
+        <option value="$PROJECT_DIR$/userservice/primary/build/generate-resources/main/pom.xml" />
+        <option value="$PROJECT_DIR$/userservice/primary/src/main/gen/pom.xml" />
+        <option value="$PROJECT_DIR$/userservice/secondary/build/generate-resources/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
