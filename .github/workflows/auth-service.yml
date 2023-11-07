@@ -13,6 +13,7 @@ jobs:
         with:
           sparse-checkout: |
             authservice
+          path: authservice
           sparse-checkout-cone-mode: false
 
       - name: Set up JDK 21
