@@ -1,24 +1,25 @@
-name: auth-service-pipeline
+name: career-service-pipeline
 
 on:
   push:
     branches: main
     paths:
+      - .github/workflows/career-service.yml
       - careerservice/**
 
 defaults:
   run:
-    working-directory: ./authservice
+    working-directory: ./careerservice
 
 jobs:
-  build:
+  build-x-unit-test-x-docker-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout auth-service
+      - name: Checkout career-service
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
-            authservice
+            careerservice
           sparse-checkout-cone-mode: false
 
       - name: Set up JDK 21
@@ -34,8 +35,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Execute Gradle build
+      - name: Execute Gradle bootJar build
         run: ./gradlew bootJar
+
+      - name: Execute Gradle unit tests
+        run: ./gradlew test
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -46,7 +50,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./authservice
-          file: ./authservice/Dockerfile
+          context: ./careerservice
+          file: ./careerservice/Dockerfile
           push: true
-          tags: ${{secrets.DOCKER_USERNAME}}/cnd-joboffers-auth-service
+          tags: ${{secrets.DOCKER_USERNAME}}/cnd-joboffers-career-service

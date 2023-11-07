@@ -1,25 +1,25 @@
-name: auth-service-pipeline
+name: user-service-pipeline
 
 on:
   push:
     branches: main
     paths:
-      - .github/workflows/auth-service.yml
-      - authservice/**
+      - .github/workflows/user-service.yml
+      - userservice/**
 
 defaults:
   run:
-    working-directory: ./authservice
+    working-directory: ./userservice
 
 jobs:
   build-x-unit-test-x-docker-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout auth-service
+      - name: Checkout user-service
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
-            authservice
+            userservice
           sparse-checkout-cone-mode: false
 
       - name: Set up JDK 21
@@ -47,7 +47,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./authservice
-          file: ./authservice/Dockerfile
+          context: ./userservice
+          file: ./userservice/Dockerfile
           push: true
-          tags: ${{secrets.DOCKER_USERNAME}}/cnd-joboffers-auth-service
+          tags: ${{secrets.DOCKER_USERNAME}}/cnd-joboffers-user-service
