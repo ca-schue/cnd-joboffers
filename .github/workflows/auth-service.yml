@@ -32,8 +32,8 @@ jobs:
         uses: mxschmitt/action-tmate@v3
 
       - name: Execute Gradle build
-        working-directory: ./authservice/
         run: gradlew bootJar
+        working-directory: ./authservice
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
