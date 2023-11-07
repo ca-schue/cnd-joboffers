@@ -15,11 +15,11 @@ jobs:
   docker-build-x-docker-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout fontend
+      - name: Checkout frontend
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
-            fontend
+            frontend
           sparse-checkout-cone-mode: false
 
       - name: Log in to Docker Hub
