@@ -16,6 +16,9 @@ jobs:
           path: authservice
           sparse-checkout-cone-mode: false
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
