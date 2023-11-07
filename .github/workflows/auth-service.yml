@@ -50,4 +50,4 @@ jobs:
           context: ./authservice
           file: ./Dockerfile
           push: true
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/auth-service
+          tags: ${{secrets.DOCKER_USERNAME}}/cnd-joboffers-auth-service
