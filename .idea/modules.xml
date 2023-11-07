@@ -6,6 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/authservice.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/authservice.core.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/authservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/authservice.primary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/authservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/authservice.secondary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/careerservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/careerservice.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/careerservice.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/careerservice.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/careerservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/careerservice.primary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/careerservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/careerservice.secondary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/cnd-joboffers.iml" filepath="$PROJECT_DIR$/.idea/cnd-joboffers.iml" />
     </modules>
   </component>
