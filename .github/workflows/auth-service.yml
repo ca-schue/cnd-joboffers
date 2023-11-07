@@ -3,7 +3,9 @@ name: auth-service-pipeline
 on:
   push:
     branches: main
-
+    paths:
+      - authservice/**
+      
 defaults:
   run:
     working-directory: ./authservice
@@ -48,6 +50,3 @@ jobs:
           file: ./authservice/Dockerfile
           push: true
           tags: ${{secrets.DOCKER_USERNAME}}/cnd-joboffers-auth-service
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
