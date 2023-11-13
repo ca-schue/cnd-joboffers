@@ -114,7 +114,6 @@ public class AccountRepositoryAdapter implements AccountRepositoryPort {
         }
     }
 
-
     @Override
     public Account findAccountById(AccountId accountId) throws AccountNotFoundByIdException {
         AccountDAO accountDao = accountRepository
