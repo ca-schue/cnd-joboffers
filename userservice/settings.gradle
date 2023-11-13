@@ -1,6 +1,5 @@
 rootProject.name = 'userservice'
+include 'adapters'
 include 'application'
-include 'core'
-include 'primary'
-include 'secondary'
+include 'domain'
 

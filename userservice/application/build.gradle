@@ -10,9 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation project(':core')
-    implementation project(':primary')
-    implementation project(':secondary')
+    implementation project(':domain')
 }
 
 dependencies {

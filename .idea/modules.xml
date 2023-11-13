@@ -2,15 +2,22 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/authservice.iml" filepath="$PROJECT_DIR$/.idea/modules/authservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/authservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/authservice.application.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/authservice.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/authservice.core.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/authservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/authservice.primary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/authservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/authservice.secondary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/careerservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/careerservice.application.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/careerservice.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/careerservice.core.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/careerservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/careerservice.primary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/careerservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/careerservice.secondary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/cnd-joboffers.iml" filepath="$PROJECT_DIR$/.idea/cnd-joboffers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/notificationservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/notificationservice.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/notificationservice.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/notificationservice.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/notificationservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/notificationservice.primary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/notificationservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/notificationservice.secondary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/userservice.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/userservice.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/userservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/userservice.primary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/userservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/userservice.secondary.main.iml" />
     </modules>
   </component>
 </project>

@@ -1,4 +1,3 @@
-import org.gradle.api.tasks.testing.Test
 
 plugins {
     id 'java'
@@ -20,10 +19,14 @@ jar {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencies {
+    implementation project(':adapters')
+    implementation project(':domain')
     implementation project(':application')
-    implementation project(':core')
-    implementation project(':primary')
-    implementation project(':secondary')
 }
 
 repositories {
@@ -37,6 +40,7 @@ subprojects {
 
     java {
         sourceCompatibility = '21'
+        targetCompatibility = '21'
     }
 
     repositories {
