@@ -48,9 +48,9 @@ subprojects {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-validation'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        implementation 'org.springframework.boot:spring-boot-starter-jetty'
+        //implementation 'org.springframework.boot:spring-boot-starter-jetty'
         implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
-        implementation 'org.eclipse.jetty:jetty-server:11.0.14'
+        //implementation 'org.eclipse.jetty:jetty-server:11.0.14'
         implementation 'org.springframework:spring-webflux:6.0.11'
 
         implementation 'net.logstash.logback:logstash-logback-encoder:7.4'

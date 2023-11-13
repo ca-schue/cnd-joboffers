@@ -9,9 +9,9 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.5.5.Final/897f6f115930b936287bef552bf5fe28cc64717d/mapstruct-processor-1.5.5.Final.jar" />
         </processorPath>
-        <module name="userservice.secondary.main" />
-        <module name="userservice.core.main" />
-        <module name="userservice.primary.main" />
+        <module name="userservice.adapters.main" />
+        <module name="userservice.application.main" />
+        <module name="userservice.domain.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -37,9 +37,15 @@
       <module name="openapi-spring" target="17" />
       <module name="openapi-spring (1)" target="17" />
       <module name="openapi-spring (2)" target="17" />
-      <module name="userservice.application" target="21" />
-      <module name="userservice.application.main" target="21" />
-      <module name="userservice.application.test" target="21" />
+      <module name="userservice.core" target="21" />
+      <module name="userservice.core.main" target="21" />
+      <module name="userservice.core.test" target="21" />
+      <module name="userservice.primary" target="21" />
+      <module name="userservice.primary.main" target="21" />
+      <module name="userservice.primary.test" target="21" />
+      <module name="userservice.secondary" target="21" />
+      <module name="userservice.secondary.main" target="21" />
+      <module name="userservice.secondary.test" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

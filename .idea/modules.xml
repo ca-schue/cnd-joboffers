@@ -15,9 +15,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/notificationservice.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/notificationservice.core.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/notificationservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/notificationservice.primary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/notificationservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/notificationservice.secondary.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/userservice.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/userservice.core.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/userservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/userservice.primary.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/userservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/userservice.secondary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapters/userservice.adapters.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapters/userservice.adapters.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/userservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/userservice.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/userservice.domain.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/userservice.domain.main.iml" />
     </modules>
   </component>
 </project>

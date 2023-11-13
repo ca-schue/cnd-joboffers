@@ -51,7 +51,7 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        implementation 'org.springframework.boot:spring-boot-starter-jetty'
+        //implementation 'org.springframework.boot:spring-boot-starter-jetty'
         implementation 'org.springframework.boot:spring-boot-starter-security'
         implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
         implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.1.3'
@@ -64,7 +64,7 @@ subprojects {
         implementation 'com.eventstore:db-client-java:4.3.0'
 
         implementation 'org.springframework:spring-webflux:6.0.11'
-        implementation 'org.eclipse.jetty:jetty-reactive-httpclient:3.0.8'
+        //implementation 'org.eclipse.jetty:jetty-reactive-httpclient:3.0.8'
 
         // Escaping strings
         implementation 'org.apache.commons:commons-text:1.10.0'
