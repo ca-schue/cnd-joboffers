@@ -9,12 +9,22 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.5.5.Final/897f6f115930b936287bef552bf5fe28cc64717d/mapstruct-processor-1.5.5.Final.jar" />
         </processorPath>
-        <module name="userservice.adapters.main" />
-        <module name="userservice.domain.main" />
+        <module name="authservice.domain.main" />
+        <module name="authservice.adapters.main" />
+        <module name="authservice.application.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="auth-service" target="21" />
+      <module name="authservice.core" target="21" />
+      <module name="authservice.core.main" target="21" />
+      <module name="authservice.core.test" target="21" />
+      <module name="authservice.primary" target="21" />
+      <module name="authservice.primary.main" target="21" />
+      <module name="authservice.primary.test" target="21" />
+      <module name="authservice.secondary" target="21" />
+      <module name="authservice.secondary.main" target="21" />
+      <module name="authservice.secondary.test" target="21" />
       <module name="carieerservice" target="21" />
       <module name="carieerservice.application" target="21" />
       <module name="carieerservice.application.main" target="21" />

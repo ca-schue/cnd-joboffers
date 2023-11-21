@@ -10,7 +10,6 @@ import thi.cnd.authservice.domain.model.account.*;
 @Validated
 public interface AccountRepository {
 
-
     Account saveAccount(Account account) throws AccountAlreadyExistsException;
     InternalAccount saveInternalAccount(InternalAccount internalAccount) throws AccountAlreadyExistsException;
     OidcAccount saveOidcAccount(OidcAccount oidcAccount) throws AccountAlreadyExistsException;

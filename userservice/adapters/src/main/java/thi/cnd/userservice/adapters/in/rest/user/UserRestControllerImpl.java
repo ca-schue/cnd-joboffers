@@ -1,7 +1,8 @@
 package thi.cnd.userservice.adapters.in.rest.user;
 
-import thi.cnd.userservice.adapters.generated.rest.model.*;
+import thi.cnd.authservice.adapters.generated.rest.model.*;
 import thi.cnd.userservice.adapters.generated.rest.UserApi;
+import thi.cnd.userservice.adapters.generated.rest.model.*;
 import thi.cnd.userservice.adapters.in.security.authentication.AuthenticatedAccount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

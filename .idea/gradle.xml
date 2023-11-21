@@ -10,10 +10,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/authservice" />
+            <option value="$PROJECT_DIR$/authservice/adapters" />
             <option value="$PROJECT_DIR$/authservice/application" />
-            <option value="$PROJECT_DIR$/authservice/core" />
-            <option value="$PROJECT_DIR$/authservice/primary" />
-            <option value="$PROJECT_DIR$/authservice/secondary" />
+            <option value="$PROJECT_DIR$/authservice/domain" />
           </set>
         </option>
       </GradleProjectSettings>

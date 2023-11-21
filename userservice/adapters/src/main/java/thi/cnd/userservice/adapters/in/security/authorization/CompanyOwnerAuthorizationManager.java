@@ -7,11 +7,11 @@ import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 import org.springframework.stereotype.Component;
+import thi.cnd.userservice.adapters.in.security.authentication.AuthenticatedAccount;
 import thi.cnd.userservice.domain.exceptions.CompanyNotFoundByIdException;
 import thi.cnd.userservice.domain.model.company.Company;
 import thi.cnd.userservice.domain.model.company.CompanyId;
 import thi.cnd.userservice.domain.CompanyService;
-import thi.cnd.userservice.adapters.in.security.authentication.AuthenticatedAccount;
 
 import java.util.function.Supplier;
 

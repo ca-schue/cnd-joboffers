@@ -144,6 +144,8 @@ services:
     build: ./authservice/.
     networks:
       - my-network
+    ports:
+      - "8085:8080"
     expose:
       - "8080"
     depends_on:

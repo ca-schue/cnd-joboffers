@@ -1,6 +1,7 @@
 package thi.cnd.userservice.adapters.in.rest.user;
 
 import org.mapstruct.*;
+import thi.cnd.authservice.adapters.generated.rest.model.*;
 import thi.cnd.userservice.adapters.generated.rest.model.*;
 import thi.cnd.userservice.domain.model.company.CompanyId;
 import thi.cnd.userservice.domain.model.user.User;
