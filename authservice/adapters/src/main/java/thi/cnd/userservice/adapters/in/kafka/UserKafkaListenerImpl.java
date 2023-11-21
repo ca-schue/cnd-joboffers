@@ -1,4 +1,4 @@
-package thi.cnd.userservice.adapters.in.event;
+package thi.cnd.userservice.adapters.in.kafka;
 
 
 
