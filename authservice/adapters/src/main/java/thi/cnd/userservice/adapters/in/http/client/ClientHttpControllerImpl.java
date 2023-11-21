@@ -24,7 +24,7 @@ import java.util.Set;
 public class ClientHttpControllerImpl implements ClientManagementApi {
 
     private final ClientServicePort service;
-    private final ClientApiMapper mapper;
+    private final ClientDtoMapper mapper;
 
     public OAuth2TokenGenerator<Jwt> loginClient() {
         return (context) -> {

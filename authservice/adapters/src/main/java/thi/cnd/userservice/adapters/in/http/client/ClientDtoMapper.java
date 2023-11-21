@@ -16,9 +16,9 @@ import java.util.Collections;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedSourcePolicy = ReportingPolicy.ERROR,
         unmappedTargetPolicy = ReportingPolicy.ERROR)
-public interface ClientApiMapper {
+public interface ClientDtoMapper {
 
-    ClientApiMapper INSTANCE = Mappers.getMapper(ClientApiMapper.class);
+    ClientDtoMapper INSTANCE = Mappers.getMapper(ClientDtoMapper.class);
 
     default ClientCreationResponseDTO toDTO(ClientWithPlaintextPassword clientAndPassword) {
         return new ClientCreationResponseDTO()

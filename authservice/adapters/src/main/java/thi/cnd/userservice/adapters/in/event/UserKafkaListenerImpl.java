@@ -1,4 +1,4 @@
-package thi.cnd.userservice.adapters.in.event.user;
+package thi.cnd.userservice.adapters.in.event;
 
 
 
@@ -15,9 +15,9 @@ import thi.cnd.authservice.events.generated.model.UserRegisteredEventDTO;
 
 @Component
 @RequiredArgsConstructor
-public class UserEventListener {
+public class UserKafkaListenerImpl {
 
-    private final Logger logger = LoggerFactory.getLogger(UserEventListener.class);
+    private final Logger logger = LoggerFactory.getLogger(UserKafkaListenerImpl.class);
 
     private final AccountServicePort accountServicePort;
 
