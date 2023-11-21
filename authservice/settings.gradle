@@ -1,6 +1,5 @@
 rootProject.name = 'authservice'
+include 'adapters'
 include 'application'
-include 'primary'
-include 'secondary'
-include 'core'
+include 'domain'
 
