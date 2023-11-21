@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.web.SecurityFilterChain;
 import thi.cnd.authservice.domain.jwt.JwtConfig;
-import thi.cnd.userservice.adapters.in.http.client.ClientController;
+import thi.cnd.userservice.adapters.in.http.client.ClientHttpControllerImpl;
 import thi.cnd.userservice.adapters.in.security.cors.CorsConfig;
 
 @Configuration
@@ -18,7 +18,7 @@ import thi.cnd.userservice.adapters.in.security.cors.CorsConfig;
 public class ClientLoginFilterChainConfig {
 
     private final JwtConfig jwtConfig;
-    private final ClientController clientController;
+    private final ClientHttpControllerImpl clientHttpControllerImpl;
     private final CorsConfig corsConfig;
 
     /*
@@ -41,7 +41,7 @@ public class ClientLoginFilterChainConfig {
         http.securityMatcher("/oauth2/**");
         http.apply(authorizationServerConfigurer)
                 .authorizationServerSettings(providerSettings())
-                .tokenGenerator(clientController.loginClient());
+                .tokenGenerator(clientHttpControllerImpl.loginClient());
         http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
                 .anyRequest().authenticated());
         http.csrf(AbstractHttpConfigurer::disable);

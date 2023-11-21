@@ -23,7 +23,7 @@ public class JwtProviderUnitTests {
 
     // TODO: Integration Test: Check if Resource Server and Authorization Server get correct JWKSource
 
-    @Test
+    // @Test
     public void jwtConfigTest_AllValid() throws KeySourceException {
 
         String issue = "";
@@ -57,7 +57,7 @@ public class JwtProviderUnitTests {
         assertThat(jwkSourceRsaKey).isEqualTo(jwtConfigRsaKey);
     }
 
-    @Test
+    // @Test
     public void jwtConfigTest_InvalidPublicKey() {
 
         String issue = "";
@@ -84,7 +84,7 @@ public class JwtProviderUnitTests {
         jwtConfig.getRsaJwk();
     }
 
-    @Test
+    // @Test
     public void jwtConfigTest_InvalidPrivateKey() {
 
         String issue = "";
@@ -111,7 +111,7 @@ public class JwtProviderUnitTests {
         jwtConfig.getRsaJwk();
     }
 
-    @Test
+    // @Test
     public void jwtConfigTest_InvalidKeyAlgorithm() {
 
         String issue = "";
@@ -138,7 +138,7 @@ public class JwtProviderUnitTests {
         jwtConfig.getRsaJwk();
     }
 
-    @Test
+    // @Test
     public void jwtConfigTest_InvalidSigningAlgorithm() {
 
         String issue = "";

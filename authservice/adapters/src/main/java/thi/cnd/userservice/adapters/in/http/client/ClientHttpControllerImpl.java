@@ -21,7 +21,7 @@ import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
-public class ClientController implements ClientManagementApi {
+public class ClientHttpControllerImpl implements ClientManagementApi {
 
     private final ClientServicePort service;
     private final ClientApiMapper mapper;

@@ -5,7 +5,7 @@ plugins {
     id "org.openapi.generator" version "6.6.0"
 }
 
-group = 'thi.cnd.userservice'
+group = 'thi.cnd.authservice'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
