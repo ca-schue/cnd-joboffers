@@ -2,7 +2,7 @@ package thi.cnd.userservice.adapters.in.security.authentication.loginAuthenticat
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import thi.cnd.authservice.application.ports.out.repository.AccountRepositoryPort;
+import thi.cnd.authservice.application.ports.out.repository.AccountRepository;
 import thi.cnd.authservice.domain.exceptions.AccountNotFoundBySubjectException;
 import thi.cnd.authservice.domain.model.account.OidcAccount;
 
@@ -10,7 +10,7 @@ import thi.cnd.authservice.domain.model.account.OidcAccount;
 @AllArgsConstructor
 public class AuthenticatedOidcIdTokenService {
 
-    private final AccountRepositoryPort accountPort;
+    private final AccountRepository accountPort;
     public AuthenticatedOidcIdToken loadIdTokenBySubject(String subject) {
         try {
             OidcAccount oidcAccount = accountPort.findOidcAccountBySubjectAndUpdateLastLogin(subject);

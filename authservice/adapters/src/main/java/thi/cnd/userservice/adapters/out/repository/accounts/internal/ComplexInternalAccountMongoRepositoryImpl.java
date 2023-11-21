@@ -1,4 +1,4 @@
-package thi.cnd.userservice.adapters.out.repository.account;
+package thi.cnd.userservice.adapters.out.repository.accounts.internal;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 import thi.cnd.authservice.domain.model.account.AccountId;
-import thi.cnd.userservice.adapters.out.repository.account.model.InternalAccountDAO;
+import thi.cnd.userservice.adapters.out.repository.accounts.model.InternalAccountDAO;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -20,7 +20,7 @@ import java.util.Optional;
 @Repository
 @Validated
 @RequiredArgsConstructor
-public class InternalAccountMongoDBRepositoryComplexImpl implements InternalAccountMongoDBRepositoryComplex {
+public class ComplexInternalAccountMongoRepositoryImpl implements ComplexInternalAccountMongoRepository {
     private final MongoTemplate mongoTemplate;
     FindAndModifyOptions findAndModifyOptions = FindAndModifyOptions.options().returnNew(true);
 

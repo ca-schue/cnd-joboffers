@@ -10,7 +10,7 @@ import thi.cnd.authservice.domain.model.client.ClientWithPlaintextPassword;
 
 import java.util.Set;
 
-public interface ClientServicePort {
+public interface ClientService {
     @NotNull
     ClientWithPlaintextPassword createNewClient(@NotBlank String name, @NotNull Set<String> audiences, Set<String> scopes) throws ClientAlreadyExistsException;
 

@@ -1,21 +1,23 @@
-package thi.cnd.userservice.adapters.out.repository.account;
+package thi.cnd.userservice.adapters.out.repository.accounts;
 
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
-import thi.cnd.authservice.application.ports.out.repository.AccountRepositoryPort;
+import thi.cnd.authservice.application.ports.out.repository.AccountRepository;
 import thi.cnd.authservice.domain.exceptions.*;
 import thi.cnd.authservice.domain.model.account.*;
-import thi.cnd.userservice.adapters.out.repository.account.model.*;
+import thi.cnd.userservice.adapters.out.repository.accounts.internal.InternalAccountMongoRepository;
+import thi.cnd.userservice.adapters.out.repository.accounts.model.*;
+import thi.cnd.userservice.adapters.out.repository.accounts.oidc.OidcAccountMongoRepository;
 
 @Component
 @AllArgsConstructor
-public class AccountRepositoryAdapter implements AccountRepositoryPort {
+public class AllAccountsMongoRepositoryImpl implements AccountRepository {
 
-    private final AccountMongoDBRepository accountRepository;
-    private final InternalAccountMongoDBRepository internalAccountRepository;
-    private final OidcAccountMongoDBRepository oidcAccountRepository;
-    private final AccountDAOMapper mapper;
+    private final AccountMongoRepository accountRepository;
+    private final InternalAccountMongoRepository internalAccountRepository;
+    private final OidcAccountMongoRepository oidcAccountRepository;
+    private final AccountDaoMapper mapper;
 
     @Override
     public Account saveAccount(Account account) throws AccountAlreadyExistsException {

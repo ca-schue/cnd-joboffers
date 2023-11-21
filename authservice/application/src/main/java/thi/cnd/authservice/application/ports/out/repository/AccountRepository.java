@@ -8,7 +8,7 @@ import thi.cnd.authservice.domain.exceptions.*;
 import thi.cnd.authservice.domain.model.account.*;
 
 @Validated
-public interface AccountRepositoryPort {
+public interface AccountRepository {
 
 
     Account saveAccount(Account account) throws AccountAlreadyExistsException;

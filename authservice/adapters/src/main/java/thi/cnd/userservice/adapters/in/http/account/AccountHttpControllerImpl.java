@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import thi.cnd.authservice.api.generated.AccountManagementApi;
 import thi.cnd.authservice.api.generated.model.*;
-import thi.cnd.authservice.domain.AccountServicePort;
+import thi.cnd.authservice.domain.AccountService;
 import thi.cnd.authservice.domain.exceptions.*;
 import thi.cnd.authservice.domain.model.account.*;
 import thi.cnd.userservice.adapters.in.security.authentication.loginAuthentication.internalAccount.InternalAccountDetails;
@@ -20,14 +20,14 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AccountHttpControllerImpl implements AccountManagementApi {
 
-    private final AccountServicePort accountServicePort;
+    private final AccountService accountService;
     private final AccountDtoMapper accountDtoMapper;
 
     @Override
     public ResponseEntity<AccountLoginResponseDTO> registerInternalAccount(InternalAccountRegistrationRequestDTO requestDTO) {
         try {
-            InternalAccount registeredInternalAccount = accountServicePort.registerNewInternalAccount(requestDTO.getEmail(), requestDTO.getPassword());
-            AccountAccessToken accessToken = accountServicePort.mintAccountAccessToken(registeredInternalAccount);
+            InternalAccount registeredInternalAccount = accountService.registerNewInternalAccount(requestDTO.getEmail(), requestDTO.getPassword());
+            AccountAccessToken accessToken = accountService.mintAccountAccessToken(registeredInternalAccount);
             InternalAccountDTO internalAccountDTO = accountDtoMapper.toInternalDTO(registeredInternalAccount);
             return ResponseEntity.ok(accountDtoMapper.toLoginResponseDTO(internalAccountDTO, accessToken));
         } catch (AccountAlreadyExistsException ex) {
@@ -40,7 +40,7 @@ public class AccountHttpControllerImpl implements AccountManagementApi {
     @Override
     public ResponseEntity<Void> updateInternalAccountPassword(UUID accountId, InternalAccountPasswordUpdateRequestDTO internalAccountPasswordUpdateRequestDTO) {
         try {
-            accountServicePort.updateInternalAccountPassword(new AccountId(accountId), internalAccountPasswordUpdateRequestDTO.getNewPlaintextPassword());
+            accountService.updateInternalAccountPassword(new AccountId(accountId), internalAccountPasswordUpdateRequestDTO.getNewPlaintextPassword());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (WrongProviderException e1) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e1.getMessage());
@@ -55,7 +55,7 @@ public class AccountHttpControllerImpl implements AccountManagementApi {
     @Override
     public ResponseEntity<InternalAccountDTO> updateInternalAccountEmail(UUID accountId, InternalAccountEmailUpdateRequestDTO internalAccountEmailUpdateRequestDTO) {
         try {
-            InternalAccount internalAccount = accountServicePort.updateInternalAccountEmail(new AccountId(accountId), internalAccountEmailUpdateRequestDTO.getNewEmail());
+            InternalAccount internalAccount = accountService.updateInternalAccountEmail(new AccountId(accountId), internalAccountEmailUpdateRequestDTO.getNewEmail());
             return ResponseEntity.ok(accountDtoMapper.toInternalDTO(internalAccount));
         } catch (EmailAlreadyInUserException | WrongProviderException e1) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e1.getMessage());
@@ -68,7 +68,7 @@ public class AccountHttpControllerImpl implements AccountManagementApi {
     public ResponseEntity<AccountLoginResponseDTO> loginInternalAccount() {
         InternalAccountDetails accountDetails = (InternalAccountDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         InternalAccount internalAccount = accountDetails.internalAccount();
-        AccountAccessToken accessToken = accountServicePort.mintAccountAccessToken(internalAccount);
+        AccountAccessToken accessToken = accountService.mintAccountAccessToken(internalAccount);
         InternalAccountDTO internalAccountDTO = accountDtoMapper.toInternalDTO(internalAccount);
         return ResponseEntity.ok(accountDtoMapper.toLoginResponseDTO(internalAccountDTO, accessToken));
     }
@@ -79,12 +79,12 @@ public class AccountHttpControllerImpl implements AccountManagementApi {
         OidcAccount oidcAccount = (OidcAccount) authenticatedOidcIdToken.getPrincipal();
         if (oidcAccount == null) { // No account exists yet
             try {
-                oidcAccount = accountServicePort.registerNewOidcAccount(authenticatedOidcIdToken.getSubject());
+                oidcAccount = accountService.registerNewOidcAccount(authenticatedOidcIdToken.getSubject());
             } catch (AccountAlreadyExistsException e) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
             }
         }
-        AccountAccessToken accessToken = accountServicePort.mintAccountAccessToken(oidcAccount);
+        AccountAccessToken accessToken = accountService.mintAccountAccessToken(oidcAccount);
         OidcAccountDTO oidcAccountDTO = accountDtoMapper.toOidcDTO(oidcAccount);
         return ResponseEntity.ok(accountDtoMapper.toLoginResponseDTO(oidcAccountDTO, accessToken));
     }
@@ -92,7 +92,7 @@ public class AccountHttpControllerImpl implements AccountManagementApi {
     @Override
     public ResponseEntity<Void> deleteAccount(UUID accountId) {
         try {
-            accountServicePort.deleteAccount(new AccountId(accountId));
+            accountService.deleteAccount(new AccountId(accountId));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (AccountNotFoundByIdException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import thi.cnd.authservice.api.generated.ClientManagementApi;
 import thi.cnd.authservice.api.generated.model.ClientCreationRequestDTO;
 import thi.cnd.authservice.api.generated.model.ClientCreationResponseDTO;
-import thi.cnd.authservice.domain.ClientServicePort;
+import thi.cnd.authservice.domain.ClientService;
 import thi.cnd.authservice.domain.exceptions.ClientAlreadyExistsException;
 import thi.cnd.authservice.domain.exceptions.ClientNotFoundByNameException;
 import thi.cnd.authservice.domain.model.client.*;
@@ -23,7 +23,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class ClientHttpControllerImpl implements ClientManagementApi {
 
-    private final ClientServicePort service;
+    private final ClientService service;
     private final ClientDtoMapper mapper;
 
     public OAuth2TokenGenerator<Jwt> loginClient() {

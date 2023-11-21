@@ -1,14 +1,14 @@
-package thi.cnd.userservice.adapters.out.repository.account;
+package thi.cnd.userservice.adapters.out.repository.accounts.internal;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import thi.cnd.authservice.domain.model.account.AccountId;
-import thi.cnd.userservice.adapters.out.repository.account.model.InternalAccountDAO;
+import thi.cnd.userservice.adapters.out.repository.accounts.model.InternalAccountDAO;
 
 import java.util.Optional;
 
-public interface InternalAccountMongoDBRepositoryComplex {
+public interface ComplexInternalAccountMongoRepository {
 
     public Optional<InternalAccountDAO> findByEmailAndUpdateLastLogin(@NotBlank String email);
 

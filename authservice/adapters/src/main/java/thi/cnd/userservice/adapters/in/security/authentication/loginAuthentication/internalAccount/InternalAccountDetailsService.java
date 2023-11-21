@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import thi.cnd.authservice.application.ports.out.repository.AccountRepositoryPort;
+import thi.cnd.authservice.application.ports.out.repository.AccountRepository;
 import thi.cnd.authservice.domain.exceptions.AccountNotFoundByEmailException;
 import thi.cnd.authservice.domain.model.account.InternalAccount;
 
@@ -13,7 +13,7 @@ import thi.cnd.authservice.domain.model.account.InternalAccount;
 @AllArgsConstructor
 public class InternalAccountDetailsService implements UserDetailsService {
 
-    private final AccountRepositoryPort accountPort;
+    private final AccountRepository accountPort;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

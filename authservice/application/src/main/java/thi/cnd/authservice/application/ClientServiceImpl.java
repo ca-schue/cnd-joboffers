@@ -3,13 +3,12 @@ package thi.cnd.authservice.application;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import thi.cnd.authservice.domain.ClientServicePort;
+import thi.cnd.authservice.domain.ClientService;
 import thi.cnd.authservice.domain.jwt.JwtProvider;
 import thi.cnd.authservice.domain.password.PasswordEncoder;
 import thi.cnd.authservice.domain.password.PasswordGenerator;
 import thi.cnd.authservice.domain.exceptions.*;
 import thi.cnd.authservice.domain.model.client.*;
-import thi.cnd.authservice.domain.model.account.*;
 import thi.cnd.authservice.application.ports.out.repository.ClientRepositoryPort;
 
 import java.time.Instant;
@@ -17,7 +16,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class ClientService implements ClientServicePort {
+public class ClientServiceImpl implements ClientService {
 
     private final ClientRepositoryPort port;
     private final PasswordEncoder encoder;

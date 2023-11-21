@@ -6,7 +6,7 @@ import thi.cnd.authservice.domain.exceptions.*;
 import thi.cnd.authservice.domain.model.account.*;
 
 @Validated
-public interface AccountServicePort {
+public interface AccountService {
 
     public AccountAccessToken mintAccountAccessToken(Account account);
 

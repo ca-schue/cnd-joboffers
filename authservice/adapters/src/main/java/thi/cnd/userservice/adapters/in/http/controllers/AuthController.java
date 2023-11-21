@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import thi.cnd.authservice.api.generated.AuthEndpointsApi;
 import thi.cnd.authservice.api.generated.model.AccountDTO;
 import thi.cnd.authservice.api.generated.model.ClientDTO;
-import thi.cnd.authservice.application.ports.out.repository.AccountRepositoryPort;
+import thi.cnd.authservice.application.ports.out.repository.AccountRepository;
 import thi.cnd.authservice.application.ports.out.repository.ClientRepositoryPort;
 import thi.cnd.authservice.domain.exceptions.*;
 import thi.cnd.authservice.domain.model.account.*;
@@ -24,7 +24,7 @@ import thi.cnd.userservice.adapters.in.security.authentication.accessTokenAuthen
 public class AuthController implements AuthEndpointsApi {
 
     private final ClientRepositoryPort clientRepositoryPort;
-    private final AccountRepositoryPort accountRepositoryPort;
+    private final AccountRepository accountRepository;
     private final AccountDtoMapper accountDtoMapper;
 
 
@@ -34,7 +34,7 @@ public class AuthController implements AuthEndpointsApi {
         if (auth instanceof AuthenticatedAccount authAcc) {
             try {
                 AccountId accountId = authAcc.getAccountId();
-                Account account = accountRepositoryPort.findAccountById(accountId);
+                Account account = accountRepository.findAccountById(accountId);
                 switch (account) {
                     case InternalAccount ia -> { return ResponseEntity.ok(accountDtoMapper.toInternalDTO(ia)); }
                     case OidcAccount oa -> { return ResponseEntity.ok(accountDtoMapper.toOidcDTO(oa)); }

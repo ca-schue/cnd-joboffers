@@ -1,4 +1,4 @@
-package thi.cnd.userservice.adapters.out.repository.account.model;
+package thi.cnd.userservice.adapters.out.repository.accounts.model;
 
 
 import org.mapstruct.Mapper;
@@ -9,7 +9,7 @@ import thi.cnd.authservice.domain.model.account.*;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedSourcePolicy = ReportingPolicy.ERROR,
         unmappedTargetPolicy = ReportingPolicy.ERROR)
-public interface AccountDAOMapper {
+public interface AccountDaoMapper {
 
     default Account toAccount(AccountDAO accountDao) {
         return switch (AccountProvider.valueOf(accountDao.getProvider())) {

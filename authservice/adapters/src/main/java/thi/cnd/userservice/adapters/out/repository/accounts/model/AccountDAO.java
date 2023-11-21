@@ -1,4 +1,4 @@
-package thi.cnd.userservice.adapters.out.repository.account.model;
+package thi.cnd.userservice.adapters.out.repository.accounts.model;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
