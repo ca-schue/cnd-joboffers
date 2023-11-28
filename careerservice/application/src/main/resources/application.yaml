@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    default: local
   data:
     mongodb:
       uri: ${CAREER_SERVICE_MONGODB_URI:mongodb://localhost:27017/career-service?authSource=admin&readPreference=primary&directConnection=true&ssl=false}
@@ -16,8 +14,7 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          jwk-set-uri: ${AUTH_SERVICE_URL:http://localhost:8081}/oauth2/jwks
-
+          jwk-set-uri: ${AUTH_SERVICE_URL:http://localhost:8081}/oauth2/jwks}
 
 event:
   eventTypePrefix: career-service
@@ -35,7 +32,6 @@ joboffer:
 
 jobapplication:
   maxJobApplicationPerNonSubscribedUser: 50
-
 
 management:
   info:
@@ -60,31 +56,8 @@ security:
   csrfActive: true
   corsActive: true
 
----
-spring:
-  config:
-    activate:
-      on-profile: local
-
 server:
   port: 8083
-
-security:
-  csrfActive: false
-  corsActive: false
-
----
-spring:
-  config:
-    activate:
-      on-profile: docker
-
-server:
-  port: 8080
-
-security:
-  csrfActive: false
-  corsActive: false
 
 ---
 spring:
