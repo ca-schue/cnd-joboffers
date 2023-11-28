@@ -45,10 +45,10 @@ services:
       - MONGO_INITDB_DATABASE
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
-      interval: 10s
+      interval: 20s
       timeout: 10s
       retries: 10
-      start_period: 20s
+      start_period: 40s
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -64,10 +64,10 @@ services:
       - ./volumes/zookeeper/log:/var/lib/zookeeper/log
     healthcheck:
       test: nc -z localhost 2181 || exit -1
-      interval: 10s
+      interval: 20s
       timeout: 10s
       retries: 10
-      start_period: 20s
+      start_period: 40s
 
   kafka-event:
     image: confluentinc/cp-kafka:latest
@@ -88,10 +88,10 @@ services:
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
     healthcheck:
       test: nc -z localhost 9092 || exit -1
-      interval: 5s
+      interval: 20s
       timeout: 10s
       retries: 10
-      start_period: 20s
+      start_period: 40s
 
   eventstoredb:
     image: eventstore/eventstore:23.6.0-buster-slim
