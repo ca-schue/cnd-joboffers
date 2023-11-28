@@ -44,7 +44,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD
       - MONGO_INITDB_DATABASE
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
       interval: 20s
       timeout: 10s
       retries: 10
