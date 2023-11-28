@@ -168,10 +168,10 @@ services:
 
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 10s
       retries: 10
-      start_period: 20s
+      start_period: 40s
 
   user-service:
     build: ./userservice/.
@@ -192,10 +192,10 @@ services:
       - USER_SERVICE_MONGODB_URI
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 10s
       retries: 10
-      start_period: 20s
+      start_period: 40s
 
   career-service:
     build: ./careerservice/.
@@ -224,10 +224,10 @@ services:
       - USER_SERVICE_URL
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 10s
       retries: 10
-      start_period: 20s
+      start_period: 40s
 
 
   notification-service:
@@ -246,10 +246,10 @@ services:
       - KAFKA_BOOTSTRAP_SERVER
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
+      interval: 20s
       timeout: 10s
       retries: 10
-      start_period: 20s
+      start_period: 40s
 
 networks:
   my-network:
