@@ -31,7 +31,7 @@ services:
       - CAREER_NGINX_ENDPOINT
 
   mongodb:
-    image: mongo
+    image: mongo:4.4.6
     networks:
       - my-network
     expose:
