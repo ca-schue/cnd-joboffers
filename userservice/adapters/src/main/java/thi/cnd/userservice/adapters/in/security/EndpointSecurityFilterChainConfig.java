@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import thi.cnd.userservice.adapters.in.security.authentication.AccessTokenAuthenticationConverter;
-import thi.cnd.authservice.adapters.in.security.authorization.*;
 import thi.cnd.userservice.adapters.in.security.authorization.*;
 import thi.cnd.userservice.adapters.in.security.cors.CorsConfig;
 
