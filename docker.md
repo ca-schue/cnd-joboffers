@@ -24,6 +24,7 @@
   - Build container with Dockerfile: `docker build -t (TODO...)`
 
 ## Docker Container Configuration
+- Problem: [Docker run cannot substitute variables set in .env, only docker compose can](https://stackoverflow.com/questions/63714506/variable-substitution-in-env-file-for-docker-run-env-file)
 - ### Default configuration (no changes required)
 - ### Semi-Custom configuration:
     - Change default values of predefined environment variables in `.env` file as documented for each service\
