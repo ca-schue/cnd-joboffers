@@ -4,7 +4,7 @@ services:
     image: nginx:latest
     container_name: nginx_container
     ports:
-      - "${NGINX_PORT}:${NGINX_PORT}"
+      - "${NGINX_PORT}:80"
     volumes:
       - ./templates:/etc/nginx/templates
     networks:
@@ -105,10 +105,9 @@ services:
     build: ./frontend/.
     networks:
       - service-network
-    ports:
-      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    expose:
+      - "${FRONTEND_PORT}:80"
     environment:
-      - FRONTEND_PORT
       - EXTERNAL_AUTH_SERVICE_URL=http://localhost/auth
       - EXTERNAL_USER_SERVICE_URL=http://localhost/user
       - EXTERNAL_CAREER_SERVICE_URL=http://localhost/career
@@ -132,7 +131,10 @@ services:
           condition: service_healthy
       kafka-event:
         condition: service_healthy
+    expose:
+      - "${AUTH_SERVICE_PORT}:${AUTH_SERVICE_PORT}"
     environment:
+      - AUTH_SERVICE_PORT
       - AUTH_SERVICE_MONGODB_URI
       - KAFKA_BOOTSTRAP_SERVER
       - INTERNAL_JWT_ISSUER_URL
@@ -162,7 +164,10 @@ services:
         condition: service_healthy
       auth-service:
           condition: service_healthy
+    expose:
+      - "${USER_SERVICE_PORT}:${USER_SERVICE_PORT}"
     environment:
+      - USER_SERVICE_PORT
       - INTERNAL_JWT_ISSUER_URL
       - KAFKA_BOOTSTRAP_SERVER
       - USER_SERVICE_MONGODB_URI
@@ -188,7 +193,10 @@ services:
         condition: service_healthy
       user-service:
         condition: service_healthy
+    expose:
+      - "${CAREER_SERVICE_PORT}:${CAREER_SERVICE_PORT}"
     environment:
+      - CAREER_SERVICE_PORT
       - KAFKA_BOOTSTRAP_SERVER
       - EVENT_STORE_URI
       - CAREER_SERVICE_MONGODB_URI
