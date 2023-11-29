@@ -55,6 +55,7 @@
            --rm \
            -e MONGO_INITDB_ROOT_USERNAME=root \
            -e MONGO_INITDB_ROOT_PASSWORD=root \
+           -e MONGO_INITDB_DATABASE: root-db
            --name mongodb \
            --volume ./volumes/mongo-data:/data/db \
            --volume ./authservice/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js \
