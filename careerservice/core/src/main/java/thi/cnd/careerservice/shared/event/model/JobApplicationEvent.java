@@ -3,15 +3,18 @@ package thi.cnd.careerservice.shared.event.model;
 import org.springframework.validation.annotation.Validated;
 
 import thi.cnd.careerservice.company.model.CompanyId;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationId;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationStatus;
-import thi.cnd.careerservice.joboffer.model.JobOfferId;
-import thi.cnd.careerservice.joboffer.view.model.JobOfferView;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationId;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationStatus;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
+import thi.cnd.careerservice.joboffer.query.domain.model.JobOfferView;
 import thi.cnd.careerservice.shared.event.RegisteredDomainEvent;
 import thi.cnd.careerservice.user.model.UserId;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+/**
+ * Contains all internal job application domain events
+ */
 @Validated
 public sealed interface JobApplicationEvent extends DomainEvent {
 

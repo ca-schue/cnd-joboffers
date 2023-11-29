@@ -11,15 +11,15 @@ import thi.cnd.careerservice.api.generated.model.JobApplicationCreationRequestDT
 import thi.cnd.careerservice.api.generated.model.JobApplicationCreationResponseDTO;
 import thi.cnd.careerservice.api.generated.model.JobApplicationUpdateRequestDTO;
 import thi.cnd.careerservice.shared.model.ETag;
-import thi.cnd.careerservice.jobapplication.command.JobApplicationCommand;
-import thi.cnd.careerservice.jobapplication.command.JobApplicationCommand.UpdateJobApplicationAttributes;
-import thi.cnd.careerservice.jobapplication.command.JobApplicationCommand.UpdateJobApplicationStatus;
-import thi.cnd.careerservice.jobapplication.command.JobApplicationCommandHandler;
-import thi.cnd.careerservice.jobapplication.model.JobApplication;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationId;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationStatus;
+import thi.cnd.careerservice.jobapplication.command.application.model.JobApplicationCommand;
+import thi.cnd.careerservice.jobapplication.command.application.model.JobApplicationCommand.UpdateJobApplicationAttributes;
+import thi.cnd.careerservice.jobapplication.command.application.model.JobApplicationCommand.UpdateJobApplicationStatus;
+import thi.cnd.careerservice.jobapplication.command.port.JobApplicationCommandHandler;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplication;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationId;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationStatus;
 import thi.cnd.careerservice.user.model.UserId;
-import thi.cnd.careerservice.joboffer.model.JobOfferId;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
 import lombok.RequiredArgsConstructor;
 
 @RestController

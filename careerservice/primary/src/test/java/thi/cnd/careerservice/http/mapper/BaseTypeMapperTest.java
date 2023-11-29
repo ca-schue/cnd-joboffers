@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-import thi.cnd.careerservice.http.SharedMapper;
+import thi.cnd.careerservice.http.CommonDTOMapper;
 
 class BaseTypeMapperTest {
 
@@ -19,7 +19,7 @@ class BaseTypeMapperTest {
                 100
         );
 
-        var output = SharedMapper.toPaginationDTO(input);
+        var output = CommonDTOMapper.toPaginationDTO(input);
 
         return;
     }

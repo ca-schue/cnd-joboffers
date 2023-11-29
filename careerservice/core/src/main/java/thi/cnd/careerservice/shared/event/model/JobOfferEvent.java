@@ -2,13 +2,19 @@ package thi.cnd.careerservice.shared.event.model;
 
 import java.util.List;
 
+import org.springframework.validation.annotation.Validated;
+
 import thi.cnd.careerservice.company.model.CompanyId;
 import thi.cnd.careerservice.shared.event.RegisteredDomainEvent;
 import thi.cnd.careerservice.user.model.UserId;
-import thi.cnd.careerservice.joboffer.model.JobOfferId;
-import thi.cnd.careerservice.joboffer.model.JobOfferStatus;
-import thi.cnd.careerservice.joboffer.model.SalaryRange;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferStatus;
+import thi.cnd.careerservice.joboffer.command.domain.model.SalaryRange;
 
+/**
+ * Contains all internal job offer domain events
+ */
+@Validated
 public sealed interface JobOfferEvent extends DomainEvent {
 
     @RegisteredDomainEvent(name = "JobOfferCreated")

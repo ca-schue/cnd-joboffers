@@ -6,14 +6,14 @@ import org.mapstruct.ReportingPolicy;
 
 import thi.cnd.careerservice.api.generated.model.JobApplicationCreationRequestDTO;
 import thi.cnd.careerservice.exception.InvalidInputReceivedException;
-import thi.cnd.careerservice.http.SharedMapper;
-import thi.cnd.careerservice.jobapplication.command.JobApplicationCommand.CreateJobApplication;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationStatus;
+import thi.cnd.careerservice.http.CommonDTOMapper;
+import thi.cnd.careerservice.jobapplication.command.application.model.JobApplicationCommand.CreateJobApplication;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationStatus;
 import thi.cnd.careerservice.user.model.UserId;
-import thi.cnd.careerservice.joboffer.model.JobOfferId;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
 
 @Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING, uses = SharedMapper.class,
+    componentModel = MappingConstants.ComponentModel.SPRING, uses = CommonDTOMapper.class,
     unmappedTargetPolicy = ReportingPolicy.ERROR, unmappedSourcePolicy = ReportingPolicy.ERROR
 )
 public interface JobApplicationCommandApiMapper {

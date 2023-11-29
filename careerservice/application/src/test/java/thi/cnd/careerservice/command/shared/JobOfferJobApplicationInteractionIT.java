@@ -6,18 +6,18 @@ import org.junit.jupiter.api.Test;
 
 import thi.cnd.careerservice.AbstractIntegrationTest;
 import thi.cnd.careerservice.MockQueryPorts;
-import thi.cnd.careerservice.joboffer.model.JobOfferStatus;
-import thi.cnd.careerservice.joboffer.model.JobOfferTestProvider;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferStatus;
+import thi.cnd.careerservice.joboffer.query.model.JobOfferTestProvider;
 import thi.cnd.careerservice.QueryMockConfig;
 import thi.cnd.careerservice.shared.event.model.JobApplicationEvent.JobApplicationDeleted;
 import thi.cnd.careerservice.shared.event.model.JobApplicationEvent.JobApplicationStatusChanged;
 import thi.cnd.careerservice.shared.event.model.JobApplicationEvent.JobApplicationViewOnlyEvent.JobApplicationJobOfferUpdated;
 
-import static thi.cnd.careerservice.jobapplication.model.JobApplicationStatus.ACCEPTED;
-import static thi.cnd.careerservice.jobapplication.model.JobApplicationStatus.DELETED;
-import static thi.cnd.careerservice.jobapplication.model.JobApplicationStatus.DENIED;
-import static thi.cnd.careerservice.jobapplication.model.JobApplicationStatus.DRAFT;
-import static thi.cnd.careerservice.jobapplication.model.JobApplicationStatus.OPEN;
+import static thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationStatus.ACCEPTED;
+import static thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationStatus.DELETED;
+import static thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationStatus.DENIED;
+import static thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationStatus.DRAFT;
+import static thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationStatus.OPEN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;

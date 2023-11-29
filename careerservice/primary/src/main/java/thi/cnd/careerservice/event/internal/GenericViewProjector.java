@@ -6,7 +6,7 @@ import org.springframework.context.SmartLifecycle;
 import com.eventstore.dbclient.EventStoreDBPersistentSubscriptionsClient;
 
 import thi.cnd.careerservice.shared.view.ViewProjector;
-import thi.cnd.careerservice.event.config.EventStoreSerializer;
+import thi.cnd.careerservice.shared.event.config.EventStoreSerializer;
 
 /**
  * Projects internal domain events to the query side of the CQRS application in order to represent the current state of the domain objects.

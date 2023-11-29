@@ -11,11 +11,11 @@ import org.springframework.data.domain.Page;
 import thi.cnd.careerservice.api.generated.model.JobOfferResponseDTO;
 import thi.cnd.careerservice.api.generated.model.JobOffersResponseDTO;
 import thi.cnd.careerservice.api.generated.model.PaginatedJobOffersResponseDTO;
-import thi.cnd.careerservice.joboffer.view.model.JobOfferView;
-import thi.cnd.careerservice.http.SharedMapper;
+import thi.cnd.careerservice.joboffer.query.domain.model.JobOfferView;
+import thi.cnd.careerservice.http.CommonDTOMapper;
 
 @Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING, uses = SharedMapper.class,
+    componentModel = MappingConstants.ComponentModel.SPRING, uses = CommonDTOMapper.class,
     unmappedTargetPolicy = ReportingPolicy.ERROR, unmappedSourcePolicy = ReportingPolicy.ERROR
 )
 public interface JobOfferQueryApiMapper {
@@ -26,7 +26,7 @@ public interface JobOfferQueryApiMapper {
 
     default PaginatedJobOffersResponseDTO toDTO(Page<JobOfferView> jobOfferView) {
         return new PaginatedJobOffersResponseDTO(
-            SharedMapper.toPaginationDTO(jobOfferView),
+            CommonDTOMapper.toPaginationDTO(jobOfferView),
             jobOfferView.getContent().stream().map(this::toDTO).toList()
         );
     }

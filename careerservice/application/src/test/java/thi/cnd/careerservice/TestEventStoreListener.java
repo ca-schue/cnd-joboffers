@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.eventstore.dbclient.EventStoreDBPersistentSubscriptionsClient;
 
-import thi.cnd.careerservice.event.config.EventStoreSerializer;
+import thi.cnd.careerservice.shared.event.config.EventStoreSerializer;
 import thi.cnd.careerservice.event.internal.EventStoreListener;
 import thi.cnd.careerservice.shared.event.InternalDomainEventListener;
 import thi.cnd.careerservice.shared.event.model.DomainEvent;

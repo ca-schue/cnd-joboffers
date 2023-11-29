@@ -10,7 +10,6 @@ import {userProfileCreated} from "../state/reducer/AccountSlice";
 function MyProfileView() {
 
     const userState = useAppSelector(state => state.user)
-    const logout = useLogout()
 
     useEffect(() => {
         clearErrorsAndFeedback()

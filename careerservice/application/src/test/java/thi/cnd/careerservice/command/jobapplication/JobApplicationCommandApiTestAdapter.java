@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
-import thi.cnd.careerservice.jobapplication.event.JobApplicationEventStore;
-import thi.cnd.careerservice.jobapplication.model.JobApplication;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationId;
+import thi.cnd.careerservice.jobapplication.command.port.JobApplicationEventStore;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplication;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationId;
 import thi.cnd.careerservice.EndpointMockConfig;
 import thi.cnd.careerservice.QueryMockConfig;
 import thi.cnd.careerservice.shared.DataWithVersion;

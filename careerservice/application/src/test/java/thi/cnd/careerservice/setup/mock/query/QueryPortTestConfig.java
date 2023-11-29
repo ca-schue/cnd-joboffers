@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import thi.cnd.careerservice.jobapplication.view.query.JobApplicationQueryPort;
-import thi.cnd.careerservice.joboffer.view.query.JobOfferQueryPort;
+import thi.cnd.careerservice.jobapplication.query.port.JobApplicationQueryPort;
+import thi.cnd.careerservice.joboffer.query.port.JobOfferQueryPort;
 
 import static org.mockito.Mockito.mock;
 

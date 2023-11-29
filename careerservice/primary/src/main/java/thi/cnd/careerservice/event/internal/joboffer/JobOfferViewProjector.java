@@ -13,10 +13,10 @@ import thi.cnd.careerservice.shared.event.model.JobOfferEvent.JobOfferDeleted;
 import thi.cnd.careerservice.shared.event.model.JobOfferEvent.JobOfferStatusUpdated;
 import thi.cnd.careerservice.shared.event.model.JobOfferEvent.JobOfferTitleChanged;
 import thi.cnd.careerservice.shared.event.model.RecordedDomainEventWithMetadata;
-import thi.cnd.careerservice.joboffer.view.update.UpdateJobOfferViewService;
+import thi.cnd.careerservice.joboffer.query.application.service.UpdateJobOfferViewService;
 import thi.cnd.careerservice.shared.view.ViewProjectorName;
 import thi.cnd.careerservice.event.internal.GenericViewProjector;
-import thi.cnd.careerservice.event.config.EventStoreSerializer;
+import thi.cnd.careerservice.shared.event.config.EventStoreSerializer;
 
 @Component
 public class JobOfferViewProjector extends GenericViewProjector {

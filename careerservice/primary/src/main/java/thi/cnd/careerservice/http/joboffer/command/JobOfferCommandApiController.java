@@ -11,12 +11,12 @@ import thi.cnd.careerservice.api.generated.model.JobOfferCreationRequestDTO;
 import thi.cnd.careerservice.api.generated.model.JobOfferCreationResponseDTO;
 import thi.cnd.careerservice.api.generated.model.JobOfferUpdateRequestDTO;
 import thi.cnd.careerservice.shared.model.ETag;
-import thi.cnd.careerservice.joboffer.command.JobOfferCommand.DeleteJobOffer;
-import thi.cnd.careerservice.joboffer.command.JobOfferCommand.UpdateJobOfferStatus;
-import thi.cnd.careerservice.joboffer.command.JobOfferCommandHandler;
-import thi.cnd.careerservice.joboffer.model.JobOffer;
-import thi.cnd.careerservice.joboffer.model.JobOfferId;
-import thi.cnd.careerservice.joboffer.model.JobOfferStatus;
+import thi.cnd.careerservice.joboffer.command.application.model.JobOfferCommand.DeleteJobOffer;
+import thi.cnd.careerservice.joboffer.command.application.model.JobOfferCommand.UpdateJobOfferStatus;
+import thi.cnd.careerservice.joboffer.command.port.JobOfferCommandHandler;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOffer;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferStatus;
 import lombok.AllArgsConstructor;
 
 @RestController
