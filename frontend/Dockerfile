@@ -8,4 +8,4 @@ RUN apk --no-cache add curl
 RUN npm install
 RUN npm install -g http-server
 
-ENTRYPOINT ["sh", "-c", "npm run build && cd build && http-server -p ${FRONTEND_PORT}"]
+ENTRYPOINT ["sh", "-c", "npm run build && cd build && http-server"]
