@@ -57,7 +57,7 @@ security:
   corsActive: true
 
 server:
-  port: 8083
+  port: ${CAREER_SERVICE_PORT:8083}
 
 ---
 spring:

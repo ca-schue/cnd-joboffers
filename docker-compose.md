@@ -27,7 +27,7 @@
 - ### Semi-Custom configuration:
     - Change default values of predefined environment variables in `.env` file as documented for each service\
       (Frontend, Auth, User, Career, Notification)
-    - Pass this file to each service container at execution time: `docker compose up --env-file <env-file-name>.env`
+    - Pass this file to the docker compose command (see next section): `docker compose up --env-file <env-file-name>.env`
 - ### Fully-Custom configuration: (not recommended)
   - Configure frontend: Change values of `LocalConfig.tsx` before executing docker compose  
   - Configure Spring Services at build time:
@@ -36,10 +36,14 @@
     - Change the docker compose file by setting spring flags in the `command:` attributes of the services. Refer to section ["Docker Configuration"](docker.md). 
 
 ## Docker Compose Execution
-- Workdir: `cnd-joboffers/` (root)
-- Command:
-  - Default configuration: `docker compose up`
-  - Custom configuration: `docker compose up --env-file <env-file-name>.env`
+1. Create docker volumes:
+   - Workdir: `cnd-joboffers/` (root)
+   - Command: `./mkdirs.sh`
+3. Execute docker compose
+   - Workdir: `cnd-joboffers/` (root)
+   - Command:
+     - Default configuration: `docker compose up`
+     - Custom configuration: `docker compose up --env-file <env-file-name>.env`
 
 ## Docker Compose Use Application
 - Default Configuration: Enter in Browser `http://localhost/`

@@ -40,9 +40,48 @@
 
 ## Docker Execution
 1. Create docker network (TODO!)
+    ```
+    docker network create services-seperated
+    ```
+
 2. Create docker volumes (TODO!)
-3. Start auxiliary infrastructure containers (TODO!)
-   .... Zookeeper, Kafka, MongoDB, EventDB (Ensure that the ports match the service configuration)
+3. Start auxiliary infrastructure containers
+   - Mongo DB:
+       ```
+       source docker.env
+    
+       docker run \
+           --rm \
+           --env-file ./docker.env \
+           --name mongodb \
+           --volume ./volumes/mongo-data:/data/db \
+           --volume ./authservice/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js \
+           --network services-seperated \
+           (-p 27017:$MONGO_DB_PORT \)
+           mongo:4.4.6
+       ```
+   - Zookeeper:
+       ```
+       docker run \
+           --rm \
+           --env-file ./docker.env \
+           --name zookeeper \
+           --volume ./volumes/zookeeper/data:/var/lib/zookeeper/data \
+           --volume ./volumes/zookeeper/log:/var/lib/zookeeper/log \
+           --network services-seperated \
+           confluentinc/cp-zookeeper:latest
+       ```
+   - Kafka:  
+       ```
+       docker run \
+           --rm \
+           --env-file ./docker.env \
+           --name kafka-event \
+           --volume ./volumes/kafka-broker/data:/var/lib/kafka/data \
+           --network services-seperated \
+           confluentinc/cp-kafka:latest
+       ```
+      .... Zookeeper, Kafka, MongoDB, EventDB (Ensure that the ports match the service configuration)
 4. Start service containers (TODO!)
    - Order:
        1. Auth-Service

@@ -1,16 +1,15 @@
 server {
-    listen 80;
-    server_name ${NGINX_URL}/;
+    server_name localhost;
     location / {
        proxy_pass ${FRONTEND_URL}/;
     }
-    location ${AUTH_NGINX_ENDPOINT}/ {
+    location /auth/ {
       proxy_pass ${AUTH_SERVICE_URL}/;
     }
-    location ${USER_NGINX_ENDPOINT}/ {
+    location /user/ {
       proxy_pass ${USER_SERVICE_URL}/;
     }
-    location ${CAREER_NGINX_ENDPOINT}/ {
+    location /career/ {
       proxy_pass ${CAREER_SERVICE_URL}/;
     }
 }

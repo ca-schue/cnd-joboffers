@@ -1,15 +1,14 @@
 version: '3.8'
 services:
-
   nginx:
     image: nginx:latest
     container_name: nginx_container
     ports:
-      - "80:80"
+      - "${NGINX_PORT}:${NGINX_PORT}"
     volumes:
       - ./templates:/etc/nginx/templates
     networks:
-      - my-network
+      - service-network
     depends_on:
       auth-service:
         condition: service_healthy
@@ -24,25 +23,19 @@ services:
     environment:
       - FRONTEND_URL
       - AUTH_SERVICE_URL
-      - AUTH_NGINX_ENDPOINT
       - USER_SERVICE_URL
-      - USER_NGINX_ENDPOINT
       - CAREER_SERVICE_URL
-      - CAREER_NGINX_ENDPOINT
 
   mongodb:
     image: mongo:4.4.6
     networks:
-      - my-network
-    expose:
-      - "27017"
+      - service-network
     volumes:
       - ./volumes/mongo-data:/data/db
       - ./authservice/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
     environment:
       - MONGO_INITDB_ROOT_USERNAME
       - MONGO_INITDB_ROOT_PASSWORD
-      - MONGO_INITDB_DATABASE
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
       interval: 20s
@@ -56,9 +49,7 @@ services:
       - ZOOKEEPER_CLIENT_PORT
       - ZOOKEEPER_TICK_TIME
     networks:
-      - my-network
-    expose:
-      - '2181'
+      - service-network
     volumes:
       - ./volumes/zookeeper/data:/var/lib/zookeeper/data
       - ./volumes/zookeeper/log:/var/lib/zookeeper/log
@@ -75,10 +66,8 @@ services:
       zookeeper:
         condition: service_healthy
     networks:
-      - my-network
+      - service-network
     hostname: kafka-event
-    expose:
-      - "9092"
     volumes:
       - ./volumes/kafka-broker/data:/var/lib/kafka/data
     environment:
@@ -106,48 +95,38 @@ services:
       - EVENTSTORE_INSECURE
       - EVENTSTORE_ENABLE_EXTERNAL_TCP
       - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP
-    expose:
-      - '1113'
-      - '2113'
     volumes:
       - ./volumes/eventstore-volume-data:/var/lib/eventstore
       - ./volumes/eventstore-volume-logs:/var/log/eventstore
     networks:
       - my-network
 
-
   frontend:
     build: ./frontend/.
-    #image: caschuen/cnd-joboffers-frontend
     networks:
-      - my-network
-    expose:
-      - "8080"
+      - service-network
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     environment:
-      - EXTERNAL_AUTH_SERVICE_URL
-      - EXTERNAL_USER_SERVICE_URL
-      - EXTERNAL_CAREER_SERVICE_URL
-      - APP_ENV
+      - FRONTEND_PORT
+      - EXTERNAL_AUTH_SERVICE_URL=http://localhost/auth
+      - EXTERNAL_USER_SERVICE_URL=http://localhost/user
+      - EXTERNAL_CAREER_SERVICE_URL=http://localhost/career
       - OIDC_PROVIDER_DISCOVERY_ENDPOINT
       - OIDC_CLIENT_ID
       - OIDC_CLIENT_SECRET
       - OIDC_CLIENT_REDIRECT_URL
     healthcheck:
-      test: "curl -sf http://localhost:8080 || exit 1"
+      test: "curl -sf http://localhost:${FRONTEND_PORT} || exit 1"
       interval: 20s
       timeout: 10s
       retries: 10
       start_period: 40s
 
-
   auth-service:
     build: ./authservice/.
     networks:
-      - my-network
-    ports:
-      - "8085:8080"
-    expose:
-      - "8080"
+      - service-network
     depends_on:
       mongodb:
           condition: service_healthy
@@ -156,8 +135,7 @@ services:
     environment:
       - AUTH_SERVICE_MONGODB_URI
       - KAFKA_BOOTSTRAP_SERVER
-      - USER_SERVICE_URL
-      - AUTH_SERVICE_URL
+      - INTERNAL_JWT_ISSUER_URL
       - OIDC_PROVIDER_DISCOVERY_ENDPOINT
       - JWT_PUBLIC_KEY_BASE64
       - JWT_PRIVATE_KEY_BASE64
@@ -176,9 +154,7 @@ services:
   user-service:
     build: ./userservice/.
     networks:
-      - my-network
-    expose:
-      - "8080"
+      - service-network
     depends_on:
       mongodb:
         condition: service_healthy
@@ -187,7 +163,7 @@ services:
       auth-service:
           condition: service_healthy
     environment:
-      - AUTH_SERVICE_URL
+      - INTERNAL_JWT_ISSUER_URL
       - KAFKA_BOOTSTRAP_SERVER
       - USER_SERVICE_MONGODB_URI
     healthcheck:
@@ -200,9 +176,7 @@ services:
   career-service:
     build: ./careerservice/.
     networks:
-      - my-network
-    expose:
-      - "8080"
+      - service-network
     depends_on:
       mongodb:
         condition: service_healthy
@@ -215,12 +189,10 @@ services:
       user-service:
         condition: service_healthy
     environment:
-      - SPRING_PROFILES_ACTIVE
       - KAFKA_BOOTSTRAP_SERVER
       - EVENT_STORE_URI
       - CAREER_SERVICE_MONGODB_URI
-      - CAREER_SERVICE_CLIENT_SECRET
-      - AUTH_SERVICE_URL
+      - INTERNAL_JWT_ISSUER_URL
       - USER_SERVICE_URL
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
@@ -233,16 +205,13 @@ services:
   notification-service:
     build: ./notificationservice/.
     networks:
-      - my-network
-    expose:
-      - "8080"
+      - service-network
     depends_on:
       mongodb:
         condition: service_healthy
       kafka-event:
         condition: service_healthy
     environment:
-      - SPRING_PROFILES_ACTIVE
       - KAFKA_BOOTSTRAP_SERVER
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
@@ -252,5 +221,5 @@ services:
       start_period: 40s
 
 networks:
-  my-network:
-    name: my-network
+  service-network:
+    name: service-network
