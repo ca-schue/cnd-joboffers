@@ -95,11 +95,11 @@ services:
       - EVENTSTORE_INSECURE
       - EVENTSTORE_ENABLE_EXTERNAL_TCP
       - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP
+    networks:
+      - service-network
     volumes:
       - ./volumes/eventstore-volume-data:/var/lib/eventstore
       - ./volumes/eventstore-volume-logs:/var/log/eventstore
-    networks:
-      - my-network
 
   frontend:
     build: ./frontend/.
