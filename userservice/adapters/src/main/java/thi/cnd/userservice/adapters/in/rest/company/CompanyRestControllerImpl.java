@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import thi.cnd.userservice.adapters.generated.rest.CompanyApi;
-import thi.cnd.authservice.adapters.generated.rest.model.*;
 import thi.cnd.userservice.adapters.generated.rest.model.*;
 import thi.cnd.userservice.domain.exceptions.*;
 import thi.cnd.userservice.domain.model.company.*;

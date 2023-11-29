@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    default: local
   data:
     mongodb:
       uri: ${CAREER_SERVICE_MONGODB_URI:mongodb://localhost:27017/career-service?authSource=admin&readPreference=primary&directConnection=true&ssl=false}
@@ -40,7 +38,6 @@ joboffer:
 jobapplication:
   maxJobApplicationPerNonSubscribedUser: 50
 
-
 management:
   info:
     env:
@@ -64,31 +61,8 @@ security:
   csrfActive: true
   corsActive: true
 
----
-spring:
-  config:
-    activate:
-      on-profile: local
-
 server:
   port: 8083
-
-security:
-  csrfActive: false
-  corsActive: false
-
----
-spring:
-  config:
-    activate:
-      on-profile: docker
-
-server:
-  port: 8080
-
-security:
-  csrfActive: false
-  corsActive: false
 
 ---
 spring:

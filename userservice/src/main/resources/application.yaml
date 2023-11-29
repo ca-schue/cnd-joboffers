@@ -1,20 +1,20 @@
 spring:
   data:
     mongodb:
-      uri: ${USER_SERVICE_MONGODB_URI}
+      uri: ${USER_SERVICE_MONGODB_URI:mongodb://localhost:27017/user-service?authSource=admin&readPreference=primary&directConnection=true&ssl=false}
       auto-index-creation: true
       uuid-representation: standard
   kafka:
     producer:
       retries: 5
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER:http://localhost:9092}
     consumer:
       group-id: user-service
   security:
     oauth2:
       resource-server:
         jwt:
-          jwk-set-uri: "${AUTH_SERVICE_URL}/oauth2/jwks"
+          jwk-set-uri: "${AUTH_SERVICE_URL:http://localhost:8081}/oauth2/jwks"
           audiences: user-service
 
 logging:
@@ -33,7 +33,7 @@ management:
         enabled: true
 
 server:
-  port: 8080
+  port: 8082
 
 event:
   kafka:

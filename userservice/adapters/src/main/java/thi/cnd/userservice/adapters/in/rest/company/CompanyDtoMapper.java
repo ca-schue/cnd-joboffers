@@ -5,7 +5,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.data.domain.Page;
-import thi.cnd.authservice.adapters.generated.rest.model.*;
 import thi.cnd.userservice.adapters.generated.rest.model.*;
 import thi.cnd.userservice.domain.model.company.*;
 import thi.cnd.userservice.domain.model.user.*;

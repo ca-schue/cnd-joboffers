@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    default: local
   jackson:
     serialization:
       write-dates-as-timestamps: false
@@ -30,18 +28,5 @@ management:
     readinessState:
       enabled: true
 
-
----
-spring:
-  config:
-    activate:
-      on-profile: local
-
 server:
   port: 8987
-
----
-spring:
-  config:
-    activate:
-      on-profile: docker
