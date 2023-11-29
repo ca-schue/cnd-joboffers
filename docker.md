@@ -147,6 +147,6 @@
          --env-file ./docker.env \
          --name frontend \
          --network services-seperated \
-         -p $FRONTEND_PORT:$FRONTEND_PORT \
+         -p $FRONTEND_PORT:80 \
          frontend:latest
       ```   
