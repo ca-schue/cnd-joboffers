@@ -37,7 +37,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME
       - MONGO_INITDB_ROOT_PASSWORD
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      test: "echo 'db.runCommand(\"ping\").ok' | mongo localhost:${MONGO_DB_PORT}/test --quiet"
       interval: 20s
       timeout: 10s
       retries: 10
@@ -54,7 +54,7 @@ services:
       - ./volumes/zookeeper/data:/var/lib/zookeeper/data
       - ./volumes/zookeeper/log:/var/lib/zookeeper/log
     healthcheck:
-      test: nc -z localhost 2181 || exit -1
+      test: "nc -z localhost ${ZOOKEEPER_CLIENT_PORT} || exit -1"
       interval: 20s
       timeout: 10s
       retries: 10
@@ -76,7 +76,7 @@ services:
       - KAFKA_ADVERTISED_LISTENERS
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
     healthcheck:
-      test: nc -z localhost 9092 || exit -1
+      test: "nc -z localhost ${KAFKA_EVENT_PORT} || exit -1"
       interval: 20s
       timeout: 10s
       retries: 10
@@ -131,8 +131,6 @@ services:
           condition: service_healthy
       kafka-event:
         condition: service_healthy
-    expose:
-      - "${AUTH_SERVICE_PORT}:${AUTH_SERVICE_PORT}"
     environment:
       - AUTH_SERVICE_PORT
       - AUTH_SERVICE_MONGODB_URI
@@ -145,9 +143,8 @@ services:
       - JWT_VALIDITY_IN_SECONDS
       - JWT_KEY_ALGORITHM
       - JWT_SIGNING_ALGORITHM
-
     healthcheck:
-      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent localhost:${AUTH_SERVICE_PORT}/actuator/health/readiness | grep UP || exit 1"
       interval: 20s
       timeout: 10s
       retries: 10
@@ -164,15 +161,13 @@ services:
         condition: service_healthy
       auth-service:
           condition: service_healthy
-    expose:
-      - "${USER_SERVICE_PORT}:${USER_SERVICE_PORT}"
     environment:
       - USER_SERVICE_PORT
       - INTERNAL_JWT_ISSUER_URL
       - KAFKA_BOOTSTRAP_SERVER
       - USER_SERVICE_MONGODB_URI
     healthcheck:
-      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent localhost:${USER_SERVICE_PORT}/actuator/health/readiness | grep UP || exit 1"
       interval: 20s
       timeout: 10s
       retries: 10
@@ -193,8 +188,6 @@ services:
         condition: service_healthy
       user-service:
         condition: service_healthy
-    expose:
-      - "${CAREER_SERVICE_PORT}:${CAREER_SERVICE_PORT}"
     environment:
       - CAREER_SERVICE_PORT
       - KAFKA_BOOTSTRAP_SERVER
@@ -203,7 +196,7 @@ services:
       - INTERNAL_JWT_ISSUER_URL
       - USER_SERVICE_URL
     healthcheck:
-      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent localhost:${CAREER_SERVICE_PORT}/actuator/health/readiness | grep UP || exit 1"
       interval: 20s
       timeout: 10s
       retries: 10
