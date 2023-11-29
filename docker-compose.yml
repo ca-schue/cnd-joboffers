@@ -106,7 +106,7 @@ services:
     networks:
       - service-network
     expose:
-      - "${FRONTEND_PORT}:80"
+      - "${FRONTEND_PORT}"
     environment:
       - EXTERNAL_AUTH_SERVICE_URL=http://localhost/auth
       - EXTERNAL_USER_SERVICE_URL=http://localhost/user
@@ -185,8 +185,6 @@ services:
       eventstoredb:
         condition: service_healthy
       auth-service:
-        condition: service_healthy
-      user-service:
         condition: service_healthy
     environment:
       - CAREER_SERVICE_PORT
