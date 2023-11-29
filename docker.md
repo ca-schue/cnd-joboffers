@@ -15,13 +15,11 @@
 ## Docker Build Container
 - ### Frontend:
   - Workdir: `cnd-joboffers/frontend/`
-  - Install NPM packages: `npm install`
-  - Install Node.js http-server: `npm install -g http-server`
-  - Build: `npm run build`
+  - Build container with Dockerfile: `docker build -t frontend:latest .`
 - ### Spring Services:
   - Workdir: `cnd-joboffers/[auth|user|career|notification]service/`
   - Build jar with gradle wrapper: `./gradlew bootJar` (will download gradle 8.4)
-  - Build container with Dockerfile: `docker build -t (TODO...)`
+  - Build container with Dockerfile: `docker build -t [auth|user|career|notification]-service:latest .`
 
 ## Docker Container Configuration
 - Problem: [Docker run cannot substitute variables set in .env, only docker compose can](https://stackoverflow.com/questions/63714506/variable-substitution-in-env-file-for-docker-run-env-file)
@@ -58,7 +56,6 @@
            --volume ./volumes/mongo-data:/data/db \
            --volume ./authservice/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js \
            --network services-seperated \
-           (-p 27017:$MONGO_DB_PORT \)
            mongo:4.4.6
        ```
    - Zookeeper:
@@ -82,7 +79,17 @@
            --network services-seperated \
            confluentinc/cp-kafka:latest
        ```
-      .... Zookeeper, Kafka, MongoDB, EventDB (Ensure that the ports match the service configuration)
+   - EventDB 
+       ```
+       docker run \
+           --rm \
+           --env-file ./docker.env \
+           --name eventstoredb \
+           --volume ./volumes/eventstore-volume-data:/var/lib/eventstore \
+           --volume ./volumes/eventstore-volume-logs:/var/log/eventstore \
+           --network services-seperated \
+           eventstore/eventstore:23.6.0-buster-slim
+       ```   
 4. Start service containers (TODO!)
    - Order:
        1. Auth-Service
