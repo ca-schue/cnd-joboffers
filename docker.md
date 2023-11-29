@@ -133,13 +133,25 @@
          notification-service:latest
       ```          
    5. Frontend 
-      ```
-      docker run \
-         --rm \
-         --env-file ./docker.env \
-         --name frontend \
-         --network services-seperated \
-         -p 80:80 \
-         frontend:latest \
-         -p 80 # must match right side of -p above
-      ```  
+      - Default:
+         ```
+         docker run \
+            --rm \
+            --env-file ./docker.env \
+            --name frontend \
+            --network services-seperated \
+            -p 80:80 \
+            frontend:latest \
+            -p 80 # must match right side of -p above
+         ```  
+      - Custom Port:
+         ```
+         docker run \
+            --rm \
+            --env-file ./docker.env \
+            --name frontend \
+            --network services-seperated \
+            -p 80:80 \
+            frontend:latest \
+            -p 80 # must match right side of -p above
+         ```        
