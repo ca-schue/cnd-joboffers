@@ -14,7 +14,7 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          jwk-set-uri: "${INTERNAL_JWT_ISSUER_URL:http://localhost:8081}/oauth2/jwks"
+          jwk-set-uri: ${INTERNAL_JWT_ISSUER_URL:http://localhost:8081}/oauth2/jwks}
           audiences: user-service
 
 logging:
