@@ -140,5 +140,6 @@
          --name frontend \
          --network services-seperated \
          -p 80:80 \
-         frontend:latest
+         frontend:latest \
+         -p 80 # must match right side of -p above
       ```  
