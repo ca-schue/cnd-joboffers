@@ -105,8 +105,8 @@ services:
     build: ./frontend/.
     networks:
       - service-network
-    expose:
-      - "${FRONTEND_PORT}"
+    ports:
+      - "${FRONTEND_PORT}:80"
     environment:
       - EXTERNAL_AUTH_SERVICE_URL=http://localhost/auth
       - EXTERNAL_USER_SERVICE_URL=http://localhost/user
