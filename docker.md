@@ -98,33 +98,40 @@
    - Workdir: `cnd-joboffers/`(root)
    1. Auth-Service
       ```
+      source docker.env
       docker run \
          --rm \
          --env-file ./docker.env \
          --name auth-service \
          --network services-seperated \
+         -p $AUTH_SERVICE_PORT:$AUTH_SERVICE_PORT\
          auth-service:latest
       ```
    2. User-Serivce
       ```
+      source docker.env
       docker run \
          --rm \
          --env-file ./docker.env \
          --name user-service \
          --network services-seperated \
+         -p $USER_SERVICE_PORT:$USER_SERVICE_PORT\
          user-service:latest
       ```
    3. Career-Service
       ```
+      source docker.env
       docker run \
          --rm \
          --env-file ./docker.env \
          --name career-service \
          --network services-seperated \
+         -p $CAREER_SERVICE_PORT:$CAREER_SERVICE_PORT\
          career-service:latest
       ```  
    4. Notification-Service
       ```
+      source docker.env
       docker run \
          --rm \
          --env-file ./docker.env \
@@ -133,25 +140,13 @@
          notification-service:latest
       ```          
    5. Frontend 
-      - Default:
-         ```
-         docker run \
-            --rm \
-            --env-file ./docker.env \
-            --name frontend \
-            --network services-seperated \
-            -p 80:80 \
-            frontend:latest \
-            -p 80 # must match right side of -p above
-         ```  
-      - Custom Port:
-         ```
-         docker run \
-            --rm \
-            --env-file ./docker.env \
-            --name frontend \
-            --network services-seperated \
-            -p 80:80 \
-            frontend:latest \
-            -p 80 # must match right side of -p above
-         ```        
+      ```
+      source docker.env
+      docker run \
+         --rm \
+         --env-file ./docker.env \
+         --name frontend \
+         --network services-seperated \
+         -p $FRONTEND_PORT:$FRONTEND_PORT \
+         frontend:latest
+      ```   
