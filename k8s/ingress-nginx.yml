@@ -12,7 +12,8 @@ metadata:
   namespace: default
 spec:
   rules:
-    - http:
+    - host: job-offers.com
+      http:
         paths:
           - path: /auth/?(.*)
             pathType: ImplementationSpecific

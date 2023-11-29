@@ -32,7 +32,7 @@ spec:
         app: zookeeper
     spec:
       containers:
-        - image: confluentinc/cp-zookeeper:latest
+        - image: confluentinc/cp-zookeeper:7.4.3
           name: zookeeper
           ports:
             - containerPort: 2181

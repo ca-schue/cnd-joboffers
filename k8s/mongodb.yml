@@ -42,6 +42,10 @@ spec:
           volumeMounts:
             - name: "mongo-mount"
               mountPath: "/data/db"
+            - name: "mongo-init-database"
+              mountPath: /docker-entrypoint-initdb.d/mongo-init.js
+              subPath: mongo-init.js
+            
       volumes:
         - name: "mongo-mount"
           persistentVolumeClaim:
@@ -86,12 +90,12 @@ spec:
 
 apiVersion: v1
 data:
-  mongo-init.js: "let res = [\r\n    db.Clients.insertOne({\r\n        \"_id\": \"career-service\",\r\n
+  mongo-init.js: "use(process.env.AUTH_SERVICE_DB)\r\n let res = [db.Clients.insertOne({\r\n        \"_id\": \"career-service\",\r\n
     \       \"encryptedPassword\": \"$2a$10$1KgYAGEqhADDPvEzxZ7Q0OtPfPrKo8ZDTJAd1SG342YVdT9XNZQN6\",\r\n
     \       \"audiences\": [\"user-service\", \"auth-service\", \"career-service\",
     \"notification-service\"],\r\n        \"lastLogin\": ISODate(\"2023-10-11T12:58:47.275Z\"),\r\n
     \       \"lastPasswordChange\": ISODate(\"2023-10-11T12:58:47.275Z\"),\r\n        \"_class\":
-    \"thi.cnd.authservice.secondary.repository.clients.model.ClientDAO\"\r\n    })\r\n\r\n]\r\n\r\nprintjson(res)\r\n\r\ndb.Clients.find()\r\n"
+    \"thi.cnd.authservice.secondary.repository.clients.model.ClientDAO\"\r\n    })\r\n\r\n]"
 kind: ConfigMap
 metadata:
   creationTimestamp: "2023-11-06T20:13:43Z"

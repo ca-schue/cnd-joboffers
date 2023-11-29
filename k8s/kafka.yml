@@ -32,7 +32,7 @@ spec:
         app: kafka-event
     spec:
       containers:
-        - image: confluentinc/cp-kafka:latest
+        - image: confluentinc/cp-kafka:7.4.3
           name: kafka-event
           ports:
             - containerPort: 9092
