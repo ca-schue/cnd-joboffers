@@ -38,17 +38,19 @@
       `docker run (TODO!....) --spring.config-name=<new-application.yaml>`
 
 ## Docker Execution
-1. Create docker network (TODO!)
+1. Create docker network
     ```
     docker network create services-seperated
     ```
-
-2. Create docker volumes (TODO!)
+2. Create docker volumes
+   - Workdir: `cnd-joboffers/`(root)
+      ```
+      ./mkdirs.sh
+      ```
 3. Start auxiliary infrastructure containers
+   - Workdir: `cnd-joboffers/`(root)
    - Mongo DB:
        ```
-       source docker.env
-    
        docker run \
            --rm \
            --env-file ./docker.env \
@@ -90,17 +92,51 @@
            --network services-seperated \
            eventstore/eventstore:23.6.0-buster-slim
        ```   
-4. Start service containers (TODO!)
-   - Order:
-       1. Auth-Service
-       2. User-Serivce
-       3. Career-Service | Notification-Service
-       4. Frontend 
-   - Start commands:
-     - Spring services:
-       - Workdir: `cnd-joboffers/[auth|user|career|notification]service/build/libs/`
-       - Command: `java -jar [auth|user|career|notification]service<version>.jar`
-     - Frontend:
-       - Workdir: `cnd-joboffers/frontend/build`
-       - Command (default configuration): `http-server -p 80`
-       - Command (custom configuration): `http-server -p [configured frontend port]`
+4. Start service containers in this order:
+   - Workdir: `cnd-joboffers/`(root)
+   1. Auth-Service
+      ```
+      docker run \
+         --rm \
+         --env-file ./docker.env \
+         --name auth-service \
+         --network services-seperated \
+         auth-service:latest
+      ```
+   2. User-Serivce
+      ```
+      docker run \
+         --rm \
+         --env-file ./docker.env \
+         --name user-service \
+         --network services-seperated \
+         user-service:latest
+      ```
+   3. Career-Service
+      ```
+      docker run \
+         --rm \
+         --env-file ./docker.env \
+         --name career-service \
+         --network services-seperated \
+         career-service:latest
+      ```  
+   4. Notification-Service
+      ```
+      docker run \
+         --rm \
+         --env-file ./docker.env \
+         --name notification-service \
+         --network services-seperated \
+         notification-service:latest
+      ```          
+   5. Frontend 
+      ```
+      docker run \
+         --rm \
+         --env-file ./docker.env \
+         --name frontend \
+         --network services-seperated \
+         -p 80:80 \
+         frontend:latest
+      ```  
