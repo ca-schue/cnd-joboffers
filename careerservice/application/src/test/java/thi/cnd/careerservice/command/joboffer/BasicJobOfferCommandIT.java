@@ -3,7 +3,7 @@ package thi.cnd.careerservice.command.joboffer;
 import org.junit.jupiter.api.Test;
 
 import thi.cnd.careerservice.exception.ResourceDisallowsModificationException;
-import thi.cnd.careerservice.joboffer.model.JobOfferStatus;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferStatus;
 import thi.cnd.careerservice.AbstractIntegrationTest;
 import thi.cnd.careerservice.shared.event.model.JobOfferEvent;
 

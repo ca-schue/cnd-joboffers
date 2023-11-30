@@ -10,10 +10,10 @@ import thi.cnd.careerservice.api.generated.JobApplicationQueryApi;
 import thi.cnd.careerservice.api.generated.model.JobApplicationResponseDTO;
 import thi.cnd.careerservice.api.generated.model.JobApplicationsResponseDTO;
 import thi.cnd.careerservice.shared.model.ETag;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationId;
-import thi.cnd.careerservice.jobapplication.view.model.JobApplicationView;
-import thi.cnd.careerservice.jobapplication.view.query.JobApplicationQueryService;
-import thi.cnd.careerservice.joboffer.model.JobOfferId;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationId;
+import thi.cnd.careerservice.jobapplication.query.domain.model.JobApplicationView;
+import thi.cnd.careerservice.jobapplication.query.port.JobApplicationQueryService;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
 import thi.cnd.careerservice.user.model.UserId;
 import lombok.RequiredArgsConstructor;
 

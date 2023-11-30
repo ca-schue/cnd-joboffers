@@ -6,13 +6,13 @@ import org.mapstruct.ReportingPolicy;
 
 import thi.cnd.careerservice.api.generated.model.JobOfferCreationRequestDTO;
 import thi.cnd.careerservice.api.generated.model.JobOfferUpdateRequestDTO;
-import thi.cnd.careerservice.http.SharedMapper;
-import thi.cnd.careerservice.joboffer.command.JobOfferCommand.CreateJobOffer;
-import thi.cnd.careerservice.joboffer.command.JobOfferCommand.UpdateJobOfferAttributes;
-import thi.cnd.careerservice.joboffer.model.JobOfferId;
+import thi.cnd.careerservice.http.CommonDTOMapper;
+import thi.cnd.careerservice.joboffer.command.application.model.JobOfferCommand.CreateJobOffer;
+import thi.cnd.careerservice.joboffer.command.application.model.JobOfferCommand.UpdateJobOfferAttributes;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
 
 @Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING, uses = SharedMapper.class,
+    componentModel = MappingConstants.ComponentModel.SPRING, uses = CommonDTOMapper.class,
     unmappedTargetPolicy = ReportingPolicy.ERROR, unmappedSourcePolicy = ReportingPolicy.ERROR
 )
 public interface JobOfferCommandApiMapper {

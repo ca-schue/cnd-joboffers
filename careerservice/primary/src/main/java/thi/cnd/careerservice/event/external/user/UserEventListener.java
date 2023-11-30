@@ -6,8 +6,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
+import thi.cnd.careerservice.jobapplication.command.port.JobApplicationExternalEventHandler;
 import thi.cnd.careerservice.shared.event.ExternalEventListener;
-import thi.cnd.careerservice.jobapplication.domain.JobApplicationCrossAggregateEventHandler;
 import thi.cnd.careerservice.user.model.UserId;
 import thi.cnd.careerservice.event.userservice.generated.model.UserDeletedEventDTO;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +21,12 @@ public class UserEventListener implements ExternalEventListener {
 
     private final Logger logger = LoggerFactory.getLogger(UserEventListener.class);
 
-    private final JobApplicationCrossAggregateEventHandler eventHandler;
+    private final JobApplicationExternalEventHandler jobApplicationExternalEventHandler;
 
     @KafkaListener(groupId = "career-service", topics = "user-service_user-deleted")
     public void listen(@Payload UserDeletedEventDTO event) {
         logger.info("User-Deleted-Event received for user {}", event.getUserId());
-        eventHandler.deleteJobApplication(new UserId(event.getUserId()));
+        jobApplicationExternalEventHandler.deleteJobApplication(new UserId(event.getUserId()));
     }
 
 }

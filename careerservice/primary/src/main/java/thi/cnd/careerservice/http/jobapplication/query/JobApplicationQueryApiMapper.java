@@ -9,11 +9,11 @@ import org.mapstruct.ReportingPolicy;
 
 import thi.cnd.careerservice.api.generated.model.JobApplicationResponseDTO;
 import thi.cnd.careerservice.api.generated.model.JobApplicationsResponseDTO;
-import thi.cnd.careerservice.http.SharedMapper;
-import thi.cnd.careerservice.jobapplication.view.model.JobApplicationView;
+import thi.cnd.careerservice.http.CommonDTOMapper;
+import thi.cnd.careerservice.jobapplication.query.domain.model.JobApplicationView;
 
 @Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING, uses = SharedMapper.class,
+    componentModel = MappingConstants.ComponentModel.SPRING, uses = CommonDTOMapper.class,
     unmappedTargetPolicy = ReportingPolicy.ERROR, unmappedSourcePolicy = ReportingPolicy.ERROR
 )
 public interface JobApplicationQueryApiMapper {

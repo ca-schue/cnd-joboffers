@@ -7,9 +7,9 @@ import org.javamoney.moneta.Money;
 import org.springframework.stereotype.Component;
 
 import thi.cnd.careerservice.company.model.CompanyId;
-import thi.cnd.careerservice.joboffer.model.JobOffer;
-import thi.cnd.careerservice.joboffer.model.JobOfferStatus;
-import thi.cnd.careerservice.joboffer.model.SalaryRange;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOffer;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferStatus;
+import thi.cnd.careerservice.joboffer.command.domain.model.SalaryRange;
 import thi.cnd.careerservice.shared.DataWithVersion;
 import thi.cnd.careerservice.user.model.UserId;
 

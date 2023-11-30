@@ -10,15 +10,14 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import thi.cnd.careerservice.company.model.CompanyId;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationStatus;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationTestProvider;
-import thi.cnd.careerservice.jobapplication.view.model.JobApplicationView;
-import thi.cnd.careerservice.jobapplication.view.query.JobApplicationQueryPort;
-import thi.cnd.careerservice.joboffer.model.JobOfferId;
-import thi.cnd.careerservice.joboffer.model.JobOfferStatus;
-import thi.cnd.careerservice.joboffer.view.model.JobOfferView;
-import thi.cnd.careerservice.joboffer.view.query.JobOfferQueryPort;
-import thi.cnd.careerservice.shared.event.model.JobApplicationEvent;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationStatus;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationTestProvider;
+import thi.cnd.careerservice.jobapplication.query.domain.model.JobApplicationView;
+import thi.cnd.careerservice.jobapplication.query.port.JobApplicationQueryPort;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferStatus;
+import thi.cnd.careerservice.joboffer.query.domain.model.JobOfferView;
+import thi.cnd.careerservice.joboffer.query.port.JobOfferQueryPort;
 import thi.cnd.careerservice.shared.event.model.JobApplicationEvent.JobApplicationCreated;
 import thi.cnd.careerservice.shared.event.model.JobOfferEvent;
 import thi.cnd.careerservice.shared.event.model.RecordedDomainEventWithMetadata;
@@ -26,7 +25,7 @@ import thi.cnd.careerservice.shared.event.model.RecordedEventMetadata;
 import thi.cnd.careerservice.user.model.UserId;
 import thi.cnd.careerservice.setup.mock.query.QueryPortTestConfig;
 
-import static thi.cnd.careerservice.jobapplication.model.JobApplicationStatus.OPEN;
+import static thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationStatus.OPEN;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 

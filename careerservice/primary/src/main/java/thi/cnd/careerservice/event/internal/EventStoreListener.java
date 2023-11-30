@@ -24,7 +24,7 @@ import com.eventstore.dbclient.SubscriptionFilter;
 
 import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
-import thi.cnd.careerservice.event.config.EventStoreSerializer;
+import thi.cnd.careerservice.shared.event.config.EventStoreSerializer;
 import thi.cnd.careerservice.event.internal.exception.EventStoreConnectionException;
 import thi.cnd.careerservice.shared.event.InternalDomainEventListener;
 import thi.cnd.careerservice.shared.event.model.DomainEvent;

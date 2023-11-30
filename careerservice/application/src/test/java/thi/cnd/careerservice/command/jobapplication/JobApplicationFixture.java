@@ -5,10 +5,10 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 
 import thi.cnd.careerservice.company.model.CompanyId;
-import thi.cnd.careerservice.jobapplication.model.JobApplication;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationId;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationStatus;
-import thi.cnd.careerservice.joboffer.model.JobOfferId;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplication;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationId;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationStatus;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
 import thi.cnd.careerservice.shared.DataWithVersion;
 import thi.cnd.careerservice.user.model.UserId;
 

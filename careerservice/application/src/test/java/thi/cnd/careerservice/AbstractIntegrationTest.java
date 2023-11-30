@@ -27,10 +27,10 @@ import thi.cnd.careerservice.command.jobapplication.JobApplicationCommandApiTest
 import thi.cnd.careerservice.command.jobapplication.JobApplicationFixture;
 import thi.cnd.careerservice.command.joboffer.JobOfferCommandApiTestAdapter;
 import thi.cnd.careerservice.command.joboffer.JobOfferFixture;
-import thi.cnd.careerservice.jobapplication.event.JobApplicationEventStore;
-import thi.cnd.careerservice.jobapplication.model.JobApplicationId;
-import thi.cnd.careerservice.joboffer.event.JobOfferEventStore;
-import thi.cnd.careerservice.joboffer.model.JobOfferId;
+import thi.cnd.careerservice.jobapplication.command.port.JobApplicationEventStore;
+import thi.cnd.careerservice.jobapplication.command.domain.model.JobApplicationId;
+import thi.cnd.careerservice.joboffer.command.port.JobOfferEventStore;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
 import thi.cnd.careerservice.setup.container.TestContainerManager;
 import thi.cnd.careerservice.setup.mock.endpoint.WireMockInitializer;
 import thi.cnd.careerservice.shared.event.model.JobApplicationEvent;

@@ -16,12 +16,17 @@ spring:
         jwt:
           jwk-set-uri: ${INTERNAL_JWT_ISSUER_URL:http://localhost:8081}/oauth2/jwks
 
+oauth2:
+  client-id: ${CAREER_SERVICE_CLIENT_ID:career-service}
+  client-secret: ${CAREER_SERVICE_CLIENT_SECRET:6ko*Y(kkMT>W,qWKU4nU5S}
+
 event:
   eventTypePrefix: career-service
   event-store-uri: ${EVENT_STORE_URI:esdb://localhost:2113?tls=false}
 
 endpoints:
   user-service: ${USER_SERVICE_URL:http://localhost:8082}
+  auth-service: ${AUTH_SERVICE_URL:http://localhost:8081}
 
 global:
   defaultFallbackPaginationLimit: 20

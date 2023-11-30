@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useAuth} from "react-oidc-context";
-import {useAppDispatch, useAppSelector} from "../state/hooks";
+import {useAppDispatch, useAppSelector, useLogout} from "../state/hooks";
 import {authApi, userApi} from "../api/apis";
 import {setAccessToken} from "../state/reducer/AuthSlice";
 import {loginAccount, userProfileCreated} from "../state/reducer/AccountSlice";
@@ -154,6 +154,8 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
             })
     };
 
+    const logout = useLogout()
+
     const handleProfileCreation = () => {
 
 
@@ -161,7 +163,7 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
             .then(async user => {
                 dispatch(loginUser({user: user}))
                 dispatch(userProfileCreated({userProfileCreated: true}))
-                //logout()
+                logout()
             })
             .catch(error => {
                 setError(error.message)

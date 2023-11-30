@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 
 import com.eventstore.dbclient.EventStoreDBPersistentSubscriptionsClient;
 
-import thi.cnd.careerservice.event.config.EventStoreSerializer;
+import thi.cnd.careerservice.shared.event.config.EventStoreSerializer;
 import thi.cnd.careerservice.event.internal.GenericViewProjector;
-import thi.cnd.careerservice.jobapplication.view.update.UpdateJobApplicationViewService;
+import thi.cnd.careerservice.jobapplication.query.port.UpdateJobApplicationViewService;
 import thi.cnd.careerservice.shared.event.model.DomainEvent;
 import thi.cnd.careerservice.shared.event.model.JobApplicationEvent;
 import thi.cnd.careerservice.shared.event.model.JobApplicationEvent.JobApplicationContentChanged;

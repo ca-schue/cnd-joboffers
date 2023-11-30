@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import thi.cnd.careerservice.AbstractIntegrationTest;
 import thi.cnd.careerservice.NotYetProcessedException;
 import thi.cnd.careerservice.exception.ViewResourceNotFoundException;
-import thi.cnd.careerservice.joboffer.model.JobOffer;
-import thi.cnd.careerservice.joboffer.model.JobOfferStatus;
-import thi.cnd.careerservice.joboffer.model.JobOfferTestProvider;
-import thi.cnd.careerservice.joboffer.view.model.JobOfferView;
-import thi.cnd.careerservice.view.joboffer.JobOfferQueryAdapter;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOffer;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferStatus;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferTestProvider;
+import thi.cnd.careerservice.joboffer.query.domain.model.JobOfferView;
+import thi.cnd.careerservice.joboffer.query.JobOfferQueryAdapter;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;

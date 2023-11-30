@@ -8,9 +8,7 @@ import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import thi.cnd.careerservice.joboffer.view.model.SearchAvailableJobOfferFilter;
+import thi.cnd.careerservice.joboffer.query.domain.model.AvailableJobOfferSearchFilter;
 import thi.cnd.careerservice.shared.view.PaginationService;
 import thi.cnd.careerservice.api.generated.JobOfferQueryApi;
 import thi.cnd.careerservice.api.generated.model.JobOfferResponseDTO;
@@ -19,8 +17,8 @@ import thi.cnd.careerservice.api.generated.model.PaginatedJobOffersResponseDTO;
 import thi.cnd.careerservice.shared.model.ETag;
 import thi.cnd.careerservice.company.model.CompanyId;
 import thi.cnd.careerservice.exception.ResourceNotFoundException;
-import thi.cnd.careerservice.joboffer.model.JobOfferId;
-import thi.cnd.careerservice.joboffer.view.query.JobOfferQueryService;
+import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
+import thi.cnd.careerservice.joboffer.query.application.service.JobOfferQueryService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -34,7 +32,7 @@ public class JobOfferQueryApiController implements JobOfferQueryApi {
     @Override
     public ResponseEntity<PaginatedJobOffersResponseDTO> searchAvailableJobOffers(Optional<Integer> skip,
         Optional<Integer> limit, Optional<String> title, Optional<List<UUID>> companyIds) {
-        var searchFilter = new SearchAvailableJobOfferFilter(
+        var searchFilter = new AvailableJobOfferSearchFilter(
             title,
             companyIds.orElse(List.of()).stream().map(CompanyId::new).toList(),
             paginationService.createPageableOfRequest(skip, limit)
