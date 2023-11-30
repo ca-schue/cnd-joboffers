@@ -15,15 +15,14 @@
 ## Docker Build Container
 - ### Frontend:
   - Workdir: `cnd-joboffers/frontend/`
-  - Install NPM packages: `npm install`
-  - Install Node.js http-server: `npm install -g http-server`
-  - Build: `npm run build`
+  - Build container with Dockerfile: `docker build -t frontend:latest .`
 - ### Spring Services:
   - Workdir: `cnd-joboffers/[auth|user|career|notification]service/`
   - Build jar with gradle wrapper: `./gradlew bootJar` (will download gradle 8.4)
-  - Build container with Dockerfile: `docker build -t (TODO...)`
+  - Build container with Dockerfile: `docker build -t [auth|user|career|notification]-service:latest .`
 
 ## Docker Container Configuration
+- Problem: [Docker run cannot substitute variables set in .env, only docker compose can](https://stackoverflow.com/questions/63714506/variable-substitution-in-env-file-for-docker-run-env-file)
 - ### Default configuration (no changes required)
 - ### Semi-Custom configuration:
     - Change default values of predefined environment variables in `.env` file as documented for each service\
@@ -39,21 +38,115 @@
       `docker run (TODO!....) --spring.config-name=<new-application.yaml>`
 
 ## Docker Execution
-1. Create docker network (TODO!)
-2. Create docker volumes (TODO!)
-3. Start auxiliary infrastructure containers (TODO!)
-   .... Zookeeper, Kafka, MongoDB, EventDB (Ensure that the ports match the service configuration)
-4. Start service containers (TODO!)
-   - Order:
-       1. Auth-Service
-       2. User-Serivce
-       3. Career-Service | Notification-Service
-       4. Frontend 
-   - Start commands:
-     - Spring services:
-       - Workdir: `cnd-joboffers/[auth|user|career|notification]service/build/libs/`
-       - Command: `java -jar [auth|user|career|notification]service<version>.jar`
-     - Frontend:
-       - Workdir: `cnd-joboffers/frontend/build`
-       - Command (default configuration): `http-server -p 80`
-       - Command (custom configuration): `http-server -p [configured frontend port]`
+1. Create docker network
+    ```
+    docker network create services-seperated
+    ```
+2. Create docker volumes
+   - Workdir: `cnd-joboffers/`(root)
+      ```
+      ./mkdirs.sh
+      ```
+3. Start auxiliary infrastructure containers
+   - Workdir: `cnd-joboffers/`(root)
+   - Mongo DB:
+       ```
+       docker run \
+           --rm \
+           -e MONGO_INITDB_ROOT_USERNAME=root \
+           -e MONGO_INITDB_ROOT_PASSWORD=root \
+           -e MONGO_INITDB_DATABASE=root-db \
+           --name mongodb \
+           --volume ./volumes/mongo-data:/data/db \
+           --volume ./authservice/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js \
+           --network services-seperated \
+           mongo:4.4.6
+       ```
+   - Zookeeper:
+       ```
+       docker run \
+           --rm \
+           --env-file ./docker.env \
+           --name zookeeper \
+           --volume ./volumes/zookeeper/data:/var/lib/zookeeper/data \
+           --volume ./volumes/zookeeper/log:/var/lib/zookeeper/log \
+           --network services-seperated \
+           confluentinc/cp-zookeeper:latest
+       ```
+   - Kafka:  
+       ```
+       docker run \
+           --rm \
+           --env-file ./docker.env \
+           --name kafka-event \
+           --volume ./volumes/kafka-broker/data:/var/lib/kafka/data \
+           --network services-seperated \
+           confluentinc/cp-kafka:latest
+       ```
+   - EventDB 
+       ```
+       docker run \
+           --rm \
+           --env-file ./docker.env \
+           --name eventstoredb \
+           --volume ./volumes/eventstore-volume-data:/var/lib/eventstore \
+           --volume ./volumes/eventstore-volume-logs:/var/log/eventstore \
+           --network services-seperated \
+           eventstore/eventstore:23.6.0-buster-slim
+       ```   
+4. Start service containers in this order:
+   - Workdir: `cnd-joboffers/`(root)
+   1. Auth-Service
+      ```
+      source docker.env
+      docker run \
+         --rm \
+         --env-file ./docker.env \
+         --name auth-service \
+         --network services-seperated \
+         -p $AUTH_SERVICE_PORT:$AUTH_SERVICE_PORT\
+         auth-service:latest
+      ```
+   2. User-Serivce
+      ```
+      source docker.env
+      docker run \
+         --rm \
+         --env-file ./docker.env \
+         --name user-service \
+         --network services-seperated \
+         -p $USER_SERVICE_PORT:$USER_SERVICE_PORT\
+         user-service:latest
+      ```
+   3. Career-Service
+      ```
+      source docker.env
+      docker run \
+         --rm \
+         --env-file ./docker.env \
+         --name career-service \
+         --network services-seperated \
+         -p $CAREER_SERVICE_PORT:$CAREER_SERVICE_PORT\
+         career-service:latest
+      ```  
+   4. Notification-Service
+      ```
+      source docker.env
+      docker run \
+         --rm \
+         --env-file ./docker.env \
+         --name notification-service \
+         --network services-seperated \
+         notification-service:latest
+      ```          
+   5. Frontend 
+      ```
+      source docker.env
+      docker run \
+         --rm \
+         --env-file ./docker.env \
+         --name frontend \
+         --network services-seperated \
+         -p $FRONTEND_PORT:80 \
+         frontend:latest
+      ```   
