@@ -33,21 +33,21 @@ public class JwtConfig {
     private final PublicKey publicKey;
     private final PrivateKey privateKey;
     private final RSAKey RsaJwk;
-    private final String keyAlgorithm;
+    private final String keyAlgorithm = "RSA";
     private final String signingAlgorithm;
-    public JwtConfig(@NotBlank String issuer, String oidcIssuerDiscoveryEndpoint, @NotBlank String publicKeyBase64, @NotBlank String privateKeyBase64, @NotBlank String keyId, @PositiveOrZero long validityInSeconds, @NotBlank String keyAlgorithm, @NotBlank String signingAlgorithm) {
-        this.keyAlgorithm = keyAlgorithm;
-        this.signingAlgorithm = signingAlgorithm;
+
+    public JwtConfig(@NotBlank String issuer, String oidcIssuerDiscoveryEndpoint, @NotBlank String rsaPublicKeyBase64, @NotBlank String rsaPrivateKeyBase64, @NotBlank String keyId, @PositiveOrZero long validityInSeconds, @NotBlank String rsaSigningAlgorithm) {
+        this.signingAlgorithm = rsaSigningAlgorithm;
         this.issuer = issuer;
         this.keyId = keyId;
         this.validityInSeconds = validityInSeconds;
         this.oidcIssuerDiscoveryEndpoint = oidcIssuerDiscoveryEndpoint;
 
-        this.publicKey = buildPublicKey(publicKeyBase64, this.keyAlgorithm);
-        this.privateKey = buildPrivateKey(privateKeyBase64, this.keyAlgorithm);
+        this.publicKey = buildPublicKey(rsaPublicKeyBase64, this.keyAlgorithm);
+        this.privateKey = buildPrivateKey(rsaPrivateKeyBase64, this.keyAlgorithm);
         KeyPair keyPair = new KeyPair(this.publicKey, this.privateKey);
         this.RsaJwk = new RSAKey.Builder((RSAPublicKey) keyPair.getPublic())
-                .algorithm(JWSAlgorithm.parse(signingAlgorithm))
+                .algorithm(JWSAlgorithm.parse(this.signingAlgorithm))
                 .privateKey((RSAPrivateKey) keyPair.getPrivate())
                 .keyUse(KeyUse.SIGNATURE)
                 .keyID(keyId)

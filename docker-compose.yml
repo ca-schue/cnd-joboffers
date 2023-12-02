@@ -4,9 +4,9 @@ services:
     image: nginx:latest
     container_name: nginx_container
     ports:
-      - "${NGINX_PORT}:80"
+      - "${NGINX_PORT}:${NGINX_PORT}"
     volumes:
-      - ./templates:/etc/nginx/templates
+      - ./.config/default.conf.template:/etc/nginx/templates/default.conf.template
     networks:
       - service-network
     depends_on:
@@ -21,10 +21,16 @@ services:
       frontend:
         condition: service_healthy
     environment:
+      - NGINX_PORT
+      - NGINX_BASE_URL
+      - NGINX_SERVER_NAME
       - FRONTEND_URL
       - AUTH_SERVICE_URL
+      - NGINX_AUTH_ENDPOINT
       - USER_SERVICE_URL
+      - NGINX_USER_ENDPOINT
       - CAREER_SERVICE_URL
+      - NGINX_CAREER_ENDPOINT
 
   mongodb:
     image: mongo:4.4.6
@@ -106,9 +112,9 @@ services:
     networks:
       - service-network
     environment:
-      - EXTERNAL_AUTH_SERVICE_URL=http://localhost/auth
-      - EXTERNAL_USER_SERVICE_URL=http://localhost/user
-      - EXTERNAL_CAREER_SERVICE_URL=http://localhost/career
+      - EXTERNAL_AUTH_SERVICE_URL
+      - EXTERNAL_USER_SERVICE_URL
+      - EXTERNAL_CAREER_SERVICE_URL
       - OIDC_PROVIDER_DISCOVERY_ENDPOINT
       - OIDC_CLIENT_ID
       - OIDC_CLIENT_SECRET
@@ -129,6 +135,8 @@ services:
           condition: service_healthy
       kafka-event:
         condition: service_healthy
+    #ports:  # debug: comment in for publishing port
+    #  - "${AUTH_SERVICE_PORT}:${AUTH_SERVICE_PORT}"
     environment:
       - AUTH_SERVICE_PORT
       - AUTH_SERVICE_MONGODB_URI
@@ -159,6 +167,8 @@ services:
         condition: service_healthy
       auth-service:
           condition: service_healthy
+    #ports:  # debug: comment in for publishing port
+    #  - "${USER_SERVICE_PORT}:${USER_SERVICE_PORT}"
     environment:
       - USER_SERVICE_PORT
       - INTERNAL_JWT_ISSUER_URL
@@ -184,6 +194,8 @@ services:
         condition: service_healthy
       auth-service:
         condition: service_healthy
+    #ports:  # debug: comment in for publishing port
+    #  - "${CAREER_SERVICE_PORT}:${CAREER_SERVICE_PORT}"
     environment:
       - CAREER_SERVICE_PORT
       - KAFKA_BOOTSTRAP_SERVER
@@ -191,13 +203,13 @@ services:
       - CAREER_SERVICE_MONGODB_URI
       - INTERNAL_JWT_ISSUER_URL
       - USER_SERVICE_URL
+      - CAREER_SERVICE_CLIENT_SECRET
     healthcheck:
       test: "curl --fail --silent localhost:${CAREER_SERVICE_PORT}/actuator/health/readiness | grep UP || exit 1"
       interval: 20s
       timeout: 10s
       retries: 10
       start_period: 40s
-
 
   notification-service:
     build: ./notificationservice/.
@@ -209,9 +221,12 @@ services:
       kafka-event:
         condition: service_healthy
     environment:
+      - NOTIFICATION_SERVICE_PORT
       - KAFKA_BOOTSTRAP_SERVER
+    #ports: # debug: comment in for publishing port
+    #  - "${NOTIFICATION_SERVICE_PORT}:${NOTIFICATION_SERVICE_PORT}"
     healthcheck:
-      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent localhost:${NOTIFICATION_SERVICE_PORT}/actuator/health/readiness | grep UP || exit 1"
       interval: 20s
       timeout: 10s
       retries: 10

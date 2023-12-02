@@ -17,6 +17,7 @@ spring:
           jwk-set-uri: ${INTERNAL_JWT_ISSUER_URL:http://localhost:8081}/oauth2/jwks
 
 oauth2:
+  tokenIssuerUrl: ${INTERNAL_JWT_ISSUER_URL:http://localhost:8081}/oauth2/token
   client-id: ${CAREER_SERVICE_CLIENT_ID:career-service}
   client-secret: ${CAREER_SERVICE_CLIENT_SECRET:6ko*Y(kkMT>W,qWKU4nU5S}
 
@@ -26,7 +27,6 @@ event:
 
 endpoints:
   user-service: ${USER_SERVICE_URL:http://localhost:8082}
-  auth-service: ${AUTH_SERVICE_URL:http://localhost:8081}
 
 global:
   defaultFallbackPaginationLimit: 20

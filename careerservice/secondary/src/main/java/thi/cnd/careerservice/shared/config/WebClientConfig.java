@@ -39,7 +39,7 @@ public class WebClientConfig {
     ClientRegistrationRepository reactiveClientRegistrationRepository(
             @Value("${oauth2.client-id}") String clientId,
             @Value("${oauth2.client-secret}") String clientSecret,
-            @Value("${endpoints.auth-service}") String authServiceUrl
+            @Value("${oauth2.tokenIssuerUrl}") String jwkSetEndpoint
         ) {
         return new InMemoryClientRegistrationRepository(
             ClientRegistration
@@ -49,7 +49,7 @@ public class WebClientConfig {
                 .clientSecret(clientSecret)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .tokenUri(authServiceUrl+"/oauth2/token")
+                .tokenUri(jwkSetEndpoint)
                 .userNameAttributeName("name")
                 .build()
         );
