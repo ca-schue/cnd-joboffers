@@ -55,6 +55,7 @@ metadata:
   name: kafka-data-claim
   labels:
     app: kafka-event
+  namespace: default
 spec:
   accessModes:
     - ReadWriteOnce
@@ -72,15 +73,16 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: hostname
   capacity:
     storage: 500Mi
   accessModes:
     - ReadWriteOnce
   claimRef:
     name: kafka-data-claim
+    namespace: default
   hostPath:
     type: DirectoryOrCreate
-    path: ./volumes/kafka-broker
+    path: {{ $.Values.localConfig.mountBasePath }}/kafka-broker/data
 
 

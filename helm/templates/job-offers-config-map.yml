@@ -30,7 +30,7 @@ data:
   AUTH_SERVICE_DB: {{ .dbName }}
   AUTH_SERVICE_MONGODB_URI: {{ tpl (tpl .dbUri $) $ }}
   JWT_PUBLIC_KEY_BASE64: {{ .jwtPublicKeyBase64 }}
-  JWT_PRIVATE_KEY_BASE64: {{ .jwtPrivateKeyBase64 }}
+  #JWT_PRIVATE_KEY_BASE64: {{ .jwtPrivateKeyBase64 }}
   JWT_KEY_ID: {{ .jwtKeyId }}
   JWT_VALIDITY_IN_SECONDS: {{ .jwtValidityInSeconds | quote }}
   JWT_KEY_ALGORITHM: {{ .jwtKeyAlgorithm }}
@@ -41,8 +41,8 @@ data:
   {{- with .Values.microservices.careerService }}
   CAREER_SERVICE_URL: {{ tpl .url $ }}
   CAREER_SERVICE_MONGODB_URI: {{ tpl (tpl .dbUri $) $ }}
-  CAREER_SERVICE_CLIENT_ID: {{ .oAuth2ClientID }}
-  CAREER_SERVICE_CLIENT_SECRET: {{ .oAuth2ClientSecretPlaintext }}
+  #CAREER_SERVICE_CLIENT_ID: {{ .oAuth2ClientID }}
+  #CAREER_SERVICE_CLIENT_SECRET: {{ .oAuth2ClientSecretPlaintext }}
   CAREER_SERVICE_PORT: {{ .port | quote }}
   {{- end }} 
 
@@ -80,6 +80,6 @@ data:
   EXTERNAL_CAREER_SERVICE_URL: {{ tpl $.Values.ingress.endpoints.career.externalUrl $ }}
   OIDC_PROVIDER_DISCOVERY_ENDPOINT: {{ .oidc.discoveryEndpoint }}
   OIDC_CLIENT_ID: {{ .oidc.clientID }}
-  OIDC_CLIENT_SECRET: {{ .oidc.clientSecret }}
+  #OIDC_CLIENT_SECRET: {{ .oidc.clientSecret }}
   OIDC_CLIENT_REDIRECT_URL: {{ .oidc.clientRedirectUrl }}
   {{- end }} 

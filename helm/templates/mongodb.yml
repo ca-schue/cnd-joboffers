@@ -32,13 +32,15 @@ spec:
         app: mongodb
     spec:
       containers:
-        - image: mongo
+        - image: "mongo:{{ .Values.mongodb.imageTag }}"
           name: mongodb
           ports:
             - containerPort: 27017
           envFrom:
             - configMapRef:
                 name: job-offers-config-map
+            - secretRef:
+                name: job-offers-secret-config
           volumeMounts:
             - name: "mongo-mount"
               mountPath: "/data/db"
@@ -68,10 +70,11 @@ spec:
   accessModes:
     - ReadWriteOnce
   claimRef:
+    namespace: default
     name: mongodb-volume-claim
   hostPath:
     type: DirectoryOrCreate
-    path: /run/desktop/mnt/host/d/Dev/carl-repo/cnd-joboffers/volumes/mongo-data
+    path: {{ $.Values.localConfig.mountBasePath }}/mongo-data
 
 ---
 
@@ -79,9 +82,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mongodb-volume-claim
+  namespace: default
   labels:
     app: mongodb
 spec:
+  storageClassName: hostpath
   accessModes:
     - ReadWriteOnce
   volumeName: mongodb-volume

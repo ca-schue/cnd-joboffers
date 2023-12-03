@@ -60,6 +60,7 @@ metadata:
   name: zookeeper-data-claim
   labels:
     app: zookeeper
+  namespace: default
 spec:
   accessModes:
     - ReadWriteOnce
@@ -76,6 +77,7 @@ metadata:
   name: zookeeper-log-claim
   labels:
     app: zookeeper
+  namespace: default
 spec:
   accessModes:
     - ReadWriteOnce
@@ -93,16 +95,17 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: hostname
   capacity:
     storage: 500Mi
   accessModes:
     - ReadWriteOnce
   claimRef:
     name: zookeeper-data-claim
+    namespace: default
   hostPath:
     type: DirectoryOrCreate
-    path: ./volumes/zookeeper/data
+    path: {{ $.Values.localConfig.mountBasePath }}/zookeeper/data
 
 ---
 
@@ -113,13 +116,14 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: hostname
   capacity:
     storage: 500Mi
   accessModes:
     - ReadWriteOnce
   claimRef:
-    name: zookeeper-log-claim-logs
+    name: zookeeper-log-claim
+    namespace: default
   hostPath:
     type: DirectoryOrCreate
-    path: ./volumes/zookeeper/log
+    path: {{ $.Values.localConfig.mountBasePath }}/zookeeper/log

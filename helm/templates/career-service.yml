@@ -39,6 +39,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: job-offers-config-map
+            - secretRef:
+                name: job-offers-secret-config
           ports:
             - containerPort: {{ .port }}
       restartPolicy: Always

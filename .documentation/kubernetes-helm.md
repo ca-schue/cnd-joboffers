@@ -9,6 +9,9 @@
 3. Install ingress controller in kubernetes cluster
 	- Example: [Doku](https://kubernetes.github.io/ingress-nginx/deploy/)
 	- Command tested: `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml`
+4. Execute `mkdirs.sh` to create the `volumes` folder.
+5. Adjust the base configuration under the `./helm` folder
+    - Everything should be already configured. Only value that should be adjusted is `localConfig.mountBasePath`, which is the path to the `volumes` folder created in the previous step
 
 ## Installing Application with Helm Chart
 1. Go to root folder and type command `helm install joboffers helm/.`

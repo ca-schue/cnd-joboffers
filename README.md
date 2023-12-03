@@ -32,7 +32,7 @@ Actor role evolution:
 - ... [locally 'bare metal' (un-containerized)](.documentation/bare-metal.md)
 - ... [locally as seperated docker containers](.documentation/docker-seperated.md)
 - ... [locally using docker compose](.documentation/docker-compose.md)
-- ... on a kubernetes cluster (TODO)
+- ... [on a kubernetes cluster](.documentation/kubernetes-helm.md)
 
 ## System architecture
 
