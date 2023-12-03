@@ -43,7 +43,7 @@ spec:
                 name: job-offers-secret-config
           volumeMounts:
             - name: "mongo-mount"
-              mountPath: "/data/db"
+              mountPath: "/data"
             - name: "mongo-init-database"
               mountPath: /docker-entrypoint-initdb.d/mongo-init.js
               subPath: mongo-init.js
