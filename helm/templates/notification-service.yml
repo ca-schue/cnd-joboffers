@@ -1,16 +1,17 @@
+{{- with .Values.microservices.notificationService }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-svc
+  name: {{ .serviceName }}
   labels:
-    app: user-service
+    app: {{ .name }}
 spec:
   selector:
-    app: user-service
+    app: {{ .name }}
   ports:
-    - port: 8080
+    - port: {{ .port }}
       protocol: TCP
-      targetPort: 8080
+      targetPort: {{ .port }}
   type: ClusterIP
 
 ---
@@ -19,25 +20,27 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: user-service
+  name: {{ .name }}
   labels:
-    app: user-service
+    app: {{ .name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: {{ .name }}
   template:
     metadata:
       labels:
-        app: user-service
+        app: {{ .name }}
     spec:
       containers:
-        - name: user-service
-          image: caschuen/cnd-joboffers-user-service
+        - name: {{ .name }}
+          image: "{{ .image }}:{{ .imageTag }}"
           envFrom:
             - configMapRef:
                 name: job-offers-config-map
           ports:
-            - containerPort: 8080
+            - containerPort: {{ .port }}
       restartPolicy: Always
+
+{{- end }} 

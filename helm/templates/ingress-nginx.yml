@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    #kubernetes.io/ingress.class: "nginx"
+    #nginx.ingress.kubernetes.io/affinity-mode: "persistent"
+    #nginx.ingress.kubernetes.io/affinity: "cookie"
+    #nginx.ingress.kubernetes.io/use-regex: "true"
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  namespace: default
+spec:
+  rules:
+    - http:
+        paths:
+          {{- range .Values.ingress.endpoints }}
+          - path: {{ .endpoint }}/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ tpl .serviceName $ }}
+                port:
+                  number: {{ tpl .port $ }}
+          {{- end }}

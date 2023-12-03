@@ -1,47 +1,46 @@
+{{- with .Values.microservices.authService }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-svc
+  name: {{ .serviceName }}
   labels:
-    app: auth-service
+    app: {{ .name }}
 spec:
   selector:
-    app: auth-service
+    app: {{ .name }}
   ports:
-    - port: 8080
+    - port: {{ .port }}
       protocol: TCP
-      targetPort: 8080
+      targetPort: {{ .port }}
   type: ClusterIP
-
 ---
-
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
-  name: auth-service
+  name: {{ .name }}
   labels:
-    app: auth-service
+    app: {{ .name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth-service
+      app: {{ .name }}
   template:
     metadata:
       labels:
-        app: auth-service
+        app: {{ .name }}
     spec:
       containers:
-        - name: auth-service
-          image: caschuen/cnd-joboffers-auth-service
+        - name: {{ .name }}
+          image: "{{ .image }}:{{ .imageTag }}"
           envFrom:
             - configMapRef:
                 name: job-offers-config-map
           ports:
-            - containerPort: 8080
+            - containerPort: {{ .port }}
           resources:
             limits:
               memory: "1Gi"
               cpu: "100m"
       restartPolicy: Always
+{{- end }} 

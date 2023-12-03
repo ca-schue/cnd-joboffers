@@ -3,17 +3,17 @@ kind: Service
 metadata:
   labels:
     app: eventstoredb
-  name: eventstoredb
+  name: {{ .Values.eventstore.serviceName }}
 spec:
   ports:
     - name: eventstoredb-port-1113
-      port: 1113
+      port: {{ .Values.eventstore.dbPort }}
       protocol: TCP
-      targetPort: 1113
+      targetPort: {{ .Values.eventstore.dbPort }}
     - name: eventstoredb-port-2113
-      port: 2113
+      port: {{ .Values.eventstore.webUIPort }}
       protocol: TCP
-      targetPort: 2113
+      targetPort: {{ .Values.eventstore.webUIPort }}
   selector:
     app: eventstoredb
 
@@ -37,13 +37,11 @@ spec:
         app: eventstoredb
     spec:
       containers:
-        - image: eventstore/eventstore:23.6.0-buster-slim
-          # For ARM-based processors
-          # image: eventstore/eventstore:23.6.0-alpha-arm64v8
+        - image: "{{ .Values.eventstore.image }}:{{ .Values.eventstore.imageTag }}"
           name: eventstoredb
           ports:
-            - containerPort: 1113
-            - containerPort: 2113
+            - containerPort: {{ .Values.eventstore.dbPort }}
+            - containerPort: {{ .Values.eventstore.webUIPort }}
           envFrom:
             - configMapRef:
                 name: job-offers-config-map
@@ -71,6 +69,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  volumeName: eventstoredb-data-volume
   resources:
     requests:
       storage: 500Mi
@@ -86,6 +85,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  volumeName: eventstoredb-log-volume
   resources:
     requests:
       storage: 500Mi
@@ -96,15 +96,38 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: eventstoredb-volume
+  name: eventstoredb-data-volume
   labels:
     type: local
 spec:
   storageClassName: manual
   capacity:
     storage: 500Mi
+  claimRef:
+    name: eventstoredb-data-claim
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: ./volumes/eventstoredb
+    type: DirectoryOrCreate
+    path: ./volumes/eventstore-volume-data
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: eventstoredb-log-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 500Mi
+  claimRef:
+    name: eventstoredb-log-claim
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    type: DirectoryOrCreate
+    path: ./volumes/eventstore-volume-logs
 

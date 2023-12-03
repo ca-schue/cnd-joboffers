@@ -1,16 +1,17 @@
+{{- with .Values.microservices.userService }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: career-svc
+  name: {{ .serviceName }}
   labels:
-    app: career-service
+    app: {{ .name }}
 spec:
   selector:
-    app: career-service
+    app: {{ .name }}
   ports:
-    - port: 8080
+    - port: {{ .port }}
       protocol: TCP
-      targetPort: 8080
+      targetPort: {{ .port }}
   type: ClusterIP
 
 ---
@@ -19,25 +20,26 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: career-service
+  name: {{ .name }}
   labels:
-    app: career-service
+    app: {{ .name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: career-service
+      app: {{ .name }}
   template:
     metadata:
       labels:
-        app: career-service
+        app: {{ .name }}
     spec:
       containers:
-        - name: career-service
-          image: caschuen/cnd-joboffers-career-service
+        - name: {{ .name }}
+          image: "{{ .image }}:{{ .imageTag }}"
           envFrom:
             - configMapRef:
                 name: job-offers-config-map
           ports:
-            - containerPort: 8080
+            - containerPort: {{ .port }}
       restartPolicy: Always
+{{- end }} 

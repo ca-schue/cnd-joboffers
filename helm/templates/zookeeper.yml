@@ -3,12 +3,12 @@ kind: Service
 metadata:
   labels:
     app: zookeeper
-  name: zookeeper
+  name: {{ .Values.zookeeper.serviceName }}
 spec:
   ports:
-    - port: 2181
+    - port: {{ .Values.zookeeper.port }}
       protocol: TCP
-      targetPort: 2181
+      targetPort: {{ .Values.zookeeper.port }}
   selector:
     app: zookeeper
 
@@ -32,10 +32,10 @@ spec:
         app: zookeeper
     spec:
       containers:
-        - image: confluentinc/cp-zookeeper:7.4.3
+        - image: confluentinc/cp-zookeeper:{{ .Values.zookeeper.imageTag }}
           name: zookeeper
           ports:
-            - containerPort: 2181
+            - containerPort: {{ .Values.zookeeper.port }}
           envFrom:
             - configMapRef:
                 name: job-offers-config-map
@@ -63,6 +63,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  volumeName: zookeeper-data-volume
   resources:
     requests:
       storage: 500Mi
@@ -78,6 +79,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  volumeName: zookeeper-log-volume
   resources:
     requests:
       storage: 500Mi
@@ -87,7 +89,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: zookeeper-volume
+  name: zookeeper-data-volume
   labels:
     type: local
 spec:
@@ -96,5 +98,28 @@ spec:
     storage: 500Mi
   accessModes:
     - ReadWriteOnce
+  claimRef:
+    name: zookeeper-data-claim
   hostPath:
-    path: ./volumes/zookeeper
+    type: DirectoryOrCreate
+    path: ./volumes/zookeeper/data
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: zookeeper-log-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 500Mi
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    name: zookeeper-log-claim-logs
+  hostPath:
+    type: DirectoryOrCreate
+    path: ./volumes/zookeeper/log

@@ -3,10 +3,10 @@ kind: Service
 metadata:
   labels:
     app: mongodb
-  name: mongodb
+  name: {{ .Values.mongodb.serviceName }}
 spec:
   ports:
-    - port: 27017
+    - port: {{ .Values.mongodb.port }}
       protocol: TCP
       targetPort: 27017
   selector:
@@ -63,13 +63,15 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
   capacity:
     storage: 500Mi
   accessModes:
     - ReadWriteOnce
+  claimRef:
+    name: mongodb-volume-claim
   hostPath:
-    path: ./volumes/mongodb
+    type: DirectoryOrCreate
+    path: /run/desktop/mnt/host/d/Dev/carl-repo/cnd-joboffers/volumes/mongo-data
 
 ---
 
@@ -82,6 +84,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  volumeName: mongodb-volume
   resources:
     requests:
       storage: 500Mi
@@ -90,12 +93,7 @@ spec:
 
 apiVersion: v1
 data:
-  mongo-init.js: "use(process.env.AUTH_SERVICE_DB)\r\n let res = [db.Clients.insertOne({\r\n        \"_id\": \"career-service\",\r\n
-    \       \"encryptedPassword\": \"$2a$10$1KgYAGEqhADDPvEzxZ7Q0OtPfPrKo8ZDTJAd1SG342YVdT9XNZQN6\",\r\n
-    \       \"audiences\": [\"user-service\", \"auth-service\", \"career-service\",
-    \"notification-service\"],\r\n        \"lastLogin\": ISODate(\"2023-10-11T12:58:47.275Z\"),\r\n
-    \       \"lastPasswordChange\": ISODate(\"2023-10-11T12:58:47.275Z\"),\r\n        \"_class\":
-    \"thi.cnd.authservice.secondary.repository.clients.model.ClientDAO\"\r\n    })\r\n\r\n]"
+  mongo-init.js: {{ tpl .Values.mongodb.startupScript . | toYaml | indent 1 }}
 kind: ConfigMap
 metadata:
   creationTimestamp: "2023-11-06T20:13:43Z"

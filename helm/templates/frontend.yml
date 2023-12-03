@@ -1,16 +1,17 @@
+{{- with .Values.microservices.frontend }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend
+  name: {{ .serviceName }}
   labels:
-    app: frontend
+    app: {{ .name }}
 spec:
   selector:
-    app: frontend
+    app: {{ .name }}
   ports:
-    - port: 8080
+    - port: {{ .port }}
       protocol: TCP
-      targetPort: 8080
+      targetPort: {{ .port }}
   type: ClusterIP
 
 ---
@@ -19,29 +20,30 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: frontend
+  name: {{ .name }}
   labels:
-    app: frontend
+    app: {{ .name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: {{ .name }}
   template:
     metadata:
       labels:
-        app: frontend
+        app: {{ .name }}
     spec:
       containers:
-        - name: frontend
-          image: caschuen/cnd-joboffers-frontend
+        - name: {{ .name }}
+          image: "{{ .image }}:{{ .imageTag }}"
           envFrom:
             - configMapRef:
                 name: job-offers-config-map
           ports:
-            - containerPort: 8080
+            - containerPort: {{ .port }}
           resources:
             limits:
               memory: "4Gi"
               cpu: "1.0"
       restartPolicy: Always
+{{- end }}

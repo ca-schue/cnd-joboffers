@@ -3,10 +3,10 @@ kind: Service
 metadata:
   labels:
     app: kafka-event
-  name: kafka-event
+  name: {{ .Values.kafka.serviceName }}
 spec:
   ports:
-    - port: 9092
+    - port: {{ .Values.kafka.port }}
       protocol: TCP
       targetPort: 9092
   selector:
@@ -32,7 +32,7 @@ spec:
         app: kafka-event
     spec:
       containers:
-        - image: confluentinc/cp-kafka:7.4.3
+        - image: confluentinc/cp-kafka:{{ .Values.kafka.imageTag }}
           name: kafka-event
           ports:
             - containerPort: 9092
@@ -58,6 +58,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  volumeName: kafka-volume
   resources:
     requests:
       storage: 500Mi
@@ -76,7 +77,10 @@ spec:
     storage: 500Mi
   accessModes:
     - ReadWriteOnce
+  claimRef:
+    name: kafka-data-claim
   hostPath:
-    path: ./volumes/kafka
+    type: DirectoryOrCreate
+    path: ./volumes/kafka-broker
 
 
