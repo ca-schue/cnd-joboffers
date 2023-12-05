@@ -73,7 +73,6 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
                         if (account.accountType !== "OidcAccount") {
                             throw new Error("OIDC Login failed. No OIDC Account")
                         }
-                        dispatch(loginAccount({account: account}))
 
                         const access_token = accountLoginResponse.access_token;
                         if (access_token == null) {
@@ -84,6 +83,7 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
                         userApi.fetchUser(account.id)
                             .then(async user => {
                                 setLoading(false)
+                                dispatch(loginAccount({account: account}))
                                 dispatch(loginUser({user: user}))
                                 dispatch(userProfileCreated({userProfileCreated: true}))
                                 setError("")
@@ -91,6 +91,7 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
                             })
                             .catch(() => {
                                 setLoading(false)
+                                dispatch(loginAccount({account: account}))
                                 dispatch(userProfileCreated({userProfileCreated: false}))
                                 console.log("No user fetched");
                             })
@@ -118,7 +119,6 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
                 if (account.accountType !== "InternalAccount") {
                     throw new Error("Internal Login failed. No Internal Account")
                 }
-                dispatch(loginAccount({account}))
 
                 const access_token = accountLoginResponse.access_token;
                 if (access_token == null) {
@@ -129,6 +129,7 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
                 userApi.fetchUser(account.id)
                     .then(async user => {
                         setLoading(false)
+                        dispatch(loginAccount({account}))
                         dispatch(loginUser({user: user}))
                         dispatch(userProfileCreated({userProfileCreated: true}))
                         setError("")
@@ -136,6 +137,7 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
                     })
                     .catch(() => {
                         setLoading(false)
+                        dispatch(loginAccount({account}))
                         dispatch(userProfileCreated({userProfileCreated: false}))
                         console.log("No user fetched");
                         setUserProfileEmail(account.email)
