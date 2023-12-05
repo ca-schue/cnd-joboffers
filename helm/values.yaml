@@ -7,7 +7,7 @@ localConfig:
   # For Docker Desktop the path starts with /run/desktop/mnt/host
   # and then the drive + location of the git repository + "/volumes"
   # Example: /run/desktop/mnt/host/d/git-repos/cnd-joboffers/volumes
-  mountBasePath: "./volumes"
+  mountBasePath: "/data/volumes"
 
 microservices:
   authService:

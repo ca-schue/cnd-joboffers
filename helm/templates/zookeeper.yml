@@ -95,7 +95,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: hostname
+  storageClassName: hostpath
   capacity:
     storage: 500Mi
   accessModes:
@@ -116,7 +116,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: hostname
+  storageClassName: hostpath
   capacity:
     storage: 500Mi
   accessModes:
