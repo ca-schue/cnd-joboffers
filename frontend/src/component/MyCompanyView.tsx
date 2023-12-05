@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Modal, Form, ListGroup, Container, Row, Col} from 'react-bootstrap';
+import {Col, Container, Form, ListGroup, Modal, Row} from 'react-bootstrap';
 import {useAppDispatch, useAppSelector, useLogout} from "../state/hooks";
-import {Company} from "../.generated/user-service/models/Company";
-import {CompanyDTO, CompanyIdDTO, PublicUserProfileDTO, UserDTO, UserIdDTO} from "../.generated/user-service";
+import {CompanyDTO, PublicUserProfileDTO, UserDTO, UserIdDTO} from "../.generated/user-service";
 import {userApi} from "../api/apis";
 import {addMemberCompany, setOwnerCompany, updateMemberCompany} from "../state/reducer/MyCompaniesSlice";
 import {updateUser} from "../state/reducer/UserSlice";
-import {UUID} from "../.generated/user-service/models/UUID";
-import * as Stream from "stream";
-import {forEach, map} from "react-bootstrap/ElementChildren";
+import {Box, Button, Card, CardContent, TextField, Typography} from '@mui/material';
+import WarningIcon from '@mui/icons-material/Warning';
 
 interface MyCompanyViewProps {
     loading: ((is_loading: boolean) => void)
@@ -189,7 +187,7 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
                 dispatch(updateUser({user: ownerUser}))
                 dispatch(setOwnerCompany({company: newCompany}))
                 dispatch(addMemberCompany({company: newCompany}))
-                setCreateCompanyFeedback("Company created. Logging out.")
+                setCreateCompanyFeedback("Firma erstellt. Sie werden abgemeldet.")
                 new Promise(r => setTimeout(r, 1000 * 2))
                     .then(() => {
                         props.loading(false)
@@ -214,7 +212,7 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
                 dispatch(setOwnerCompany({company: updatedCompany}))
                 dispatch(updateMemberCompany({updatedMemberCompany: updatedCompany}))
                 props.loading(false)
-                setUpdateBasicCompanyDataFeedback("Company data updated.")
+                setUpdateBasicCompanyDataFeedback("Firma-Informationen aktualisiert.")
             })
             .catch(error => {
                 setUpdateBasicCompanyDataError(error.body.error)
@@ -237,7 +235,7 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
                 dispatch(setOwnerCompany({company: updatedCompany}))
                 dispatch(updateMemberCompany({updatedMemberCompany: updatedCompany}))
                 props.loading(false)
-                setUpdateCompanyLinksFeedback("Company links updated")
+                setUpdateCompanyLinksFeedback("Firmen-Links aktualisiert.")
             })
             .catch(error => {
                 setUpdateCompanyLinksError(error)
@@ -256,10 +254,10 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
             .then( () => {
                 setNewUserEmail("")
                 props.loading(false)
-                setInviteUserFeedback("User '" + newUserEmail + "' invited.")
+                setInviteUserFeedback("Benutzer '" + newUserEmail + "' eingeladen.")
             })
             .catch(error => {
-                setInviteUserError("Error when inviting user '" + newUserEmail + "': " + error.body.error)
+                setInviteUserError("Der Benutzer '" + newUserEmail + "' konnte nicht eingeladen werden: " + error.body.error)
                 props.loading(false)
             })
     };
@@ -271,7 +269,7 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
         props.loading(true)
         userApi.deleteCompany(existingCompany.id)
             .then( () => {
-                setDeleteCompanyFeedback("Company deleted. Logging out.")
+                setDeleteCompanyFeedback("Firma wurde gelöscht. Sie werden abgemeldet.")
                 new Promise(r => setTimeout(r, 1000 * 2))
                     .then(() => {
                         props.loading(false)
@@ -304,200 +302,153 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
 
             {hasCompany && (
                 <div>
-                    <h1>Premium Partner</h1>
-                    {premiumPartner ? (
-                        <p>{partnerUntil}</p>
-                    ) : (
-                        <Button onClick={handlePartnerProgramSubscription}>Become a premium partner</Button>)
+                    <Typography variant="h4" margin={"20px 0px"}>Premium Partner</Typography>
+                    {premiumPartner && (
+                        <Typography>Sie sind Partner bis {partnerUntil}</Typography>
+                    ) || (
+                        <Button variant="contained" onClick={handlePartnerProgramSubscription}>Become a premium partner</Button>)
                     }
-                    { premiumPartnerError != "" && (
-                        <div className="text-danger">
-                            {premiumPartnerError}
-                        </div>
-                    )}
+                    { premiumPartnerError != "" && <Typography color={"error"}>{premiumPartnerError}</Typography>}
                 </div>
             )}
 
             <hr />
 
-            <h1>Basis-Informationen</h1>
+            <Typography variant="h4">Basis-Informationen</Typography>
+            <Box sx={{width: "100%", display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px"}}>
+                <TextField
+                    type="text"
+                    label="Firmenname"
+                    value={companyDetails.name}
+                    onChange={(e) => setCompanyDetails({ ...companyDetails, name: e.target.value })}
+                />
+                <TextField
+                    multiline
+                    type="text"
+                    label="Beschreibung"
+                    value={companyDetails.description}
+                    onChange={(e) => setCompanyDetails({ ...companyDetails, description: e.target.value })}
+                />
+                <TextField
+                    type="text"
+                    label="Tags"
+                    value={companyDetails.tags.join(', ')}
+                    onChange={(e) => setCompanyDetails({ ...companyDetails, tags: e.target.value.split(', ') })}
+                />
+                <TextField
+                    type="text"
+                    label="Standort"
+                    value={companyDetails.location}
+                    onChange={(e) => setCompanyDetails({ ...companyDetails, location: e.target.value })}
+                />
+            </Box>
+
             <Form>
-                <Form.Group>
-                    <Form.Label>Firmenname</Form.Label>
-                    <Form.Control
-                        type="text"
-                        value={companyDetails.name}
-                        onChange={(e) => setCompanyDetails({ ...companyDetails, name: e.target.value })}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Beschreibung</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        value={companyDetails.description}
-                        onChange={(e) => setCompanyDetails({ ...companyDetails, description: e.target.value })}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Tags</Form.Label>
-                    <Form.Control
-                        type="text"
-                        value={companyDetails.tags.join(', ')}
-                        onChange={(e) => setCompanyDetails({ ...companyDetails, tags: e.target.value.split(', ') })}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Standort</Form.Label>
-                    <Form.Control
-                        type="text"
-                        value={companyDetails.location}
-                        onChange={(e) => setCompanyDetails({ ...companyDetails, location: e.target.value })}
-                    />
-                </Form.Group>
+                <br/>
                 {hasCompany && (
-                    <Button onClick={handleUpdateBasisInfo}>Update der Basis-Informationen</Button>
+                    <Button variant="contained" onClick={handleUpdateBasisInfo}>Update der Basis-Informationen</Button>
                 )}
-                { updateBasicCompanyDataFeedback != "" && (
-                    <div className="text-success">
-                        {updateBasicCompanyDataFeedback}
-                    </div>
-                )}
-                { updateBasicCompanyDataError != "" && (
-                    <div className="text-danger">
-                        {updateBasicCompanyDataError}
-                    </div>
-                )}
+                { updateBasicCompanyDataFeedback != "" && <Typography color="success">{updateBasicCompanyDataFeedback}</Typography>}
+                { updateBasicCompanyDataError != "" && <Typography color="error">{updateBasicCompanyDataError}</Typography>}
             </Form>
 
             <hr />
-
-            <h1>Firmen-Links</h1>
-            <Form>
-                <Form.Group>
-                    <Form.Label>Webseiten-URL</Form.Label>
-                    <Form.Control
-                        type="text"
-                        value={companyLinks.website_url === undefined ? "" : companyLinks.website_url}
-                        onChange={(e) => setCompanyLinks({ ...companyLinks, website_url: e.target.value })}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Social Media</Form.Label>
-                    <Form.Control
-                        type="text"
-                        value={companyLinks.social_media === undefined ? [] as string [] : (companyLinks.social_media as string []).join(', ')}
-                        onChange={(e) => setCompanyLinks({ ...companyLinks, social_media: e.target.value.split(', ') })}
-                    />
-                </Form.Group>
+            <Typography variant="h4" sx={{marginTop: "10px"}}>Firmen-Links</Typography>
+            <Box sx={{width: "100%", display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px"}}>
+                <TextField
+                    type="text"
+                    label="Website Url"
+                    value={companyLinks.website_url}
+                    onChange={(e) => setCompanyLinks({ ...companyLinks, website_url: e.target.value })}
+                />
+                <TextField
+                    type="text"
+                    label="Social Media Links"
+                    value={companyLinks.social_media === undefined ? [] as string [] : (companyLinks.social_media as string []).join(', ')}
+                    onChange={(e) => setCompanyLinks({ ...companyLinks, social_media: e.target.value.split(', ') })}
+                />
                 {hasCompany && (
-                    <Button onClick={handleUpdateFirmenLinks}>Update der Firmen-Links</Button>
+                    <Button variant="contained" sx={{width: "fit-content"}} onClick={handleUpdateFirmenLinks}>Update der Firmen-Links</Button>
                 )}
-                { updateCompanyLinksFeedback != "" && (
-                    <div className="text-success">
-                        {updateCompanyLinksFeedback}
-                    </div>
-                )}
-                { updateCompanyLinksError != "" && (
-                    <div className="text-danger">
-                        {updateCompanyLinksError}
-                    </div>
-                )}
-                
+                { updateCompanyLinksFeedback != "" && <Typography color="success">{updateCompanyLinksFeedback}</Typography>}
+                { updateCompanyLinksError != "" && <Typography color="error">{updateCompanyLinksError}</Typography>}
+
                 {!hasCompany && (
-                    <Button onClick={handleCreateCompany}>Neue Firma erstellen</Button>
+                    <Box marginTop="10px">
+                        <Button variant="contained" sx={{width: "fit-content", marginRight: "20px"}} onClick={handleCreateCompany}>Neue Firma erstellen</Button>
+                        <Typography color={"error"} sx={{display: "inline-block"}}>Sie werden durch diese Aktion abgemeldet.</Typography>
+                    </Box>
                 )}
-                { createCompanyFeedback != "" && (
-                    <div className="text-success">
-                        {createCompanyFeedback}
-                    </div>
-                )}
-                { createCompanyError != "" && (
-                    <div className="text-danger">
-                        {createCompanyError}
-                    </div>
-                )}
-            </Form>
-
-            <hr />
+                { createCompanyFeedback != "" && <Typography color="success">{createCompanyFeedback}</Typography>}
+                { createCompanyError != "" && <Typography color="error">{createCompanyError}</Typography>}
+            </Box>
 
             {hasCompany && (
             <div>
-                <h1>HR</h1>
-                <Container>
-                    <h2>Member List</h2>
-                    <ListGroup>
-                        {/*members.length == 0 && (
-                            <h5>No members in your company :(</h5>
-                        )*/}
-                        {members.members.map(userProfile => (
-                            <ListGroup.Item key={userProfile.id}>
-                                <Row>
-                                    <Col md={4}>
-                                        <strong>Member ID:</strong> {userProfile.id}
-                                    </Col>
-                                    <Col md={4}>
-                                        <strong>First Name:</strong> {userProfile.first_name}
-                                    </Col>
-                                    <Col md={4}>
-                                        <strong>Last Name:</strong> {userProfile.last_name}
-                                    </Col>
-                                    <Col md={12}>
-                                        <strong>User Profile Email:</strong> {userProfile.user_profile_email}
-                                    </Col>
-                                </Row>
-                            </ListGroup.Item>
-                        ))}
-                    </ListGroup>
-                </Container>
-                <Form>
-                    <Form.Group>
-                        <Form.Label>Invite new User</Form.Label>
-                        <Form.Control
-                            type="text"
-                            value={newUserEmail}
-                            onChange={(e) => setNewUserEmail(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Button onClick={handleInviteUser}>Invite new User</Button>
-                    { inviteUserFeedback != "" && (
-                        <div className="text-success">
-                            {inviteUserFeedback}
-                        </div>
-                    )}
-                    { inviteUserError != "" && (
-                        <div className="text-danger">
-                            {inviteUserError}
-                        </div>
-                    )}
-                </Form>
+                <hr/>
+                <Typography variant={"h4"}>Mitarbeiter</Typography>
+
+                <Box>
+                    { members.members.map(userProfile => (
+                        <Card key={userProfile.id} sx={{margin: "10px 0px", borderRadius: 0, border: "1px solid", width: "80%"}} color="primary">
+                            <CardContent sx={{padding: "10px", "&:last-child": {paddingBottom: "10px"}}}>
+                                <Typography>
+                                    <strong>Member ID:</strong> {userProfile.id}
+                                </Typography>
+                                <Typography>
+                                    <strong>First Name:</strong> {userProfile.first_name}
+                                </Typography>
+                                <Typography>
+                                    <strong>Last Name:</strong> {userProfile.last_name}
+                                </Typography>
+                                <Typography>
+                                    <strong>User Profile Email:</strong> {userProfile.user_profile_email}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </Box>
+
+                <Box display="flex" gap="5%" alignItems="center" width="90%" marginTop="20px">
+                    <TextField
+                        size="small"
+                        type="text"
+                        label="Mitglied einladen"
+                        value={newUserEmail}
+                        sx={{width: "60%"}}
+                        onChange={(e) => setNewUserEmail(e.target.value)}
+                    />
+                    <Button variant="contained" sx={{width: "25%"}} onClick={handleInviteUser}>Abschicken</Button>
+                </Box>
+
+                <Box width="90%" textAlign="center" marginTop="20px">
+                    { inviteUserFeedback != "" && <Typography color="success">{inviteUserFeedback}</Typography>}
+                    { inviteUserError != "" && <Typography color="error">{inviteUserError}</Typography>}
+                </Box>
 
                 <hr />
 
-                <h1>Delete Company</h1>
-                <Button onClick={() => setShowDeleteModal(true)}>Delete Company</Button>
+                <Typography variant="h4">Gefahrenbereich</Typography>
+                <Button sx={{margin: "30px 0px"}} variant="contained" color="error" onClick={() => setShowDeleteModal(true)}>
+                    <WarningIcon sx={{marginRight: "15px"}}/> Firma löschen
+                </Button>
 
                 <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Confirm Deletion</Modal.Title>
+                        <Modal.Title>
+                            <Typography variant={"h5"}>Warnung</Typography>
+                        </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Are you sure you want to delete the company?</Modal.Body>
+                    <Modal.Body><Typography sx={{margin: "5px 0px"}}>Wollen sie diese Firma wirklich löschen?</Typography></Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
-                            Cancel
+                        <Button sx={{marginRight: "20px"}} variant="contained" color="primary" onClick={() => setShowDeleteModal(false)}>
+                            Zurück
                         </Button>
-                        <Button variant="danger" onClick={handleDeleteCompany}>
-                            Delete
+                        <Button variant="contained" color="error" onClick={handleDeleteCompany}>
+                            Firma endgültig löschen
                         </Button>
-                        { deleteCompanyFeedback != "" && (
-                            <div className="text-success">
-                                {deleteCompanyFeedback}
-                            </div>
-                        )}
-                        { deleteCompanyError != "" && (
-                            <div className="text-danger">
-                                {deleteCompanyError}
-                            </div>
-                        )}
+                        { deleteCompanyFeedback != "" && <Typography color="success">{deleteCompanyFeedback}</Typography>}
+                        { deleteCompanyError != "" && <Typography color="error">{deleteCompanyError}</Typography>}
                     </Modal.Footer>
                 </Modal>
             </div>
