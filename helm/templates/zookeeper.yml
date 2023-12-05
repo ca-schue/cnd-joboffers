@@ -36,6 +36,9 @@ spec:
           name: zookeeper
           ports:
             - containerPort: {{ .Values.zookeeper.port }}
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
           envFrom:
             - configMapRef:
                 name: job-offers-config-map

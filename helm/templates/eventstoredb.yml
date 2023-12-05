@@ -42,6 +42,9 @@ spec:
           ports:
             - containerPort: {{ .Values.eventstore.dbPort }}
             - containerPort: {{ .Values.eventstore.webUIPort }}
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
           envFrom:
             - configMapRef:
                 name: job-offers-config-map

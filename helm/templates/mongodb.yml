@@ -36,6 +36,9 @@ spec:
           name: mongodb
           ports:
             - containerPort: 27017
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
           envFrom:
             - configMapRef:
                 name: job-offers-config-map
