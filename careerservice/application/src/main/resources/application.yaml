@@ -58,8 +58,8 @@ management:
       enabled: true
 
 security:
-  csrfActive: true
-  corsActive: true
+  csrfActive: false
+  corsActive: false
 
 server:
   port: ${CAREER_SERVICE_PORT:8083}
