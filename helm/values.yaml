@@ -7,7 +7,7 @@ localConfig:
   # For Docker Desktop the path starts with /run/desktop/mnt/host
   # and then the drive + location of the git repository + "/volumes"
   # Example: /run/desktop/mnt/host/d/git-repos/cnd-joboffers/volumes
-  mountBasePath: "/data/volumes"
+  mountBasePath: "/data"
 
 microservices:
   authService:
@@ -126,9 +126,9 @@ eventstore:
   webUIPort: "2113"
   dbPort: "1113"
   image: eventstore/eventstore
-  imageTag: 23.6.0-buster-slim
+  #imageTag: 23.6.0-buster-slim
   # For ARM-based processors
-  # image: 23.6.0-alpha-arm64v8
+  imageTag: 23.6.0-alpha-arm64v8
   connectionUrl: esdb://{{ .Values.eventstore.serviceName }}:{{ .Values.eventstore.webUIPort }}?tls=false
 
 auth:

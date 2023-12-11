@@ -68,6 +68,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   volumeName: zookeeper-data-volume
+  storageClassName: standard
   resources:
     requests:
       storage: 500Mi
@@ -85,6 +86,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   volumeName: zookeeper-log-volume
+  storageClassName: standard
   resources:
     requests:
       storage: 500Mi
@@ -98,7 +100,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: hostpath
+  storageClassName: standard
   capacity:
     storage: 500Mi
   accessModes:
@@ -119,7 +121,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: hostpath
+  storageClassName: standard
   capacity:
     storage: 500Mi
   accessModes:

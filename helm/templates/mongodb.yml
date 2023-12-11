@@ -31,14 +31,15 @@ spec:
       labels:
         app: mongodb
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 999
+        fsGroup: 999
       containers:
         - image: "mongo:{{ .Values.mongodb.imageTag }}"
           name: mongodb
           ports:
             - containerPort: 27017
-          securityContext:
-            runAsUser: 0
-            runAsGroup: 0
           envFrom:
             - configMapRef:
                 name: job-offers-config-map
@@ -75,6 +76,7 @@ spec:
   claimRef:
     namespace: default
     name: mongodb-volume-claim
+  storageClassName: standard
   hostPath:
     type: DirectoryOrCreate
     path: {{ $.Values.localConfig.mountBasePath }}/mongo-data
@@ -89,7 +91,7 @@ metadata:
   labels:
     app: mongodb
 spec:
-  storageClassName: hostpath
+  storageClassName: standard
   accessModes:
     - ReadWriteOnce
   volumeName: mongodb-volume
