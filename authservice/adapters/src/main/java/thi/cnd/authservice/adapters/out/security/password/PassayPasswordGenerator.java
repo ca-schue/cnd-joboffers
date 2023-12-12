@@ -1,4 +1,4 @@
-package thi.cnd.authservice.domain.password;
+package thi.cnd.authservice.adapters.out.security.password;
 
 import jakarta.validation.constraints.NotBlank;
 import org.passay.CharacterData;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Random;
 
 @Component
-public class PasswordGenerator {
+public class PassayPasswordGenerator {
 
     private final org.passay.PasswordGenerator passwordGenerator = new org.passay.PasswordGenerator();
     private final CharacterRule digitRule = new CharacterRule(EnglishCharacterData.Digit);
@@ -18,7 +18,7 @@ public class PasswordGenerator {
     private final int minPasswordCharacterLength;
     private final int maxPasswordCharacterLength;
 
-    public PasswordGenerator(
+    public PassayPasswordGenerator(
             @Value("${password.minCharacterLength}") int minPasswordCharacterLength,
             @Value("${password.maxCharacterLength}") int maxPasswordCharacterLength
     ) {

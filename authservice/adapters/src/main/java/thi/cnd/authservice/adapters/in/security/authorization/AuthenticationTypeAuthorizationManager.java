@@ -7,7 +7,7 @@ import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
-import thi.cnd.authservice.adapters.in.security.authentication.accessTokenAuthentication.JwtConstants;
+import thi.cnd.authservice.adapters.in.security.authentication.accessTokenAuthentication.JwtClaims;
 import thi.cnd.authservice.adapters.in.security.authentication.accessTokenAuthentication.AuthenticatedAccount;
 
 import java.util.function.Supplier;
@@ -24,7 +24,7 @@ public class AuthenticationTypeAuthorizationManager implements AuthorizationMana
     }
 
     public static AuthorizationManager<RequestAuthorizationContext> isAccount() {
-        return AuthorityAuthorizationManager.hasRole(JwtConstants.ACCOUNT);
+        return AuthorityAuthorizationManager.hasRole(JwtClaims.subjectTypeAccount);
         //return new AuthenticationTypeAuthorizationManager(AuthenticatedAccount.class);
     }
 
@@ -34,7 +34,7 @@ public class AuthenticationTypeAuthorizationManager implements AuthorizationMana
     }
 
     public static AuthorizationManager<RequestAuthorizationContext> isClient() {
-        return AuthorityAuthorizationManager.hasRole(JwtConstants.CLIENT);
+        return AuthorityAuthorizationManager.hasRole(JwtClaims.subjectTypeClient);
         //return new AuthenticationTypeAuthorizationManager(AuthenticatedAccount.class);
     }
 }

@@ -1,6 +1,7 @@
 package thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.oidcAccount;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,21 +19,34 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtIssuerAuthenticationManagerResolver;
 import org.springframework.security.web.SecurityFilterChain;
 import thi.cnd.authservice.adapters.in.security.cors.CorsConfig;
-import thi.cnd.authservice.domain.jwt.JwtConfig;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@AllArgsConstructor
 public class OidcLoginFilterChainConfig {
 
-    private final JwtConfig jwtConfig;
     private final AuthenticatedOidcIdTokenService authenticatedOidcIdTokenService;
     private final CorsConfig corsConfig;
 
-    @Value("${jwt-config.oidcIssuerDiscoveryEndpoint}")
     private final String oidcIssuerDiscoveryEndpoint;
+
+    private final String jwtIssuer;
+
+
+    @Autowired
+    public OidcLoginFilterChainConfig(
+        AuthenticatedOidcIdTokenService authenticatedOidcIdTokenService,
+        CorsConfig corsConfig,
+        @Value("${oidc.oidcProviderDiscoveryEndpoint}") String oidcIssuerDiscoveryEndpoint,
+        @Value("${jwt-config.issuer}") String jwtIssuer
+
+    ) {
+        this.authenticatedOidcIdTokenService = authenticatedOidcIdTokenService;
+        this.corsConfig = corsConfig;
+        this.oidcIssuerDiscoveryEndpoint = oidcIssuerDiscoveryEndpoint;
+        this.jwtIssuer = jwtIssuer;
+    }
 
 
     // OIDC
@@ -72,7 +86,7 @@ public class OidcLoginFilterChainConfig {
             if(subject.isEmpty()) {
                 OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.INVALID_TOKEN, "Subject Claim missing in JWT", null);
                 throw new OAuth2AuthenticationException(error);
-            } else if(jwt.getIssuer().toString().equals(jwtConfig.getIssuer())) {
+            } else if(jwt.getIssuer().toString().equals(jwtIssuer)) {
                 OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.ACCESS_DENIED, "JWT was issued from this server. Only external OIDC providers supported for this endpoint. Use /account/loginInternalAccount instead.", null);
                 throw new OAuth2AuthenticationException(error);
             } else {

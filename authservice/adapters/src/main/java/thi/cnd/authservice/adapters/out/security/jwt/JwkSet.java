@@ -1,4 +1,4 @@
-package thi.cnd.authservice.adapters.in.security.authentication.accessTokenAuthentication;
+package thi.cnd.authservice.adapters.out.security.jwt;
 
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -7,10 +7,11 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
@@ -26,8 +27,7 @@ import java.util.Date;
 
 
 @Validated
-@Component("JwkSetAdapterIn")
-@Configuration
+@Component("JwkSetAdapterOut")
 @Getter
 public class JwkSet {
 
@@ -35,17 +35,19 @@ public class JwkSet {
     private final String rsaPrivateKeyBase64;
     private final String rsaSigningAlgorithm;
     private final String keyId;
+    private final JWKSource jwkSet;
 
     public JwkSet(
             @Value("${jwk.rsaPublicKeyBase64}") String rsaPublicKeyBase64,
             @Value("${jwk.rsaPrivateKeyBase64}") String rsaPrivateKeyBase64,
             @Value("${jwk.rsaSigningAlgorithm}") String rsaSigningAlgorithm,
             @Value("${jwk.keyId}") String keyId
-            ){
+    ){
         this.rsaPublicKeyBase64 = rsaPublicKeyBase64;
         this.rsaPrivateKeyBase64 = rsaPrivateKeyBase64;
         this.rsaSigningAlgorithm = rsaSigningAlgorithm;
         this.keyId = keyId;
+        this.jwkSet = buildJwk(rsaPublicKeyBase64, rsaPrivateKeyBase64);
     }
 
     private JWKSource buildJwk(String rsaPublicKeyBase64, String rsaPrivateKeyBase64) {
@@ -86,8 +88,4 @@ public class JwkSet {
         }
     }
 
-    @Bean
-    public JWKSource<SecurityContext> jwkSource() {
-        return this.buildJwk(this.rsaPublicKeyBase64, this.rsaPrivateKeyBase64);
-    }
 }

@@ -8,8 +8,6 @@ import com.nimbusds.jose.jwk.RSAKey;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import thi.cnd.authservice.domain.jwt.JwtConfig;
-import thi.cnd.authservice.domain.jwt.JwtKeys;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -18,6 +16,7 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 public class JwtProviderUnitTests {
 
+    /*
     // TODO: Replace hard coded constructor parameters with @TestConfiguration (valid.yaml) / (invalid.yaml)
 
     // TODO: Integration Test: Check if Resource Server and Authorization Server get correct JWKSource
@@ -169,4 +168,6 @@ public class JwtProviderUnitTests {
     //  > Mock JWT Config
 
     // createClientAccessToken
+
+     */
 }

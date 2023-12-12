@@ -21,10 +21,10 @@ public class AuthenticatedClient extends AbstractAuthenticationToken {
                         .map(scope -> new SimpleGrantedAuthority("SCOPE_" + scope))
                 ,
                 Stream.of(
-                        new SimpleGrantedAuthority("ROLE_" + JwtConstants.CLIENT)
+                        new SimpleGrantedAuthority("ROLE_" + JwtClaims.subjectTypeClient)
                 )
         ).collect(Collectors.toSet()));
-        this.clientName = jwt.getClaimAsString(JwtConstants.SUBJECT_CLAIM_NAME);
+        this.clientName = jwt.getClaimAsString(JwtClaims.subjectClaimName);
         this.setAuthenticated(true);
     }
 

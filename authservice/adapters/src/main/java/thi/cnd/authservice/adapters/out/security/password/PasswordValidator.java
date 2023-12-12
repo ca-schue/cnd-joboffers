@@ -1,4 +1,4 @@
-package thi.cnd.authservice.domain.password;
+package thi.cnd.authservice.adapters.out.security.password;
 
 import org.springframework.stereotype.Component;
 

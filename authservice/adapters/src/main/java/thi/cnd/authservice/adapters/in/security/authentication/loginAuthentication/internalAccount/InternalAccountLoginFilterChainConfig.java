@@ -10,9 +10,9 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import thi.cnd.authservice.adapters.in.security.cors.CorsConfig;
-import thi.cnd.authservice.domain.password.PasswordEncoder;
 
 @Configuration
 public class InternalAccountLoginFilterChainConfig {
@@ -21,10 +21,10 @@ public class InternalAccountLoginFilterChainConfig {
     private final CorsConfig corsConfig;
 
     @Autowired
-    public InternalAccountLoginFilterChainConfig(InternalAccountDetailsService accountDetailsService, PasswordEncoder passwordEncoder, CorsConfig corsConfig) {
+    public InternalAccountLoginFilterChainConfig(InternalAccountDetailsService accountDetailsService, CorsConfig corsConfig) {
         this.daoAuthenticationProvider = new DaoAuthenticationProvider();
         this.daoAuthenticationProvider.setUserDetailsService(accountDetailsService);
-        this.daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+        this.daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
         this.corsConfig = corsConfig;
     }
 

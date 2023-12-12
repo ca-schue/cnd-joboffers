@@ -23,11 +23,11 @@ public class AuthenticatedAccount extends AbstractAuthenticationToken {
                         .map(scope -> new SimpleGrantedAuthority("SCOPE_" + scope))
                 , */ // TODO: Concat with scopes, when implemented for accounts
                 Stream.of(
-                        new SimpleGrantedAuthority("ROLE_" + JwtConstants.ACCOUNT)
+                        new SimpleGrantedAuthority("ROLE_" + JwtClaims.subjectTypeAccount)
                         )
                 .collect(Collectors.toSet()));
-        this.accountId = AccountId.of(jwt.getClaim(JwtConstants.SUBJECT_CLAIM_NAME).toString());
-        this.isVerified = jwt.getClaim(JwtConstants.VERIFIED_CLAIM_NAME);
+        this.accountId = AccountId.of(jwt.getClaim(JwtClaims.subjectClaimName).toString());
+        this.isVerified = jwt.getClaim(JwtClaims.verifiedClaimName);
         this.setAuthenticated(true);
     }
 

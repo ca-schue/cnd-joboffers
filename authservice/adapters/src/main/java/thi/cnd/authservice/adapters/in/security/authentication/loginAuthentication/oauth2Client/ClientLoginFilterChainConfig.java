@@ -1,6 +1,8 @@
 package thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.oauth2Client;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -11,15 +13,26 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.web.SecurityFilterChain;
 import thi.cnd.authservice.adapters.in.http.client.ClientHttpControllerImpl;
 import thi.cnd.authservice.adapters.in.security.cors.CorsConfig;
-import thi.cnd.authservice.domain.jwt.JwtConfig;
 
 @Configuration
 @AllArgsConstructor
 public class ClientLoginFilterChainConfig {
 
-    private final JwtConfig jwtConfig;
+
     private final ClientHttpControllerImpl clientHttpControllerImpl;
     private final CorsConfig corsConfig;
+
+    private final String jwtIssuer;
+
+    @Autowired
+    public ClientLoginFilterChainConfig(
+            @Value("${jwt-config.issuer}") String jwtIssuer,
+            ClientHttpControllerImpl clientHttpControllerImpl,
+            CorsConfig corsConfig) {
+        this.clientHttpControllerImpl = clientHttpControllerImpl;
+        this.corsConfig = corsConfig;
+        this.jwtIssuer = jwtIssuer;
+    }
 
     /*
     // Auth server
@@ -53,7 +66,7 @@ public class ClientLoginFilterChainConfig {
     @Bean
     public AuthorizationServerSettings providerSettings() {
         return AuthorizationServerSettings.builder()
-                .issuer(jwtConfig.getIssuer())
+                .issuer(this.jwtIssuer)
                 .build();
     }
 
