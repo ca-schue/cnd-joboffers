@@ -1,6 +1,7 @@
 package thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.oidcAccount;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -30,6 +31,9 @@ public class OidcLoginFilterChainConfig {
     private final AuthenticatedOidcIdTokenService authenticatedOidcIdTokenService;
     private final CorsConfig corsConfig;
 
+    @Value("${jwt-config.oidcIssuerDiscoveryEndpoint}")
+    private final String oidcIssuerDiscoveryEndpoint;
+
 
     // OIDC
     @Bean
@@ -38,7 +42,6 @@ public class OidcLoginFilterChainConfig {
         Map<String, AuthenticationManager> authenticationManagers = new HashMap<>();
         JwtIssuerAuthenticationManagerResolver authenticationManagerResolver =
                 new JwtIssuerAuthenticationManagerResolver(authenticationManagers::get);
-        String oidcIssuerDiscoveryEndpoint = jwtConfig.getOidcIssuerDiscoveryEndpoint();
         addManager(authenticationManagers, oidcIssuerDiscoveryEndpoint);
 
         http

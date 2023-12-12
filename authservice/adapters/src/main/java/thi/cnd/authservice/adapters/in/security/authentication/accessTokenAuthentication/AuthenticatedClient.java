@@ -4,7 +4,6 @@ import lombok.Getter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
-import thi.cnd.authservice.domain.jwt.JwtConstants;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

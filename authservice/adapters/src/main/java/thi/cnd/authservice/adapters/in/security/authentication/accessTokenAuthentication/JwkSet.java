@@ -1,4 +1,4 @@
-package thi.cnd.authservice.domain.jwt;
+package thi.cnd.authservice.adapters.in.security.authentication.accessTokenAuthentication;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -8,12 +8,11 @@ import com.nimbusds.jose.proc.SecurityContext;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+import thi.cnd.authservice.domain.jwt.JwtConfig;
 
 @Configuration
 @AllArgsConstructor
-public class JwtKeys {
-
+public class JwkSet {
     private final JwtConfig jwtConfig;
 
     @Bean

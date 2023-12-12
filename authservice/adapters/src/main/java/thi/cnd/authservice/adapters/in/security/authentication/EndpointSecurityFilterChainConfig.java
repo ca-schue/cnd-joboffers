@@ -1,4 +1,4 @@
-package thi.cnd.authservice.adapters.in.security;
+package thi.cnd.authservice.adapters.in.security.authentication;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;

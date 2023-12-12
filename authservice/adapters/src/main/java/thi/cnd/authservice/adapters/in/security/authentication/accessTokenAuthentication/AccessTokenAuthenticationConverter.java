@@ -3,7 +3,6 @@ package thi.cnd.authservice.adapters.in.security.authentication.accessTokenAuthe
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.oauth2.jwt.Jwt;
-import thi.cnd.authservice.domain.jwt.JwtConstants;
 
 public class AccessTokenAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
     @Override
