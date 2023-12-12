@@ -1,4 +1,4 @@
-package thi.cnd.careerservice.event.external.company;
+package thi.cnd.careerservice.event.external.company.command;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

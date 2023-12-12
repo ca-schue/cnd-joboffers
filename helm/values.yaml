@@ -4,10 +4,13 @@ spring:
 localConfig:
   # This config is based on your machine.
   #
-  # For Docker Desktop the path starts with /run/desktop/mnt/host
+  # For Docker Desktop + Windows the path starts with /run/desktop/mnt/host
   # and then the drive + location of the git repository + "/volumes"
   # Example: /run/desktop/mnt/host/d/git-repos/cnd-joboffers/volumes
-  mountBasePath: "/data"
+  #
+  # For Docker Desktop + Mac you can use the absolute path of the volumes folder.
+  # Just make sure the parent folder is in the configured shared folders of Docker Desktop (/Users/* is shared by default; See Docker Desktop settings)
+  mountBasePath: "/Users/thalmaier/work/cnd-joboffers/volumes"
 
 microservices:
   authService:

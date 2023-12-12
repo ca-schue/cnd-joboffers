@@ -1,0 +1,642 @@
+<mxfile host="Electron" modified="2023-12-07T17:07:49.043Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.2 Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36" etag="Mm7zaViVDU10i96MzeXO" version="22.1.2" type="device">
+  <diagram name="Page-1" id="13e1069c-82ec-6db2-03f1-153e76fe0fe0">
+    <mxGraphModel dx="2247" dy="-142" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="x402ROqtHx6wiFdu4wqv-165" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCC5C5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1098" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-164" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCEBC5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1180" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-163" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCEBC5;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1262" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-161" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCC5C5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1344" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-159" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCEBC5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1426" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-158" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCEBC5;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1508" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-90" value="Frontend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="1115" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-94" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-90" target="x402ROqtHx6wiFdu4wqv-93">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-740" y="1135" as="sourcePoint" />
+            <mxPoint x="-660" y="1135" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-95" value="Create &lt;br&gt;Job Offer" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-94">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-96" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-93" target="x402ROqtHx6wiFdu4wqv-97">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="1135" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-93" value="JobOffer&lt;br style=&quot;font-size: 10px;&quot;&gt;Command&lt;br style=&quot;font-size: 10px;&quot;&gt;API" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="1112.5" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-97" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="1106.25" width="80" height="57.5" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-87" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1110" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-88" value="Job Offer" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1110" width="65" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-89" value="State = Open" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-496.25" y="1140" width="92.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-98" value="Command&lt;br style=&quot;font-size: 10px;&quot;&gt;JobOffer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1123.5" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-100" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-109" target="x402ROqtHx6wiFdu4wqv-103">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-710" y="1220.99" as="sourcePoint" />
+            <mxPoint x="-660" y="1220.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-101" value="Job Offer&lt;br&gt;Created Event" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-100">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint x="6" y="-17" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-102" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-103" target="x402ROqtHx6wiFdu4wqv-104">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="1220.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-103" value="JobOffer&lt;br&gt;View&lt;br&gt;Projector" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="1198.49" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-104" value="MongoDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="1192.8700000000001" width="80" height="56.25" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-105" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1195.99" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-106" value="Job Offer View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1195.99" width="100" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-107" value="State = Open" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-496.25" y="1225.99" width="92.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-108" value="Query&lt;br style=&quot;font-size: 10px;&quot;&gt;JobOffer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1209.5" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-109" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="1192.8700000000001" width="80" height="56.25" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-110" value="Frontend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="1283.75" width="80" height="38.75" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-111" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-110" target="x402ROqtHx6wiFdu4wqv-114">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-740" y="1303.12" as="sourcePoint" />
+            <mxPoint x="-660" y="1303.12" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-112" value="Read&lt;br&gt;Job Offer" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-111">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint y="-17" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-113" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-114" target="x402ROqtHx6wiFdu4wqv-121">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="1303.12" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-114" value="JobOffer&lt;br style=&quot;font-size: 10px;&quot;&gt;Query&lt;br style=&quot;font-size: 10px;&quot;&gt;API" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="1280.62" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-116" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1278.12" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-118" value="State = Open" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-496.25" y="1308.12" width="92.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-119" value="Query&lt;br style=&quot;font-size: 10px;&quot;&gt;JobOffer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1291.5" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-120" value="Job Offer View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1278.12" width="100" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-121" value="MongoDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="1275" width="80" height="54.37" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-122" value="Frontend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="1366.88" width="80" height="38.75" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-123" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-122" target="x402ROqtHx6wiFdu4wqv-126">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-740" y="1386.25" as="sourcePoint" />
+            <mxPoint x="-660" y="1386.25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-124" value="Create&lt;br&gt;Job Application" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-123">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-125" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-126" target="x402ROqtHx6wiFdu4wqv-132">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="1386.2550000000003" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-126" value="JobApplication&lt;br&gt;Command&lt;br&gt;API" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="1363.75" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-127" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1361.25" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-128" value="State = Open" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-496.25" y="1391.25" width="92.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-130" value="Job Application" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1361.25" width="120" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-132" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="1357.5" width="80" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-135" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-144" target="x402ROqtHx6wiFdu4wqv-138">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-730" y="1468.3" as="sourcePoint" />
+            <mxPoint x="-660" y="1468.25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-136" value="Job Application&lt;br&gt;Created Event" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-135">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-137" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-138" target="x402ROqtHx6wiFdu4wqv-146">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="1467" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-138" value="JobApplication&lt;br&gt;View&lt;br&gt;Projector" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="1445.75" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-139" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1443.25" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-140" value="State = Open" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-496.25" y="1473.25" width="92.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-142" value="Job Application View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1443.25" width="120" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-144" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="1440.75" width="80" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-146" value="MongoDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="1440.75" width="80" height="54.37" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-147" value="Frontend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="1529.64" width="80" height="38.75" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-148" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-147" target="x402ROqtHx6wiFdu4wqv-151">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-740" y="1549.01" as="sourcePoint" />
+            <mxPoint x="-660" y="1549.01" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-149" value="Read&lt;br&gt;Job Application" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-148">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint y="-17" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-150" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-151" target="x402ROqtHx6wiFdu4wqv-157">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="1547.76" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-151" value="JobApplication&lt;br&gt;Query&lt;br&gt;API" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="1526.51" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-152" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1524.01" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-153" value="State = Open" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-496.25" y="1554.01" width="92.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-154" value="Query&lt;br style=&quot;font-size: 10px;&quot;&gt;JobApplication" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1536.78" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-155" value="Job Application View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1524.01" width="120" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-157" value="MongoDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="1521.8200000000002" width="80" height="54.37" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-160" value="Query&lt;br style=&quot;font-size: 10px;&quot;&gt;JobApplication" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1456.75" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-162" value="Command&lt;br style=&quot;font-size: 10px;&quot;&gt;JobApplication" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1373.5" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-166" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCC5C5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1590" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-167" value="Frontend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="1612.88" width="80" height="38.75" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-168" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-167" target="x402ROqtHx6wiFdu4wqv-171">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-740" y="1632.25" as="sourcePoint" />
+            <mxPoint x="-660" y="1632.25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-169" value="Accept&lt;br&gt;Job Application" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-168">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-170" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-171" target="x402ROqtHx6wiFdu4wqv-175">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="1632.2550000000003" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-171" value="JobApplication&lt;br&gt;Command&lt;br&gt;API" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="1609.75" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-172" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1607.25" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-173" value="State = Accepted" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-508.12" y="1637.25" width="116.25" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-174" value="Job Application" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1607.25" width="120" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-175" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="1603.5" width="80" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-176" value="Command&lt;br style=&quot;font-size: 10px;&quot;&gt;JobApplication" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1619.5" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-177" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCEBC5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1672" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-178" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-185" target="x402ROqtHx6wiFdu4wqv-181">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-730" y="1714.3" as="sourcePoint" />
+            <mxPoint x="-660" y="1714.25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-179" value="Job Application&lt;br&gt;Accepted Event" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-178">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-180" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-181" target="x402ROqtHx6wiFdu4wqv-186">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="1713" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-181" value="JobApplication&lt;br&gt;View&lt;br&gt;Projector" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="1691.75" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-182" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1689.25" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-183" value="State = Accepted" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-503.12" y="1719.25" width="106.25" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-184" value="Job Application View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1689.25" width="120" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-185" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="1686.75" width="80" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-186" value="MongoDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="1686.75" width="80" height="54.37" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-187" value="Query&lt;br style=&quot;font-size: 10px;&quot;&gt;JobApplication" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1702.75" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-188" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCC5C5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1754" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-189" value="Frontend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="1771" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-190" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-189" target="x402ROqtHx6wiFdu4wqv-193">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-740" y="1791" as="sourcePoint" />
+            <mxPoint x="-660" y="1791" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-191" value="Close&lt;br&gt;Job Offer" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-190">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-192" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-193" target="x402ROqtHx6wiFdu4wqv-194">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="1791" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-193" value="JobOffer&lt;br style=&quot;font-size: 10px;&quot;&gt;Command&lt;br style=&quot;font-size: 10px;&quot;&gt;API" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="1768.5" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-194" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="1762.25" width="80" height="57.5" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-195" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1766" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-196" value="Job Offer" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1766" width="65" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-197" value="State = Closed" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-496.25" y="1796" width="92.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-198" value="Command&lt;br style=&quot;font-size: 10px;&quot;&gt;JobOffer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1779.5" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-199" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCEBC5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1836" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-200" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-209" target="x402ROqtHx6wiFdu4wqv-203">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-710" y="1876.99" as="sourcePoint" />
+            <mxPoint x="-660" y="1876.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-201" value="Job Offer&lt;br&gt;Closed Event" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-200">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint x="-4" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-202" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-203" target="x402ROqtHx6wiFdu4wqv-204">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="1876.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-203" value="JobOffer&lt;br&gt;View&lt;br&gt;Projector" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="1854.49" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-204" value="MongoDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="1848.8700000000001" width="80" height="56.25" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-205" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1851.99" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-206" value="Job Offer View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1851.99" width="100" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-207" value="State = Closed" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-496.25" y="1881.99" width="92.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-208" value="Query&lt;br style=&quot;font-size: 10px;&quot;&gt;JobOffer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1865.5" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-209" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="1848.8700000000001" width="80" height="56.25" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-210" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCC5C5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1918" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-211" value="Frontend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="1935" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-212" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-211" target="x402ROqtHx6wiFdu4wqv-215">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-740" y="1955" as="sourcePoint" />
+            <mxPoint x="-660" y="1955" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-213" value="Delete&lt;br&gt;Job Offer" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-212">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-214" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-215" target="x402ROqtHx6wiFdu4wqv-216">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="1955" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-215" value="JobOffer&lt;br style=&quot;font-size: 10px;&quot;&gt;Command&lt;br style=&quot;font-size: 10px;&quot;&gt;API" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="1932.5" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-216" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="1926.25" width="80" height="57.5" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-217" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1930" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-218" value="Job Offer" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="1930" width="65" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-219" value="State = Deleted" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-496.25" y="1960" width="92.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-220" value="Command&lt;br style=&quot;font-size: 10px;&quot;&gt;JobApplication" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="1943.5" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-221" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCEBC5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="2000" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-222" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-231" target="x402ROqtHx6wiFdu4wqv-225">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-710" y="2040.99" as="sourcePoint" />
+            <mxPoint x="-660" y="2040.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-223" value="Job Offer&lt;br&gt;Deleted Event" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-222">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint x="-4" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-224" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-225" target="x402ROqtHx6wiFdu4wqv-226">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="2040.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-225" value="JobOffer&lt;br&gt;View&lt;br&gt;Projector" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="2018.49" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-226" value="MongoDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="2012.8700000000001" width="80" height="56.25" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-227" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="2015.99" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-228" value="Job Offer View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="2015.99" width="100" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-230" value="Query&lt;br style=&quot;font-size: 10px;&quot;&gt;JobOffer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="2029.5" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-231" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="2012.8700000000001" width="80" height="56.25" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-232" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCC5C5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="2082" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-233" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-242" target="x402ROqtHx6wiFdu4wqv-236">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-710" y="2122.99" as="sourcePoint" />
+            <mxPoint x="-660" y="2122.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-234" value="Job Offer&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;Deleted Event" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-233">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint x="-4" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-235" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-236" target="x402ROqtHx6wiFdu4wqv-245">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="2122.995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-236" value="JobApplication&lt;br&gt;Internal Event&lt;br&gt;Listener" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="2100.49" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-248" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-504.12" y="2090.62" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-247" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-506.12" y="2092.62" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-246" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-508.12" y="2095.49" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-238" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="2097.99" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-239" value="Job Application" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="2097.99" width="100" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-240" value="State = Deleted" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-496.25" y="2127.99" width="92.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-241" value="Command&lt;br style=&quot;font-size: 10px;&quot;&gt;JobApplication" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="2111.5" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-242" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="2094.87" width="80" height="56.25" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-243" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=7;fillColor=#e51400;strokeColor=#B20000;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-517.5" y="2069.99" as="sourcePoint" />
+            <mxPoint x="-382.5" y="2015.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-244" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=7;fillColor=#e51400;strokeColor=#B20000;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-382.5" y="2070.87" as="sourcePoint" />
+            <mxPoint x="-517.5" y="2012.87" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-245" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="2093.62" width="80" height="57.5" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-249" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCEBC5;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="2164" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-250" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-258" target="x402ROqtHx6wiFdu4wqv-253">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-710" y="2204.99" as="sourcePoint" />
+            <mxPoint x="-660" y="2204.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-251" value="Job Application&lt;br&gt;Deleted Event" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="x402ROqtHx6wiFdu4wqv-250">
+          <mxGeometry x="-0.0112" y="1" relative="1" as="geometry">
+            <mxPoint x="-4" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-252" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="x402ROqtHx6wiFdu4wqv-253" target="x402ROqtHx6wiFdu4wqv-254">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350" y="2204.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-265" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-504.12" y="2172.5" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-264" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-506.12" y="2174.87" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-253" value="JobApplication&lt;br&gt;View&lt;br&gt;Projector" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-620" y="2182.49" width="80" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-261" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-508.12" y="2177.49" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-254" value="MongoDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="2176.87" width="80" height="56.25" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-255" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="2179.99" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-256" value="Job Application View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="2179.99" width="120" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-257" value="Query&lt;br style=&quot;font-size: 10px;&quot;&gt;JobApplication" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;rotation=-90;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="-890" y="2193.5" width="60" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-258" value="EventStore" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10.190476190476147;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="2176.87" width="80" height="56.25" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-259" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=7;fillColor=#e51400;strokeColor=#B20000;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-517.5" y="2233.99" as="sourcePoint" />
+            <mxPoint x="-382.5" y="2179.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-260" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=7;fillColor=#e51400;strokeColor=#B20000;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-382.5" y="2234.87" as="sourcePoint" />
+            <mxPoint x="-517.5" y="2176.87" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-266" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=0;top=0;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1180" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-267" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;rotation=-180;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1098" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-268" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;rotation=-180;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1344" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-269" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=0;top=0;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1426" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-270" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;rotation=-180;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1590" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-272" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=0;top=0;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1672" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-273" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;rotation=-180;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1754" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-274" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=0;top=0;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1835.99" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-275" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;rotation=-180;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1918" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-276" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=0;top=0;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="1999.99" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-277" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=0;top=0;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="2082" width="590" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="x402ROqtHx6wiFdu4wqv-278" value="" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;rotation=0;" vertex="1" parent="1">
+          <mxGeometry x="-840" y="2164" width="590" height="82" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

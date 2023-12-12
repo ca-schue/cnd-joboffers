@@ -32,9 +32,8 @@ spec:
         app: mongodb
     spec:
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 999
-        fsGroup: 999
+        runAsUser: 0
+        runAsGroup: 0
       containers:
         - image: "mongo:{{ .Values.mongodb.imageTag }}"
           name: mongodb
