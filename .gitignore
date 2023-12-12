@@ -4,3 +4,4 @@
 /k8s/volumes/mongodb/
 /k8s/volumes/zookeeper/
 /.idea/
+.idea

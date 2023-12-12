@@ -1,4 +1,4 @@
-package thi.cnd.careerservice.event.internal.joboffer;
+package thi.cnd.careerservice.event.internal.joboffer.query;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;

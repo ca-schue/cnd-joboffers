@@ -11,10 +11,14 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/careerservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/careerservice.primary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/careerservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/careerservice.secondary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/cnd-joboffers.iml" filepath="$PROJECT_DIR$/.idea/cnd-joboffers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/cnd-joboffers.careerservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/cnd-joboffers.careerservice.primary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/notificationservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/notificationservice.application.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/notificationservice.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/notificationservice.core.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/notificationservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/notificationservice.primary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/notificationservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/notificationservice.secondary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapters/thi.cnd.userservice.userservice.adapters.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapters/thi.cnd.userservice.userservice.adapters.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/thi.cnd.userservice.userservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/thi.cnd.userservice.userservice.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/thi.cnd.userservice.userservice.domain.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/thi.cnd.userservice.userservice.domain.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapters/userservice.adapters.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapters/userservice.adapters.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/userservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/userservice.application.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/userservice.domain.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/userservice.domain.main.iml" />
