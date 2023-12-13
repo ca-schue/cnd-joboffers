@@ -1,4 +1,4 @@
-package thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.oidcAccount;
+package thi.cnd.authservice.adapters.in.security.oidcAccountLogin;
 
 import com.mongodb.lang.Nullable;
 import jakarta.validation.constraints.NotNull;

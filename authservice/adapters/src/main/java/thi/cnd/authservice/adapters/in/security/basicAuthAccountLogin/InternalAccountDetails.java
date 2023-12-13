@@ -1,4 +1,4 @@
-package thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.internalAccount;
+package thi.cnd.authservice.adapters.in.security.basicAuthAccountLogin;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

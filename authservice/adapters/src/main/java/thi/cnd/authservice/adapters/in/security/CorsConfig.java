@@ -1,4 +1,4 @@
-package thi.cnd.authservice.adapters.in.security.cors;
+package thi.cnd.authservice.adapters.in.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

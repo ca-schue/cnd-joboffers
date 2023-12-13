@@ -1,6 +1,5 @@
-package thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.oidcAccount;
+package thi.cnd.authservice.adapters.in.security.oidcAccountLogin;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -18,13 +17,13 @@ import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
 import org.springframework.security.oauth2.server.resource.authentication.JwtIssuerAuthenticationManagerResolver;
 import org.springframework.security.web.SecurityFilterChain;
-import thi.cnd.authservice.adapters.in.security.cors.CorsConfig;
+import thi.cnd.authservice.adapters.in.security.CorsConfig;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class OidcLoginFilterChainConfig {
+class OidcLoginFilterChainConfig {
 
     private final AuthenticatedOidcIdTokenService authenticatedOidcIdTokenService;
     private final CorsConfig corsConfig;

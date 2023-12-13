@@ -1,19 +1,19 @@
-package thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.oidcAccount;
+package thi.cnd.authservice.adapters.in.security.oidcAccountLogin;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import thi.cnd.authservice.application.ports.out.repository.AccountRepository;
+import thi.cnd.authservice.domain.AccountService;
 import thi.cnd.authservice.domain.exceptions.AccountNotFoundBySubjectException;
 import thi.cnd.authservice.domain.model.account.OidcAccount;
 
 @Service
 @AllArgsConstructor
-public class AuthenticatedOidcIdTokenService {
+class AuthenticatedOidcIdTokenService {
 
-    private final AccountRepository accountPort;
+    private final AccountService accountService;
     public AuthenticatedOidcIdToken loadIdTokenBySubject(String subject) {
         try {
-            OidcAccount oidcAccount = accountPort.findOidcAccountBySubjectAndUpdateLastLogin(subject);
+            OidcAccount oidcAccount = accountService.updateLastOidcAccountLogin(subject);
             return new AuthenticatedOidcIdToken(subject, oidcAccount);
         } catch (AccountNotFoundBySubjectException e) {
             return new AuthenticatedOidcIdToken(subject, null);

@@ -1,7 +1,5 @@
 package thi.cnd.authservice.adapters.in.kafka;
 
-
-
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +13,7 @@ import thi.cnd.authservice.events.generated.model.UserRegisteredEventDTO;
 
 @Component
 @RequiredArgsConstructor
-public class UserKafkaListenerImpl {
+class UserKafkaListenerImpl {
 
     private final Logger logger = LoggerFactory.getLogger(UserKafkaListenerImpl.class);
 

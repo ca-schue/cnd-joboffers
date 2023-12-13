@@ -1,9 +1,8 @@
-package thi.cnd.authservice.adapters.in.security.authentication.accessTokenAuthentication;
+package thi.cnd.authservice.adapters.in.security.jwtEndpointAuthentication;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
@@ -11,7 +10,7 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Component("JwtClaimsAdapterIn")
 @Getter
-public class JwtClaims {
+class JwtClaims {
 
     @NotBlank public static String subjectTypeAccount;
 

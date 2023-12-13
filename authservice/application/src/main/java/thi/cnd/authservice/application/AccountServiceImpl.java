@@ -5,12 +5,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import thi.cnd.authservice.application.ports.out.repository.AccountRepository;
 import thi.cnd.authservice.application.ports.out.security.PasswordProvider;
 import thi.cnd.authservice.application.ports.out.security.TokenProvider;
 import thi.cnd.authservice.domain.AccountService;
 import thi.cnd.authservice.domain.exceptions.*;
+import thi.cnd.authservice.domain.model.AccessToken;
 import thi.cnd.authservice.domain.model.account.*;
-import thi.cnd.authservice.application.ports.out.repository.AccountRepository;
 
 import java.time.Instant;
 
@@ -18,7 +19,7 @@ import java.time.Instant;
 @Service
 @Validated
 @AllArgsConstructor
-public class AccountServiceImpl implements AccountService {
+class AccountServiceImpl implements AccountService {
 
     private final TokenProvider tokenProvider;
     private final AccountRepository accountRepository;
@@ -55,7 +56,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountAccessToken mintAccountAccessToken(Account account) {
+    public AccessToken mintAccountAccessToken(Account account) {
         return tokenProvider.createAccountAccessToken(account);
     }
 
@@ -91,6 +92,16 @@ public class AccountServiceImpl implements AccountService {
         InternalAccount internalAccountWithOldPassword = accountRepository.findInternalAccountById(accountId);
         InternalAccount updatedInternalAccount = this.updatePassword(internalAccountWithOldPassword, newPlaintextPassword);
         accountRepository.updateInternalAccount(updatedInternalAccount);
+    }
+
+    @Override
+    public InternalAccount updateLastInternalAccountLogin(String email) throws AccountNotFoundByEmailException {
+        return accountRepository.findInternalAccountByEmailAndUpdateLastLogin(email);
+    }
+
+    @Override
+    public OidcAccount updateLastOidcAccountLogin(String subject) throws AccountNotFoundBySubjectException {
+        return accountRepository.findOidcAccountBySubjectAndUpdateLastLogin(subject);
     }
 
     private OidcAccount buildOidcAccount(String subject) {

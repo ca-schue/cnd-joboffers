@@ -4,6 +4,9 @@ package thi.cnd.authservice.adapters.out.repository.accounts.DAOs;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
+import thi.cnd.authservice.adapters.out.repository.accounts.DAOs.AccountDAO;
+import thi.cnd.authservice.adapters.out.repository.accounts.DAOs.InternalAccountDAO;
+import thi.cnd.authservice.adapters.out.repository.accounts.DAOs.OidcAccountDAO;
 import thi.cnd.authservice.domain.model.account.*;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,

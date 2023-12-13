@@ -11,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Getter
 @Component("JwtClaimsAdapterOut")
-public class JwtClaims {
+class JwtClaims {
 
     @NotBlank public static String subjectTypeAccount;
 

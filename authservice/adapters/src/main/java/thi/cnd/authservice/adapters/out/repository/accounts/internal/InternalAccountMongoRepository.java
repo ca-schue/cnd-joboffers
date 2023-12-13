@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface InternalAccountMongoRepository extends MongoRepository<InternalAccountDAO, AccountId>, ComplexInternalAccountMongoRepository {
 
+
     Optional<InternalAccountDAO> findByEmail(String email);
 }

@@ -1,8 +1,8 @@
 package thi.cnd.authservice.adapters.out.repository.accounts;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import thi.cnd.authservice.domain.model.account.AccountId;
 import thi.cnd.authservice.adapters.out.repository.accounts.DAOs.AccountDAO;
+import thi.cnd.authservice.domain.model.account.AccountId;
 
 import java.util.Optional;
 

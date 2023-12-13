@@ -14,7 +14,7 @@ import org.zalando.jackson.datatype.money.MoneyModule;
 
 
 @Configuration
-public class KafkaConfig {
+class KafkaConfig {
 
     public static String OVERRIDE_KAFKA_BOOTSTRAP_ADDRESS = null;
 

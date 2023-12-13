@@ -1,4 +1,4 @@
-package thi.cnd.authservice.adapters.in.security.authentication;
+package thi.cnd.authservice.adapters.in.security.jwtEndpointAuthentication;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -11,15 +11,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.validation.annotation.Validated;
-import thi.cnd.authservice.adapters.in.security.authorization.AuthenticationTypeAuthorizationManager;
-import thi.cnd.authservice.adapters.in.security.authorization.IdMatcherAuthorizationManager;
-import thi.cnd.authservice.adapters.in.security.cors.CorsConfig;
-import thi.cnd.authservice.adapters.in.security.authentication.accessTokenAuthentication.AccessTokenAuthenticationConverter;
+import thi.cnd.authservice.adapters.in.security.CorsConfig;
 
 @Validated
 @Configuration
 @AllArgsConstructor
-public class EndpointSecurityFilterChainConfig {
+class EndpointSecurityFilterChainConfig {
 
     private final CorsConfig corsConfig;
 

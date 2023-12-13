@@ -1,4 +1,4 @@
-package thi.cnd.authservice.adapters.in.security.authentication.accessTokenAuthentication;
+package thi.cnd.authservice.adapters.in.security.jwtEndpointAuthentication;
 
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -29,7 +29,7 @@ import java.util.Date;
 @Component("JwkSetAdapterIn")
 @Configuration
 @Getter
-public class JwkSet {
+class JwkSet {
 
     private final String rsaPublicKeyBase64;
     private final String rsaPrivateKeyBase64;

@@ -4,21 +4,23 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import thi.cnd.authservice.api.generated.AccountManagementApi;
 import thi.cnd.authservice.api.generated.model.*;
 import thi.cnd.authservice.domain.AccountService;
 import thi.cnd.authservice.domain.exceptions.*;
+import thi.cnd.authservice.domain.model.AccessToken;
 import thi.cnd.authservice.domain.model.account.*;
-import thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.internalAccount.InternalAccountDetails;
-import thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.oidcAccount.AuthenticatedOidcIdToken;
+import thi.cnd.authservice.adapters.in.security.basicAuthAccountLogin.InternalAccountDetails;
+import thi.cnd.authservice.adapters.in.security.oidcAccountLogin.AuthenticatedOidcIdToken;
 
 import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
-public class AccountHttpControllerImpl implements AccountManagementApi {
+class AccountHttpControllerImpl implements AccountManagementApi {
 
     private final AccountService accountService;
     private final AccountDtoMapper accountDtoMapper;
@@ -27,9 +29,16 @@ public class AccountHttpControllerImpl implements AccountManagementApi {
     public ResponseEntity<AccountLoginResponseDTO> registerInternalAccount(InternalAccountRegistrationRequestDTO requestDTO) {
         try {
             InternalAccount registeredInternalAccount = accountService.registerNewInternalAccount(requestDTO.getEmail(), requestDTO.getPassword());
-            AccountAccessToken accessToken = accountService.mintAccountAccessToken(registeredInternalAccount);
+            AccessToken accountAccessToken = accountService.mintAccountAccessToken(registeredInternalAccount);
+            Jwt accountJwt = new Jwt(
+                    accountAccessToken.getTokenValue(),
+                    accountAccessToken.getIssuedAt(),
+                    accountAccessToken.getExpiresAt(),
+                    accountAccessToken.getHeaders(),
+                    accountAccessToken.getClaims()
+            );
             InternalAccountDTO internalAccountDTO = accountDtoMapper.toInternalDTO(registeredInternalAccount);
-            return ResponseEntity.ok(accountDtoMapper.toLoginResponseDTO(internalAccountDTO, accessToken));
+            return ResponseEntity.ok(accountDtoMapper.toLoginResponseDTO(internalAccountDTO, accountJwt));
         } catch (AccountAlreadyExistsException ex) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
         } catch (InvalidPasswordException e) {
@@ -68,15 +77,22 @@ public class AccountHttpControllerImpl implements AccountManagementApi {
     public ResponseEntity<AccountLoginResponseDTO> loginInternalAccount() {
         InternalAccountDetails accountDetails = (InternalAccountDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         InternalAccount internalAccount = accountDetails.internalAccount();
-        AccountAccessToken accessToken = accountService.mintAccountAccessToken(internalAccount);
+        AccessToken accountAccessToken = accountService.mintAccountAccessToken(internalAccount);
+        Jwt accountJwt = new Jwt(
+                accountAccessToken.getTokenValue(),
+                accountAccessToken.getIssuedAt(),
+                accountAccessToken.getExpiresAt(),
+                accountAccessToken.getHeaders(),
+                accountAccessToken.getClaims()
+        );
         InternalAccountDTO internalAccountDTO = accountDtoMapper.toInternalDTO(internalAccount);
-        return ResponseEntity.ok(accountDtoMapper.toLoginResponseDTO(internalAccountDTO, accessToken));
+        return ResponseEntity.ok(accountDtoMapper.toLoginResponseDTO(internalAccountDTO, accountJwt));
     }
 
     @Override
     public ResponseEntity<AccountLoginResponseDTO> loginOIDCAccount() {
-        AuthenticatedOidcIdToken authenticatedOidcIdToken = (AuthenticatedOidcIdToken) SecurityContextHolder.getContext().getAuthentication();
-        OidcAccount oidcAccount = (OidcAccount) authenticatedOidcIdToken.getPrincipal();
+        AuthenticatedOidcIdToken authenticatedOidcIdToken = (AuthenticatedOidcIdToken) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        OidcAccount oidcAccount = (OidcAccount) authenticatedOidcIdToken.getOidcAccount();
         if (oidcAccount == null) { // No account exists yet
             try {
                 oidcAccount = accountService.registerNewOidcAccount(authenticatedOidcIdToken.getSubject());
@@ -84,9 +100,16 @@ public class AccountHttpControllerImpl implements AccountManagementApi {
                 throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
             }
         }
-        AccountAccessToken accessToken = accountService.mintAccountAccessToken(oidcAccount);
+        AccessToken accountAccessToken = accountService.mintAccountAccessToken(oidcAccount);
+        Jwt accountJwt = new Jwt(
+                accountAccessToken.getTokenValue(),
+                accountAccessToken.getIssuedAt(),
+                accountAccessToken.getExpiresAt(),
+                accountAccessToken.getHeaders(),
+                accountAccessToken.getClaims()
+        );
         OidcAccountDTO oidcAccountDTO = accountDtoMapper.toOidcDTO(oidcAccount);
-        return ResponseEntity.ok(accountDtoMapper.toLoginResponseDTO(oidcAccountDTO, accessToken));
+        return ResponseEntity.ok(accountDtoMapper.toLoginResponseDTO(oidcAccountDTO, accountJwt));
     }
 
     @Override

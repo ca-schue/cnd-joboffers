@@ -6,12 +6,8 @@ import com.nimbusds.jose.jwk.KeyUse;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
@@ -29,7 +25,7 @@ import java.util.Date;
 @Validated
 @Component("JwkSetAdapterOut")
 @Getter
-public class JwkSet {
+class JwkSet {
 
     private final String rsaPublicKeyBase64;
     private final String rsaPrivateKeyBase64;

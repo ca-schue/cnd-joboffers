@@ -1,10 +1,10 @@
-package thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.oauth2Client;
+package thi.cnd.authservice.adapters.in.security.oauth2ClientLogin;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.stereotype.Component;
-import thi.cnd.authservice.application.ports.out.repository.ClientRepositoryPort;
+import thi.cnd.authservice.domain.ClientService;
 import thi.cnd.authservice.domain.exceptions.ClientNotFoundByNameException;
 import thi.cnd.authservice.domain.model.client.Client;
 
@@ -15,9 +15,9 @@ import thi.cnd.authservice.domain.model.client.Client;
 // This Token is converted in the JWT which is sent to the client
 @Component
 @RequiredArgsConstructor
-public class CustomRegisteredClientRepository implements RegisteredClientRepository {
+class CustomRegisteredClientRepository implements RegisteredClientRepository {
 
-    private final ClientRepositoryPort port;
+    private final ClientService clientService;
 
     @Override
     public void save(RegisteredClient registeredClient) {
@@ -45,11 +45,8 @@ public class CustomRegisteredClientRepository implements RegisteredClientReposit
         }
     }
     private RegisteredClient findClientByNameAndUpdateLastLogin(String clientId) throws ClientNotFoundByNameException {
-        Client client = port.findByNameAndUpdateLastLogin(clientId);
-        CustomRegisteredClient customRegisteredClient = new CustomRegisteredClient(
-                client
-        );
-        return customRegisteredClient;
+        Client client = clientService.updateLastLogin(clientId);
+        return new CustomRegisteredClient(client);
     }
 
 }

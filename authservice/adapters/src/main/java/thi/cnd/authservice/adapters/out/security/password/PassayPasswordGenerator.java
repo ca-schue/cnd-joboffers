@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Random;
 
 @Component
-public class PassayPasswordGenerator {
+class PassayPasswordGenerator {
 
     private final org.passay.PasswordGenerator passwordGenerator = new org.passay.PasswordGenerator();
     private final CharacterRule digitRule = new CharacterRule(EnglishCharacterData.Digit);

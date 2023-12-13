@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import thi.cnd.authservice.adapters.out.repository.clients.DAOs.ClientDAO;
 import thi.cnd.authservice.adapters.out.repository.clients.DAOs.ClientDaoMapper;
-import thi.cnd.authservice.application.ports.out.repository.ClientRepositoryPort;
+import thi.cnd.authservice.application.ports.out.repository.ClientRepository;
 import thi.cnd.authservice.domain.exceptions.ClientAlreadyExistsException;
 import thi.cnd.authservice.domain.exceptions.ClientNotFoundByNameException;
 import thi.cnd.authservice.domain.model.client.Client;
@@ -23,7 +23,7 @@ import java.util.Optional;
 @Validated
 @Component
 @RequiredArgsConstructor
-public class ClientMongoRepositoryImpl implements ClientRepositoryPort {
+public class ClientMongoRepositoryImpl implements ClientRepository {
 
     private final MongoTemplate mongoTemplate;
     private final ClientDaoMapper mapper;

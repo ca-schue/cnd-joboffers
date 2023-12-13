@@ -1,6 +1,7 @@
 package thi.cnd.authservice.adapters.in.http.account;
 
 import org.mapstruct.*;
+import org.springframework.security.oauth2.jwt.Jwt;
 import thi.cnd.authservice.api.generated.model.AccountDTO;
 import thi.cnd.authservice.api.generated.model.AccountLoginResponseDTO;
 import thi.cnd.authservice.api.generated.model.InternalAccountDTO;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedSourcePolicy = ReportingPolicy.ERROR,
         unmappedTargetPolicy = ReportingPolicy.ERROR)
-public interface AccountDtoMapper {
+interface AccountDtoMapper {
 
     default AccountDTO toAccountDTO(Account account) {
         return switch (account.getProvider()) {
@@ -29,8 +30,8 @@ public interface AccountDtoMapper {
     @BeanMapping(ignoreUnmappedSourceProperties = { "lastLogin", "verified" })
     OidcAccountDTO toOidcDTO(OidcAccount oidcAccount);
 
-    default AccountLoginResponseDTO toLoginResponseDTO(AccountDTO accountDTO, AccountAccessToken token) {
-        return new AccountLoginResponseDTO(accountDTO, token.signedAccountJwt().getTokenValue());
+    default AccountLoginResponseDTO toLoginResponseDTO(AccountDTO accountDTO, Jwt accountJwt) {
+        return new AccountLoginResponseDTO(accountDTO, accountJwt.getTokenValue());
     }
 
     default UUID toUUID(AccountId accountId) {

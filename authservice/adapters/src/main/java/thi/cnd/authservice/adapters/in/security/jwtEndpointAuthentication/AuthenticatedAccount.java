@@ -1,4 +1,4 @@
-package thi.cnd.authservice.adapters.in.security.authentication.accessTokenAuthentication;
+package thi.cnd.authservice.adapters.in.security.jwtEndpointAuthentication;
 
 import lombok.Getter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Getter
-public class AuthenticatedAccount extends AbstractAuthenticationToken {
+class AuthenticatedAccount extends AbstractAuthenticationToken {
 
     private final AccountId accountId;
     private final boolean isVerified;

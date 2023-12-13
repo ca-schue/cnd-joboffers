@@ -181,39 +181,6 @@ paths:
       security:
         - clientAccessToken: []
 
-
-  /token-introspection/account:
-    get:
-      description: Get detailed account data from the provided access token.
-      operationId: tokenIntrospectionAccount
-      tags:
-       - Auth Endpoints
-      responses:
-        '200':
-          description: Token is valid and data could be retrieved.
-          content:
-           application/json:
-             schema:
-                 $ref: '#/components/schemas/Account'
-      security:
-        - accountAccessToken: [ ]
-
-  /token-introspection/client:
-    get:
-      description: Get detailed client data from the provided access token.
-      operationId: tokenIntrospectionClient
-      tags:
-        - Auth Endpoints
-      responses:
-        '200':
-          description: Token is valid and data could be retrieved.
-          content:
-            application/json:
-              schema:
-                  $ref: '#/components/schemas/Client'
-      security:
-        - clientAccessToken: [ ]
-
 components:
   parameters:
     AccountId:

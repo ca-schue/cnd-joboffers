@@ -1,4 +1,4 @@
-package thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.internalAccount;
+package thi.cnd.authservice.adapters.in.security.basicAuthAccountLogin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,10 +12,10 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import thi.cnd.authservice.adapters.in.security.cors.CorsConfig;
+import thi.cnd.authservice.adapters.in.security.CorsConfig;
 
 @Configuration
-public class InternalAccountLoginFilterChainConfig {
+class InternalAccountLoginFilterChainConfig {
 
     private final DaoAuthenticationProvider daoAuthenticationProvider;
     private final CorsConfig corsConfig;

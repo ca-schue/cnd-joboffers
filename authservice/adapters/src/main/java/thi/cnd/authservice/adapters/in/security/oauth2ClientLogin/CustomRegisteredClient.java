@@ -1,4 +1,4 @@
-package thi.cnd.authservice.adapters.in.security.authentication.loginAuthentication.oauth2Client;
+package thi.cnd.authservice.adapters.in.security.oauth2ClientLogin;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Getter
 @Validated
-public class CustomRegisteredClient extends RegisteredClient {
+class CustomRegisteredClient extends RegisteredClient {
 
     private final RegisteredClient registeredClient;
     private final Set<String> audiences;

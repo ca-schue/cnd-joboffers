@@ -1,15 +1,14 @@
 package thi.cnd.authservice.adapters.out.security.jwt;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import thi.cnd.authservice.application.ports.out.security.TokenProvider;
+import thi.cnd.authservice.domain.model.AccessToken;
 import thi.cnd.authservice.domain.model.account.*;
 import thi.cnd.authservice.domain.model.client.*;
 
@@ -19,7 +18,7 @@ import java.util.Collections;
 
 @Validated
 @Component
-public class JwtProvider implements TokenProvider {
+class JwtProvider implements TokenProvider {
 
     @Qualifier("JwkSetAdapterOut")
     private final JwkSet jwkSet;
@@ -36,16 +35,28 @@ public class JwtProvider implements TokenProvider {
         this.jwkSet = jwkSet;
     }
 
-    public AccountAccessToken createAccountAccessToken(Account account) {
+    public AccessToken createAccountAccessToken(Account account) {
         JwtClaimsSet accountJwtClaims = createAccountClaims(account);
         Jwt signedAccountJwt = generateSignedJwt(accountJwtClaims);
-        return new AccountAccessToken(account, signedAccountJwt);
+        return new AccessToken(
+                signedAccountJwt.getTokenValue(),
+                signedAccountJwt.getIssuedAt(),
+                signedAccountJwt.getExpiresAt(),
+                signedAccountJwt.getHeaders(),
+                signedAccountJwt.getClaims()
+        );
     }
 
-    public ClientAccessToken createClientAccessToken(Client client) {
+    public AccessToken createClientAccessToken(Client client) {
         JwtClaimsSet clientJwtClaims = createClientClaims(client);
         Jwt signedAccountJwt = generateSignedJwt(clientJwtClaims);
-        return new ClientAccessToken(client, signedAccountJwt);
+        return new AccessToken(
+                signedAccountJwt.getTokenValue(),
+                signedAccountJwt.getIssuedAt(),
+                signedAccountJwt.getExpiresAt(),
+                signedAccountJwt.getHeaders(),
+                signedAccountJwt.getClaims()
+        );
     }
 
     private JwtClaimsSet createAccountClaims(Account account) {
