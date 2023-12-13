@@ -11,6 +11,8 @@
           <set>
             <option value="$PROJECT_DIR$/authservice" />
             <option value="$PROJECT_DIR$/authservice/adapters" />
+            <option value="$PROJECT_DIR$/authservice/adapters/in" />
+            <option value="$PROJECT_DIR$/authservice/adapters/out" />
             <option value="$PROJECT_DIR$/authservice/application" />
             <option value="$PROJECT_DIR$/authservice/domain" />
           </set>

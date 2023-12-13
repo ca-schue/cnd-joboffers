@@ -5,15 +5,11 @@ plugins {
     id "org.openapi.generator" version "6.6.0"
 }
 
-group = 'thi.cnd.authservice'
-version = '0.0.1-SNAPSHOT'
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation project(':application')
     implementation project(':domain')
 
     implementation 'org.zalando:problem-spring-web-starter:0.29.1'

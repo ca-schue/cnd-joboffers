@@ -1,5 +1,6 @@
 rootProject.name = 'authservice'
-include 'adapters'
+include 'adapters:in'
+include 'adapters:out'
 include 'application'
 include 'domain'
 
