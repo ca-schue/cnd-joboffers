@@ -1,5 +1,7 @@
 package thi.cnd.authservice.adapters.in.http.account;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import thi.cnd.authservice.adapters.in.security.basicAuthAccountLogin.InternalAccountDetails;
 import thi.cnd.authservice.adapters.in.security.oidcAccountLogin.AuthenticatedOidcIdToken;
 import lombok.AllArgsConstructor;
@@ -91,7 +93,7 @@ class AccountHttpControllerImpl implements AccountManagementApi {
 
     @Override
     public ResponseEntity<AccountLoginResponseDTO> loginOIDCAccount() {
-        AuthenticatedOidcIdToken authenticatedOidcIdToken = (AuthenticatedOidcIdToken) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        AuthenticatedOidcIdToken authenticatedOidcIdToken = (AuthenticatedOidcIdToken) SecurityContextHolder.getContext().getAuthentication();
         OidcAccount oidcAccount = (OidcAccount) authenticatedOidcIdToken.getOidcAccount();
         if (oidcAccount == null) { // No account exists yet
             try {

@@ -3,7 +3,7 @@ package thi.cnd.authservice.application;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import thi.cnd.authservice.application.ports.out.repository.ClientRepository;
+import thi.cnd.authservice.application.ports.out.mongo.ClientRepository;
 import thi.cnd.authservice.application.ports.out.security.PasswordProvider;
 import thi.cnd.authservice.application.ports.out.security.TokenProvider;
 import thi.cnd.authservice.domain.ClientService;

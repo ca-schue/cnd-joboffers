@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import thi.cnd.authservice.application.ports.out.repository.AccountRepository;
+import thi.cnd.authservice.application.ports.out.mongo.AccountRepository;
 import thi.cnd.authservice.application.ports.out.security.PasswordProvider;
 import thi.cnd.authservice.application.ports.out.security.TokenProvider;
 import thi.cnd.authservice.domain.AccountService;

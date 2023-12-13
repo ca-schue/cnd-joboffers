@@ -1,4 +1,4 @@
-package thi.cnd.authservice.application.ports.out.repository;
+package thi.cnd.authservice.application.ports.out.mongo;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

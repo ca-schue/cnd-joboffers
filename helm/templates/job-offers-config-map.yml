@@ -33,8 +33,7 @@ data:
   #JWT_PRIVATE_KEY_BASE64: {{ .jwtPrivateKeyBase64 }}
   JWT_KEY_ID: {{ .jwtKeyId }}
   JWT_VALIDITY_IN_SECONDS: {{ .jwtValidityInSeconds | quote }}
-  JWT_KEY_ALGORITHM: {{ .jwtKeyAlgorithm }}
-  JWT_SIGNING_ALGORITHM: {{ .jwtSigningAlgorithm }}
+  JWT_SIGNING_ALGORITHM: {{ .jwtRsaSigningAlgorithm }}
   {{- end }} 
 
   # CAREER SERVICE
