@@ -12,7 +12,7 @@ import java.time.Duration;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final CompanyService companyService;

@@ -39,6 +39,8 @@ services:
     volumes:
       - ./volumes/mongo-data:/data/db
       - ./authservice/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    ports:
+      - 27017:${MONGO_DB_PORT}
     environment:
       - MONGO_INITDB_ROOT_USERNAME
       - MONGO_INITDB_ROOT_PASSWORD
@@ -135,8 +137,8 @@ services:
           condition: service_healthy
       kafka-event:
         condition: service_healthy
-    #ports:  # debug: comment in for publishing port
-    #  - "${AUTH_SERVICE_PORT}:${AUTH_SERVICE_PORT}"
+    ports:  # debug: comment in for publishing port
+      - "${AUTH_SERVICE_PORT}:${AUTH_SERVICE_PORT}"
     environment:
       - AUTH_SERVICE_PORT
       - AUTH_SERVICE_MONGODB_URI
@@ -167,8 +169,8 @@ services:
         condition: service_healthy
       auth-service:
           condition: service_healthy
-    #ports:  # debug: comment in for publishing port
-    #  - "${USER_SERVICE_PORT}:${USER_SERVICE_PORT}"
+    ports:  # debug: comment in for publishing port
+      - "${USER_SERVICE_PORT}:${USER_SERVICE_PORT}"
     environment:
       - USER_SERVICE_PORT
       - INTERNAL_JWT_ISSUER_URL

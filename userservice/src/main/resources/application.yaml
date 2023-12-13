@@ -17,6 +17,14 @@ spring:
           jwk-set-uri: ${INTERNAL_JWT_ISSUER_URL:http://localhost:8081}/oauth2/jwks
           audiences: user-service
 
+jwt-claims:
+  verifiedClaimName: verified
+  scopeClaimName: scope
+  subjectClaimName: sub
+  subjectTypeClaimName: subject-type
+  subjectTypeAccount: account
+  subjectTypeClient: client
+
 logging:
   level:
     org.springframework.web: DEBUG

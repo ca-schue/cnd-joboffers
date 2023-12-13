@@ -1,6 +1,6 @@
 let res = db.getSiblingDB("auth-service").Clients.insertOne({
     "_id": "career-service",
-    "encryptedPassword": "$2a$10$1KgYAGEqhADDPvEzxZ7Q0OtPfPrKo8ZDTJAd1SG342YVdT9XNZQN6",
+    "encryptedPassword": "$2a$10$pa2o.dXwU0AOHRFIQWLU8OiVBBJxRjdaHlZs2w3TFJUTzfTk0IBn2",
     "audiences": ["user-service", "auth-service", "career-service", "notification-service"],
     "scopes": ["getUser", "getCompany"],
     "lastLogin": new Date("2023-10-11T12:58:47.275Z"),

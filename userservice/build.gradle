@@ -24,9 +24,10 @@ dependencies {
 }
 
 dependencies {
-    implementation project(':adapters')
-    implementation project(':domain')
     implementation project(':application')
+    implementation project(':domain')
+    implementation project(':adapters:in')
+    implementation project(':adapters:out')
 }
 
 repositories {

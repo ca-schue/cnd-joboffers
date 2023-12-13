@@ -51,6 +51,8 @@
           <set>
             <option value="$PROJECT_DIR$/userservice" />
             <option value="$PROJECT_DIR$/userservice/adapters" />
+            <option value="$PROJECT_DIR$/userservice/adapters/in" />
+            <option value="$PROJECT_DIR$/userservice/adapters/out" />
             <option value="$PROJECT_DIR$/userservice/application" />
             <option value="$PROJECT_DIR$/userservice/domain" />
           </set>

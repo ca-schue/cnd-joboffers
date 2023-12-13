@@ -20,7 +20,7 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
-public class CompanyServiceImpl implements CompanyService {
+class CompanyServiceImpl implements CompanyService {
 
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
