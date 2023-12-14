@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableConfigurationProperties
 @EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
-@ComponentScan(basePackages = {"thi.cnd.authservice.api", "thi.cnd.authservice.domain", "thi.cnd.authservice.application", "thi.cnd.authservice.adapters"})
+@ComponentScan(basePackages = {"thi.cnd.authservice", "thi.cnd.authservice.api", "thi.cnd.authservice.domain", "thi.cnd.authservice.application", "thi.cnd.authservice.adapters"})
 @ConfigurationPropertiesScan
 public class Application {
 

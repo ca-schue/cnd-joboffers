@@ -26,6 +26,12 @@ test {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:4.7.1'
+	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:4.7.0'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 }
 
 dependencies {
@@ -33,6 +39,7 @@ dependencies {
 	implementation project(':domain')
 	implementation project(':adapters:in')
 	implementation project(':adapters:out')
+
 }
 
 repositories {

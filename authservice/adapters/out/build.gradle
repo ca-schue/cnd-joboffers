@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':application')
+    implementation project(':domain')
+
+    implementation 'org.zalando:problem-spring-web-starter:0.29.1'
+    implementation 'org.zalando:jackson-datatype-problem:0.27.1'
+}
+
+test {
+    useJUnitPlatform()
+}
