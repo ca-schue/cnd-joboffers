@@ -52,57 +52,87 @@ The User Service mandates an asynchronous coupling between <b>one</b> user profi
 
 ## Microservice Architecture
 
-The microservice follows a scalable design principle, employing a hexagonal architecture for enhanced modularity.
-This approach facilitates efficient users and companies while promoting code clarity and maintainability.
+The microservice follows a scalable design principle, employing a "Hexagonal Architecture" for enhanced modularity.
+This approach facilitates efficient scaling of accounts, clients and services while promoting code clarity and maintainability.
 
-Package naming and organization were adopted from the [provided lecture example](), ensuring alignment with the given requirements.
+The "Hexagonal Architecture" was implemented according to the guidelines of the accompanying lecture [[1]](https://online-lectures-cs.thi.de/sesa-ws2021-inf/#/6).
+These are based on the "Ports and Adapters" pattern by Alistair Cockburn [[2]](https://alistair.cockburn.us/hexagonal-architecture/) and were simplified in a Miro board of the lecture [[3]](https://miro.com/app/board/o9J_llo8IL8=/?moveToWidget=3458764538112404057&cot=14):
+
+<blockquote>
+
+<cite><b>"The rule to obey is that code pertaining to the 'inside' part should not leak into the 'outside' part."</b> <a href="https://alistair.cockburn.us/hexagonal-architecture/">[2]</a></cite>
+<details>
+<summary>Implemented with ...</summary>
+
+- Hexagonal layers are implemented as Gradle subprojects: `adapters:in`, `domain`, `application`, `adapters:out`.
+- Inner Gradle subprojects do not receive any `dependency` from outer subprojects.
+</details>
+</blockquote>
+
+<blockquote>
+
+<cite><b>No access among the adapters</b> <a href="https://miro.com/app/board/o9J_llo8IL8=/?moveToWidget=3458764538112404057&cot=14">[3]</a></cite>
+<details>
+<summary>Implemented with ...</summary>
+
+- Input and output adapters separated by Java modules and Gradle projects `adapters:in` and `adapters:out`.
+- Java class visibility reduced to package level whenever possible.
+</details>
+</blockquote>
+
+<blockquote>
+<cite><b>"[…] use cases should generally be written at [...] the inner hexagon, to specify the functions [...]"</b> <a href="https://alistair.cockburn.us/hexagonal-architecture/">[1]</a></cite>
+
+<cite><b>Limit input adapter access to domain layer interfaces</b> <a href="https://miro.com/app/board/o9J_llo8IL8=/?moveToWidget=3458764538112404057&cot=14">[3]</a></cite>
+
+<details>
+<summary>Implemented with ...</summary>
+
+- The Input Adapter Gradle Subproject does not get access to the subproject of the Application Layer.
+</details>
+</blockquote>
+
+<blockquote>
+
+<cite><b>"The [domain] logic is implemented without relation to [...] technology"</b><a href="https://miro.com/app/board/o9J_llo8IL8=/?moveToWidget=3458764538112404057&cot=14">[2]</a></cite>
+
+<p style="margin-left: 10px">Implemented by design.</p>
+</blockquote>
 
 ***Note:*** Increase webpage size for better readability of the vector graphic below
-![Actor role evolution](./figures/user-service/user-service.svg)
 
-(Increase webpage size for better readability of vector graphic)
+![Actor role evolution](./figures/user-service/user-service.svg)
 
 ### Comments on Design decisions
 
 <details>
   <summary><b>Input Adapters</b></summary>
-  
-  - Security: 
-    - With Spring's `OAuth2 Resource Server`, selected endpoints are authenticated by validating "Account JWT" or "Client JWT" using the JWK of the Auth Service   
-    - Spring Security `Authorization Managers` allow authorizing endpoint access.
+
   - HTTP:
+    - Endpoint Controller:
       - User and Company Management use cases are performed through HTTP calls on `UserHttpControllerImpl` and `CompanyHttpControllerImpl`
       - Received DTOs are mapped to the domain model
       - [User Service HTTP endpoints are defined with OpenApi](../userservice/adapters/src/main/resources/openapi-us-rest-spec.yaml)
+    - Endpoint Security:
+      - With Spring's `OAuth2 Resource Server`, selected endpoints are authenticated by validating "Account JWT" or "Client JWT" using the JWK of the Auth Service (obtained via oauth2 HTTP Endpoint).   
+      - Spring Security `Authorization Managers` allow authorizing endpoint access.
 </details>
 
 <details>
-  <summary><b>Domain and Model</b></summary>
+  <summary><b>Domain Model</b></summary>
 
-  - Company and User Service: 
-    - Interfaces reflecting use cases
-  - Model: 
-    - Domain model designed using DDD principles.
-    - This design was chosen to ensure atomic transactions between users and companies.
-</details>
-
-<details>
-  <summary><b>Output Ports</b></summary>
-
-  - Repository:
-    - Interfaces for persisting account and client data
-  - Events:
-    - Distributing user and company data asynchronously to other services.
+  - Domain models `User` and `Company` designed using DDD principles.
+  - This design was chosen to ensure atomic transactions between users and companies.
 </details>
 
 <details>
   <summary><b>Output Adapters</b></summary>
 
-- MongoDB:
-  - Repository ports implemented through Spring's `MongoRepository` module. The URL for the remote database is set in the `AUTH_SERVICE_MONGODB_URI` environment variable.
+- Repositories: MongoDB
+  - Repository ports for persisting account and client data are implemented through Spring's `MongoRepository` module. The URL for the remote database is set in the `AUTH_SERVICE_MONGODB_URI` environment variable.
   - Mapping from the domain model to persisting entities is done through DAOs
-- Kafka: 
-  - Event Ports are implemented using Spring's `KafkaTemplates`
+- Events: Kafka
+  - Event Ports for distributing user and company data asynchronously to other services are implemented using Spring's `KafkaTemplates`
   - [User Service Events are defined with OpenApi](../userservice/adapters/src/main/resources/openapi-us-event-spec.yaml)
   - Mapping from the domain model to persisting entities is done through generated OpenApi classes.
 

@@ -2,7 +2,7 @@ package thi.cnd.userservice.adapters.in.http.user;
 
 import thi.cnd.userservice.adapters.generated.rest.UserApi;
 import thi.cnd.userservice.adapters.generated.rest.model.*;
-import thi.cnd.userservice.adapters.in.jwtEndpointAuthentication.AuthenticatedAccount;
+import thi.cnd.userservice.adapters.in.http.jwtEndpointAuthentication.AuthenticatedAccount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

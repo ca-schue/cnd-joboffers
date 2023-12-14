@@ -1,9 +1,7 @@
 package thi.cnd.authservice.adapters.in.http.account;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import thi.cnd.authservice.adapters.in.security.basicAuthAccountLogin.InternalAccountDetails;
-import thi.cnd.authservice.adapters.in.security.oidcAccountLogin.AuthenticatedOidcIdToken;
+import thi.cnd.authservice.adapters.in.http.basicAuthAccountLogin.InternalAccountDetails;
+import thi.cnd.authservice.adapters.in.http.oidcAccountLogin.AuthenticatedOidcIdToken;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
