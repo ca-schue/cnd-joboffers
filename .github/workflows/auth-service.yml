@@ -2,7 +2,7 @@ name: auth-service-pipeline
 
 on:
   push:
-    branches: **
+    branches: '**'
     paths:
       - .github/workflows/auth-service.yml
       - authservice/**
