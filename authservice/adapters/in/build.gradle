@@ -24,6 +24,9 @@ sourceSets {
     main {
         java.srcDir("$projectDir/build/generate-resources/src/main/java")
     }
+    test {
+        java.srcDir("$projectDir/src/test/java")
+    }
 }
 
 openApiValidate {

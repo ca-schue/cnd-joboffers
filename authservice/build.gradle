@@ -19,6 +19,10 @@ jar {
 	}
 }
 
+test {
+	useJUnitPlatform()
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -88,6 +92,7 @@ subprojects {
 	test {
 		useJUnitPlatform()
 	}
+
 	tasks.withType(Test).configureEach {
 		maxParallelForks = 1
 	}

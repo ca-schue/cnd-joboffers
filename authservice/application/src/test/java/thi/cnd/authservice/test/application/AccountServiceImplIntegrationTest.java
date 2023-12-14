@@ -1,4 +1,4 @@
-package thi.cnd.authservice.test.application.integration;
+/*package thi.cnd.authservice.test.application;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -12,4 +12,4 @@ class AccountServiceImplIntegrationTest {
     // TODO: loginInternalAccount
 
 }
-
+*/

@@ -1,4 +1,4 @@
-package thi.cnd.authservice.test.domain.unit;
+/*package thi.cnd.authservice.test.application;
 
 import com.nimbusds.jose.KeySourceException;
 import com.nimbusds.jose.jwk.JWK;
@@ -16,7 +16,7 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 public class JwtProviderUnitTests {
 
-    /*
+
     // TODO: Replace hard coded constructor parameters with @TestConfiguration (valid.yaml) / (invalid.yaml)
 
     // TODO: Integration Test: Check if Resource Server and Authorization Server get correct JWKSource
@@ -169,5 +169,5 @@ public class JwtProviderUnitTests {
 
     // createClientAccessToken
 
-     */
-}
+
+}*/
