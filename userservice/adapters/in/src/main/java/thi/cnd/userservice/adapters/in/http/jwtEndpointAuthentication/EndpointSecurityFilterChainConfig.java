@@ -197,6 +197,7 @@ public class EndpointSecurityFilterChainConfig {
                                 .jwtAuthenticationConverter(new AccessTokenAuthenticationConverter())));
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfig.corsConfigurationSource()));
+
         return http.build();
     }
 

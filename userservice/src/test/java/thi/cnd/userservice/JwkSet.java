@@ -1,4 +1,4 @@
-package thi.cnd.authservice.adapters.out.security.jwt;
+package thi.cnd.userservice;
 
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -6,8 +6,13 @@ import com.nimbusds.jose.jwk.KeyUse;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
+import com.nimbusds.jose.proc.SecurityContext;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
@@ -23,28 +28,29 @@ import java.util.Date;
 
 
 @Validated
-@Component("JwkSetAdapterOut")
-@Getter
+@Component("JwkSetTest")
+@Configuration
 class JwkSet {
 
     private final String rsaPublicKeyBase64;
     private final String rsaPrivateKeyBase64;
     private final String rsaSigningAlgorithm;
     private final String keyId;
-    private final JWKSource jwkSet;
-
 
     public JwkSet(
             @Value("${jwk.rsaPublicKeyBase64}") String rsaPublicKeyBase64,
             @Value("${jwk.rsaPrivateKeyBase64}") String rsaPrivateKeyBase64,
             @Value("${jwk.rsaSigningAlgorithm}") String rsaSigningAlgorithm,
             @Value("${jwk.keyId}") String keyId
-    ){
+            ){
         this.rsaPublicKeyBase64 = rsaPublicKeyBase64;
         this.rsaPrivateKeyBase64 = rsaPrivateKeyBase64;
         this.rsaSigningAlgorithm = rsaSigningAlgorithm;
         this.keyId = keyId;
-        this.jwkSet = buildJwk(rsaPublicKeyBase64, rsaPrivateKeyBase64);
+    }
+
+    public String getRsaSigningAlgorithm() {
+        return rsaSigningAlgorithm;
     }
 
     private JWKSource buildJwk(String rsaPublicKeyBase64, String rsaPrivateKeyBase64) {
@@ -85,4 +91,26 @@ class JwkSet {
         }
     }
 
+    @Bean
+    public JWKSource<SecurityContext> jwkSource() {
+        return this.buildJwk(this.rsaPublicKeyBase64, this.rsaPrivateKeyBase64);
+    }
+
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        return NimbusJwtDecoder.withPublicKey(buildPublicKey()).build();
+    }
+
+    private RSAPublicKey buildPublicKey() {
+        try {
+            byte[] keyBytes = Base64.getDecoder().decode(rsaPublicKeyBase64);
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            return (RSAPublicKey) keyFactory.generatePublic(keySpec);
+        } catch (Exception e) {
+            // Fügen Sie hier eine geeignete Exception-Behandlung hinzu
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

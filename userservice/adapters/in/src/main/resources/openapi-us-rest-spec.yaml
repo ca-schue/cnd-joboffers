@@ -5,7 +5,7 @@ info:
   version: 0.0.1
 paths:
   /users/register:
-    put:
+    post:
       summary: Register a new user.
       operationId: registerNewUser
       tags:
@@ -87,7 +87,7 @@ paths:
         '404':
           description: User not found for id.
   /users/{user-id}/update-user-settings:
-    post:
+    put:
       description: Update the user settings associated with this user.
       operationId: updateUserSettings
       tags:
@@ -110,7 +110,7 @@ paths:
         '404':
           description: User not found for id.
   /users/{user-id}/update-user-profile:
-    post:
+    put:
       description: Update the user profile associated with this user.
       operationId: updateUserProfile
       tags:
@@ -200,7 +200,7 @@ paths:
         '404':
           description: Company not found for id.
   /companies/register:
-    put:
+    post:
       summary: Creates a new company.
       operationId: createNewCompany
       tags:
@@ -301,7 +301,7 @@ paths:
         '404':
           description: Company not found for id.
   /companies/{company-id}/update-company-details:
-    post:
+    put:
       description: Overrides the current company details with the provided data.
       operationId: updateCompanyDetails
       tags:
@@ -324,7 +324,7 @@ paths:
         '404':
           description: Company not found for id.
   /companies/{company-id}/update-company-links:
-    post:
+    put:
       description: Overrides the current company links with the provided data.
       operationId: updateCompanyLinks
       tags:
@@ -346,19 +346,6 @@ paths:
                 $ref: '#/components/schemas/Company'
         '404':
           description: Company not found for id.
-  /token-introspection:
-    get:
-      summary: Get the user data from the provided access token.
-      operationId: getRequestUserData
-      tags:
-        - Auth
-      responses:
-        '200':
-          description: Token is valid and user data could be retrieved.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
 
 components:
   parameters:
@@ -420,8 +407,6 @@ components:
           $ref: '#/components/schemas/UserSettings'
         subscription:
           $ref: '#/components/schemas/UserSubscription'
-        owner_of:
-          $ref: '#/components/schemas/UUID'
     UserProfile:
       type: object
       required:

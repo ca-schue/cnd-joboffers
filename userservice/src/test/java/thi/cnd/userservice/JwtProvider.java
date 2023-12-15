@@ -1,5 +1,7 @@
-package thi.cnd.authservice.adapters.out.security.jwt;
+package thi.cnd.userservice;
 
+import com.nimbusds.jose.jwk.source.JWKSource;
+import com.nimbusds.jose.proc.SecurityContext;
 import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,10 +9,6 @@ import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
-import thi.cnd.authservice.application.ports.out.security.TokenProvider;
-import thi.cnd.authservice.domain.model.AccessToken;
-import thi.cnd.authservice.domain.model.account.*;
-import thi.cnd.authservice.domain.model.client.*;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -18,9 +16,11 @@ import java.util.Collections;
 
 @Validated
 @Component
-class JwtProvider implements TokenProvider {
+class JwtProvider {
 
-    @Qualifier("JwkSetAdapterOut")
+    private final JWKSource<SecurityContext> jwkSource;
+
+    @Qualifier("JwkSetTest")
     private final JwkSet jwkSet;
     private final String issuer;
     private final long validityInSeconds;
@@ -28,52 +28,38 @@ class JwtProvider implements TokenProvider {
     public JwtProvider(
             @Value("${jwt-config.issuer}") String issuer,
             @PositiveOrZero @Value("${jwt-config.validityInSeconds}") long validityInSeconds,
+            JWKSource<SecurityContext> jwkSource,
             JwkSet jwkSet
             ) {
         this.issuer = issuer;
         this.validityInSeconds = validityInSeconds;
+        this.jwkSource = jwkSource;
         this.jwkSet = jwkSet;
     }
 
-    public AccessToken createAccountAccessToken(Account account) {
-        JwtClaimsSet accountJwtClaims = createAccountClaims(account);
-        Jwt signedAccountJwt = generateSignedJwt(accountJwtClaims);
-        return new AccessToken(
-                signedAccountJwt.getTokenValue(),
-                signedAccountJwt.getIssuedAt(),
-                signedAccountJwt.getExpiresAt(),
-                signedAccountJwt.getHeaders(),
-                signedAccountJwt.getClaims()
-        );
+    public Jwt mintAccountJwt(String accountId, boolean isVerified) {
+        return generateSignedJwt(createAccountClaims(accountId, isVerified));
     }
 
-    public AccessToken createClientAccessToken(Client client) {
-        JwtClaimsSet clientJwtClaims = createClientClaims(client);
-        Jwt signedAccountJwt = generateSignedJwt(clientJwtClaims);
-        return new AccessToken(
-                signedAccountJwt.getTokenValue(),
-                signedAccountJwt.getIssuedAt(),
-                signedAccountJwt.getExpiresAt(),
-                signedAccountJwt.getHeaders(),
-                signedAccountJwt.getClaims()
-        );
+    public Jwt mintClientJwt(String clientName, String [] audiences , String [] scopes) {
+        return generateSignedJwt(createClientClaims(clientName, audiences, scopes));
     }
 
-    private JwtClaimsSet createAccountClaims(Account account) {
+    private JwtClaimsSet createAccountClaims(String accountId, boolean isVerified) {
         return JwtClaimsSet.builder()
                 .claim(JwtClaims.subjectTypeClaimName, JwtClaims.subjectTypeAccount)
-                .claim(JwtClaims.verifiedClaimName, account.isVerified())
+                .claim(JwtClaims.verifiedClaimName, isVerified)
                 .audience(Arrays.asList("user-service", "career-service", "auth-service", "notification-service"))
-                .subject(account.getId().id().toString())
+                .subject(accountId)
                 .build();
     }
 
-    private JwtClaimsSet createClientClaims(Client client) {
+    private JwtClaimsSet createClientClaims(String clientName, String [] audiences , String [] scopes) {
         return JwtClaimsSet.builder()
                 .claim(JwtClaims.subjectTypeClaimName, JwtClaims.subjectTypeClient)
-                .subject(client.name())
-                .audience(client.audiences().stream().toList())
-                .claim("scope", client.scopes() == null ? Collections.emptyList() : client.scopes().stream().toList())
+                .subject(clientName)
+                .audience(Arrays.asList(audiences))
+                .claim("scope", scopes.length == 0 ? Collections.emptyList() : Arrays.asList(scopes))
                 .build();
     }
 
@@ -81,8 +67,7 @@ class JwtProvider implements TokenProvider {
         Instant now = Instant.now();
         Instant expiration = now.plusSeconds(this.validityInSeconds * 1000);
 
-
-        NimbusJwtEncoder nimbusJwtEncoder = new NimbusJwtEncoder(this.jwkSet.getJwkSet());
+        NimbusJwtEncoder nimbusJwtEncoder = new NimbusJwtEncoder(jwkSource);
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.from(this.jwkSet.getRsaSigningAlgorithm());
         JwsHeader jwsHeader = JwsHeader.with(signatureAlgorithm).build();
