@@ -260,7 +260,7 @@ public class LoginIntegrationTests {
 
         String wrongPassword = "Wr0ngP@ssw0rd";
         assertEquals(
-                "Response status expected:<200> but was:<401>FAILFAIL",
+                "Response status expected:<200> but was:<401>",
                 assertThrows(AssertionError.class, () -> testClientLogin(name, wrongPassword)).getMessage()
         );
 
@@ -276,7 +276,7 @@ public class LoginIntegrationTests {
         testClientLogin(name, resetPassword);
 
 
-        /*System.out.println("Login with old PW");
+        System.out.println("Login with old PW");
 
         assertEquals(
                 "Response status expected:<200> but was:<401>",
@@ -295,6 +295,6 @@ public class LoginIntegrationTests {
         assertEquals(
                 "Response status expected:<200> but was:<401>",
                 assertThrows(AssertionError.class, () -> testClientLogin(name, resetPassword)).getMessage()
-        );*/
+        );
     }
 }
