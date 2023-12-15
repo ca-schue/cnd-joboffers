@@ -12,10 +12,14 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/careerservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/careerservice.primary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/careerservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/careerservice.secondary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/cnd-joboffers.iml" filepath="$PROJECT_DIR$/.idea/cnd-joboffers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/cnd-joboffers.authservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/cnd-joboffers.authservice.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/cnd-joboffers.authservice.domain.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/cnd-joboffers.authservice.domain.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapters/in/in.authservice.adapters.in.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapters/in/in.authservice.adapters.in.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/notificationservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/notificationservice.application.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/notificationservice.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/notificationservice.core.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/primary/notificationservice.primary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/primary/notificationservice.primary.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/secondary/notificationservice.secondary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/secondary/notificationservice.secondary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapters/out/out.authservice.adapters.out.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapters/out/out.authservice.adapters.out.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapters/in/userservice.adapters.in.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapters/in/userservice.adapters.in.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapters/out/userservice.adapters.out.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapters/out/userservice.adapters.out.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/userservice.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/userservice.application.main.iml" />
