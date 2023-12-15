@@ -54,15 +54,6 @@ class CompanyMongoRepositoryImpl implements CompanyRepository {
     }
 
     @Override
-    public Page<Company> searchCompaniesByName(@Nullable String name, Set<String> tags, Pageable pageable) {
-        if (name == null && tags.isEmpty()) {
-            return repository.findAll(pageable).map(companyDaoMapper::toCompany);
-        }
-        return repository.findByDetailsNameContainingIgnoreCaseAndDetailsTagsContainingIgnoreCase(name, tags, pageable)
-                .map(companyDaoMapper::toCompany);
-    }
-
-    @Override
     public Company saveCompany(Company company) throws CompanyAlreadyExistsException {
         try {
             var dao = companyDaoMapper.toDAO(company);

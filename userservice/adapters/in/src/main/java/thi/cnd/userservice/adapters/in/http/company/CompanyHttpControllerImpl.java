@@ -94,21 +94,6 @@ class CompanyHttpControllerImpl implements CompanyApi {
     }
 
     @Override
-    public ResponseEntity<PaginatedPublicCompanyProfileResponseDTO> searchCompanies(
-            Optional<String> name,
-            Optional<Set<String>> tags,
-            Optional<Integer> page,
-            Optional<Integer> size) {
-        // Author. = offen
-        var resultList = companyService.searchCompanies(
-                name.orElse(null),
-                tags.orElse(Set.of()),
-                createPageRequest(page, size)
-            );
-        return ResponseEntity.ok(companyDtoMapper.toPaginatedCompaniesDTO(resultList));
-    }
-
-    @Override
     public ResponseEntity<CompanyDTO> subscribeToPartnerProgram(UUID companyId) {
         try {
             Company subscribedCompany = companyService.subscribeToPartnerProgram(CompanyId.of(companyId.toString()));

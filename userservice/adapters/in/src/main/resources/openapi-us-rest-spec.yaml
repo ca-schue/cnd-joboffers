@@ -170,35 +170,6 @@ paths:
       responses:
         '204':
           description: Invitation was accepted.
-  /companies:
-    get:
-      description: Get company for provided id.
-      operationId: searchCompanies
-      tags:
-        - Company
-      parameters:
-        - in: query
-          name: name
-          schema:
-            type: string
-        - in: query
-          name: tags
-          schema:
-            type: array
-            uniqueItems: true
-            items:
-              type: string
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/Size'
-      responses:
-        '200':
-          description: Companies for filters were found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedPublicCompanyProfileResponse'
-        '404':
-          description: Company not found for id.
   /companies/register:
     post:
       summary: Creates a new company.

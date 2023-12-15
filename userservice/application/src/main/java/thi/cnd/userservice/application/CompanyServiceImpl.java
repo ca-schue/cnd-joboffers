@@ -32,11 +32,6 @@ class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Page<Company> searchCompanies(@Nullable String name, Set<String> tags, Pageable pageable) {
-        return null;
-    }
-
-    @Override
     public Company registerNewCompany(
             @NotNull UserId ownerId,
             @NotNull CompanyDetails details,
@@ -63,7 +58,7 @@ class CompanyServiceImpl implements CompanyService {
 
         boolean nameChanged = oldCompany.getDetails().name().equals(updatedCompanyDetails.name());
 
-        oldCompany.setDetails(updatedCompanyDetails); // TODO: Input verification?
+        oldCompany.setDetails(updatedCompanyDetails);
 
         if(nameChanged) {
             companyEvents.publishCompanyNameChanged(companyId, updatedCompanyDetails.name());

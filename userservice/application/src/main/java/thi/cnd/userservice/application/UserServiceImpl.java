@@ -51,7 +51,7 @@ class UserServiceImpl implements UserService {
             if (!userWithSameEmail.getId().toString().equals(userId.toString())) {
                 throw new EmailAlreadyInUseException(newUserProfileEmail);
             } else {
-                throw new UserNotFoundByEmailException(""); // TODO: ugly solution
+                throw new UserNotFoundByEmailException(""); // TODO: ugly solution ...
             }
         } catch (UserNotFoundByEmailException e) {
             user.setProfile(updatedUserProfile);
