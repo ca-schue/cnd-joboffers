@@ -260,7 +260,7 @@ public class LoginIntegrationTests {
 
         String wrongPassword = "Wr0ngP@ssw0rd";
         assertEquals(
-                "Response status expected:<200> but was:<401>",
+                "Response status expected:<200> but was:<401>FAILFAIL",
                 assertThrows(AssertionError.class, () -> testClientLogin(name, wrongPassword)).getMessage()
         );
 
