@@ -4,19 +4,20 @@ This project "Joboffers" is the submission of Simon T. ([@Thalmaier](https://git
 It aims to demonstrate the hexagonal architecture pattern for microservices in a complex, realistic and cloud-based context at its best.
 
 <details xmlns="http://www.w3.org/1999/html">
+  
 <summary><b>Fulfillment of requirements (German) </b></summary>
+
+<br>
 
 <blockquote>
 <cite><b>"Das Anwendungsbeispiel muss je Team-Mitglied mindestens aus zwei Diensten bestehen und Daten erfassen, ein Dienst sollte Anfragen über HTTP entgegen nehmen."</b></cite>
 
 - [x] Four microservices acquire data via the frontend or inter-service communication via HTTP and additionally Kafka events. For more details, refer to section ["System architecture"](#system-architecture):
-  - <b><i>Auth service</i></b> (Carl)
-  - <b><i>User service</i></b> (Carl)
-  - <b><i>Career service</i></b> (Simon)
-  - <b><i>Notification service</i></b> (Simon)
-
-  The frontend and the deployment of the application was developed in an equal split of work.
-
+- <b><i>Auth service</i></b> (Carl)
+- <b><i>User service</i></b> (Carl)
+- <b><i>Career service</i></b> (Simon)
+- <b><i>Notification service</i></b> (Simon)
+<p style="margin: 0;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The frontend and the deployment of the application was developed in an equal split of work.</p>
 </blockquote>
 
 
