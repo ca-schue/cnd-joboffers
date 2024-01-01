@@ -188,7 +188,7 @@ These are based on the "Ports and Adapters" pattern by Alistair Cockburn [[2]](h
   ```
   ./gradlew test
   ```
-- Optionally: Execute end-to-end integration tests to verify use cases
+- Optionally: Execute end-to-end integration tests to verify use cases. The integration tests show a [very rare and non-reproducible idempotence](../authservice/src/test/java/thi/cnd/authservice/IntegrationTests.java) in relation to Spring OAuth2 and embedded MongoDB. Restart the tests in these fail cases after a clean build.
   ```
   ./gradlew integrationTest
   ```
