@@ -1,65 +1,91 @@
-# Cloud-native development (CND) Project: "Joboffers"
+## Project Context
 
-This CND project is a small application that allows users to apply to job offers.
-Respectively, users can also create companies and post job offers in their name.
-We use microservices written in Java with Spring Boot and a hexagonal architecture.
-Our services include:
+This project "Joboffers" is the submission of [@Thalmaier](https://github.com/Thalmaier) and [@ca-schue](https://github.com/ca-schue) for the assignment of the master course Cloud-native development (CND) at Technische Hochschule Ingolstadt in the winter semester 2023/24.
+It aims to demonstrate the hexagonal architecture pattern for microservices in a complex, realistic and cloud-based context at its best.
+
+<details xmlns="http://www.w3.org/1999/html">
+<summary><b>Fulfillment of requirements (German) </b></summary>
+
+<blockquote>
+<cite><b>"Das Anwendungsbeispiel muss je Team-Mitglied mindestens aus zwei Diensten bestehen und Daten erfassen, ein Dienst sollte Anfragen über HTTP entgegen nehmen."</b></cite>
+
+- [x] We have four microservices, which all store their data in a database and are connected over http (except notification service) and events:
 - Auth Service (Authentication) by Carl
 - User Service (User Management) by Carl
 - Career Service (Main Business Logic) by Simon
 - Notification Service (Logs events to console to demonstrate a possible use case) by Simon
+</blockquote>
 
+<blockquote>
+<cite><b>"Realisieren Sie je Team-Mitglied mindestens einen Dienst unter Verwendung eines modernen Architekturansatzes."</b></cite>
 
-<details xmlns="http://www.w3.org/1999/html">
-<summary><b>Fulfillment of requirements</b></summary>
+- [x] All our services use a hexagonal architecture
 
-- [x] Das Anwendungsbeispiel muss je Team-Mitglied mindestens aus zwei Diensten bestehen und Daten erfassen, ein Dienst sollte Anfragen über HTTP entgegen nehmen.
-  - We have four microservices, which all store their data in a database and are connected over http (except notification service) and events
-- [x] Realisieren Sie je Team-Mitglied mindestens einen Dienst unter Verwendung eines modernen Architekturansatzes.
-  - All our services use a hexagonal architecture
-- [x] Ergänzen Sie ein kleines Frontend, welches die realisierte Backend-Funktionalität nutzt.
-  - We created a frontend in react to use our application in a "real world" scenario
-- [x] Ergänzen Sie für die Dienste einfache Unit-Tests, die den jeweiligen Dienst überprüfen, eine vollständige Test-Abdeckung ist nicht notwendig.
-  - We created some unit test cases
-- [x] Dokumentieren Sie kurz, was nötig ist, um die Dienste in einer VM zu installieren und zu starten.
-  - Documented below
-- [x] Erstellen Sie Dockerfiles, welches je einen Dienst zur Ausführung bringt und Dokumentieren Sie, wie diese Dienste installiert und gestartet werden.
-  - Documented below
-- [x] Erstellen Sie ein Docker-Compose-File, welche alle Dienste konfiguriert und Dokumentieren Sie, wie diese Datei genutzt wird, ergänzen Sie einen Load-Balancer (z.B. nginx) um Anfragen zu verteilen. Achten Sie auf die Konfiguration Ihrer Volumes.
-  - Documented below
-- [x] Erstellen Sie Kubernetes-Manifeste, welche Ihre Dienste konfiguriert.
-  - Documented below
-- [x] Automatisieren Sie den Bauprozess (die Bereitstellung ist nicht zwingend erforderlich) in einer wählbaren Umgebung, verwenden Sie hierfür z.B. das GitLab und verfügbare GitLab-CI.
-  - We use Github Actions to build our applications, see `.github/workflows`
-- [x] Skizzieren Sie die realisierte finale Service-Architektur und die innere Architektur eines Dienstes.
-  - See `.documentation` folder
+</blockquote>
 
+<blockquote>
+<cite><b>"Ergänzen Sie ein kleines Frontend, welches die realisierte Backend-Funktionalität nutzt."</b></cite>
+
+- [x] We created a frontend in react to use our application in a "real world" scenario
+</blockquote>
+
+<blockquote>
+<cite><b>"Ergänzen Sie für die Dienste einfache Unit-Tests, die den jeweiligen Dienst überprüfen, eine vollständige Test-Abdeckung ist nicht notwendig."</b></cite>
+
+- [x] Use Cases are verified by end-to-end integration tests in the respective microservice.
+  Core functionality is verified by either fully mocked unit tests or slice tests with selected autowired components.
+</blockquote>
+
+<blockquote>
+<cite><b>"Dokumentieren Sie kurz, was nötig ist, um die Dienste in einer VM zu installieren und zu starten."</b></cite>
+
+- [x] Documented below
+</blockquote>
+
+<blockquote>
+<cite><b>"Erstellen Sie Dockerfiles, welches je einen Dienst zur Ausführung bringt und Dokumentieren Sie, wie diese Dienste installiert und gestartet werden."</b></cite>
+
+- [x] Documented below
+</blockquote>
+
+<blockquote>
+<cite><b>"Erstellen Sie ein Docker-Compose-File, welche alle Dienste konfiguriert und Dokumentieren Sie, wie diese Datei genutzt wird, ergänzen Sie einen Load-Balancer (z.B. nginx) um Anfragen zu verteilen. Achten Sie auf die Konfiguration Ihrer Volumes."</b></cite>
+
+- [x] Documented below
+</blockquote>
+
+<blockquote>
+<cite><b>"Erstellen Sie Kubernetes-Manifeste, welche Ihre Dienste konfiguriert."</b></cite>
+
+- [x] Documented below
+</blockquote>
+
+<blockquote>
+<cite><b>"Automatisieren Sie den Bauprozess (die Bereitstellung ist nicht zwingend erforderlich) in einer wählbaren Umgebung, verwenden Sie hierfür z.B. das GitLab und verfügbare GitLab-CI."</b></cite>
+
+- [x] We use Github Actions to build our applications, see `.github/workflows`
+</blockquote>
+
+<blockquote>
+<cite><b>"Skizzieren Sie die realisierte finale Service-Architektur und die innere Architektur eines Dienstes."</b></cite>
+
+- [x] See `.documentation` folder
+</blockquote>
 
 </details>
 
 ## Application Use Cases
 
+In this application, either a newly registered account or a Google account is linked to a user profile.
+This allows users to set up companies and invite other users as company members to publish job offers.
+All users can then apply for the published job offers of any company.
+
 ![Use Cases](./.documentation/figures/use-cases.svg)
 
-What does this application do from a user perspective? only use-case level no technical details:
 
 Actor role evolution:
 
 ![Actor role evolution](./.documentation/figures/actor-role-evolution.svg)
-
-- Actor: Non-Registered User (Guest):
-  - List Job offers etc. ...
-  - Can create Account with OIDC or Basic Auth.
-- Actor: Registered + Authenticated Account (No Profile):
-  - ... TODO: Was haben wir hier nochmal gesagt?
-  - Must complete user profile for use cases x y and z
-- Actor: Registered + Authenticated User (Account + User Profile):
-  - Verified User = Account + User Profile
-  - Can perform core use cases a b and c ...
-- Actor: Company Owner
-  - Update company details and delete company
-- Actor: Company Member
-  - Can create, edit, delete job offers in the name of the company
 
 ## Run this application ...
 - ... [locally 'bare metal' (un-containerized)](.documentation/bare-metal.md)
@@ -75,7 +101,7 @@ Actor role evolution:
 <summary><b>Frontend</b> (<a href=".documentation/frontend.md">detailed documentation</a>)
   </summary>
   
-  - Uses the provided REST Api of the services to implement the use cases in a GUI
+  - Uses the provided HTTP Api of the services to implement the use cases in a GUI
   - Handles OIDC Authentication 
 </details>
 
@@ -97,7 +123,7 @@ Actor role evolution:
   <summary><b>Career Service</b> (<a href=".documentation/career-service.md">detailed documentation</a>)</summary>
    
   - Contains main business logic to create, edit and delete job offers / job applications
-  - Has integration with the user-service over REST Api and Kafka events
+  - Has integration with the user-service over HTTP Api and Kafka events
   - Uses CQRS and Event-sourcing
 </details>
 
@@ -106,15 +132,5 @@ Actor role evolution:
 
   - Small microservice that listens to events sent to the kafka event bus and prints information out to the console
 </details>
-
-## Featured technology  stack
-
-- Frontend Implementation: React
-- Service Implementation: Spring Boot
-- Authentication: OIDC, OAuth2 and JWT
-- Communication: (unsecured) HTTP & Kafka + OpenAPI
-- Persistence: 
-  - Event Sourcing
-  - MongoDB
 
 
