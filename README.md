@@ -14,10 +14,11 @@ It aims to demonstrate the hexagonal architecture pattern for microservices in a
   - <b><i>User service</i></b> (Carl)
   - <b><i>Career service</i></b> (Simon)
   - <b><i>Notification service</i></b> (Simon)
-  
-  The frontend and the deployment of the application was developed in an equal split of work.  
+
+  The frontend and the deployment of the application was developed in an equal split of work.
 
 </blockquote>
+
 
 <blockquote>
 <cite><b>"Realisieren Sie je Team-Mitglied mindestens einen Dienst unter Verwendung eines modernen Architekturansatzes."</b></cite>
@@ -26,17 +27,20 @@ It aims to demonstrate the hexagonal architecture pattern for microservices in a
 
 </blockquote>
 
+
 <blockquote>
 <cite><b>"Ergänzen Sie ein kleines Frontend, welches die realisierte Backend-Funktionalität nutzt."</b></cite>
 
 - [x] We created a frontend in React in order to deploy the microservices in a realistic production environment.
 </blockquote>
 
+
 <blockquote>
 <cite><b>"Ergänzen Sie für die Dienste einfache Unit-Tests, die den jeweiligen Dienst überprüfen, eine vollständige Test-Abdeckung ist nicht notwendig."</b></cite>
 
 - [x] The core functionality is verified by either fully mocked unit tests or slice tests with selected autowired components. Additionally, relevant use cases are verified by end-to-end integration tests in the respective microservice.
 </blockquote>
+
 
 <blockquote>
 <cite><b>"Dokumentieren Sie kurz, was nötig ist, um die Dienste in einer VM zu installieren und zu starten."</b></cite>
@@ -49,11 +53,13 @@ It aims to demonstrate the hexagonal architecture pattern for microservices in a
   - and on a ["Kubernetes cluster with Helm"](.documentation/kubernetes-helm.md).
 </blockquote>
 
+
 <blockquote>
 <cite><b>"Erstellen Sie Dockerfiles, welches je einen Dienst zur Ausführung bringt und Dokumentieren Sie, wie diese Dienste installiert und gestartet werden."</b></cite>
 
 - [x] Dockerfiles were written for each service as well as for the React frontend. The configuration and execution is described in ["Run the Application as Separate Docker Containers"](.documentation/docker-seperated.md).
 </blockquote>
+
 
 <blockquote>
 <cite><b>"Erstellen Sie ein Docker-Compose-File, welche alle Dienste konfiguriert und Dokumentieren Sie, wie diese Datei genutzt wird, ergänzen Sie einen Load-Balancer (z.B. nginx) um Anfragen zu verteilen. Achten Sie auf die Konfiguration Ihrer Volumes."</b></cite>
@@ -62,11 +68,13 @@ It aims to demonstrate the hexagonal architecture pattern for microservices in a
 An intuitive concept with environment variables was established to simplify configuration. See ["Run the application with Docker Compose"](.documentation/docker-compose.md).
 </blockquote>
 
+
 <blockquote>
 <cite><b>"Erstellen Sie Kubernetes-Manifeste, welche Ihre Dienste konfiguriert."</b></cite>
 
 - [x] As a cloud-native application, Kubernetes manifests were written for the entire system context. In order to achieve a realistic production environment, a Helm Chart was also written for deployment on a cluster. Detailed information can be found under ["Run the Application on a Kubernetes Cluster using Helm"](.documentation/kubernetes-helm.md).
 </blockquote>
+
 
 <blockquote>
 <cite><b>"Automatisieren Sie den Bauprozess (die Bereitstellung ist nicht zwingend erforderlich) in einer wählbaren Umgebung, verwenden Sie hierfür z.B. das GitLab und verfügbare GitLab-CI."</b></cite>
@@ -75,12 +83,14 @@ An intuitive concept with environment variables was established to simplify conf
   In each pipeline, the service is built and comprehensively tested - depending on the test duration, additional integration tests are performed. At the end of each pipeline, a Docker image is created and uploaded to the [Docker Hub Registry](https://hub.docker.com/repositories/caschuen). Please refer to [`.github/workflows`](.github/workflows).
 </blockquote>
 
+
 <blockquote>
 <cite><b>"Skizzieren Sie die realisierte finale Service-Architektur und die innere Architektur eines Dienstes."</b></cite>
 
 - [x] Section ["System architecture"](#system-architecture) illustrates the service interactions.
   Beyond this, for each individual service, its relevance in the overall system context as well as its technical implementation are documented together with a detailed visualisation and explanation of the internal architecture.
 </blockquote>
+
 
 </details>
 
