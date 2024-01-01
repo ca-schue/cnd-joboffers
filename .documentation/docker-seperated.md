@@ -1,4 +1,4 @@
-# Run the Application with Docker Compose 
+# Run the Application as Separate Docker Containers 
 
 You can run the "joboffers" application as separately started docker containers (`docker run ...`) on your local machine running under `localhost`.
 **Since this is error-prone for misconfigurations, we recommend using [docker compose](docker-compose.md) instead.**

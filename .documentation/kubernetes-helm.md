@@ -1,5 +1,5 @@
 
-# Run the Application within Kubernetes
+# Run the Application on a Kubernetes Cluster using Helm
 
  ## Running on Windows:
 
