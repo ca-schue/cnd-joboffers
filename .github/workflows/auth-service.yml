@@ -2,7 +2,7 @@ name: auth-service-pipeline
 
 on:
   push:
-    branches: main
+    branches: '**'
     paths:
       - .github/workflows/auth-service.yml
       - authservice/**
@@ -36,7 +36,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Execute Gradle bootJar build
-        run: ./gradlew bootJar
+        run: ./gradlew bootJar test --info
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3

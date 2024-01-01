@@ -20,8 +20,6 @@ public interface CompanyRepository {
 
     @NotNull Company updateOrSaveCompany(Company updatedCompany); // TODO: do like Auth service => strict update!
 
-    Page<Company> searchCompaniesByName(@Nullable String name, @NotNull Set<String> tags, Pageable pageable);
-
     @NotNull Company saveCompany(@NotNull Company company) throws CompanyAlreadyExistsException;
 
     void deleteCompanyById(@NotNull CompanyId companyId) throws CompanyNotFoundByIdException;

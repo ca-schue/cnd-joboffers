@@ -1,0 +1,61 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
+plugins {
+    id 'java'
+    id "org.openapi.generator" version "6.6.0"
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':domain')
+}
+
+test {
+    useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        java.srcDir("$projectDir/build/generate-resources/src/main/java")
+    }
+}
+
+openApiValidate {
+    inputSpec.set("$projectDir/src/main/resources/openapi-us-rest-spec.yaml")
+}
+
+task generateUserRestApi(type: GenerateTask) {
+    inputSpec.set("$projectDir/src/main/resources/openapi-us-rest-spec.yaml")
+    outputDir = "$projectDir/build/generate-resources"
+    generatorName = "spring"
+    library = "spring-boot"
+    modelNameSuffix = "DTO"
+    validateSpec = true
+    modelPackage = "thi.cnd.userservice.adapters.generated.rest.model"
+    apiPackage = "thi.cnd.userservice.adapters.generated.rest"
+    typeMappings = [
+            "OffsetDateTime": "Instant"
+    ]
+    importMappings = [
+            "java.time.OffsetDateTime": "java.time.Instant"
+    ]
+    importMappings = [
+            "java.time.OffsetDateTime": "java.time.Instant"
+    ]
+    additionalProperties = [
+            "useSpringBoot3"      : true,
+            "useSpringController" : false,
+            "useTags"             : true,
+            "useResponseEntity"   : true,
+            "useOptional"         : true,
+            "openApiNullable"     : false,
+            "interfaceOnly"       : true,
+            "skipDefaultInterface": true
+    ]
+}
+
+compileJava.dependsOn generateUserRestApi

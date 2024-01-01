@@ -13,12 +13,6 @@ public interface CompanyService {
 
     Company findCompanyById(@NotNull CompanyId companyId) throws CompanyNotFoundByIdException;
 
-    Page<Company> searchCompanies(
-            @Nullable String name,
-            @NotNull Set<String> tags,
-            Pageable pageable
-    );
-
     @NotNull Company registerNewCompany(
             @NotNull UserId ownerId,
             @NotNull CompanyDetails details,

@@ -20,7 +20,7 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
-public class CompanyServiceImpl implements CompanyService {
+class CompanyServiceImpl implements CompanyService {
 
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
@@ -29,11 +29,6 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public Company findCompanyById(CompanyId companyId) throws CompanyNotFoundByIdException {
         return companyRepository.findCompanyById(companyId);
-    }
-
-    @Override
-    public Page<Company> searchCompanies(@Nullable String name, Set<String> tags, Pageable pageable) {
-        return null;
     }
 
     @Override
@@ -63,7 +58,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         boolean nameChanged = oldCompany.getDetails().name().equals(updatedCompanyDetails.name());
 
-        oldCompany.setDetails(updatedCompanyDetails); // TODO: Input verification?
+        oldCompany.setDetails(updatedCompanyDetails);
 
         if(nameChanged) {
             companyEvents.publishCompanyNameChanged(companyId, updatedCompanyDetails.name());

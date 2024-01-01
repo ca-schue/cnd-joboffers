@@ -5,33 +5,36 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import thi.cnd.authservice.domain.AccountFactory;
+import thi.cnd.authservice.application.ports.out.repository.AccountRepository;
+import thi.cnd.authservice.application.ports.out.security.PasswordProvider;
+import thi.cnd.authservice.application.ports.out.security.TokenProvider;
 import thi.cnd.authservice.domain.AccountService;
 import thi.cnd.authservice.domain.exceptions.*;
-import thi.cnd.authservice.domain.jwt.JwtProvider;
+import thi.cnd.authservice.domain.model.AccessToken;
 import thi.cnd.authservice.domain.model.account.*;
-import thi.cnd.authservice.application.ports.out.repository.AccountRepository;
+
+import java.time.Instant;
 
 
 @Service
 @Validated
 @AllArgsConstructor
-public class AccountServiceImpl implements AccountService {
+class AccountServiceImpl implements AccountService {
 
-    private final JwtProvider jwtProvider;
+    private final TokenProvider tokenProvider;
     private final AccountRepository accountRepository;
-    private final AccountFactory accountFactory;
+    private final PasswordProvider passwordProvider;
     private final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     @Override
     public InternalAccount registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException {
-        InternalAccount internalAccount = accountFactory.buildInternal(email, password);
+        InternalAccount internalAccount = this.buildInternalAccount(email, password);
         return accountRepository.saveInternalAccount(internalAccount);
     }
 
     @Override
     public OidcAccount registerNewOidcAccount(String subject) throws AccountAlreadyExistsException {
-        OidcAccount oidcAccount = accountFactory.buildOidc(subject);
+        OidcAccount oidcAccount = this.buildOidcAccount(subject);
         return accountRepository.saveOidcAccount(oidcAccount);
     }
 
@@ -53,8 +56,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountAccessToken mintAccountAccessToken(Account account) {
-        return jwtProvider.createAccountAccessToken(account);
+    public AccessToken mintAccountAccessToken(Account account) {
+        return tokenProvider.createAccountAccessToken(account);
     }
 
     @Override
@@ -87,7 +90,47 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void updateInternalAccountPassword(AccountId accountId, String newPlaintextPassword) throws AccountNotFoundByIdException, InvalidPasswordException, WrongProviderException {
         InternalAccount internalAccountWithOldPassword = accountRepository.findInternalAccountById(accountId);
-        InternalAccount updatedInternalAccount = accountFactory.updatePassword(internalAccountWithOldPassword, newPlaintextPassword);
+        InternalAccount updatedInternalAccount = this.updatePassword(internalAccountWithOldPassword, newPlaintextPassword);
         accountRepository.updateInternalAccount(updatedInternalAccount);
     }
+
+    @Override
+    public InternalAccount updateLastInternalAccountLogin(String email) throws AccountNotFoundByEmailException {
+        return accountRepository.findInternalAccountByEmailAndUpdateLastLogin(email);
+    }
+
+    @Override
+    public OidcAccount updateLastOidcAccountLogin(String subject) throws AccountNotFoundBySubjectException {
+        return accountRepository.findOidcAccountBySubjectAndUpdateLastLogin(subject);
+    }
+
+    private OidcAccount buildOidcAccount(String subject) {
+        return new OidcAccount(
+                new AccountId(),
+                Instant.now(),
+                subject,
+                false
+        );
+    }
+
+    private InternalAccount buildInternalAccount(String email, String password) throws InvalidPasswordException {
+        return new InternalAccount(
+                new AccountId(),
+                Instant.now(),
+                email,
+                this.passwordProvider.validatePasswordAndEncode(password),
+                false
+        );
+    }
+
+    private InternalAccount updatePassword(InternalAccount internalAccount, String newPlainTextPassword) throws InvalidPasswordException {
+        return new InternalAccount(
+                internalAccount.getId(),
+                internalAccount.getLastLogin(),
+                internalAccount.getEmail(),
+                this.passwordProvider.validatePasswordAndEncode(newPlainTextPassword),
+                internalAccount.isVerified()
+        );
+    }
+
 }

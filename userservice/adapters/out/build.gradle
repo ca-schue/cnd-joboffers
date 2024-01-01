@@ -1,0 +1,61 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
+plugins {
+    id 'java'
+    id "org.openapi.generator" version "6.6.0"
+}
+
+group = 'thi.cnd.userservice'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':application')
+    implementation project(':domain')
+}
+
+test {
+    useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        java.srcDir("$projectDir/build/generate-resources/src/main/java")
+    }
+}
+
+
+openApiValidate {
+    inputSpec.set("$projectDir/src/main/resources/openapi-us-event-spec.yaml")
+}
+
+task generateKafkaEvents(type: GenerateTask) {
+    inputSpec.set("$projectDir/src/main/resources/openapi-us-event-spec.yaml")
+    outputDir = "$projectDir/build/generate-resources"
+    generatorName = "spring"
+    library = "spring-boot"
+    //modelNameSuffix = "DTO"
+    modelPackage = "thi.cnd.userservice.adapters.generated.kafka.model"
+    apiPackage = "thi.cnd.userservice.adapters.generated.kafka"
+    typeMappings = [
+            "OffsetDateTime": "Instant"
+    ]
+    importMappings = [
+            "java.time.OffsetDateTime": "java.time.Instant"
+    ]
+    additionalProperties = [
+            "useSpringBoot3"      : true,
+            "useSpringController" : false,
+            "useTags"             : true,
+            "useResponseEntity"   : false,
+            "useOptional"         : true,
+            "openApiNullable"     : false,
+            "interfaceOnly"       : true,
+            "skipDefaultInterface": true
+    ]
+}
+
+compileJava.dependsOn generateKafkaEvents

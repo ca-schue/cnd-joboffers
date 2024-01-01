@@ -3,30 +3,29 @@ package thi.cnd.authservice.application;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import thi.cnd.authservice.application.ports.out.repository.ClientRepository;
+import thi.cnd.authservice.application.ports.out.security.PasswordProvider;
+import thi.cnd.authservice.application.ports.out.security.TokenProvider;
 import thi.cnd.authservice.domain.ClientService;
-import thi.cnd.authservice.domain.jwt.JwtProvider;
-import thi.cnd.authservice.domain.password.PasswordEncoder;
-import thi.cnd.authservice.domain.password.PasswordGenerator;
 import thi.cnd.authservice.domain.exceptions.*;
+import thi.cnd.authservice.domain.model.AccessToken;
 import thi.cnd.authservice.domain.model.client.*;
-import thi.cnd.authservice.application.ports.out.repository.ClientRepositoryPort;
 
 import java.time.Instant;
 import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class ClientServiceImpl implements ClientService {
+class ClientServiceImpl implements ClientService {
 
-    private final ClientRepositoryPort port;
-    private final PasswordEncoder encoder;
-    private final PasswordGenerator passwordGenerator;
-    private final JwtProvider jwtProvider;
+    private final ClientRepository port;
+    private final PasswordProvider passwordProvider;
+    private final TokenProvider tokenProvider;
 
     @Override
     public ClientWithPlaintextPassword createNewClient(String name, Set<String> audiences, Set<String> scopes) throws ClientAlreadyExistsException {
-        var password = passwordGenerator.generatePassword();
-        var encryptedPassword = encoder.encode(password);
+        var password = this.passwordProvider.generatePassword();
+        var encryptedPassword = this.passwordProvider.encodePassword(password);
         var now = Instant.now();
 
         Client client = new Client(name, encryptedPassword, audiences, scopes, now, now);
@@ -34,15 +33,14 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientAccessToken mintClientAccessToken(Client client) {
-        return jwtProvider.createClientAccessToken(client);
+    public AccessToken mintClientAccessToken(Client client) {
+        return tokenProvider.createClientAccessToken(client);
     }
-
 
     @Override
     public ClientWithPlaintextPassword setNewRandomPassword(@NotBlank String name) throws ClientNotFoundByNameException {
-        var password = passwordGenerator.generatePassword();
-        var encryptedPassword = encoder.encode(password);
+        var password = this.passwordProvider.generatePassword();
+        var encryptedPassword = this.passwordProvider.encodePassword(password);
         var savedClient = port.updatePassword(name, encryptedPassword);
         return new ClientWithPlaintextPassword(savedClient, password);
     }
@@ -50,6 +48,11 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void deleteClient(String name) throws ClientNotFoundByNameException {
         port.delete(name);
+    }
+
+    @Override
+    public Client updateLastLogin(String name) throws ClientNotFoundByNameException {
+        return port.findByNameAndUpdateLastLogin(name);
     }
 
 }

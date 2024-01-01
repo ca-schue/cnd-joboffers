@@ -1,0 +1,375 @@
+openapi: 3.0.0
+info:
+  title: Auth-Service
+  description: |
+    The api for the auth-service. This service creates accounts and clients to authenticate against the internal
+    applications of this project.
+  version: 1.0.0
+paths:
+  /accounts/loginInternalAccount:
+    post:
+      description: Login to an internal account with basic auth. Returns an access token with claim "subject-type = account"
+      operationId: loginInternalAccount
+      tags:
+        - Account Management
+      security:
+        - internalAccountBasicAuth: []
+      responses:
+        '200':
+          description: Login to interal Account was successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountLoginResponse'
+        '401':
+          description: Wrong credentials
+  /accounts/loginOIDCAccount:
+    post:
+      description: Login with via ID-token provided by OIDC provider (issuer must be supported by auth. server). Creates new account if email does not exist. Returns access token with access token with claim "subject-type = account".
+      operationId: loginOIDCAccount
+      security:
+        - oidcIdToken: []
+      tags:
+        - Account Management
+      responses:
+        '200':
+          description: Login with OIDC was successful. Account exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountLoginResponse'
+        #        '201':
+        #          description: Login with OIDC was successful. New Account created.
+        #          content:
+        #            application/json:
+        #              schema:
+        #                $ref: '#/components/schemas/AccessTokenResponse'
+        '401':
+          description: Unsupported OIDC identity provider (ID-Token issuer).
+  /accounts/registerInternalAccount:
+    post:
+      description: Registers a new internal account with the provided credentials.
+      operationId: registerInternalAccount
+      tags:
+        - Account Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalAccountRegistrationRequest'
+      responses:
+        '200':
+          description: Interal account registration was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountLoginResponse'
+        '409':
+          description: Account with the email already exists.
+        default:
+          description: Returned if any error occurred during the request.
+  /accounts/{accountId}/update-internal-email:
+    put:
+      description: Updates the login email of the provided internal account
+      operationId: updateInternalAccountEmail
+      tags:
+        - Account Management
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalAccountEmailUpdateRequest'
+      responses:
+        '200':
+          description: Update was successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalAccount'
+        '404':
+          description: Account not found for id.
+  /accounts/{accountId}/update-internal-password:
+    put:
+      description: Updates the login password of the provided internal account
+      operationId: updateInternalAccountPassword
+      tags:
+        - Account Management
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalAccountPasswordUpdateRequest'
+      responses:
+        '200':
+          description: Update was successful
+        '404':
+          description: Account not found for id.
+      security:
+        - accountAccessToken: []
+  /accounts/{accountId}:
+    delete:
+      description: Deletes the account and the user profile if available. {accountId} must match account id in access token
+      operationId: deleteAccount
+      tags:
+        - Account Management
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      responses:
+        '204':
+          description: Account was deleted.
+        '404':
+          description: Account not found for id.
+      security:
+        - accountAccessToken: []
+
+  /clients/create:
+    post:
+      description: Creates a new client.
+      operationId: createNewClient
+      tags:
+        - Client Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientCreationRequest'
+      responses:
+        '200':
+          description: Client was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCreationResponse'
+  /clients/{clientId}/reset-password:
+    put:
+      description: Resets the password to a new random one. {clientId} must match client id in access token
+      operationId: resetPassword
+      tags:
+        - Client Management
+      parameters:
+        - $ref: '#/components/parameters/ClientId'
+      security:
+        - clientAccessToken: []
+      responses:
+        '200':
+          description: Password was successfully reset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCreationResponse'
+  /clients/{clientId}:
+    delete:
+      description: Deletes the client. {clientId} must match clientId id in access token
+      operationId: deleteClient
+      tags:
+        - Client Management
+      parameters:
+        - $ref: '#/components/parameters/ClientId'
+      responses:
+        '204':
+          description: Client was deleted.
+        '404':
+          description: Client not found for id.
+      security:
+        - clientAccessToken: []
+
+components:
+  parameters:
+    AccountId:
+      in: path
+      name: accountId
+      schema:
+        $ref: '#/components/schemas/UUID'
+      required: true
+    ClientId:
+      in: path
+      name: clientId
+      schema:
+        type: string
+      required: true
+
+  schemas:
+    Account:
+      oneOf:
+        - $ref: '#/components/schemas/InternalAccount'
+        - $ref: '#/components/schemas/OidcAccount'
+      discriminator:
+        propertyName: accountType
+
+    InternalAccount:
+      type: object
+      required:
+        - accountType
+        - id
+        - email
+      properties:
+        accountType:
+          type: string
+        id:
+          $ref: '#/components/schemas/UUID'
+        email:
+          type: string
+
+    OidcAccount:
+      type: object
+      required:
+        - accountType
+        - id
+        - subject
+      properties:
+        accountType:
+          type: string
+        id:
+          $ref: '#/components/schemas/UUID'
+        subject:
+          type: string
+
+    #    Account:
+    #      type: object
+    #      required:
+    #        - type
+    #        - provider
+    #        - id
+    #        - email
+    #      properties:
+    #        type:
+    #          type: string
+    #        provider:
+    #          type: string
+    #        id:
+    #          $ref: '#/components/schemas/UUID'
+    #        email:
+    #          type: string
+    InternalAccountRegistrationRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    InternalAccountPasswordUpdateRequest:
+      type: object
+      required:
+        - new_plaintext_password
+      properties:
+        new_plaintext_password:
+          type: string
+
+    InternalAccountEmailUpdateRequest:
+      type: object
+      required:
+        - new_email
+      properties:
+        new_email:
+          type: string
+
+    Client:
+      type: object
+      required:
+        - type
+        - name
+        - audiences
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+        audiences:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        scopes:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        last_password_change:
+          type: string
+          format: date-time
+    ClientCreationRequest:
+      type: object
+      required:
+        - name
+        - audiences
+      properties:
+        name:
+          type: string
+        audiences:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        scopes:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+    ClientCreationResponse:
+      type: object
+      required:
+        - name
+        - password
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+        audiences:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        scopes:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+
+    AccountLoginResponse:
+      type: object
+      required:
+        - account
+        - access_token
+      properties:
+        account:
+          $ref: '#/components/schemas/Account'
+        access_token:
+          type: string
+
+    UUID:
+      type: string
+      format: UUID
+
+  securitySchemes:
+    accountAccessToken:
+      type: http
+      description: Access token issued by this auth. server at /accounts/loginInternalAccount or /accounts/loginOIDCAccount. Used by external frontend for accessing microservice endpoints. Identified by claim "subject-type = account"
+      scheme: bearer
+      bearerFormat: JWT
+    clientAccessToken:
+      type: http
+      description: Enriched access token issued by this auth. server using the client_credentials OAuth2 flow. Used by internal microservices (clients) for accessing other microservice endpoints. Identified by claim "subject-type = client"
+      scheme: bearer
+      bearerFormat: JWT
+    internalAccountBasicAuth:
+      type: http
+      description: Basic Auhtentication used to login into an internal account. Will be exchanged into access token with claim "subject-type = account"
+      scheme: basic
+    oidcIdToken:
+      type: http
+      description: Identity token provided by an OIDC provider which must be supported by this authentication server. Will be exchanged into access token with claim "subject-type = account"
+      scheme: bearer
+      bearerFormat: JWT
