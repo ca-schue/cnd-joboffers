@@ -20,6 +20,12 @@ jar {
 }
 
 test {
+	useJUnitPlatform() {
+		exclude "**/IntegrationTests.class"
+	}
+}
+
+tasks.register('integrationTest', Test) {
 	useJUnitPlatform()
 }
 

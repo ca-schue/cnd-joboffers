@@ -33,7 +33,6 @@ class JwkSet {
     private final String keyId;
     private final JWKSource jwkSet;
 
-
     public JwkSet(
             @Value("${jwk.rsaPublicKeyBase64}") String rsaPublicKeyBase64,
             @Value("${jwk.rsaPrivateKeyBase64}") String rsaPrivateKeyBase64,

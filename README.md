@@ -8,25 +8,14 @@ Very brief overview of project context (Student project) and structure of this r
 
 ![Use Cases](./.documentation/figures/use-cases.svg)
 
-What does this application do from a user perspective? only use-case level no technical details:
+In each microservice, the respective use cases are verified by end-to-end integration tests.
+The core functionality of each service is either verified by fully mocked unit tests or slice tests with selected autowired components.
 
 Actor role evolution:
 
 ![Actor role evolution](./.documentation/figures/actor-role-evolution.svg)
 
-- Actor: Non-Registered User (Guest):
-  - List Job offers etc. ...
-  - Can create Account with OIDC or Basic Auth.
-- Actor: Registered + Authenticated Account (No Profile):
-  - ... TODO: Was haben wir hier nochmal gesagt?
-  - Must complete user profile for use cases x y and z
-- Actor: Registered + Authenticated User (Account + User Profile):
-  - Verified User = Account + User Profile
-  - Can perform core use cases a b and c ...
-- Actor: Company Owner
-  - ...
-- Actor: Company Member
-  - ...
+
 
 ## Run this application ...
 - ... [locally 'bare metal' (un-containerized)](.documentation/bare-metal.md)

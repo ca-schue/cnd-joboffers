@@ -71,7 +71,7 @@ This loose coupling is unidirectional, with the User Service acting as the order
   - Spring Kafka Listener
   - Spring MongoDB
   - Java JWT
-  - Mockito (Unit & Component tests) 
+  - Mockito, Spring EmbeddedKafka and Flapdoodle embedded Mongodb for integration & slice tests 
 
 
 ## Microservice Architecture
@@ -178,6 +178,21 @@ These are based on the "Ports and Adapters" pattern by Alistair Cockburn [[2]](h
       [(for details, refer to this discussion)](https://stackoverflow.com/a/50186472 )
 </details>
 
+## Microservice Build and Test
+- Workdir: `cnd-joboffers/authservice/`
+- Build `.jar` with gradle wrapper: (will download gradle 8.4)
+  ```
+  ./gradlew bootJar
+  ```
+- Optionally: Execute slice tests with selected autowired components to verify core functionality 
+  ```
+  ./gradlew test
+  ```
+- Optionally: Execute end-to-end integration tests to verify use cases
+  ```
+  ./gradlew integrationTest
+  ```
+For further details and information on the execution of the microservice, please follow the steps of the [respective execution environment](../README.md#run-this-application-).
 
 ## Environment Variables for Configuration
 ```  

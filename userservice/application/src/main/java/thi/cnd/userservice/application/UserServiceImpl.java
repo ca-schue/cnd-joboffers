@@ -41,7 +41,6 @@ class UserServiceImpl implements UserService {
 
     @Override
     public User updateUserProfile(UserId userId, UserProfile updatedUserProfile) throws UserNotFoundByIdException, EmailAlreadyInUseException {
-        // TODO: Input verification?
         User user = userRepository.findUserById(userId);
 
         // Input verification:
@@ -51,7 +50,7 @@ class UserServiceImpl implements UserService {
             if (!userWithSameEmail.getId().toString().equals(userId.toString())) {
                 throw new EmailAlreadyInUseException(newUserProfileEmail);
             } else {
-                throw new UserNotFoundByEmailException(""); // TODO: ugly solution ...
+                throw new UserNotFoundByEmailException(""); // could be optimized...
             }
         } catch (UserNotFoundByEmailException e) {
             user.setProfile(updatedUserProfile);

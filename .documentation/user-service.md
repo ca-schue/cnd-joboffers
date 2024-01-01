@@ -4,7 +4,6 @@
 - Manages persisting user and company data.
 - Ensures consistency between users and companies as well as between users and accounts.
 
-
 ## Noteworthy Use Cases
 
 <details xmlns="http://www.w3.org/1999/html">
@@ -138,6 +137,21 @@ These are based on the "Ports and Adapters" pattern by Alistair Cockburn [[2]](h
 
 </details>
 
+## Microservice Build and Test
+- Workdir: `cnd-joboffers/userservice/`
+- Build `.jar` with gradle wrapper: (will download gradle 8.4)
+  ```
+  ./gradlew bootJar
+  ```
+- Optionally: Execute fully mocked unit tests to verify core functionality
+  ```
+  ./gradlew test
+  ```
+- Optionally: Execute end-to-end integration tests to verify use cases
+  ```
+  ./gradlew integrationTest
+  ```
+For further details and information on the execution of the microservice, please follow the steps of the [respective execution environment](../README.md#run-this-application-).
 
 
 ## Environment Variables for Configuration

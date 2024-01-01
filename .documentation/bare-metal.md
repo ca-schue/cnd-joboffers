@@ -38,8 +38,14 @@ You can run the "Joboffers" application bare-metal, un-containerized on your loc
       ```
       ./gradlew bootJar
       ```
-    - TODO: Execute tests
-
+    - Optionally: Execute slice tests to verify core functionality
+      ```
+      ./gradlew test
+      ```
+    - Optionally: Execute end-to-end integration tests to verify use cases
+      ```
+      ./gradlew integrationTest
+      ```
 
 ## Configure Bare-Metal Services
 ***Note***: This application is configured at execution time using environment variables. Use additional configuration, such as changing the `application.yaml` files  or injecting `--spring-flags` at your own risk of misconfigurations and inconsistencies.

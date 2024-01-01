@@ -299,7 +299,6 @@ public class IntegrationTests {
         String password = JsonPath.read(creationResult.andReturn().getResponse().getContentAsString(), "$.password");
 
 
-
         System.out.println("Login with generated PW");
 
         ResultActions loginResult = testClientLogin(name, password);
