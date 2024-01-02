@@ -67,7 +67,7 @@ You can run the "Joboffers" application bare-metal, un-containerized on your loc
 
 ## Configure Bare-Metal Services
 ***Note***: This application is configured at execution time using environment variables. Use additional configuration, such as changing the `application.yaml` files  or injecting `--spring-flags` at your own risk of misconfigurations and inconsistencies.
-We recommend using the provided `.env.local` file as the single source of truth for configuration as documented below:
+The provided env file `.env.local` can be used to override the default configuration. As single source of truth check the application.yaml in the microservice source code.
 - All variables are preconfigured with non-conflicting values (assuming the specified ports are unused on your local machine).
 - Variable substitution allows unique values such as ports and hostnames **only to be changed in one place**.
 - Reference the provided service documentations before changing configuration parameters: Frontend, Auth, User, Career, Notification
@@ -84,13 +84,13 @@ We recommend using the provided `.env.local` file as the single source of truth 
     4. Career-Service | Notification-Service
        - Execute in the build directory of each service `cnd-joboffers/[auth|user|career|notification]service/build/libs/`:
          ```
-         source ./.config/.env.local # not required for default configuration
+         set -o allexport && source .config/.env.local && set +o allexport # not required for default configuration
          java -jar [auth|user|career|notification]service<version>.jar
          ```   
     5. Frontend
        - Execute in the frontend build directory `cnd-joboffers/frontend/build`:
          ```
-         source ./.config/.env.local # not required for default configuration
+         set -o allexport && source .config/.env.local && set +o allexport # not required for default configuration
          npm run build # build frontend
          http-server -p $FRONTEND_PORT # provide custom port with -p flag (default: $FRONTEND_PORT = 80)
          ```
