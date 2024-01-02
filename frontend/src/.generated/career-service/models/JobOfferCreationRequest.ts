@@ -16,4 +16,3 @@ export type JobOfferCreationRequest = {
     tags: Array<string>;
     salary_range?: SalaryRange;
 };
-

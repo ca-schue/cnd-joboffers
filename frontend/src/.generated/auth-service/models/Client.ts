@@ -9,4 +9,3 @@ export type Client = {
     audiences: Array<string>;
     last_password_change?: string;
 };
-

@@ -6,4 +6,3 @@
 export type UpdateUserSettingsRequest = {
     night_mode_active: boolean;
 };
-

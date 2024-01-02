@@ -6,4 +6,3 @@
 export type DeleteUserByUserProfileEmailRequest = {
     user_profile_email: string;
 };
-

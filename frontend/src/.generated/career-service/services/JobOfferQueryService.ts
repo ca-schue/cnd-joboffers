@@ -15,19 +15,19 @@ export class JobOfferQueryService {
 
     /**
      * Returns a list of all available job offers.
-     * @param skip
-     * @param limit
-     * @param title
-     * @param companyIds
+     * @param skip 
+     * @param limit 
+     * @param title 
+     * @param companyIds 
      * @returns PaginatedJobOffersResponse List of all job offers available
      * @throws ApiError
      */
     public static searchAvailableJobOffers(
-        skip?: number,
-        limit?: number,
-        title?: string,
-        companyIds?: Array<UUID>,
-    ): CancelablePromise<PaginatedJobOffersResponse> {
+skip?: number,
+limit?: number,
+title?: string,
+companyIds?: Array<UUID>,
+): CancelablePromise<PaginatedJobOffersResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/available-job-offers',
@@ -42,13 +42,13 @@ export class JobOfferQueryService {
 
     /**
      * Returns a list of available job offers for a specific company.
-     * @param companyId
+     * @param companyId 
      * @returns JobOffersResponse List of all job offers for an user
      * @throws ApiError
      */
     public static getAvailableJobOffersByCompanyId(
-        companyId: UUID,
-    ): CancelablePromise<JobOffersResponse> {
+companyId: UUID,
+): CancelablePromise<JobOffersResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/available-job-offers',
@@ -60,13 +60,13 @@ export class JobOfferQueryService {
 
     /**
      * Returns a list of all job offers for a specific company.
-     * @param companyId
+     * @param companyId 
      * @returns JobOffersResponse List of all job offers for an user
      * @throws ApiError
      */
     public static getAllJobOffersByCompanyId(
-        companyId: UUID,
-    ): CancelablePromise<JobOffersResponse> {
+companyId: UUID,
+): CancelablePromise<JobOffersResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/job-offers',
@@ -78,17 +78,17 @@ export class JobOfferQueryService {
 
     /**
      * Returns a specific available job offer
-     * @param companyId
-     * @param jobOfferId
-     * @param ifNoneMatch
+     * @param companyId 
+     * @param jobOfferId 
+     * @param ifNoneMatch 
      * @returns JobOfferResponse The requested job offer if found.
      * @throws ApiError
      */
     public static getAvailableJobOffer(
-        companyId: UUID,
-        jobOfferId: UUID,
-        ifNoneMatch?: string,
-    ): CancelablePromise<JobOfferResponse> {
+companyId: UUID,
+jobOfferId: UUID,
+ifNoneMatch?: string,
+): CancelablePromise<JobOfferResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/available-job-offers/{job-offer-id}',
@@ -104,17 +104,17 @@ export class JobOfferQueryService {
 
     /**
      * Returns a specific job offer
-     * @param companyId
-     * @param jobOfferId
-     * @param ifNoneMatch
+     * @param companyId 
+     * @param jobOfferId 
+     * @param ifNoneMatch 
      * @returns JobOfferResponse The requested job offer if found.
      * @throws ApiError
      */
     public static getJobOffer(
-        companyId: UUID,
-        jobOfferId: UUID,
-        ifNoneMatch?: string,
-    ): CancelablePromise<JobOfferResponse> {
+companyId: UUID,
+jobOfferId: UUID,
+ifNoneMatch?: string,
+): CancelablePromise<JobOfferResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/job-offers/{job-offer-id}',

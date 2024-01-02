@@ -16,4 +16,3 @@ export type User = {
     settings: UserSettings;
     subscription: UserSubscription;
 };
-

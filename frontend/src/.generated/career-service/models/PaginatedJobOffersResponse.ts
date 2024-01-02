@@ -10,4 +10,3 @@ export type PaginatedJobOffersResponse = {
     pagination: Pagination;
     content: Array<JobOfferResponse>;
 };
-

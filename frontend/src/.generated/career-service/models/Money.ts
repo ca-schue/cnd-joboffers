@@ -16,4 +16,3 @@ export type Money = {
      */
     currency: string;
 };
-

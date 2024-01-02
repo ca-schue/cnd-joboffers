@@ -14,15 +14,15 @@ export class JobApplicationQueryService {
 
     /**
      * Returns a list of all job applications for a specific job offer.
-     * @param companyId
-     * @param jobOfferId
+     * @param companyId 
+     * @param jobOfferId 
      * @returns JobApplicationsResponse List of all job applications for an user
      * @throws ApiError
      */
     public static getAllPublishedJobApplicationsByJobOffer(
-        companyId: UUID,
-        jobOfferId: UUID,
-    ): CancelablePromise<JobApplicationsResponse> {
+companyId: UUID,
+jobOfferId: UUID,
+): CancelablePromise<JobApplicationsResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/job-applications',
@@ -35,19 +35,19 @@ export class JobApplicationQueryService {
 
     /**
      * Get a specific job application for a job offer
-     * @param companyId
-     * @param jobOfferId
-     * @param jobApplicationId
-     * @param ifNoneMatch
+     * @param companyId 
+     * @param jobOfferId 
+     * @param jobApplicationId 
+     * @param ifNoneMatch 
      * @returns JobApplicationResponse A specific job application
      * @throws ApiError
      */
     public static getJobApplicationForCompany(
-        companyId: UUID,
-        jobOfferId: UUID,
-        jobApplicationId: UUID,
-        ifNoneMatch?: string,
-    ): CancelablePromise<JobApplicationResponse> {
+companyId: UUID,
+jobOfferId: UUID,
+jobApplicationId: UUID,
+ifNoneMatch?: string,
+): CancelablePromise<JobApplicationResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}',
@@ -64,13 +64,13 @@ export class JobApplicationQueryService {
 
     /**
      * Returns a list of all applications for a specific user.
-     * @param userId
+     * @param userId 
      * @returns JobApplicationsResponse List of all job applications for an user
      * @throws ApiError
      */
     public static getAllJobApplicationsByUserId(
-        userId: UUID,
-    ): CancelablePromise<JobApplicationsResponse> {
+userId: UUID,
+): CancelablePromise<JobApplicationsResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{user-id}/job-applications',
@@ -82,17 +82,17 @@ export class JobApplicationQueryService {
 
     /**
      * Returns the job application for a specific user and job offer
-     * @param userId
-     * @param jobOfferId
-     * @param ifNoneMatch
+     * @param userId 
+     * @param jobOfferId 
+     * @param ifNoneMatch 
      * @returns JobApplicationResponse The existing job application
      * @throws ApiError
      */
     public static getJobApplicationByUserAndJobOffer(
-        userId: UUID,
-        jobOfferId: UUID,
-        ifNoneMatch?: string,
-    ): CancelablePromise<JobApplicationResponse> {
+userId: UUID,
+jobOfferId: UUID,
+ifNoneMatch?: string,
+): CancelablePromise<JobApplicationResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{user-id}/job-offers/{job-offer-id}/job-application',
@@ -108,17 +108,17 @@ export class JobApplicationQueryService {
 
     /**
      * Get a specific job application for a job offer
-     * @param userId
-     * @param jobApplicationId
-     * @param ifNoneMatch
+     * @param userId 
+     * @param jobApplicationId 
+     * @param ifNoneMatch 
      * @returns JobApplicationResponse A specific job application
      * @throws ApiError
      */
     public static getJobApplicationForUser(
-        userId: UUID,
-        jobApplicationId: UUID,
-        ifNoneMatch?: string,
-    ): CancelablePromise<JobApplicationResponse> {
+userId: UUID,
+jobApplicationId: UUID,
+ifNoneMatch?: string,
+): CancelablePromise<JobApplicationResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{user-id}/job-applications/{job-application-id}',

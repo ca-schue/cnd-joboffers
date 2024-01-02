@@ -15,15 +15,15 @@ export class JobOfferCommandService {
 
     /**
      * Create a new job offer for the logged in user.
-     * @param companyId
-     * @param requestBody
+     * @param companyId 
+     * @param requestBody 
      * @returns JobOfferCreationResponse Job offer created.
      * @throws ApiError
      */
     public static createJobOffer(
-        companyId: UUID,
-        requestBody: JobOfferCreationRequest,
-    ): CancelablePromise<JobOfferCreationResponse> {
+companyId: UUID,
+requestBody: JobOfferCreationRequest,
+): CancelablePromise<JobOfferCreationResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/companies/{company-id}/job-offers',
@@ -37,17 +37,17 @@ export class JobOfferCommandService {
 
     /**
      * Deletes a specific job offer
-     * @param companyId
-     * @param jobOfferId
-     * @param ifMatch
-     * @returns void
+     * @param companyId 
+     * @param jobOfferId 
+     * @param ifMatch 
+     * @returns void 
      * @throws ApiError
      */
     public static deleteJobOffer(
-        companyId: UUID,
-        jobOfferId: UUID,
-        ifMatch: string,
-    ): CancelablePromise<void> {
+companyId: UUID,
+jobOfferId: UUID,
+ifMatch: string,
+): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/companies/{company-id}/job-offers/{job-offer-id}',
@@ -63,19 +63,19 @@ export class JobOfferCommandService {
 
     /**
      * Update an existing job offer
-     * @param companyId
-     * @param jobOfferId
-     * @param ifMatch
-     * @param requestBody
-     * @returns void
+     * @param companyId 
+     * @param jobOfferId 
+     * @param ifMatch 
+     * @param requestBody 
+     * @returns void 
      * @throws ApiError
      */
     public static updateJobOfferAttributes(
-        companyId: UUID,
-        jobOfferId: UUID,
-        ifMatch: string,
-        requestBody: JobOfferUpdateRequest,
-    ): CancelablePromise<void> {
+companyId: UUID,
+jobOfferId: UUID,
+ifMatch: string,
+requestBody: JobOfferUpdateRequest,
+): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/update',
@@ -93,17 +93,17 @@ export class JobOfferCommandService {
 
     /**
      * Publishes the job offer
-     * @param companyId
-     * @param jobOfferId
-     * @param ifMatch
-     * @returns void
+     * @param companyId 
+     * @param jobOfferId 
+     * @param ifMatch 
+     * @returns void 
      * @throws ApiError
      */
     public static publishJobOffer(
-        companyId: UUID,
-        jobOfferId: UUID,
-        ifMatch: string,
-    ): CancelablePromise<void> {
+companyId: UUID,
+jobOfferId: UUID,
+ifMatch: string,
+): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/publish',
@@ -119,17 +119,17 @@ export class JobOfferCommandService {
 
     /**
      * Closes the job offer
-     * @param companyId
-     * @param jobOfferId
-     * @param ifMatch
-     * @returns void
+     * @param companyId 
+     * @param jobOfferId 
+     * @param ifMatch 
+     * @returns void 
      * @throws ApiError
      */
     public static closeJobOffer(
-        companyId: UUID,
-        jobOfferId: UUID,
-        ifMatch: string,
-    ): CancelablePromise<void> {
+companyId: UUID,
+jobOfferId: UUID,
+ifMatch: string,
+): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/close',

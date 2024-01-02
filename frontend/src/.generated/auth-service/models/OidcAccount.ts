@@ -10,4 +10,3 @@ export type OidcAccount = {
     id: UUID;
     subject: string;
 };
-

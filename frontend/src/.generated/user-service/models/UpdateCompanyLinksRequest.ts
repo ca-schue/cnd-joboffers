@@ -7,4 +7,3 @@ export type UpdateCompanyLinksRequest = {
     homepage?: string;
     social_media?: Array<string>;
 };
-

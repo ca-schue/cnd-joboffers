@@ -18,4 +18,3 @@ export type JobOfferResponse = {
     salary_range?: SalaryRange;
     version: number;
 };
-

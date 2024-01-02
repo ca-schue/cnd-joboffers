@@ -9,4 +9,3 @@ export type JobApplicationJobOfferResponse = {
     id: UUID;
     title: string;
 };
-

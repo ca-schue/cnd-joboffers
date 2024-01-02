@@ -6,4 +6,3 @@
 export type InternalAccountEmailUpdateRequest = {
     new_email: string;
 };
-

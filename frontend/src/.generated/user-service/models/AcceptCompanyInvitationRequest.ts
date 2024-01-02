@@ -8,4 +8,3 @@ import type { UUID } from './UUID';
 export type AcceptCompanyInvitationRequest = {
     company_id: UUID;
 };
-

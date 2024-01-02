@@ -10,4 +10,3 @@ export type UpdateCompanyDataRequest = {
     details?: UpdateCompanyDetailsRequest;
     settings?: UpdateCompanyLinksRequest;
 };
-

@@ -10,4 +10,3 @@ export type InternalAccount = {
     id: UUID;
     email: string;
 };
-

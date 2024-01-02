@@ -6,4 +6,3 @@
 export type InternalAccountPasswordUpdateRequest = {
     new_plaintext_password: string;
 };
-

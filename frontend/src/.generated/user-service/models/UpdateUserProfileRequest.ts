@@ -8,4 +8,3 @@ export type UpdateUserProfileRequest = {
     first_name: string;
     last_name: string;
 };
-

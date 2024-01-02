@@ -47,14 +47,14 @@ export class AccountManagementService {
 
     /**
      * Registers a new internal account with the provided credentials.
-     * @param requestBody
+     * @param requestBody 
      * @returns any Returned if any error occurred during the request.
      * @returns AccountLoginResponse Interal account registration was successful.
      * @throws ApiError
      */
     public static registerInternalAccount(
-        requestBody: InternalAccountRegistrationRequest,
-    ): CancelablePromise<any | AccountLoginResponse> {
+requestBody: InternalAccountRegistrationRequest,
+): CancelablePromise<any | AccountLoginResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/accounts/registerInternalAccount',
@@ -68,15 +68,15 @@ export class AccountManagementService {
 
     /**
      * Updates the login email of the provided internal account
-     * @param accountId
-     * @param requestBody
+     * @param accountId 
+     * @param requestBody 
      * @returns InternalAccount Update was successful
      * @throws ApiError
      */
     public static updateInternalAccountEmail(
-        accountId: UUID,
-        requestBody: InternalAccountEmailUpdateRequest,
-    ): CancelablePromise<InternalAccount> {
+accountId: UUID,
+requestBody: InternalAccountEmailUpdateRequest,
+): CancelablePromise<InternalAccount> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/accounts/{accountId}/update-internal-email',
@@ -93,15 +93,15 @@ export class AccountManagementService {
 
     /**
      * Updates the login password of the provided internal account
-     * @param accountId
-     * @param requestBody
+     * @param accountId 
+     * @param requestBody 
      * @returns any Update was successful
      * @throws ApiError
      */
     public static updateInternalAccountPassword(
-        accountId: UUID,
-        requestBody: InternalAccountPasswordUpdateRequest,
-    ): CancelablePromise<any> {
+accountId: UUID,
+requestBody: InternalAccountPasswordUpdateRequest,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/accounts/{accountId}/update-internal-password',
@@ -118,13 +118,13 @@ export class AccountManagementService {
 
     /**
      * Deletes the account and the user profile if available. {accountId} must match account id in access token
-     * @param accountId
-     * @returns void
+     * @param accountId 
+     * @returns void 
      * @throws ApiError
      */
     public static deleteAccount(
-        accountId: UUID,
-    ): CancelablePromise<void> {
+accountId: UUID,
+): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/accounts/{accountId}',

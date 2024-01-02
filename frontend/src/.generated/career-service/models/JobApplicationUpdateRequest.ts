@@ -6,4 +6,3 @@
 export type JobApplicationUpdateRequest = {
     content: string;
 };
-

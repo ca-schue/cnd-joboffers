@@ -11,4 +11,3 @@ export type JobApplicationCreationRequest = {
     status: JobApplicationStatus;
     content: string;
 };
-
