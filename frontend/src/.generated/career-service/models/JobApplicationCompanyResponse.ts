@@ -10,3 +10,4 @@ export type JobApplicationCompanyResponse = {
     name: string;
     location: string;
 };
+

@@ -8,3 +8,4 @@ import type { UUID } from './UUID';
 export type JobApplicationCreationResponse = {
     id: UUID;
 };
+

@@ -9,3 +9,4 @@ export type CompanyDetails = {
     tags: Array<string>;
     location?: string;
 };
+

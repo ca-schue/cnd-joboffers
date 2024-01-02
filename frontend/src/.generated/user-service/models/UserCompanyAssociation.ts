@@ -10,3 +10,4 @@ export type UserCompanyAssociation = {
     invited_to: Array<UUID>;
     owner_of?: UUID;
 };
+

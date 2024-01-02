@@ -10,3 +10,4 @@ export type PaginatedPublicCompanyProfileResponse = {
     pagination?: Pagination;
     content?: Array<PublicCompanyProfile>;
 };
+

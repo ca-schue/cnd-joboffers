@@ -6,3 +6,4 @@
 export type ExtendUserSubscriptionRequest = {
     extend_by_in_days: number;
 };
+

@@ -6,3 +6,4 @@
 export type UserSettings = {
     night_mode_active: boolean;
 };
+

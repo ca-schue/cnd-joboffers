@@ -7,3 +7,4 @@ export type CompanyPartnerProgram = {
     partnered: boolean;
     partner_until?: string;
 };
+

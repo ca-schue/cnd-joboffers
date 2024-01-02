@@ -8,3 +8,4 @@ export type ClientCreationResponse = {
     password: string;
     audiences?: Array<string>;
 };
+

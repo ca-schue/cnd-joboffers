@@ -7,3 +7,4 @@ export type InternalAccountRegistrationRequest = {
     email: string;
     password: string;
 };
+

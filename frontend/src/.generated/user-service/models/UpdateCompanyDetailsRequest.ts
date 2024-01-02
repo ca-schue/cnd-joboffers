@@ -9,3 +9,4 @@ export type UpdateCompanyDetailsRequest = {
     tags?: Array<string>;
     location?: string;
 };
+

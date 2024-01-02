@@ -19,15 +19,15 @@ export class UserService {
 
     /**
      * Register a new user.
-     * @param requestBody 
+     * @param requestBody
      * @returns User Registration was successful.
      * @throws ApiError
      */
     public static registerNewUser(
-requestBody: UserRegistrationRequest,
-): CancelablePromise<User> {
+        requestBody: UserRegistrationRequest,
+    ): CancelablePromise<User> {
         return __request(OpenAPI, {
-            method: 'PUT',
+            method: 'POST',
             url: '/users/register',
             body: requestBody,
             mediaType: 'application/json',
@@ -36,13 +36,13 @@ requestBody: UserRegistrationRequest,
 
     /**
      * Get user of provided user id.
-     * @param userId 
+     * @param userId
      * @returns User User was found.
      * @throws ApiError
      */
     public static getUser(
-userId: UUID,
-): CancelablePromise<User> {
+        userId: UUID,
+    ): CancelablePromise<User> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{user-id}',
@@ -57,13 +57,13 @@ userId: UUID,
 
     /**
      * Deletes the user.
-     * @param userId 
-     * @returns void 
+     * @param userId
+     * @returns void
      * @throws ApiError
      */
     public static deleteUser(
-userId: UUID,
-): CancelablePromise<void> {
+        userId: UUID,
+    ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/users/{user-id}',
@@ -78,13 +78,13 @@ userId: UUID,
 
     /**
      * Get user public profile of provided user id.
-     * @param userId 
+     * @param userId
      * @returns PublicUserProfile User was found.
      * @throws ApiError
      */
     public static getPublicUserProfile(
-userId: UUID,
-): CancelablePromise<PublicUserProfile> {
+        userId: UUID,
+    ): CancelablePromise<PublicUserProfile> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{user-id}/public-profile',
@@ -99,17 +99,17 @@ userId: UUID,
 
     /**
      * Update the user settings associated with this user.
-     * @param userId 
-     * @param requestBody 
+     * @param userId
+     * @param requestBody
      * @returns User User data was updated.
      * @throws ApiError
      */
     public static updateUserSettings(
-userId: UUID,
-requestBody: UpdateUserSettingsRequest,
-): CancelablePromise<User> {
+        userId: UUID,
+        requestBody: UpdateUserSettingsRequest,
+    ): CancelablePromise<User> {
         return __request(OpenAPI, {
-            method: 'POST',
+            method: 'PUT',
             url: '/users/{user-id}/update-user-settings',
             path: {
                 'user-id': userId,
@@ -124,17 +124,17 @@ requestBody: UpdateUserSettingsRequest,
 
     /**
      * Update the user profile associated with this user.
-     * @param userId 
-     * @param requestBody 
+     * @param userId
+     * @param requestBody
      * @returns User User data was updated.
      * @throws ApiError
      */
     public static updateUserProfile(
-userId: UUID,
-requestBody: UpdateUserProfileRequest,
-): CancelablePromise<User> {
+        userId: UUID,
+        requestBody: UpdateUserProfileRequest,
+    ): CancelablePromise<User> {
         return __request(OpenAPI, {
-            method: 'POST',
+            method: 'PUT',
             url: '/users/{user-id}/update-user-profile',
             path: {
                 'user-id': userId,
@@ -149,15 +149,15 @@ requestBody: UpdateUserProfileRequest,
 
     /**
      * Makes the user a subscriber or extends their subscription.
-     * @param userId 
-     * @param requestBody 
+     * @param userId
+     * @param requestBody
      * @returns User Subscription was successful.
      * @throws ApiError
      */
     public static subscribe(
-userId: UUID,
-requestBody: ExtendUserSubscriptionRequest,
-): CancelablePromise<User> {
+        userId: UUID,
+        requestBody: ExtendUserSubscriptionRequest,
+    ): CancelablePromise<User> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/{user-id}/subscribe',
@@ -171,15 +171,15 @@ requestBody: ExtendUserSubscriptionRequest,
 
     /**
      * Accepts the invitation to be a member of a company.
-     * @param userId 
-     * @param requestBody 
-     * @returns void 
+     * @param userId
+     * @param requestBody
+     * @returns void
      * @throws ApiError
      */
     public static acceptInvitation(
-userId: UUID,
-requestBody: AcceptCompanyInvitationRequest,
-): CancelablePromise<void> {
+        userId: UUID,
+        requestBody: AcceptCompanyInvitationRequest,
+    ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/{user-id}/accept-company-invitation',

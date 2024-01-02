@@ -7,3 +7,4 @@ export type CompanyLinks = {
     website_url?: string;
     social_media?: Array<string>;
 };
+

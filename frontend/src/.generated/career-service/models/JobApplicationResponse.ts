@@ -17,3 +17,4 @@ export type JobApplicationResponse = {
     content: string;
     version: number;
 };
+

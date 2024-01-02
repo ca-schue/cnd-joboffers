@@ -9,3 +9,4 @@ export type AccountLoginResponse = {
     account: Account;
     access_token: string;
 };
+

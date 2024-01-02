@@ -15,5 +15,5 @@ export type User = {
     associations: UserCompanyAssociation;
     settings: UserSettings;
     subscription: UserSubscription;
-    owner_of?: UUID;
 };
+

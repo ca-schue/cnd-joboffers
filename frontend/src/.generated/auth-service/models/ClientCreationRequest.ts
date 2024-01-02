@@ -8,3 +8,4 @@ export type ClientCreationRequest = {
     audiences: Array<string>;
     scopes?: Array<string>;
 };
+

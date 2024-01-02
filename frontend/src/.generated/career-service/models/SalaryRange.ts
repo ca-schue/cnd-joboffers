@@ -9,3 +9,4 @@ export type SalaryRange = {
     lower_bound: Money;
     upper_bound: Money;
 };
+

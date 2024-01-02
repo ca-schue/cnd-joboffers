@@ -8,3 +8,4 @@ import type { JobOfferResponse } from './JobOfferResponse';
 export type JobOffersResponse = {
     job_offers: Array<JobOfferResponse>;
 };
+

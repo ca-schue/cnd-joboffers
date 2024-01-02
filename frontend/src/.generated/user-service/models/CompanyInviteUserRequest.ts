@@ -6,3 +6,4 @@
 export type CompanyInviteUserRequest = {
     user_profile_email?: string;
 };
+

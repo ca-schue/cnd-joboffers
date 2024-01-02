@@ -15,19 +15,19 @@ export class JobApplicationCommandService {
 
     /**
      * Accepts the job application
-     * @param companyId 
-     * @param jobOfferId 
-     * @param jobApplicationId 
-     * @param ifMatch 
-     * @returns void 
+     * @param companyId
+     * @param jobOfferId
+     * @param jobApplicationId
+     * @param ifMatch
+     * @returns void
      * @throws ApiError
      */
     public static acceptJobApplication(
-companyId: UUID,
-jobOfferId: UUID,
-jobApplicationId: UUID,
-ifMatch: string,
-): CancelablePromise<void> {
+        companyId: UUID,
+        jobOfferId: UUID,
+        jobApplicationId: UUID,
+        ifMatch: string,
+    ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}/accept',
@@ -44,19 +44,19 @@ ifMatch: string,
 
     /**
      * Denies the job application
-     * @param companyId 
-     * @param jobOfferId 
-     * @param jobApplicationId 
-     * @param ifMatch 
-     * @returns void 
+     * @param companyId
+     * @param jobOfferId
+     * @param jobApplicationId
+     * @param ifMatch
+     * @returns void
      * @throws ApiError
      */
     public static denyJobApplication(
-companyId: UUID,
-jobOfferId: UUID,
-jobApplicationId: UUID,
-ifMatch: string,
-): CancelablePromise<void> {
+        companyId: UUID,
+        jobOfferId: UUID,
+        jobApplicationId: UUID,
+        ifMatch: string,
+    ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}/deny',
@@ -73,17 +73,17 @@ ifMatch: string,
 
     /**
      * Creates a new job application
-     * @param userId 
-     * @param jobOfferId 
-     * @param requestBody 
+     * @param userId
+     * @param jobOfferId
+     * @param requestBody
      * @returns JobApplicationCreationResponse The newly created job application
      * @throws ApiError
      */
     public static createJobApplication(
-userId: UUID,
-jobOfferId: UUID,
-requestBody: JobApplicationCreationRequest,
-): CancelablePromise<JobApplicationCreationResponse> {
+        userId: UUID,
+        jobOfferId: UUID,
+        requestBody: JobApplicationCreationRequest,
+    ): CancelablePromise<JobApplicationCreationResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/{user-id}/job-offers/{job-offer-id}/create-job-applications',
@@ -98,17 +98,17 @@ requestBody: JobApplicationCreationRequest,
 
     /**
      * Deletes a specific job application
-     * @param userId 
-     * @param jobApplicationId 
-     * @param ifMatch 
-     * @returns void 
+     * @param userId
+     * @param jobApplicationId
+     * @param ifMatch
+     * @returns void
      * @throws ApiError
      */
     public static deletedJobApplication(
-userId: UUID,
-jobApplicationId: UUID,
-ifMatch: string,
-): CancelablePromise<void> {
+        userId: UUID,
+        jobApplicationId: UUID,
+        ifMatch: string,
+    ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/users/{user-id}/job-applications/{job-application-id}',
@@ -124,17 +124,17 @@ ifMatch: string,
 
     /**
      * Closes the job application
-     * @param userId 
-     * @param jobApplicationId 
-     * @param ifMatch 
-     * @returns void 
+     * @param userId
+     * @param jobApplicationId
+     * @param ifMatch
+     * @returns void
      * @throws ApiError
      */
     public static publishJobApplication(
-userId: UUID,
-jobApplicationId: UUID,
-ifMatch: string,
-): CancelablePromise<void> {
+        userId: UUID,
+        jobApplicationId: UUID,
+        ifMatch: string,
+    ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/{user-id}/job-applications/{job-application-id}/publish',
@@ -150,19 +150,19 @@ ifMatch: string,
 
     /**
      * Update the job application content
-     * @param userId 
-     * @param jobApplicationId 
-     * @param ifMatch 
-     * @param requestBody 
-     * @returns void 
+     * @param userId
+     * @param jobApplicationId
+     * @param ifMatch
+     * @param requestBody
+     * @returns void
      * @throws ApiError
      */
     public static updateJobApplication(
-userId: UUID,
-jobApplicationId: UUID,
-ifMatch: string,
-requestBody: JobApplicationUpdateRequest,
-): CancelablePromise<void> {
+        userId: UUID,
+        jobApplicationId: UUID,
+        ifMatch: string,
+        requestBody: JobApplicationUpdateRequest,
+    ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/{user-id}/job-applications/{job-application-id}/update',

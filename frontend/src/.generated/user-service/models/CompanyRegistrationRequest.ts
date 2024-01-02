@@ -12,3 +12,4 @@ export type CompanyRegistrationRequest = {
     details: CompanyDetails;
     links?: CompanyLinks;
 };
+

@@ -37,6 +37,5 @@ export type { UserSettings as UserSettingsDTO } from './models/UserSettings';
 export type { UserSubscription as UserSubscriptionDTO } from './models/UserSubscription';
 export type { UUID as UUIDDTO } from './models/UUID';
 
-export { AuthService } from './services/AuthService';
 export { CompanyService } from './services/CompanyService';
 export { UserService } from './services/UserService';

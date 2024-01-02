@@ -11,3 +11,4 @@ export type PublicUserProfile = {
     last_name: string;
     user_profile_email: string;
 };
+

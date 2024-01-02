@@ -7,3 +7,4 @@ export type UserSubscription = {
     subscribed: boolean;
     subscribedUntil?: string;
 };
+

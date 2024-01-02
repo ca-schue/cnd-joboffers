@@ -12,3 +12,4 @@ export type PublicCompanyProfile = {
     details: CompanyDetails;
     links: CompanyLinks;
 };
+

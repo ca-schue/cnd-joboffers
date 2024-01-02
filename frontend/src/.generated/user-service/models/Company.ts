@@ -16,3 +16,4 @@ export type Company = {
     links: CompanyLinks;
     partner_program: CompanyPartnerProgram;
 };
+

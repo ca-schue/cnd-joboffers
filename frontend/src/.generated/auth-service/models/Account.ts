@@ -7,3 +7,4 @@ import type { InternalAccount } from './InternalAccount';
 import type { OidcAccount } from './OidcAccount';
 
 export type Account = (InternalAccount | OidcAccount);
+

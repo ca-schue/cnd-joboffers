@@ -11,3 +11,4 @@ export type JobOfferUpdateRequest = {
     tags: Array<string>;
     salary_range?: SalaryRange;
 };
+
