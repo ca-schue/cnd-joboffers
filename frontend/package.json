@@ -5,11 +5,12 @@
   "main": "index.tsx",
   "scripts": {
     "start": "webpack-dev-server --mode=development --open --hot --port 8080",
-    "build": "webpack --config webpack.prod.js",
+    "build": "npm run generate-specs && webpack --config webpack.prod.js && cp build/index.html build/404.html",
     "debug": "webpack --watch --config webpack.config.js --mode=development",
     "debug2": "node --inspect webpack",
     "dev-build": "webpack --mode=development",
     "lint": "eslint ./src/**/*.ts[x] --ignore-pattern '.build/*' --ignore-pattern '.node_modules/*'",
+    "generate-specs": "npm run generate-auth-spec && npm run generate-user-spec && npm run generate-career-spec",
     "generate-auth-spec": "openapi --input ./external-apis/auth-api-spec.yaml --output ./src/.generated/auth-service --client axios --postfixModels DTO",
     "generate-user-spec": "openapi --input ./external-apis/user-api-spec.yaml --output ./src/.generated/user-service --client axios --postfixModels DTO",
     "generate-career-spec": "openapi --input ./external-apis/career-api-spec.yaml --output ./src/.generated/career-service --client axios --postfixModels DTO"
