@@ -1,4 +1,4 @@
-package thi.cnd.careerservice.http;
+package thi.cnd.careerservice.http.exception;
 
 import java.util.Objects;
 
@@ -46,7 +46,7 @@ public class ApiExceptionHandler implements ProblemHandling {
     public ResponseEntity<Problem> identifiedRuntimeExceptionHandler(IdentifiedRuntimeException e) {
         return toResponseEntity(
             Problem.builder()
-                .withStatus(Status.valueOf(e.getStatus().value()))
+                .withStatus(Status.valueOf(ErrorCodeMapper.mapErrorCodeToHttpStatusCode(e.getErrorCode()).value()))
                 .withDetail(e.getMessage())
                 .build()
         );

@@ -1,11 +1,11 @@
 package thi.cnd.careerservice.exception;
 
-import org.springframework.http.HttpStatus;
-
 import thi.cnd.careerservice.shared.model.BaseUUID;
+
+import static thi.cnd.careerservice.exception.BasicErrorCode.RESOURCE_DISALLOWS_MODIFICATION;
 
 public class ResourceDisallowsModificationException extends IdentifiedRuntimeException {
     public ResourceDisallowsModificationException(BaseUUID id) {
-        super(HttpStatus.CONFLICT, () -> "The resource with id " + id + " does not allow any modifications");
+        super(RESOURCE_DISALLOWS_MODIFICATION, () -> "The resource with id " + id + " does not allow any modifications");
     }
 }

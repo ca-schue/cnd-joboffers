@@ -2,43 +2,39 @@ package thi.cnd.careerservice.exception;
 
 import java.util.function.Supplier;
 
-import org.springframework.http.HttpStatusCode;
+import lombok.Getter;
 
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static thi.cnd.careerservice.exception.BasicErrorCode.UNKNOWN_ERROR;
 
+@Getter
 public class IdentifiedRuntimeException extends RuntimeException {
 
-    private final HttpStatusCode status;
+    private final ErrorCode errorCode;
 
-    public IdentifiedRuntimeException(HttpStatusCode status) {
+    public IdentifiedRuntimeException(ErrorCode errorCode) {
         super();
-        this.status = status;
+        this.errorCode = errorCode;
     }
 
     public IdentifiedRuntimeException(Supplier<String> message) {
         super(message.get());
-        this.status = INTERNAL_SERVER_ERROR;
+        this.errorCode = UNKNOWN_ERROR;
     }
 
     public IdentifiedRuntimeException(Throwable e) {
         super(e.getMessage(), e);
-
-        this.status = INTERNAL_SERVER_ERROR;
+        this.errorCode = UNKNOWN_ERROR;
     }
 
     public IdentifiedRuntimeException(Supplier<String> message, Throwable e) {
         super(message.get(), e);
-
-        this.status = INTERNAL_SERVER_ERROR;
+        this.errorCode = UNKNOWN_ERROR;
     }
 
-    public IdentifiedRuntimeException(HttpStatusCode status, Supplier<String> message) {
+    public IdentifiedRuntimeException(ErrorCode errorCode, Supplier<String> message) {
         super(message.get());
-
-        this.status = status;
+        this.errorCode = errorCode;
     }
 
-    public HttpStatusCode getStatus() {
-        return status;
-    }
 }

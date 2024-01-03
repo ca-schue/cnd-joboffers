@@ -1,9 +1,9 @@
 package thi.cnd.careerservice.exception;
 
-import org.springframework.http.HttpStatus;
+import static thi.cnd.careerservice.exception.BasicErrorCode.INVALID_ETAG_HEADER;
 
 public class InvalidETagHeaderException extends IdentifiedRuntimeException {
     public InvalidETagHeaderException(String headerName) {
-        super(HttpStatus.PRECONDITION_REQUIRED, () -> headerName + " is missing or not a numeric value");
+        super(INVALID_ETAG_HEADER, () -> headerName + " is missing or not a numeric value");
     }
 }

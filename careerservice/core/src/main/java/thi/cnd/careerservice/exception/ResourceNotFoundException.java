@@ -1,9 +1,9 @@
 package thi.cnd.careerservice.exception;
 
-import org.springframework.http.HttpStatus;
+import static thi.cnd.careerservice.exception.BasicErrorCode.RESOURCE_NOT_FOUND;
 
 public class ResourceNotFoundException extends IdentifiedRuntimeException {
     public ResourceNotFoundException(String message) {
-        super(HttpStatus.NOT_FOUND, () -> message);
+        super(RESOURCE_NOT_FOUND, () -> message);
     }
 }

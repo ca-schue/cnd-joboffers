@@ -21,6 +21,8 @@ import thi.cnd.careerservice.company.model.CompanyId;
 import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferId;
 import lombok.RequiredArgsConstructor;
 
+import static thi.cnd.careerservice.exception.BasicErrorCode.RESOURCE_NOT_MODIFIED;
+
 @Component
 @RequiredArgsConstructor
 public class JobApplicationQueryAdapter implements JobApplicationQueryPort {
@@ -86,7 +88,7 @@ public class JobApplicationQueryAdapter implements JobApplicationQueryPort {
         if (eTag.isPresent()) {
             var requiredVersion = eTag.get().getValue();
             if (dao.metadata().version() <= requiredVersion) {
-                throw new IdentifiedRuntimeException(HttpStatus.NOT_MODIFIED);
+                throw new IdentifiedRuntimeException(RESOURCE_NOT_MODIFIED);
             }
         }
     }

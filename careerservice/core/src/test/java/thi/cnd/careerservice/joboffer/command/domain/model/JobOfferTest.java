@@ -23,6 +23,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static thi.cnd.careerservice.exception.BasicErrorCode.CONFLICTING_ACTION;
+import static thi.cnd.careerservice.exception.BasicErrorCode.RESOURCE_NOT_MODIFIED;
 
 class JobOfferTest {
 
@@ -111,7 +113,7 @@ class JobOfferTest {
     void statusCannotBeUpdatedBackToDraft() {
         var jobOffer = JobOfferTestProvider.createOpenJobOffer();
         var exception =assertThrows(IdentifiedRuntimeException.class, () -> jobOffer.setStatus(JobOfferStatus.DRAFT));
-        assertEquals(HttpStatus.CONFLICT, exception.getStatus());
+        assertEquals(CONFLICTING_ACTION, exception.getErrorCode());
     }
 
     @Test
@@ -133,7 +135,7 @@ class JobOfferTest {
     void newStatusAndCurrentStatusIsEqualResultsInNotModifiedException() {
         var jobOffer = JobOfferTestProvider.createOpenJobOffer();
         var exception = assertThrows(IdentifiedRuntimeException.class, () -> jobOffer.setStatus(JobOfferStatus.OPEN));
-        assertEquals(HttpStatus.NOT_MODIFIED, exception.getStatus());
+        assertEquals(RESOURCE_NOT_MODIFIED, exception.getErrorCode());
     }
 
     @Test

@@ -12,6 +12,8 @@ import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferStatus;
 import thi.cnd.careerservice.joboffer.query.port.JobOfferQueryPort;
 import thi.cnd.careerservice.joboffer.command.application.model.JobOfferCommand;
 
+import static thi.cnd.careerservice.exception.BasicErrorCode.CONFLICTING_ACTION;
+
 @Service
 public class JobOfferDomainService {
 
@@ -40,7 +42,7 @@ public class JobOfferDomainService {
 
 
         if (!company.isPartnered() && maxJobOfferPerNonPartneredCompany < existingJobOffer) {
-            throw new IdentifiedRuntimeException(HttpStatus.CONFLICT, () -> "The company exceeds its max amount of open job offers");
+            throw new IdentifiedRuntimeException(CONFLICTING_ACTION, () -> "The company exceeds its max amount of open job offers");
         }
 
         return JobOffer.init().create(

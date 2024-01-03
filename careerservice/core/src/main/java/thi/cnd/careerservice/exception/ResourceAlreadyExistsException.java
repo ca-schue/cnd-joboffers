@@ -1,9 +1,9 @@
 package thi.cnd.careerservice.exception;
 
-import org.springframework.http.HttpStatus;
+import static thi.cnd.careerservice.exception.BasicErrorCode.RESOURCE_ALREADY_EXISTS;
 
 public class ResourceAlreadyExistsException extends IdentifiedRuntimeException {
     public ResourceAlreadyExistsException(String message) {
-        super(HttpStatus.BAD_REQUEST, () -> message);
+        super(RESOURCE_ALREADY_EXISTS, () -> message);
     }
 }

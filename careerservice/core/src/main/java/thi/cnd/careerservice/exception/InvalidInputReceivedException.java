@@ -1,9 +1,9 @@
 package thi.cnd.careerservice.exception;
 
-import org.springframework.http.HttpStatus;
+import static thi.cnd.careerservice.exception.BasicErrorCode.GENERIC_INPUT_ERROR;
 
 public class InvalidInputReceivedException extends IdentifiedRuntimeException {
     public InvalidInputReceivedException(String message) {
-        super(HttpStatus.BAD_REQUEST, () -> message);
+        super(GENERIC_INPUT_ERROR, () -> message);
     }
 }

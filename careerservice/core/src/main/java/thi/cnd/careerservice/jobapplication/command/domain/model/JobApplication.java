@@ -15,6 +15,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
+import static thi.cnd.careerservice.exception.BasicErrorCode.CONFLICTING_ACTION;
+import static thi.cnd.careerservice.exception.BasicErrorCode.RESOURCE_NOT_MODIFIED;
+
 @Validated
 @Getter
 public class JobApplication extends AggregateRoot<JobApplicationId, JobApplication, JobApplicationEvent> {
@@ -63,11 +66,11 @@ public class JobApplication extends AggregateRoot<JobApplicationId, JobApplicati
         validateModification();
 
         if (this.status == status) {
-            throw new IdentifiedRuntimeException(HttpStatus.NOT_MODIFIED);
+            throw new IdentifiedRuntimeException(RESOURCE_NOT_MODIFIED);
         }
 
         if (status == JobApplicationStatus.DRAFT) {
-            throw new IdentifiedRuntimeException(HttpStatus.CONFLICT, () -> "Cannot put a published job application back into draft.");
+            throw new IdentifiedRuntimeException(CONFLICTING_ACTION, () -> "Cannot put a published job application back into draft.");
         }
 
         return fire(new JobApplicationEvent.JobApplicationStatusChanged(id, status));

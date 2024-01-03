@@ -17,6 +17,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
+import static thi.cnd.careerservice.exception.BasicErrorCode.CONFLICTING_ACTION;
+import static thi.cnd.careerservice.exception.BasicErrorCode.RESOURCE_NOT_MODIFIED;
+
 @Getter
 @Validated
 public class JobOffer extends AggregateRoot<JobOfferId, JobOffer, JobOfferEvent> {
@@ -64,7 +67,7 @@ public class JobOffer extends AggregateRoot<JobOfferId, JobOffer, JobOfferEvent>
         validateModification();
 
         if (status == newStatus) {
-            throw new IdentifiedRuntimeException(HttpStatus.NOT_MODIFIED);
+            throw new IdentifiedRuntimeException(RESOURCE_NOT_MODIFIED);
         }
 
         if (newStatus == JobOfferStatus.DELETED) {
@@ -72,7 +75,7 @@ public class JobOffer extends AggregateRoot<JobOfferId, JobOffer, JobOfferEvent>
         }
 
         if (newStatus == JobOfferStatus.DRAFT) {
-            throw new IdentifiedRuntimeException(HttpStatus.CONFLICT,
+            throw new IdentifiedRuntimeException(CONFLICTING_ACTION,
                 () -> "Cannot return the status back to draft once the job offer was published");
         }
 

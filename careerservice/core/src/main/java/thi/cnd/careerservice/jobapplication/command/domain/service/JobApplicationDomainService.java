@@ -17,6 +17,9 @@ import thi.cnd.careerservice.joboffer.query.port.JobOfferQueryPort;
 import thi.cnd.careerservice.user.UserPort;
 import thi.cnd.careerservice.joboffer.command.domain.model.JobOfferStatus;
 
+import static thi.cnd.careerservice.exception.BasicErrorCode.CONFLICTING_ACTION;
+import static thi.cnd.careerservice.exception.BasicErrorCode.GENERIC_INPUT_ERROR;
+
 @Component
 public class JobApplicationDomainService {
 
@@ -58,12 +61,12 @@ public class JobApplicationDomainService {
             var jobApplicationCount = jobApplicationFuture.get();
 
             if (jobOffer.getStatus() != JobOfferStatus.OPEN) {
-                throw new IdentifiedRuntimeException(HttpStatus.BAD_REQUEST,
+                throw new IdentifiedRuntimeException(GENERIC_INPUT_ERROR,
                     () -> "Cannot create job application if job offer is not in open status.");
             }
 
             if (!user.isSubscribed() && maxJobApplicationPerNonSubscribedUser < jobApplicationCount) {
-                throw new IdentifiedRuntimeException(HttpStatus.CONFLICT, () -> "User exceeds max amount of job applications.");
+                throw new IdentifiedRuntimeException(CONFLICTING_ACTION, () -> "User exceeds max amount of job applications.");
             }
 
             return JobApplication.init().create(

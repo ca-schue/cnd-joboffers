@@ -1,9 +1,9 @@
 package thi.cnd.careerservice.exception;
 
-import org.springframework.http.HttpStatus;
+import static thi.cnd.careerservice.exception.BasicErrorCode.RESOURCE_NOT_FOUND;
 
 public class ResourceIsDeletedException extends IdentifiedRuntimeException {
     public ResourceIsDeletedException() {
-        super(HttpStatus.NOT_FOUND);
+        super(RESOURCE_NOT_FOUND);
     }
 }
