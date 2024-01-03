@@ -27,7 +27,7 @@ export class UserService {
 requestBody: UserRegistrationRequest,
 ): CancelablePromise<User> {
         return __request(OpenAPI, {
-            method: 'PUT',
+            method: 'POST',
             url: '/users/register',
             body: requestBody,
             mediaType: 'application/json',
@@ -109,7 +109,7 @@ userId: UUID,
 requestBody: UpdateUserSettingsRequest,
 ): CancelablePromise<User> {
         return __request(OpenAPI, {
-            method: 'POST',
+            method: 'PUT',
             url: '/users/{user-id}/update-user-settings',
             path: {
                 'user-id': userId,
@@ -134,7 +134,7 @@ userId: UUID,
 requestBody: UpdateUserProfileRequest,
 ): CancelablePromise<User> {
         return __request(OpenAPI, {
-            method: 'POST',
+            method: 'PUT',
             url: '/users/{user-id}/update-user-profile',
             path: {
                 'user-id': userId,

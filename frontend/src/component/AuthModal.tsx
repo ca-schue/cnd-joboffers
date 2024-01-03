@@ -192,11 +192,13 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
                 if (accountEmail && password && accountState.account?.accountType == "InternalAccount") {
                     handleInternalLogin().then(() => {
                         setLoading(false)
-                    }).catch(() => logout)
+                    }).catch(() => logout())
                 } else {
                     setLoading(false)
                     setRelogin(true)
-                    handleOidcLogin()
+                    if(accountState.account?.accountType == "OidcAccount") {
+                        handleOidcLogin()
+                    }
                     logout()
                 }
             })

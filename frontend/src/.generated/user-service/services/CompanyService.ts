@@ -5,7 +5,6 @@
 import type { Company } from '../models/Company';
 import type { CompanyInviteUserRequest } from '../models/CompanyInviteUserRequest';
 import type { CompanyRegistrationRequest } from '../models/CompanyRegistrationRequest';
-import type { PaginatedPublicCompanyProfileResponse } from '../models/PaginatedPublicCompanyProfileResponse';
 import type { PublicCompanyProfile } from '../models/PublicCompanyProfile';
 import type { UpdateCompanyDetailsRequest } from '../models/UpdateCompanyDetailsRequest';
 import type { UpdateCompanyLinksRequest } from '../models/UpdateCompanyLinksRequest';
@@ -18,36 +17,6 @@ import { request as __request } from '../core/request';
 export class CompanyService {
 
     /**
-     * Get company for provided id.
-     * @param name 
-     * @param tags 
-     * @param page 
-     * @param size 
-     * @returns PaginatedPublicCompanyProfileResponse Companies for filters were found.
-     * @throws ApiError
-     */
-    public static searchCompanies(
-name?: string,
-tags?: Array<string>,
-page?: number,
-size?: number,
-): CancelablePromise<PaginatedPublicCompanyProfileResponse> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/companies',
-            query: {
-                'name': name,
-                'tags': tags,
-                'page': page,
-                'size': size,
-            },
-            errors: {
-                404: `Company not found for id.`,
-            },
-        });
-    }
-
-    /**
      * Creates a new company.
      * @param requestBody 
      * @returns Company Registration was successful.
@@ -57,7 +26,7 @@ size?: number,
 requestBody: CompanyRegistrationRequest,
 ): CancelablePromise<Company> {
         return __request(OpenAPI, {
-            method: 'PUT',
+            method: 'POST',
             url: '/companies/register',
             body: requestBody,
             mediaType: 'application/json',
@@ -185,7 +154,7 @@ companyId: UUID,
 requestBody: UpdateCompanyDetailsRequest,
 ): CancelablePromise<Company> {
         return __request(OpenAPI, {
-            method: 'POST',
+            method: 'PUT',
             url: '/companies/{company-id}/update-company-details',
             path: {
                 'company-id': companyId,
@@ -210,7 +179,7 @@ companyId: UUID,
 requestBody: UpdateCompanyLinksRequest,
 ): CancelablePromise<Company> {
         return __request(OpenAPI, {
-            method: 'POST',
+            method: 'PUT',
             url: '/companies/{company-id}/update-company-links',
             path: {
                 'company-id': companyId,
