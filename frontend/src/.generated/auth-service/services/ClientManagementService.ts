@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { ClientCreationRequest } from '../models/ClientCreationRequest';
 import type { ClientCreationResponse } from '../models/ClientCreationResponse';
+import type { ThrowableProblem } from '../models/ThrowableProblem';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -15,11 +16,12 @@ export class ClientManagementService {
      * Creates a new client.
      * @param requestBody 
      * @returns ClientCreationResponse Client was successfully created.
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static createNewClient(
 requestBody: ClientCreationRequest,
-): CancelablePromise<ClientCreationResponse> {
+): CancelablePromise<ClientCreationResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/clients/create',
@@ -32,11 +34,12 @@ requestBody: ClientCreationRequest,
      * Resets the password to a new random one. {clientId} must match client id in access token
      * @param clientId 
      * @returns ClientCreationResponse Password was successfully reset.
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static resetPassword(
 clientId: string,
-): CancelablePromise<ClientCreationResponse> {
+): CancelablePromise<ClientCreationResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/clients/{clientId}/reset-password',
@@ -49,12 +52,12 @@ clientId: string,
     /**
      * Deletes the client. {clientId} must match clientId id in access token
      * @param clientId 
-     * @returns void 
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static deleteClient(
 clientId: string,
-): CancelablePromise<void> {
+): CancelablePromise<ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/clients/{clientId}',

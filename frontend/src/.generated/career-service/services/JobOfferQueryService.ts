@@ -5,6 +5,7 @@
 import type { JobOfferResponse } from '../models/JobOfferResponse';
 import type { JobOffersResponse } from '../models/JobOffersResponse';
 import type { PaginatedJobOffersResponse } from '../models/PaginatedJobOffersResponse';
+import type { ThrowableProblem } from '../models/ThrowableProblem';
 import type { UUID } from '../models/UUID';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -20,6 +21,7 @@ export class JobOfferQueryService {
      * @param title 
      * @param companyIds 
      * @returns PaginatedJobOffersResponse List of all job offers available
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static searchAvailableJobOffers(
@@ -27,7 +29,7 @@ skip?: number,
 limit?: number,
 title?: string,
 companyIds?: Array<UUID>,
-): CancelablePromise<PaginatedJobOffersResponse> {
+): CancelablePromise<PaginatedJobOffersResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/available-job-offers',
@@ -44,11 +46,12 @@ companyIds?: Array<UUID>,
      * Returns a list of available job offers for a specific company.
      * @param companyId 
      * @returns JobOffersResponse List of all job offers for an user
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static getAvailableJobOffersByCompanyId(
 companyId: UUID,
-): CancelablePromise<JobOffersResponse> {
+): CancelablePromise<JobOffersResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/available-job-offers',
@@ -62,11 +65,12 @@ companyId: UUID,
      * Returns a list of all job offers for a specific company.
      * @param companyId 
      * @returns JobOffersResponse List of all job offers for an user
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static getAllJobOffersByCompanyId(
 companyId: UUID,
-): CancelablePromise<JobOffersResponse> {
+): CancelablePromise<JobOffersResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/job-offers',
@@ -82,13 +86,14 @@ companyId: UUID,
      * @param jobOfferId 
      * @param ifNoneMatch 
      * @returns JobOfferResponse The requested job offer if found.
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static getAvailableJobOffer(
 companyId: UUID,
 jobOfferId: UUID,
 ifNoneMatch?: string,
-): CancelablePromise<JobOfferResponse> {
+): CancelablePromise<JobOfferResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/available-job-offers/{job-offer-id}',
@@ -108,13 +113,14 @@ ifNoneMatch?: string,
      * @param jobOfferId 
      * @param ifNoneMatch 
      * @returns JobOfferResponse The requested job offer if found.
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static getJobOffer(
 companyId: UUID,
 jobOfferId: UUID,
 ifNoneMatch?: string,
-): CancelablePromise<JobOfferResponse> {
+): CancelablePromise<JobOfferResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/job-offers/{job-offer-id}',

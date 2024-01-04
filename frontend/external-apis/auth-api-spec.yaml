@@ -23,6 +23,16 @@ paths:
                 $ref: '#/components/schemas/AccountLoginResponse'
         '401':
           description: Wrong credentials
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /accounts/loginOIDCAccount:
     post:
       description: Login with via ID-token provided by OIDC provider (issuer must be supported by auth. server). Creates new account if email does not exist. Returns access token with access token with claim "subject-type = account".
@@ -46,6 +56,16 @@ paths:
         #                $ref: '#/components/schemas/AccessTokenResponse'
         '401':
           description: Unsupported OIDC identity provider (ID-Token issuer).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /accounts/registerInternalAccount:
     post:
       description: Registers a new internal account with the provided credentials.
@@ -59,7 +79,7 @@ paths:
             schema:
               $ref: '#/components/schemas/InternalAccountRegistrationRequest'
       responses:
-        '201':
+        '200':
           description: Interal account registration was successful.
           content:
             application/json:
@@ -67,8 +87,16 @@ paths:
                 $ref: '#/components/schemas/AccountLoginResponse'
         '409':
           description: Account with the email already exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
         default:
           description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /accounts/{accountId}/update-internal-email:
     put:
       description: Updates the login email of the provided internal account
@@ -92,6 +120,16 @@ paths:
                 $ref: '#/components/schemas/InternalAccount'
         '404':
           description: Account not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /accounts/{accountId}/update-internal-password:
     put:
       description: Updates the login password of the provided internal account
@@ -111,6 +149,16 @@ paths:
           description: Update was successful
         '404':
           description: Account not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
       security:
         - accountAccessToken: []
   /accounts/{accountId}:
@@ -126,6 +174,16 @@ paths:
           description: Account was deleted.
         '404':
           description: Account not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
       security:
         - accountAccessToken: []
 
@@ -148,6 +206,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ClientCreationResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /clients/{clientId}/reset-password:
     put:
       description: Resets the password to a new random one. {clientId} must match client id in access token
@@ -165,6 +229,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ClientCreationResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /clients/{clientId}:
     delete:
       description: Deletes the client. {clientId} must match clientId id in access token
@@ -178,41 +248,18 @@ paths:
           description: Client was deleted.
         '404':
           description: Client not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
       security:
         - clientAccessToken: []
-
-
-  /token-introspection/account:
-    get:
-      description: Get detailed account data from the provided access token.
-      operationId: tokenIntrospectionAccount
-      tags:
-        - Auth Endpoints
-      responses:
-        '200':
-          description: Token is valid and data could be retrieved.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Account'
-      security:
-        - accountAccessToken: [ ]
-
-  /token-introspection/client:
-    get:
-      description: Get detailed client data from the provided access token.
-      operationId: tokenIntrospectionClient
-      tags:
-        - Auth Endpoints
-      responses:
-        '200':
-          description: Token is valid and data could be retrieved.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Client'
-      security:
-        - clientAccessToken: [ ]
 
 components:
   parameters:
@@ -324,6 +371,11 @@ components:
           uniqueItems: true
           items:
             type: string
+        scopes:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
         last_password_change:
           type: string
           format: date-time
@@ -360,6 +412,11 @@ components:
           uniqueItems: true
           items:
             type: string
+        scopes:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
 
     AccountLoginResponse:
       type: object
@@ -375,6 +432,22 @@ components:
     UUID:
       type: string
       format: UUID
+
+    ThrowableProblem:
+      type: object
+      description: Response object, which is returned if an error occurred while processing the request.
+      required:
+        - title
+        - status
+      properties:
+        title:
+          type: string
+        status:
+          type: string
+        detail:
+          type: string
+        code:
+          type: number
 
   securitySchemes:
     accountAccessToken:

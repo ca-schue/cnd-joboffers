@@ -34,6 +34,7 @@ export type { PaginatedJobOffersResponse as PaginatedJobOffersResponseDTO } from
 export type { Pagination as PaginationDTO } from './models/Pagination';
 export type { SalaryRange as SalaryRangeDTO } from './models/SalaryRange';
 export type { Skip as SkipDTO } from './models/Skip';
+export type { ThrowableProblem as ThrowableProblemDTO } from './models/ThrowableProblem';
 export type { TitleFilter as TitleFilterDTO } from './models/TitleFilter';
 export type { UserId as UserIdDTO } from './models/UserId';
 export type { UUID as UUIDDTO } from './models/UUID';

@@ -22,6 +22,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedJobOffersResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/available-job-offers:
     get:
       summary: Returns a list of available job offers for a specific company.
@@ -37,6 +43,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobOffersResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/job-offers:
     get:
       summary: Returns a list of all job offers for a specific company.
@@ -52,6 +64,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobOffersResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
     post:
       summary: Create a new job offer for the logged in user.
       operationId: createJobOffer
@@ -72,6 +90,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobOfferCreationResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/available-job-offers/{job-offer-id}:
     get:
       summary: Returns a specific available job offer
@@ -89,6 +113,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobOfferResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/job-offers/{job-offer-id}:
     get:
       summary: Returns a specific job offer
@@ -106,6 +136,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobOfferResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
     delete:
       summary: Deletes a specific job offer
       operationId: deleteJobOffer
@@ -118,6 +154,12 @@ paths:
       responses:
         '204':
           description: Job Offer was deleted
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/job-offers/{job-offer-id}/update:
     post:
       summary: Update an existing job offer
@@ -137,6 +179,12 @@ paths:
       responses:
         '204':
           description: Request was successful and applied to the domain model
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/job-offers/{job-offer-id}/publish:
     post:
       summary: Publishes the job offer
@@ -150,6 +198,12 @@ paths:
       responses:
         '204':
           description: Request was successful and applied to the domain model
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/job-offers/{job-offer-id}/close:
     post:
       summary: Closes the job offer
@@ -163,6 +217,12 @@ paths:
       responses:
         '204':
           description: Request was successful and applied to the domain model
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/job-offers/{job-offer-id}/job-applications:
     get:
       summary: Returns a list of all job applications for a specific job offer.
@@ -179,6 +239,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobApplicationsResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}:
     get:
       summary: Get a specific job application for a job offer
@@ -197,6 +263,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobApplicationResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}/accept:
     post:
       summary: Accepts the job application
@@ -211,6 +283,12 @@ paths:
       responses:
         '204':
           description: Request was successful and applied to the domain model
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}/deny:
     post:
       summary: Denies the job application
@@ -225,7 +303,12 @@ paths:
       responses:
         '204':
           description: Request was successful and applied to the domain model
-
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
 
   /users/{user-id}/job-applications:
     get:
@@ -242,6 +325,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobApplicationsResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /users/{user-id}/job-offers/{job-offer-id}/job-application:
     get:
       summary: Returns the job application for a specific user and job offer
@@ -259,6 +348,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobApplicationResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /users/{user-id}/job-offers/{job-offer-id}/create-job-applications:
     post:
       summary: Creates a new job application
@@ -281,6 +376,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobApplicationCreationResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /users/{user-id}/job-applications/{job-application-id}:
     get:
       summary: Get a specific job application for a job offer
@@ -298,6 +399,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JobApplicationResponse'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
     delete:
       summary: Deletes a specific job application
       operationId: deletedJobApplication
@@ -310,6 +417,12 @@ paths:
       responses:
         '204':
           description: Request was successful and job application was deleted
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /users/{user-id}/job-applications/{job-application-id}/publish:
     post:
       summary: Closes the job application
@@ -323,6 +436,12 @@ paths:
       responses:
         '204':
           description: Request was successful and applied to the domain model
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /users/{user-id}/job-applications/{job-application-id}/update:
     post:
       summary: Update the job application content
@@ -342,7 +461,12 @@ paths:
       responses:
         '204':
           description: Request was successful and applied to the domain model
-
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
 
 components:
   parameters:
@@ -664,3 +788,18 @@ components:
     UUID:
       type: string
       format: UUID
+    ThrowableProblem:
+      type: object
+      description: Response object, which is returned if an error occurred while processing the request.
+      required:
+        - title
+        - status
+      properties:
+        title:
+          type: string
+        status:
+          type: string
+        detail:
+          type: string
+        code:
+          type: number

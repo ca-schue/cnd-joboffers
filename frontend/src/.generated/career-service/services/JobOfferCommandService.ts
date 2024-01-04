@@ -5,6 +5,7 @@
 import type { JobOfferCreationRequest } from '../models/JobOfferCreationRequest';
 import type { JobOfferCreationResponse } from '../models/JobOfferCreationResponse';
 import type { JobOfferUpdateRequest } from '../models/JobOfferUpdateRequest';
+import type { ThrowableProblem } from '../models/ThrowableProblem';
 import type { UUID } from '../models/UUID';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -18,12 +19,13 @@ export class JobOfferCommandService {
      * @param companyId 
      * @param requestBody 
      * @returns JobOfferCreationResponse Job offer created.
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static createJobOffer(
 companyId: UUID,
 requestBody: JobOfferCreationRequest,
-): CancelablePromise<JobOfferCreationResponse> {
+): CancelablePromise<JobOfferCreationResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/companies/{company-id}/job-offers',
@@ -40,14 +42,14 @@ requestBody: JobOfferCreationRequest,
      * @param companyId 
      * @param jobOfferId 
      * @param ifMatch 
-     * @returns void 
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static deleteJobOffer(
 companyId: UUID,
 jobOfferId: UUID,
 ifMatch: string,
-): CancelablePromise<void> {
+): CancelablePromise<ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/companies/{company-id}/job-offers/{job-offer-id}',
@@ -67,7 +69,7 @@ ifMatch: string,
      * @param jobOfferId 
      * @param ifMatch 
      * @param requestBody 
-     * @returns void 
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static updateJobOfferAttributes(
@@ -75,7 +77,7 @@ companyId: UUID,
 jobOfferId: UUID,
 ifMatch: string,
 requestBody: JobOfferUpdateRequest,
-): CancelablePromise<void> {
+): CancelablePromise<ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/update',
@@ -96,14 +98,14 @@ requestBody: JobOfferUpdateRequest,
      * @param companyId 
      * @param jobOfferId 
      * @param ifMatch 
-     * @returns void 
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static publishJobOffer(
 companyId: UUID,
 jobOfferId: UUID,
 ifMatch: string,
-): CancelablePromise<void> {
+): CancelablePromise<ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/publish',
@@ -122,14 +124,14 @@ ifMatch: string,
      * @param companyId 
      * @param jobOfferId 
      * @param ifMatch 
-     * @returns void 
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static closeJobOffer(
 companyId: UUID,
 jobOfferId: UUID,
 ifMatch: string,
-): CancelablePromise<void> {
+): CancelablePromise<ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/close',

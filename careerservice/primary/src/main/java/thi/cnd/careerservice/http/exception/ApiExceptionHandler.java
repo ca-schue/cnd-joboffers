@@ -21,6 +21,8 @@ import org.zalando.problem.violations.ConstraintViolationProblemModule;
 
 import thi.cnd.careerservice.exception.IdentifiedRuntimeException;
 
+import static thi.cnd.careerservice.exception.BasicErrorCode.UNKNOWN_ERROR;
+
 
 @ControllerAdvice
 public class ApiExceptionHandler implements ProblemHandling {
@@ -47,7 +49,9 @@ public class ApiExceptionHandler implements ProblemHandling {
         return toResponseEntity(
             Problem.builder()
                 .withStatus(Status.valueOf(ErrorCodeMapper.mapErrorCodeToHttpStatusCode(e.getErrorCode()).value()))
+                .withTitle(e.getErrorCode().getTitle())
                 .withDetail(e.getMessage())
+                .with("code", e.getErrorCode().getErrorCode())
                 .build()
         );
     }
@@ -59,6 +63,8 @@ public class ApiExceptionHandler implements ProblemHandling {
         return toResponseEntity(
             Problem.builder()
                 .withStatus(Status.INTERNAL_SERVER_ERROR)
+                .withTitle(UNKNOWN_ERROR.getTitle())
+                .with("code", UNKNOWN_ERROR.getErrorCode())
                 .withDetail(e.getMessage())
                 .build()
         );

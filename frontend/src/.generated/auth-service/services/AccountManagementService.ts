@@ -7,6 +7,7 @@ import type { InternalAccount } from '../models/InternalAccount';
 import type { InternalAccountEmailUpdateRequest } from '../models/InternalAccountEmailUpdateRequest';
 import type { InternalAccountPasswordUpdateRequest } from '../models/InternalAccountPasswordUpdateRequest';
 import type { InternalAccountRegistrationRequest } from '../models/InternalAccountRegistrationRequest';
+import type { ThrowableProblem } from '../models/ThrowableProblem';
 import type { UUID } from '../models/UUID';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -18,9 +19,10 @@ export class AccountManagementService {
     /**
      * Login to an internal account with basic auth. Returns an access token with claim "subject-type = account"
      * @returns AccountLoginResponse Login to interal Account was successful
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
-    public static loginInternalAccount(): CancelablePromise<AccountLoginResponse> {
+    public static loginInternalAccount(): CancelablePromise<AccountLoginResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/accounts/loginInternalAccount',
@@ -33,9 +35,10 @@ export class AccountManagementService {
     /**
      * Login with via ID-token provided by OIDC provider (issuer must be supported by auth. server). Creates new account if email does not exist. Returns access token with access token with claim "subject-type = account".
      * @returns AccountLoginResponse Login with OIDC was successful. Account exists.
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
-    public static loginOidcAccount(): CancelablePromise<AccountLoginResponse> {
+    public static loginOidcAccount(): CancelablePromise<AccountLoginResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/accounts/loginOIDCAccount',
@@ -48,13 +51,13 @@ export class AccountManagementService {
     /**
      * Registers a new internal account with the provided credentials.
      * @param requestBody 
-     * @returns any Returned if any error occurred during the request.
      * @returns AccountLoginResponse Interal account registration was successful.
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static registerInternalAccount(
 requestBody: InternalAccountRegistrationRequest,
-): CancelablePromise<any | AccountLoginResponse> {
+): CancelablePromise<AccountLoginResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/accounts/registerInternalAccount',
@@ -71,12 +74,13 @@ requestBody: InternalAccountRegistrationRequest,
      * @param accountId 
      * @param requestBody 
      * @returns InternalAccount Update was successful
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static updateInternalAccountEmail(
 accountId: UUID,
 requestBody: InternalAccountEmailUpdateRequest,
-): CancelablePromise<InternalAccount> {
+): CancelablePromise<InternalAccount | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/accounts/{accountId}/update-internal-email',
@@ -96,12 +100,13 @@ requestBody: InternalAccountEmailUpdateRequest,
      * @param accountId 
      * @param requestBody 
      * @returns any Update was successful
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static updateInternalAccountPassword(
 accountId: UUID,
 requestBody: InternalAccountPasswordUpdateRequest,
-): CancelablePromise<any> {
+): CancelablePromise<any | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/accounts/{accountId}/update-internal-password',
@@ -119,12 +124,12 @@ requestBody: InternalAccountPasswordUpdateRequest,
     /**
      * Deletes the account and the user profile if available. {accountId} must match account id in access token
      * @param accountId 
-     * @returns void 
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static deleteAccount(
 accountId: UUID,
-): CancelablePromise<void> {
+): CancelablePromise<ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/accounts/{accountId}',

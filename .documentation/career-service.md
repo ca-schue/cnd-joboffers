@@ -13,7 +13,7 @@
 1. Create Job Offer by company member, this will be mirrored to query side
 2. User reads Job Offer and applies for it, creating a Job Application
 3. Company member reads Job Application and accepts the application
-4. Company member closes Job Offer and deletes it afterwards. 
+4. Company member closes Job Offer and deletes it afterward. 
    - Internally the application will mark the Job Offer stream as deleted in the Event Store
    - This deletes the Job Offer from the Query Repository, but also results in the deletion of all associated Job Applications
    - The Job Applications are marked as deleted in the Event Store and removed from the Query Repository
@@ -63,9 +63,13 @@
     - Command: Upon receiving an event, the write side is affected, e.g. JobOffer-Deleted -> JobApplication-Deleted
     - Query: Upon receiving an event, the read side is affected (Projector), e.g. JobOffer-Created -> Save JobOfferView in MongoDB
   - External Event Listener: Listens to external events (Kafka) coming from other microservice, e.g. User-Deleted -> JobApplication-Deleted
-- Comments to concurrency problems:
-  - Example: 1. Company is deleted -> 2. Fetch all Job Offers -> 3. Deleted every one of them. BUT, if between 2. and 3. a Job Offer is created, this job offer will not be deleted
-  - From business view this is not important, because:
+- Comments to concurrency/eventual-consistency problems:
+  - Example: 
+    1. Company is deleted
+    2. Fetch all Job Offers for that company
+    3. Deleted every Job Offer of company. 
+    - BUT, if between 2. and 3. a Job Offer is created, this job offer will not be deleted
+  - From business view this is not a significant problem, because:
     - A stale job offer will be deleted eventually by the database (TTL of entry)
     - A stale job application will be deleted once the job offer is deleted or by TTL
   - Therefore (and also for simplicity's sake), there are no mechanism to fix inconsistencies
@@ -73,13 +77,15 @@
 ## Required Env Vars:
 
 ```  
-CAREER_SERVICE_PORT = {Spring will start the web server on this port
+CAREER_SERVICE_PORT = {Spring will start the web server on this port}
 CAREER_SERVICE_MONGODB_URI = {URI of MongoDB Document for career service data}
 
 KAFKA_BOOTSTRAP_SERVER = {URL of kafka message broker}
-    [auth-service.md](auth-service.md)
-INTERNAL_JWT_ISSUER_URL = {issuer URL of valid internal JWTs}
-EVENT_STORE_URI = {event-store-uri TODO}
+INTERNAL_JWT_ISSUER_URL = {Issuer URL of valid internal JWTs, this is the auth-service}
+EVENT_STORE_URI = {event-store-db-uri}
 
-USER_SERVICE_URL = {user service endpoint http TODO}
+CAREER_SERVICE_CLIENT_ID = {The client id to be authenticated against auth-service, used for internal service to service calls}
+CAREER_SERVICE_CLIENT_SECRET = {The client secret to be authenticated against auth-service, used for internal service to service calls}
+
+USER_SERVICE_URL = {user service http endpoint}
 ```

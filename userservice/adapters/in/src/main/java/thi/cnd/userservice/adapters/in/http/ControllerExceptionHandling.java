@@ -20,6 +20,7 @@ public class ControllerExceptionHandling implements ProblemHandling, SecurityAdv
         return toResponseEntity(
             Problem.builder()
                 .withStatus(Status.INTERNAL_SERVER_ERROR)
+                .withTitle("Unexpected Error")
                 .withDetail(e.getMessage())
                 .build()
         );

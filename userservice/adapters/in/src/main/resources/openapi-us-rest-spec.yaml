@@ -23,6 +23,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /users/{user-id}:
     get:
       description: Get user of provided user id.
@@ -40,6 +46,16 @@ paths:
                 $ref: '#/components/schemas/User'
         '404':
           description: User not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
     delete:
       description: Deletes the user.
       operationId: deleteUser
@@ -52,6 +68,16 @@ paths:
           description: User was deleted.
         '404':
           description: User not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   #/users/delete-by-user-profile-email:
   #  delete:
   #    description: Deletes the user by email. This endpoint should only be called by other services.
@@ -86,6 +112,16 @@ paths:
                 $ref: '#/components/schemas/PublicUserProfile'
         '404':
           description: User not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /users/{user-id}/update-user-settings:
     put:
       description: Update the user settings associated with this user.
@@ -109,6 +145,16 @@ paths:
                 $ref: '#/components/schemas/User'
         '404':
           description: User not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /users/{user-id}/update-user-profile:
     put:
       description: Update the user profile associated with this user.
@@ -132,6 +178,16 @@ paths:
                 $ref: '#/components/schemas/User'
         '404':
           description: User not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /users/{user-id}/subscribe:
     post:
       summary: Makes the user a subscriber or extends their subscription.
@@ -153,6 +209,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /users/{user-id}/accept-company-invitation:
     post:
       summary: Accepts the invitation to be a member of a company.
@@ -170,6 +232,12 @@ paths:
       responses:
         '204':
           description: Invitation was accepted.
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/register:
     post:
       summary: Creates a new company.
@@ -189,6 +257,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Company'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}:
     get:
       description: Get company for provided id.
@@ -206,6 +280,16 @@ paths:
                 $ref: '#/components/schemas/Company'
         '404':
           description: Company not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
     delete:
       description: Deletes the company.
       operationId: deleteCompany
@@ -218,6 +302,16 @@ paths:
           description: The company was deleted.
         '404':
           description: Company not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/public-profile:
     get:
       description: Get company for provided id.
@@ -235,6 +329,16 @@ paths:
                 $ref: '#/components/schemas/PublicCompanyProfile'
         '404':
           description: Company not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/invite-user:
     post:
       description: Invites an user to join the company.
@@ -254,6 +358,16 @@ paths:
           description: Invitation was sent.
         '404':
           description: Company not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/partner-program:
     post:
       description: Subscribes to partner program
@@ -271,6 +385,16 @@ paths:
                 $ref: '#/components/schemas/Company'
         '404':
           description: Company not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/update-company-details:
     put:
       description: Overrides the current company details with the provided data.
@@ -294,6 +418,16 @@ paths:
                 $ref: '#/components/schemas/Company'
         '404':
           description: Company not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
   /companies/{company-id}/update-company-links:
     put:
       description: Overrides the current company links with the provided data.
@@ -317,6 +451,16 @@ paths:
                 $ref: '#/components/schemas/Company'
         '404':
           description: Company not found for id.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
+        default:
+          description: Returned if any error occurred during the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ThrowableProblem'
 
 components:
   parameters:
@@ -406,7 +550,7 @@ components:
           items:
             $ref: '#/components/schemas/UUID'
         owner_of:
-            $ref: '#/components/schemas/UUID'
+          $ref: '#/components/schemas/UUID'
     UserSettings:
       type: object
       required:
@@ -631,3 +775,18 @@ components:
     UUID:
       type: string
       format: UUID
+    ThrowableProblem:
+      type: object
+      description: Response object, which is returned if an error occurred while processing the request.
+      required:
+        - title
+        - status
+      properties:
+        title:
+          type: string
+        status:
+          type: string
+        detail:
+          type: string
+        code:
+          type: number

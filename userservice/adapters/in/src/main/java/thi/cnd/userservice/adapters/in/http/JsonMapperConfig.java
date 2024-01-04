@@ -1,4 +1,4 @@
-package thi.cnd.careerservice.shared.config;
+package thi.cnd.userservice.adapters.in.http;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -23,6 +23,7 @@ export type { Pagination as PaginationDTO } from './models/Pagination';
 export type { PublicCompanyProfile as PublicCompanyProfileDTO } from './models/PublicCompanyProfile';
 export type { PublicUserProfile as PublicUserProfileDTO } from './models/PublicUserProfile';
 export type { Size as SizeDTO } from './models/Size';
+export type { ThrowableProblem as ThrowableProblemDTO } from './models/ThrowableProblem';
 export type { UpdateCompanyDataRequest as UpdateCompanyDataRequestDTO } from './models/UpdateCompanyDataRequest';
 export type { UpdateCompanyDetailsRequest as UpdateCompanyDetailsRequestDTO } from './models/UpdateCompanyDetailsRequest';
 export type { UpdateCompanyLinksRequest as UpdateCompanyLinksRequestDTO } from './models/UpdateCompanyLinksRequest';

@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { JobApplicationResponse } from '../models/JobApplicationResponse';
 import type { JobApplicationsResponse } from '../models/JobApplicationsResponse';
+import type { ThrowableProblem } from '../models/ThrowableProblem';
 import type { UUID } from '../models/UUID';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -17,12 +18,13 @@ export class JobApplicationQueryService {
      * @param companyId 
      * @param jobOfferId 
      * @returns JobApplicationsResponse List of all job applications for an user
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static getAllPublishedJobApplicationsByJobOffer(
 companyId: UUID,
 jobOfferId: UUID,
-): CancelablePromise<JobApplicationsResponse> {
+): CancelablePromise<JobApplicationsResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/job-applications',
@@ -40,6 +42,7 @@ jobOfferId: UUID,
      * @param jobApplicationId 
      * @param ifNoneMatch 
      * @returns JobApplicationResponse A specific job application
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static getJobApplicationForCompany(
@@ -47,7 +50,7 @@ companyId: UUID,
 jobOfferId: UUID,
 jobApplicationId: UUID,
 ifNoneMatch?: string,
-): CancelablePromise<JobApplicationResponse> {
+): CancelablePromise<JobApplicationResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/companies/{company-id}/job-offers/{job-offer-id}/job-applications/{job-application-id}',
@@ -66,11 +69,12 @@ ifNoneMatch?: string,
      * Returns a list of all applications for a specific user.
      * @param userId 
      * @returns JobApplicationsResponse List of all job applications for an user
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static getAllJobApplicationsByUserId(
 userId: UUID,
-): CancelablePromise<JobApplicationsResponse> {
+): CancelablePromise<JobApplicationsResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{user-id}/job-applications',
@@ -86,13 +90,14 @@ userId: UUID,
      * @param jobOfferId 
      * @param ifNoneMatch 
      * @returns JobApplicationResponse The existing job application
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static getJobApplicationByUserAndJobOffer(
 userId: UUID,
 jobOfferId: UUID,
 ifNoneMatch?: string,
-): CancelablePromise<JobApplicationResponse> {
+): CancelablePromise<JobApplicationResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{user-id}/job-offers/{job-offer-id}/job-application',
@@ -112,13 +117,14 @@ ifNoneMatch?: string,
      * @param jobApplicationId 
      * @param ifNoneMatch 
      * @returns JobApplicationResponse A specific job application
+     * @returns ThrowableProblem Returned if any error occurred during the request.
      * @throws ApiError
      */
     public static getJobApplicationForUser(
 userId: UUID,
 jobApplicationId: UUID,
 ifNoneMatch?: string,
-): CancelablePromise<JobApplicationResponse> {
+): CancelablePromise<JobApplicationResponse | ThrowableProblem> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{user-id}/job-applications/{job-application-id}',

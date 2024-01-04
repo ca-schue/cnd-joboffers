@@ -10,7 +10,7 @@ import static thi.cnd.careerservice.exception.BasicErrorCode.UNKNOWN_ERROR;
 @Getter
 public class IdentifiedRuntimeException extends RuntimeException {
 
-    private final ErrorCode errorCode;
+    private final transient ErrorCode errorCode;
 
     public IdentifiedRuntimeException(ErrorCode errorCode) {
         super();

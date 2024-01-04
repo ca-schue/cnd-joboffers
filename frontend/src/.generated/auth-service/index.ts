@@ -19,8 +19,8 @@ export type { InternalAccountEmailUpdateRequest as InternalAccountEmailUpdateReq
 export type { InternalAccountPasswordUpdateRequest as InternalAccountPasswordUpdateRequestDTO } from './models/InternalAccountPasswordUpdateRequest';
 export type { InternalAccountRegistrationRequest as InternalAccountRegistrationRequestDTO } from './models/InternalAccountRegistrationRequest';
 export type { OidcAccount as OidcAccountDTO } from './models/OidcAccount';
+export type { ThrowableProblem as ThrowableProblemDTO } from './models/ThrowableProblem';
 export type { UUID as UUIDDTO } from './models/UUID';
 
 export { AccountManagementService } from './services/AccountManagementService';
-export { AuthEndpointsService } from './services/AuthEndpointsService';
 export { ClientManagementService } from './services/ClientManagementService';

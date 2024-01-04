@@ -5,6 +5,8 @@ import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import thi.cnd.careerservice.exception.IdentifiedRuntimeException;
+import thi.cnd.careerservice.exception.InvalidInputReceivedException;
 import thi.cnd.careerservice.shared.model.DataWithETag;
 import thi.cnd.careerservice.api.generated.JobOfferCommandApi;
 import thi.cnd.careerservice.api.generated.model.JobOfferCreationRequestDTO;
@@ -64,6 +66,7 @@ public class JobOfferCommandApiController implements JobOfferCommandApi {
     public ResponseEntity<Void> updateJobOfferAttributes(UUID companyId, UUID jobOfferId, String ifMatch,
         JobOfferUpdateRequestDTO requestDTO) {
         ETag expectedRevision = ETag.fromIfMatchHeader(ifMatch);
+
         var command = jobOfferCommandApiMapper.toCommand(new JobOfferId(jobOfferId), requestDTO);
         var response = jobOfferCommandHandler.updateJobOfferAttributes(command, expectedRevision);
         return buildResponseEntity(response);

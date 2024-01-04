@@ -7,4 +7,5 @@ export type ClientCreationResponse = {
     name: string;
     password: string;
     audiences?: Array<string>;
+    scopes?: Array<string>;
 };

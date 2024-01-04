@@ -23,4 +23,9 @@ public enum BasicErrorCode implements ErrorCode {
     public int getErrorCode() {
         return errorCode;
     }
+
+    @Override
+    public String getTitle() {
+        return this.name();
+    }
 }
