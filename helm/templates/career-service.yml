@@ -38,11 +38,11 @@ spec:
           image: "{{ .image }}:{{ .imageTag }}"
           envFrom:
             - configMapRef:
-                name: job-offers-config-map
+                name: career-service-config-map
             - secretRef:
-                name: job-offers-secret-config
+                name: career-service-secret-config
           ports:
             - containerPort: {{ .port }}
       restartPolicy: Always
 
-{{- end }} 
+{{- end }}

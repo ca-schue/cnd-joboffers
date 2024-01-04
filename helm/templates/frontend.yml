@@ -38,9 +38,9 @@ spec:
           image: "{{ .image }}:{{ .imageTag }}"
           envFrom:
             - configMapRef:
-                name: job-offers-config-map
+                name: frontend-config-map
             - secretRef:
-                name: job-offers-secret-config
+                name: frontend-secret-config
           ports:
             - containerPort: {{ .port }}
           resources:

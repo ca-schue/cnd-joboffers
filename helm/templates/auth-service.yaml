@@ -35,9 +35,9 @@ spec:
           image: "{{ .image }}:{{ .imageTag }}"
           envFrom:
             - configMapRef:
-                name: job-offers-config-map
+                name: auth-service-config-map
             - secretRef:
-                name: job-offers-secret-config
+                name: auth-service-secret-config
           ports:
             - containerPort: {{ .port }}
           resources:
@@ -45,4 +45,4 @@ spec:
               memory: "1Gi"
               cpu: "100m"
       restartPolicy: Always
-{{- end }} 
+{{- end }}

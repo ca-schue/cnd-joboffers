@@ -32,7 +32,7 @@ spec:
         app: zookeeper
     spec:
       containers:
-        - image: confluentinc/cp-zookeeper:{{ .Values.zookeeper.imageTag }}
+        - image: "confluentinc/cp-zookeeper:{{ .Values.zookeeper.imageTag }}"
           name: zookeeper
           ports:
             - containerPort: {{ .Values.zookeeper.port }}
@@ -41,7 +41,7 @@ spec:
             runAsGroup: 0
           envFrom:
             - configMapRef:
-                name: job-offers-config-map
+                name: zookeeper-config-map
           volumeMounts:
             - name: "zookeeper-data"
               mountPath: "/var/lib/zookeeper/data"

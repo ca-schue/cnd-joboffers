@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notification-service-config-map
+  namespace: default
+data:
+  {{- with .Values.microservices.notificationService }}
+  NOTIFICATION_SERVICE_PORT: "{{ .port }}"
+  {{- end }}
+
+  KAFKA_BOOTSTRAP_SERVER: "{{ tpl .Values.kafka.bootstrapServer . }}"

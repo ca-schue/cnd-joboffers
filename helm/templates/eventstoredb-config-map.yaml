@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eventstoredb-config-map
+  namespace: default
+data:
+  EVENTSTORE_CLUSTER_SIZE: "1"
+  EVENTSTORE_RUN_PROJECTIONS: "All"
+  EVENTSTORE_START_STANDARD_PROJECTIONS: "true"
+  EVENTSTORE_EXT_TCP_PORT: "{{ .Values.eventstore.dbPort}}"
+  EVENTSTORE_HTTP_PORT: "{{ .Values.eventstore.webUIPort}}"
+  EVENTSTORE_INSECURE: "true"
+  EVENTSTORE_ENABLE_EXTERNAL_TCP: "true"
+  EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP: "true"

@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import { Button, Modal, Form, ListGroup, Container } from 'react-bootstrap';
-import {useAppDispatch, useAppSelector, useLogout} from "../state/hooks";
-import {Company} from "../.generated/user-service/models/Company";
-import {CompanyDTO, UserDTO, UserIdDTO} from "../.generated/user-service";
+import {Button, Container, Form} from 'react-bootstrap';
+import {useAppSelector, useLogout} from "../state/hooks";
+import {CompanyDTO} from "../.generated/user-service";
 import {userApi} from "../api/apis";
-import {addMemberCompany, setOwnerCompany, updateMemberCompany} from "../state/reducer/MyCompaniesSlice";
 
 interface MyCompanyViewProps {
     loading: ((is_loading: boolean) => void)
@@ -15,7 +13,6 @@ const MemberCompanyDetailsView = (props: MyCompanyViewProps) => {
     const userState = useAppSelector(state => state.user)
     const selectedMemberCompany = useAppSelector(state => state.selectedMemberCompany)
     const logout = useLogout()
-    const dispatch = useAppDispatch()
 
     const [inviteUserError, setInviteUserError] = useState("")
     const [inviteUserFeedback, setInviteUserFeedback] = useState("")
@@ -62,7 +59,7 @@ const MemberCompanyDetailsView = (props: MyCompanyViewProps) => {
     });
     const [companyLinks, setCompanyLinks] = useState({
         website_url: (undefined as undefined | string),
-        social_media: (undefined as undefined | string []),
+        social_media: (undefined as undefined | string[]),
     });
 
     const [newUserEmail, setNewUserEmail] = useState('');
@@ -139,14 +136,14 @@ const MemberCompanyDetailsView = (props: MyCompanyViewProps) => {
                     <Form.Label>Webseiten-URL</Form.Label>
                     <Form.Control
                         type="text"
-                        value={companyLinks.website_url === undefined ? "" : companyLinks.website_url}
+                        value={!companyLinks.website_url ? "" : companyLinks.website_url}
                         readOnly={true}                    />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Social Media</Form.Label>
                     <Form.Control
                         type="text"
-                        value={companyLinks.social_media === undefined ? [] as string [] : (companyLinks.social_media as string []).join(', ')}
+                        value={!companyLinks.social_media ? [] as string [] : (companyLinks.social_media as string []).join(', ')}
                         readOnly={true}                    />
                 </Form.Group>
             </Form>

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-config-map
+  namespace: default
+data:
+  KAFKA_ZOOKEEPER_CONNECT: "{{ tpl .Values.zookeeper.connectionUrl $ }}"
+  KAFKA_ADVERTISED_LISTENERS: "{{ tpl .Values.kafka.advertisedListeners $ }}"
+  KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"

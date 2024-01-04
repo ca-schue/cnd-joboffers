@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-service-config-map
+  namespace: default
+data:
+  {{- with .Values.microservices.userService }}
+  USER_SERVICE_PORT: "{{ tpl .port $ }}"
+  {{- end }}
+
+  KAFKA_BOOTSTRAP_SERVER: "{{ tpl .Values.kafka.bootstrapServer . }}"
+
+  {{- with .Values.microservices.authService }}
+  INTERNAL_JWT_ISSUER_URL: "{{ tpl (tpl $.Values.auth.internalJwtIssuerUrl $) $ }}"
+  {{- end }}

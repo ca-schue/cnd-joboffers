@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-service-config-map
+  namespace: default
+data:
+  {{- with .Values.microservices.authService }}
+  AUTH_SERVICE_PORT: "{{ .port }}"
+  INTERNAL_JWT_ISSUER_URL: "{{ tpl (tpl $.Values.auth.internalJwtIssuerUrl $) $ }}"
+  JWT_PUBLIC_KEY_BASE64: "{{ .jwtPublicKeyBase64 }}"
+  JWT_KEY_ID: "{{ .jwtKeyId }}"
+  JWT_VALIDITY_IN_SECONDS: "{{ .jwtValidityInSeconds }}"
+  JWT_SIGNING_ALGORITHM: "{{ .jwtRsaSigningAlgorithm }}"
+  {{- end }}
+
+  KAFKA_BOOTSTRAP_SERVER: "{{ tpl .Values.kafka.bootstrapServer . }}"
+
+  {{- with .Values.microservices.frontend }}
+  OIDC_PROVIDER_DISCOVERY_ENDPOINT: "{{ .oidc.discoveryEndpoint }}"
+  {{- end }}

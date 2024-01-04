@@ -41,7 +41,7 @@ spec:
             - containerPort: 9092
           envFrom:
             - configMapRef:
-                name: job-offers-config-map
+                name: kafka-config-map
           volumeMounts:
             - name: "kafka-data"
               mountPath: "/var/lib/kafka/data"

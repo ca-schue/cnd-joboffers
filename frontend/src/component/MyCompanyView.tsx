@@ -364,7 +364,7 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
                 <TextField
                     type="text"
                     label="Social Media Links"
-                    value={companyLinks.social_media === undefined ? [] as string [] : (companyLinks.social_media as string []).join(', ')}
+                    value={!companyLinks.social_media ? [] as string[] : (companyLinks.social_media as string[]).join(', ')}
                     onChange={(e) => setCompanyLinks({ ...companyLinks, social_media: e.target.value.split(', ') })}
                 />
                 {hasCompany && (

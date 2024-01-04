@@ -40,17 +40,15 @@ spec:
           ports:
             - containerPort: 27017
           envFrom:
-            - configMapRef:
-                name: job-offers-config-map
             - secretRef:
-                name: job-offers-secret-config
+                name: mongodb-secret-config
           volumeMounts:
             - name: "mongo-mount"
               mountPath: "/data/db"
             - name: "mongo-init-database"
               mountPath: /docker-entrypoint-initdb.d/mongo-init.js
               subPath: mongo-init.js
-            
+
       volumes:
         - name: "mongo-mount"
           persistentVolumeClaim:

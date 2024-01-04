@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config-map
+  namespace: default
+data:
+  {{- with .Values.microservices.frontend }}
+  APP_ENV: "prod"
+  EXTERNAL_AUTH_SERVICE_URL: "{{ tpl $.Values.ingress.endpoints.auth.externalUrl $ }}"
+  EXTERNAL_USER_SERVICE_URL: "{{ tpl $.Values.ingress.endpoints.user.externalUrl $ }}"
+  EXTERNAL_CAREER_SERVICE_URL: "{{ tpl $.Values.ingress.endpoints.career.externalUrl $ }}"
+  OIDC_PROVIDER_DISCOVERY_ENDPOINT: "{{ .oidc.discoveryEndpoint }}"
+  OIDC_CLIENT_ID: "{{ .oidc.clientID }}"
+  OIDC_CLIENT_REDIRECT_URL: "{{ .oidc.clientRedirectUrl }}"
+  {{- end }}
