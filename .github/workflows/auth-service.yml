@@ -38,21 +38,12 @@ jobs:
       - name: Execute Gradle bootJar build
         run: ./gradlew bootJar test --info
 
-      - name: Debug ls
-        run: ls
-
-      - name: Debug ls -la
-        run: ls -la
-
-      - name: Debug ls -la
-        run: ls ./build
-
       - name: Archive JAR
         uses: actions/upload-artifact@v3
         with:
           name: auth-service-jar
           path: |
-            ./build/**
+            authservice/build
 
   docker:
     needs: build
