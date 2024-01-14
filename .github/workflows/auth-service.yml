@@ -35,8 +35,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Execute Gradle bootJar build + test
-        run: ./gradlew bootJar test --info
+      - name: Build bootJar
+        run: ./gradlew bootJar --info
+
+      - name: Execute unit tests
+        run: ./gradlew test --info
 
       - name: Archive Jar
         uses: actions/upload-artifact@v3
