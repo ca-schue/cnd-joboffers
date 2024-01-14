@@ -16,8 +16,6 @@ import {
     PublicCompanyProfileDTO
 } from "../.generated/user-service";
 import store from "../state/Store";
-import {UpdateCompanyLinksRequest} from "../.generated/user-service/models/UpdateCompanyLinksRequest";
-import {OpenAPI} from "../.generated/career-service";
 import {handleUnexpectedResponse, parseError} from "./apis";
 
 export interface UserApi {
@@ -54,7 +52,7 @@ export class DefaultUserApi implements UserApi {
         UserApiConfig.USERNAME = undefined
         UserApiConfig.PASSWORD = undefined
         UserApiConfig.TOKEN = undefined
-        OpenAPI.HEADERS = { "Accept": "application/json, application/problem+json" }
+        UserApiConfig.HEADERS = { "Accept": "application/json, application/problem+json" }
     }
 
     private setAccessToken() {

@@ -1,21 +1,14 @@
 import {
-    AccountManagementService,
     AccountDTO,
     AccountLoginResponseDTO,
+    AccountManagementService,
     OpenAPI as AuthApiConfig
 } from "../.generated/auth-service";
 import {config} from "../config/config";
-import * as console from "console";
 import {UUID} from "../.generated/auth-service/models/UUID";
-import {useAppSelector} from "../state/hooks";
 import store from "../state/Store"
-import AuthState from "../state/state/AuthState";
-import ExternalApiError from "../model/ExternalApiError";
-import {OpenAPI} from "../.generated/career-service";
 import {handleUnexpectedResponse, parseError} from "./apis";
-import {JobApplicationCreationResponse} from "../.generated/career-service/models/JobApplicationCreationResponse";
 import {InternalAccount} from "../.generated/auth-service/models/InternalAccount";
-import {InternalAccountRegistrationRequest} from "../.generated/auth-service/models/InternalAccountRegistrationRequest";
 import {AccountLoginResponse} from "../.generated/auth-service/models/AccountLoginResponse";
 
 export interface AuthApi {
@@ -42,7 +35,7 @@ export class DefaultAuthApi implements AuthApi{
         AuthApiConfig.USERNAME = undefined
         AuthApiConfig.PASSWORD = undefined
         AuthApiConfig.TOKEN = undefined
-        OpenAPI.HEADERS = { "Accept": "application/json, application/problem+json" }
+        AuthApiConfig.HEADERS = { "Accept": "application/json, application/problem+json" }
     }
 
     private setAccessToken() {
