@@ -82,9 +82,12 @@ An intuitive concept with environment variables was established to simplify conf
 
 - [x] The application was developed using CI/CD pipelines in GitHub Actions.
   In each multi-job pipeline, the service is built and comprehensively tested - depending on the test duration, additional integration tests are performed. At the end of each pipeline, a Docker image is created and uploaded to the [Docker Hub Registry](https://hub.docker.com/repositories/caschuen). Please refer to [`.github/workflows`](.github/workflows).
- 
 
-  ![auth-service](https://github.com/ca-schue/cnd-joboffers/actions/workflows/auth-service.yml/badge.svg) ![user-service](https://github.com/ca-schue/cnd-joboffers/actions/workflows/user-service.yml/badge.svg) ![career-service](https://github.com/ca-schue/cnd-joboffers/actions/workflows/career-service.yml/badge.svg) ![notification-service](https://github.com/ca-schue/cnd-joboffers/actions/workflows/notification-service.yml/badge.svg) ![frontend](https://github.com/ca-schue/cnd-joboffers/actions/workflows/frontend.yml/badge.svg) 
+  <a href="https://github.com/ca-schue/cnd-joboffers/actions/workflows/auth-service.yml"><img src="https://github.com/ca-schue/cnd-joboffers/actions/workflows/auth-service.yml/badge.svg" alt="auth-service-ci"></a>
+  <a href="https://github.com/ca-schue/cnd-joboffers/actions/workflows/user-service.yml"><img src="https://github.com/ca-schue/cnd-joboffers/actions/workflows/user-service.yml/badge.svg" alt="user-service-ci"></a>
+  <a href="https://github.com/ca-schue/cnd-joboffers/actions/workflows/career-service.yml"><img src="https://github.com/ca-schue/cnd-joboffers/actions/workflows/career-service.yml/badge.svg" alt="career-service-ci"></a>
+  <a href="https://github.com/ca-schue/cnd-joboffers/actions/workflows/notification-service.yml"><img src="https://github.com/ca-schue/cnd-joboffers/actions/workflows/notification-service.yml/badge.svg" alt="notification-service-ci"></a>
+  <a href="https://github.com/ca-schue/cnd-joboffers/actions/workflows/frontend.yml"><img src="https://github.com/ca-schue/cnd-joboffers/actions/workflows/frontend.yml/badge.svg" alt="frontend-ci"></a>
 </blockquote>
 
 
