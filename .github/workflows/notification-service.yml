@@ -12,7 +12,7 @@ defaults:
     working-directory: ./notificationservice
 
 jobs:
-  build-x-unit-test-x-docker-push:
+  jar-build-x-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout notification-service
@@ -35,8 +35,35 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Execute Gradle bootJar build
-        run: ./gradlew bootJar
+      - name: Build bootJar
+        run: ./gradlew bootJar --info
+
+      - name: Execute unit tests
+        run: ./gradlew test --info
+
+      - name: Archive Jar
+        uses: actions/upload-artifact@v3
+        with:
+          name: notification-service-jar
+          path: |
+            notificationservice/build
+
+  docker-build-x-push:
+    needs: jar-build-x-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Dockerfile
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            notificationservice/Dockerfile
+          sparse-checkout-cone-mode: false
+
+      - name: Download Jar
+        uses: actions/download-artifact@v3
+        with:
+          name: notification-service-jar
+          path: ./notificationservice/build
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
