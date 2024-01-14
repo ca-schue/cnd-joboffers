@@ -39,7 +39,9 @@ jobs:
         run: ./gradlew bootJar --info
 
       - name: Execute unit tests
-        run: ./gradlew test --info
+        run: |
+          ./gradlew test --info
+          cat build/reports/allTests/index.html >> $GITHUB_STEP_SUMMARY
 
       - name: Archive Jar
         uses: actions/upload-artifact@v3

@@ -118,3 +118,10 @@ subprojects {
         enabled = false
     }
 }
+
+tasks.register('testReport', TestReport) {
+    destinationDir = file("$buildDir/reports/allTests")
+    testResults.from += subprojects*.test
+}
+
+test.finalizedBy testReport
