@@ -123,8 +123,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/ThrowableProblem'
-      security:
-        - accountAccessToken: []
   /accounts/{accountId}:
     delete:
       description: Deletes the account and the user profile if available. {accountId} must match account id in access token
