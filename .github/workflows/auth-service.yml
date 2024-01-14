@@ -38,10 +38,29 @@ jobs:
       - name: Execute Gradle bootJar build
         run: ./gradlew bootJar test --info
 
+      - name: Archive JAR
+        uses: actions/upload-artifact@v3
+        with:
+          name: auth-service-jar
+          path: |
+            build
+
   docker:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Dockerfile
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            authservice/Dockerfile
+          sparse-checkout-cone-mode: false
+
+      - name: Download Jar
+        uses: actions/download-artifact@v3
+        with:
+          name: auth-service-jar
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
