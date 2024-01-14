@@ -91,8 +91,16 @@ const MyAccountView = () => {
                             await new Promise(r => setTimeout(r, 1000 * 2))
                             logout()
                         })
+                        .catch(passwordError => {
+                                setPasswordBuffering(false)
+                                setIsGlobalBuffering(false)
+                                setPasswordError(passwordError.details)
+                            }
+                        )
                 } else {
-                    throw new Error("Passwords no not match")
+                    setPasswordBuffering(false)
+                    setIsGlobalBuffering(false)
+                    setPasswordError("Passwords no not match")
                 }
             })
             .catch(passwordError => {

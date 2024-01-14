@@ -17,12 +17,12 @@ public interface CompanyService {
             @NotNull UserId ownerId,
             @NotNull CompanyDetails details,
             @NotNull CompanyLinks links
-    ) throws UserNotFoundByIdException, CompanyAlreadyExistsException, UserAlreadyOwnerOfCompanyException;
+    ) throws UserNotFoundByIdException, CompanyAlreadyExistsException, UserAlreadyOwnerOfCompanyException, InvalidArgumentException;
 
     @NotNull Company updateCompanyDetails(
             @NotNull CompanyId companyId,
             @NotNull CompanyDetails updatedCompanyDetails
-    ) throws CompanyNotFoundByIdException;
+    ) throws CompanyNotFoundByIdException, InvalidArgumentException;
 
     @NotNull Company updateCompanyLinks(
             @NotNull CompanyId companyId,

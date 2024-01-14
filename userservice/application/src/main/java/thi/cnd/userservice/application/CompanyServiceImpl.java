@@ -31,13 +31,22 @@ class CompanyServiceImpl implements CompanyService {
         return companyRepository.findCompanyById(companyId);
     }
 
+    private void verifyCompanyArguments(CompanyDetails companyDetails) throws InvalidArgumentException {
+        String name = companyDetails.name();
+        String description = companyDetails.description();
+        Set<String> tags = companyDetails.tags();
+        if (name.isBlank() || description.isBlank() || tags.isEmpty()) {
+            throw new InvalidArgumentException("Please set name, description and tags of your company");
+        }
+    }
+
     @Override
     public Company registerNewCompany(
             @NotNull UserId ownerId,
             @NotNull CompanyDetails details,
             @NotNull CompanyLinks links
-    ) throws UserNotFoundByIdException, CompanyAlreadyExistsException, UserAlreadyOwnerOfCompanyException {
-
+    ) throws UserNotFoundByIdException, CompanyAlreadyExistsException, UserAlreadyOwnerOfCompanyException, InvalidArgumentException {
+        verifyCompanyArguments(details);
         User owner = userRepository.findUserById(ownerId);
         if (owner.getAssociations().getOwnerOf() != null) {
             throw new UserAlreadyOwnerOfCompanyException("User already owner of company '" + owner.getAssociations().getOwnerOf().toString() + "'");
@@ -54,7 +63,9 @@ class CompanyServiceImpl implements CompanyService {
     public @NotNull Company updateCompanyDetails(
             @NotNull CompanyId companyId,
             @NotNull CompanyDetails updatedCompanyDetails
-    ) throws CompanyNotFoundByIdException {
+    ) throws CompanyNotFoundByIdException, InvalidArgumentException {
+        verifyCompanyArguments(updatedCompanyDetails);
+
         Company oldCompany = companyRepository.findCompanyById(companyId);
 
         boolean nameChanged = oldCompany.getDetails().name().equals(updatedCompanyDetails.name());

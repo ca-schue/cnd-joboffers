@@ -44,7 +44,9 @@ class CompanyHttpControllerImpl implements CompanyApi {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (CompanyAlreadyExistsException | UserAlreadyOwnerOfCompanyException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
-        } catch (ConstraintViolationException e4) {
+        } catch (InvalidArgumentException e4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e4.getMessage());
+        } catch (ConstraintViolationException e5) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
@@ -131,7 +133,9 @@ class CompanyHttpControllerImpl implements CompanyApi {
             return ResponseEntity.ok(companyDtoMapper.toCompanyDTO(company));
         } catch (CompanyNotFoundByIdException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (ConstraintViolationException e4) {
+        } catch (InvalidArgumentException e2) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e2.getMessage());
+        } catch (ConstraintViolationException e3) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
