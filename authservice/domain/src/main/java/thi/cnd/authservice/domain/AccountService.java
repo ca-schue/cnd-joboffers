@@ -14,7 +14,7 @@ public interface AccountService {
     void validateAccount(AccountId accountId);
     void invalidateAccount(AccountId accountId);
 
-    InternalAccount registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException;
+    InternalAccount registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException, InvalidEmailException;
     OidcAccount registerNewOidcAccount(String subject) throws AccountAlreadyExistsException;
 
     void updateInternalAccountPassword(AccountId accountId, String newPlaintextPassword) throws AccountNotFoundByIdException, InvalidPasswordException, WrongProviderException;

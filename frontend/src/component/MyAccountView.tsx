@@ -66,7 +66,7 @@ const MyAccountView = () => {
                 }
             )
             .catch(emailError => {
-                setEmailError(emailError.message)
+                setEmailError(emailError.details)
                 setEmailBuffering(false)
                 setIsGlobalBuffering(false)
             })
@@ -98,7 +98,7 @@ const MyAccountView = () => {
             .catch(passwordError => {
                     setPasswordBuffering(false)
                     setIsGlobalBuffering(false)
-                    setPasswordError(passwordError.message)
+                    setPasswordError(passwordError.details)
                 }
             )
 
@@ -122,7 +122,7 @@ const MyAccountView = () => {
             setShowDeleteModal(false)
             setDeletingBuffering(false)
             setIsGlobalBuffering(false)
-            setDeletingError(deletingError.message)
+            setDeletingError(deletingError.details)
         })
     };
 

@@ -30,7 +30,13 @@ class AccountServiceImpl implements AccountService {
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
     @Override
-    public InternalAccount registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException {
+    public InternalAccount registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException, InvalidEmailException {
+        if(email.isBlank()) {
+            throw new InvalidEmailException("Email cannot be empty");
+        }
+        if (!isValidEmail(email)) {
+            throw new InvalidEmailException("Please enter a well-formed email");
+        }
         InternalAccount internalAccount = this.buildInternalAccount(email, password);
         return accountRepository.saveInternalAccount(internalAccount);
     }

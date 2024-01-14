@@ -44,7 +44,7 @@ class AccountHttpControllerImpl implements AccountManagementApi {
             throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
         } catch (InvalidPasswordException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
-        } catch (ConstraintViolationException e4) {
+        } catch (ConstraintViolationException | InvalidEmailException e4) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }

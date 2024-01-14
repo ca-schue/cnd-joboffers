@@ -77,7 +77,7 @@ function MyProfileView() {
                     setSubscribed(true);
                 })
                 .catch(subscriptionError => {
-                    setSubscribeError(subscriptionError.message)
+                    setSubscribeError(subscriptionError.details)
                 })
         } else {
             alert("Please enter a valid number of days for the subscription.");
@@ -97,7 +97,7 @@ function MyProfileView() {
                 setNightMode(!isNightMode);
             })
             .catch(nightModeError => {
-                setNightModeError(nightModeError.message)
+                setNightModeError(nightModeError.details)
             });
 
     };
@@ -116,7 +116,7 @@ function MyProfileView() {
                 setUpdateFeedback("Profile updated!")
             })
             .catch(updatedProfileError => {
-                setUpdateError(updatedProfileError.message)
+                setUpdateError(updatedProfileError.details)
             })
     };
 
@@ -138,7 +138,7 @@ function MyProfileView() {
             })
             .catch(deleteUserError => {
                 console.log(deleteUserError)
-                setDeleteError(deleteUserError.message)
+                setDeleteError(deleteUserError.details)
             })
     };
 
