@@ -2,7 +2,7 @@ name: user-service-pipeline
 
 on:
   push:
-    branches: main
+    branches: "*"
     paths:
       - .github/workflows/user-service.yml
       - userservice/**
@@ -12,7 +12,7 @@ defaults:
     working-directory: ./userservice
 
 jobs:
-  build-x-unit-test-x-docker-push:
+  build-x-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout user-service
@@ -37,6 +37,30 @@ jobs:
 
       - name: Execute Gradle bootJar build
         run: ./gradlew clean bootJar integrationTest --info
+
+      - name: Archive Jar
+        uses: actions/upload-artifact@v3
+        with:
+          name: user-service-jar
+          path: |
+            userservice/build
+
+  docker:
+    needs: build-x-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Dockerfile
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            userservice/Dockerfile
+          sparse-checkout-cone-mode: false
+
+      - name: Download Jar
+        uses: actions/download-artifact@v3
+        with:
+          name: user-service-jar
+          path: ./userservice/build
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
