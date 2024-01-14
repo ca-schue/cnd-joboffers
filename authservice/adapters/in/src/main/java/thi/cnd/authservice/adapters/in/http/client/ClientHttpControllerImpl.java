@@ -37,7 +37,7 @@ class ClientHttpControllerImpl implements ClientManagementApi {
     public ResponseEntity<Void> deleteClient(String name) {
         try {
             service.deleteClient(name);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (ClientNotFoundByNameException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }

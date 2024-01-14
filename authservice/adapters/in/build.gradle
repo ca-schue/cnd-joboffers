@@ -30,12 +30,12 @@ sourceSets {
 }
 
 openApiValidate {
-    inputSpec.set("$projectDir/src/main/resources/openapi-as-rest-spec.yaml")
+    inputSpec.set("$projectDir/src/main/resources/openapi-as-http-spec.yaml")
     inputSpec.set("$projectDir/src/main/resources/openapi-us-event-spec.yaml")
 }
 
 task generateAuthRestApi(type: GenerateTask) {
-    inputSpec.set("$projectDir/src/main/resources/openapi-as-rest-spec.yaml")
+    inputSpec.set("$projectDir/src/main/resources/openapi-as-http-spec.yaml")
     outputDir = "$projectDir/build/generate-resources"
     generatorName = "spring"
     library = "spring-boot"

@@ -21,12 +21,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccountLoginResponse'
-        '401':
-          description: Wrong credentials
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ThrowableProblem'
         default:
           description: Returned if any error occurred during the request.
           content:
@@ -48,18 +42,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccountLoginResponse'
-        #        '201':
-        #          description: Login with OIDC was successful. New Account created.
-        #          content:
-        #            application/json:
-        #              schema:
-        #                $ref: '#/components/schemas/AccessTokenResponse'
-        '401':
-          description: Unsupported OIDC identity provider (ID-Token issuer).
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ThrowableProblem'
         default:
           description: Returned if any error occurred during the request.
           content:
@@ -85,12 +67,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccountLoginResponse'
-        '409':
-          description: Account with the email already exists.
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ThrowableProblem'
         default:
           description: Returned if any error occurred during the request.
           content:
@@ -118,12 +94,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalAccount'
-        '404':
-          description: Account not found for id.
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ThrowableProblem'
         default:
           description: Returned if any error occurred during the request.
           content:
@@ -147,12 +117,6 @@ paths:
       responses:
         '200':
           description: Update was successful
-        '404':
-          description: Account not found for id.
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ThrowableProblem'
         default:
           description: Returned if any error occurred during the request.
           content:
@@ -172,12 +136,6 @@ paths:
       responses:
         '204':
           description: Account was deleted.
-        '404':
-          description: Account not found for id.
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ThrowableProblem'
         default:
           description: Returned if any error occurred during the request.
           content:
@@ -246,12 +204,6 @@ paths:
       responses:
         '204':
           description: Client was deleted.
-        '404':
-          description: Client not found for id.
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ThrowableProblem'
         default:
           description: Returned if any error occurred during the request.
           content:
@@ -312,22 +264,6 @@ components:
         subject:
           type: string
 
-    #    Account:
-    #      type: object
-    #      required:
-    #        - type
-    #        - provider
-    #        - id
-    #        - email
-    #      properties:
-    #        type:
-    #          type: string
-    #        provider:
-    #          type: string
-    #        id:
-    #          $ref: '#/components/schemas/UUID'
-    #        email:
-    #          type: string
     InternalAccountRegistrationRequest:
       type: object
       required:

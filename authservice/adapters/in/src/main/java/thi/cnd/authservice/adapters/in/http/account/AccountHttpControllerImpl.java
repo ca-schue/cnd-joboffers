@@ -42,7 +42,7 @@ class AccountHttpControllerImpl implements AccountManagementApi {
         } catch (AccountAlreadyExistsException ex) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
         } catch (InvalidPasswordException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
 
@@ -116,7 +116,7 @@ class AccountHttpControllerImpl implements AccountManagementApi {
     public ResponseEntity<Void> deleteAccount(UUID accountId) {
         try {
             accountService.deleteAccount(new AccountId(accountId));
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (AccountNotFoundByIdException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (AccountStillVerifiedException e2) {
