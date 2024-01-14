@@ -65,11 +65,20 @@ jobs:
       - name: Debug LS
         run: pwd
 
+      - name: Debug LS ..
+        run: ls ..
+
+      - name: Debug LS -la ..
+        run: ls -la ..
+
       - name: Debug LS
         run: ls
 
-      - name: Debug LS
+      - name: Debug LS -la
         run: ls -la
+
+      - name: Debug LS ./authservice
+        run: ls -la ./authservice
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
