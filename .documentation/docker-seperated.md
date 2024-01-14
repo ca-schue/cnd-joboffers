@@ -11,9 +11,8 @@ You can run the "joboffers" application as separately started docker containers 
     - Tested on: [OpenJDK JDK 21.0.1 General-Availability Release](https://jdk.java.net/21/) (Linux/x64)
     - [Installation guide (unofficial)](https://www.linuxcapable.com/how-to-install-openjdk-21-on-ubuntu-linux/)
  3. Docker
-    - Version: Latest
-    - Tested on: [kafka-3.6.0-src.tgz](https://dlcdn.apache.org/kafka/3.6.0/)
-    - [Installation guide (unofficial)](https://tecadmin.net/install-apache-kafka-debian/)
+    - Version: 24.0.7
+    - Tested on: [apt repository]([https://dlcdn.apache.org/kafka/3.6.0/](https://docs.docker.com/engine/install/debian/#install-using-the-repository))
 
 ## Build Service Containers
 - ### Frontend:
