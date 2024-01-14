@@ -38,7 +38,7 @@ We recommend using the provided `.env.docker.static` file as the single source o
 - All variables are preconfigured with non-conflicting values (assuming the specified ports are unused on your local machine).
 - ***Problem:*** Compared to `docker compose --env-file ...`, the command `docker run --env-file ...` [cannot substitute variables in the `.env` file](https://stackoverflow.com/questions/63714506/variable-substitution-in-env-file-for-docker-run-env-file), leading to replicated configuration parameters such as ports and URLs.
 - Any changes made to the configuration parameters must therefore be checked for inconsistencies. 
-- **We advise against using separate Docker containers - Use  `docker compose --env-file ...` together with the `.env.docker` file and variable substitution instead.**
+- **We advise against using separate Docker containers. Use  `docker compose --env-file ...` together with the `.env.docker` file and variable substitution instead.**
 
 ## Execute Containers
 - Execute all commands in the root directory of this repository `cnd-joboffers/`.
