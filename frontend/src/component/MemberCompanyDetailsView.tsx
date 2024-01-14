@@ -78,7 +78,7 @@ const MemberCompanyDetailsView = (props: MyCompanyViewProps) => {
                 setInviteUserFeedback("User '" + newUserEmail + "' invited.")
             })
             .catch(error => {
-                setInviteUserError("Error when inviting user '" + newUserEmail + "': " + error.body.error)
+                setInviteUserError("Error when inviting user '" + newUserEmail + "': " + error.details)
                 props.loading(false)
             })
     };

@@ -195,7 +195,7 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
                     })
             })
             .catch(error => {
-                setCreateCompanyError(error.body.error)
+                setCreateCompanyError(error.details)
                 props.loading(false)
             })
     }
@@ -215,7 +215,7 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
                 setUpdateBasicCompanyDataFeedback("Firma-Informationen aktualisiert.")
             })
             .catch(error => {
-                setUpdateBasicCompanyDataError(error.body.error)
+                setUpdateBasicCompanyDataError(error.details)
                 props.loading(false)
             })
     };
@@ -257,7 +257,7 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
                 setInviteUserFeedback("Benutzer '" + newUserEmail + "' eingeladen.")
             })
             .catch(error => {
-                setInviteUserError("Der Benutzer '" + newUserEmail + "' konnte nicht eingeladen werden: " + error.body.error)
+                setInviteUserError("Der Benutzer '" + newUserEmail + "' konnte nicht eingeladen werden: " + error.details)
                 props.loading(false)
             })
     };
@@ -277,7 +277,7 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
                     })
             })
             .catch(error => {
-                setDeleteCompanyError(error.body.error)
+                setDeleteCompanyError(error.details)
                 props.loading(false)
             })
     };
@@ -292,7 +292,7 @@ const MyCompanyView = (props: MyCompanyViewProps) => {
                 props.loading(false)
             })
             .catch(error => {
-                setPremiumPartnerError(error.body.error)
+                setPremiumPartnerError(error.details)
                 props.loading(false)
             })
     }

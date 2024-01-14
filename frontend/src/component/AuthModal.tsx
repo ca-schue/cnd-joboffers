@@ -97,16 +97,16 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
                             })
                     }).catch(error => {
                     setLoading(false)
-                    if (error.status == 409) {
+                    if (error.statusCode == 409) {
                         setError("Account mit dieser Email existiert bereits.")
                     }else {
-                        setError(error.body.detail)
+                        setError(error.details)
                     }
                 })
             })
             .catch(error => {
                 setLoading(false)
-                setError(error.body.detail)
+                setError(error.details)
             });
 
     }
@@ -145,7 +145,7 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
             })
             .catch(error => {
                 setLoading(false)
-                setError(error.body.detail)
+                setError(error.details)
             });
     }
 
@@ -170,12 +170,12 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
             })
             .catch(error => {
                 setLoading(false)
-                if (error.status == 406) {
+                if (error.statusCode == 406) {
                     setError("Passwort muss mindestens einen Groß- und Kleinbuchstaben, eine Zahl und ein Sonderzeichen beinhalten.")
-                } else if (error.status == 409) {
+                } else if (error.statusCode == 409) {
                     setError("Account mit dieser Email existiert bereits.")
                 }else {
-                    setError(error.body.detail)
+                    setError(error.details)
                 }
             })
     };
