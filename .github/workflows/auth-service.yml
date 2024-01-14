@@ -60,6 +60,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: auth-service-jar
+          path: ./authservice/build
 
       - name: Debug LS
         run: pwd
