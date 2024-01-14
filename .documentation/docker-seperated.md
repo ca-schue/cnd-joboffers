@@ -12,7 +12,7 @@ You can run the "joboffers" application as separately started docker containers 
     - [Installation guide (unofficial)](https://www.linuxcapable.com/how-to-install-openjdk-21-on-ubuntu-linux/)
  3. Docker
     - Version: 24.0.7
-    - Tested on: [apt repository]([https://dlcdn.apache.org/kafka/3.6.0/](https://docs.docker.com/engine/install/debian/#install-using-the-repository))
+    - Tested on: [apt repository](https://docs.docker.com/engine/install/debian/#install-using-the-repository)
 
 ## Build Service Containers
 - ### Frontend:
