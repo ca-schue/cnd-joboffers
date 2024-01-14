@@ -14,6 +14,8 @@ import thi.cnd.authservice.domain.model.AccessToken;
 import thi.cnd.authservice.domain.model.account.*;
 
 import java.time.Instant;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Service
@@ -25,6 +27,7 @@ class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final PasswordProvider passwordProvider;
     private final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
+    private static final String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
     @Override
     public InternalAccount registerNewInternalAccount(String email, String password) throws AccountAlreadyExistsException, InvalidPasswordException {
@@ -38,9 +41,22 @@ class AccountServiceImpl implements AccountService {
         return accountRepository.saveOidcAccount(oidcAccount);
     }
 
+    private boolean isValidEmail(String email) {
+        Pattern pattern = Pattern.compile(EMAIL_REGEX);
+        final Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
     @Override
-    public InternalAccount updateInternalAccountEmail(AccountId accountId, String email) throws EmailAlreadyInUserException, AccountNotFoundByIdException, WrongProviderException {
+    public InternalAccount updateInternalAccountEmail(AccountId accountId, String email) throws EmailAlreadyInUserException, AccountNotFoundByIdException, WrongProviderException, InvalidEmailException {
         try {
+            if(email.isBlank()) {
+                throw new InvalidEmailException("Email cannot be empty");
+            }
+            if (!isValidEmail(email)) {
+                throw new InvalidEmailException("Please enter a well-formed email");
+            }
+
             accountRepository.findInternalAccountByEmail(email);
             throw new EmailAlreadyInUserException("Email " + email + " already in use by another account");
         } catch (AccountNotFoundByEmailException e) {

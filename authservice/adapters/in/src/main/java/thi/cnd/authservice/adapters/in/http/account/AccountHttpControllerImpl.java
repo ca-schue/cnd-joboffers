@@ -1,5 +1,6 @@
 package thi.cnd.authservice.adapters.in.http.account;
 
+import jakarta.validation.ConstraintViolationException;
 import thi.cnd.authservice.adapters.in.http.basicAuthAccountLogin.InternalAccountDetails;
 import thi.cnd.authservice.adapters.in.http.oidcAccountLogin.AuthenticatedOidcIdToken;
 import lombok.AllArgsConstructor;
@@ -43,6 +44,8 @@ class AccountHttpControllerImpl implements AccountManagementApi {
             throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
         } catch (InvalidPasswordException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        } catch (ConstraintViolationException e4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
@@ -56,7 +59,9 @@ class AccountHttpControllerImpl implements AccountManagementApi {
         } catch (AccountNotFoundByIdException e2) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e2.getMessage());
         } catch (InvalidPasswordException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (ConstraintViolationException e4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
@@ -68,8 +73,10 @@ class AccountHttpControllerImpl implements AccountManagementApi {
             return ResponseEntity.ok(accountDtoMapper.toInternalDTO(internalAccount));
         } catch (EmailAlreadyInUserException | WrongProviderException e1) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e1.getMessage());
-        } catch (AccountNotFoundByIdException e2) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e2.getMessage());
+        } catch (AccountNotFoundByIdException | InvalidEmailException e2) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e2.getMessage());
+        } catch (ConstraintViolationException e4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 

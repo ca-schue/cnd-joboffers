@@ -1,5 +1,6 @@
 package thi.cnd.userservice.adapters.in.http.user;
 
+import jakarta.validation.ConstraintViolationException;
 import thi.cnd.userservice.adapters.generated.rest.UserApi;
 import thi.cnd.userservice.adapters.generated.rest.model.*;
 import thi.cnd.userservice.adapters.in.http.jwtEndpointAuthentication.AuthenticatedAccount;
@@ -85,6 +86,10 @@ class UserHttpControllerImpl implements UserApi {
             return ResponseEntity.ok(userDtoMapper.toDTO(registeredUser));
         } catch (UserAlreadyExistsException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+        } catch (InvalidArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (ConstraintViolationException e4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
@@ -115,6 +120,10 @@ class UserHttpControllerImpl implements UserApi {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e1.getMessage());
         } catch (UserNotFoundByIdException e2) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e2.getMessage());
+        } catch (InvalidArgumentException e3) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e3.getMessage());
+        } catch (ConstraintViolationException e4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
@@ -129,6 +138,8 @@ class UserHttpControllerImpl implements UserApi {
             return ResponseEntity.ok(userDtoMapper.toDTO(updatedUser));
         } catch (UserNotFoundByIdException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (ConstraintViolationException e4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 

@@ -1,5 +1,6 @@
 package thi.cnd.authservice.adapters.in.http.client;
 
+import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,8 @@ class ClientHttpControllerImpl implements ClientManagementApi {
             return ResponseEntity.ok(mapper.toDTO(clientWithPlaintextPassword));
         } catch (ClientAlreadyExistsException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+        } catch (ConstraintViolationException e4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 

@@ -16,11 +16,11 @@ public interface UserService {
 
     @NotNull User findUserByEmail(String email) throws UserNotFoundByEmailException;
 
-    @NotNull User registerNewUser(UserId userId, String email, String firstName, String lastName) throws UserAlreadyExistsException;
+    @NotNull User registerNewUser(UserId userId, String email, String firstName, String lastName) throws UserAlreadyExistsException, InvalidArgumentException;
 
     @NotNull User updateUserSettings(UserId userId, UserSettings updatedUserSettings) throws UserNotFoundByIdException;
 
-    @NotNull User updateUserProfile(UserId userId, UserProfile updatedUserProfile) throws UserNotFoundByIdException, EmailAlreadyInUseException;
+    @NotNull User updateUserProfile(UserId userId, UserProfile updatedUserProfile) throws UserNotFoundByIdException, EmailAlreadyInUseException, InvalidArgumentException;
 
     @NotNull User extendUserSubscription(UserId userId, Duration extendBy) throws UserNotFoundByIdException;
 

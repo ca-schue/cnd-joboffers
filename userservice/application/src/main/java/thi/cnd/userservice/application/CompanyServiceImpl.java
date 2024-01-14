@@ -37,6 +37,7 @@ class CompanyServiceImpl implements CompanyService {
             @NotNull CompanyDetails details,
             @NotNull CompanyLinks links
     ) throws UserNotFoundByIdException, CompanyAlreadyExistsException, UserAlreadyOwnerOfCompanyException {
+
         User owner = userRepository.findUserById(ownerId);
         if (owner.getAssociations().getOwnerOf() != null) {
             throw new UserAlreadyOwnerOfCompanyException("User already owner of company '" + owner.getAssociations().getOwnerOf().toString() + "'");

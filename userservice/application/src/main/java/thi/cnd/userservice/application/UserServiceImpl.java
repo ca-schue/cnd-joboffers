@@ -9,6 +9,8 @@ import thi.cnd.userservice.domain.*;
 import thi.cnd.userservice.application.ports.out.event.UserEvents;
 import thi.cnd.userservice.application.ports.out.repository.UserRepository;
 import java.time.Duration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +19,9 @@ class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final CompanyService companyService;
     private final UserEvents userEvents;
+
+    private static final String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+
 
     @Override
     public User findUserById(UserId userId) throws UserNotFoundByIdException {
@@ -28,9 +33,26 @@ class UserServiceImpl implements UserService {
         return userRepository.findUserByEmail(email);
     }
 
+    private boolean isValidEmail(String email) {
+        Pattern pattern = Pattern.compile(EMAIL_REGEX);
+        final Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    private void verifyUserInput(UserId userId, String email, String firstName, String lastName) throws InvalidArgumentException {
+        if (userId == null || email.isBlank() || firstName.isBlank() || lastName.isBlank()) {
+            throw new InvalidArgumentException("Please fill out every field.");
+        }
+        if (!isValidEmail(email)) {
+            throw new InvalidArgumentException("Please enter a well-formed email.");
+        }
+    }
+
     @Override
-    public User registerNewUser(UserId userId, String email, String firstName, String lastName) throws UserAlreadyExistsException {
-        // TODO: Input verification?
+    public User registerNewUser(UserId userId, String email, String firstName, String lastName) throws UserAlreadyExistsException, InvalidArgumentException {
+
+        verifyUserInput(userId, email, firstName, lastName);
+
         User newUser = new User(userId, email, firstName, lastName);
         User savedUser = userRepository.saveUser(newUser);
 
@@ -40,11 +62,16 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUserProfile(UserId userId, UserProfile updatedUserProfile) throws UserNotFoundByIdException, EmailAlreadyInUseException {
+    public User updateUserProfile(UserId userId, UserProfile updatedUserProfile) throws UserNotFoundByIdException, EmailAlreadyInUseException, InvalidArgumentException {
         User user = userRepository.findUserById(userId);
 
         // Input verification:
         String newUserProfileEmail = updatedUserProfile.getEmail();
+        String updatedFirstName = updatedUserProfile.getFirstName();
+        String updatedLastName = updatedUserProfile.getLastName();
+
+        verifyUserInput(userId, newUserProfileEmail, updatedFirstName, updatedLastName);
+
         try {
             User userWithSameEmail = userRepository.findUserByEmail(newUserProfileEmail);
             if (!userWithSameEmail.getId().toString().equals(userId.toString())) {

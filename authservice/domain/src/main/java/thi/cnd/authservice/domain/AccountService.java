@@ -18,7 +18,7 @@ public interface AccountService {
     OidcAccount registerNewOidcAccount(String subject) throws AccountAlreadyExistsException;
 
     void updateInternalAccountPassword(AccountId accountId, String newPlaintextPassword) throws AccountNotFoundByIdException, InvalidPasswordException, WrongProviderException;
-    InternalAccount updateInternalAccountEmail(AccountId accountId, String email) throws EmailAlreadyInUserException, AccountNotFoundByIdException, WrongProviderException;
+    InternalAccount updateInternalAccountEmail(AccountId accountId, String email) throws EmailAlreadyInUserException, AccountNotFoundByIdException, WrongProviderException, InvalidEmailException;
 
     InternalAccount updateLastInternalAccountLogin(String email) throws AccountNotFoundByEmailException;
     OidcAccount updateLastOidcAccountLogin(String subject) throws AccountNotFoundBySubjectException;

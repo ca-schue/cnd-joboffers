@@ -1,5 +1,6 @@
 package thi.cnd.userservice.adapters.in.http.company;
 
+import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -43,13 +44,14 @@ class CompanyHttpControllerImpl implements CompanyApi {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (CompanyAlreadyExistsException | UserAlreadyOwnerOfCompanyException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+        } catch (ConstraintViolationException e4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
     @Override
     public ResponseEntity<Void> deleteCompany(UUID companyId) {
         // Author. = Owner
-        // TODO: Delete member/assocciations of all users
         try {
             companyService.deleteCompanyById(new CompanyId(companyId));
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -129,6 +131,8 @@ class CompanyHttpControllerImpl implements CompanyApi {
             return ResponseEntity.ok(companyDtoMapper.toCompanyDTO(company));
         } catch (CompanyNotFoundByIdException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (ConstraintViolationException e4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
@@ -146,6 +150,8 @@ class CompanyHttpControllerImpl implements CompanyApi {
             return ResponseEntity.ok(companyDtoMapper.toCompanyDTO(company));
         } catch (CompanyNotFoundByIdException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (ConstraintViolationException e4) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 }
