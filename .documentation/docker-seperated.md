@@ -11,9 +11,8 @@ You can run the "joboffers" application as separately started docker containers 
     - Tested on: [OpenJDK JDK 21.0.1 General-Availability Release](https://jdk.java.net/21/) (Linux/x64)
     - [Installation guide (unofficial)](https://www.linuxcapable.com/how-to-install-openjdk-21-on-ubuntu-linux/)
  3. Docker
-    - Version: Latest
-    - Tested on: [kafka-3.6.0-src.tgz](https://dlcdn.apache.org/kafka/3.6.0/)
-    - [Installation guide (unofficial)](https://tecadmin.net/install-apache-kafka-debian/)
+    - Version: 24.0.7
+    - Tested on: [apt repository](https://docs.docker.com/engine/install/debian/#install-using-the-repository)
 
 ## Build Service Containers
 - ### Frontend:
@@ -39,7 +38,7 @@ We recommend using the provided `.env.docker.static` file as the single source o
 - All variables are preconfigured with non-conflicting values (assuming the specified ports are unused on your local machine).
 - ***Problem:*** Compared to `docker compose --env-file ...`, the command `docker run --env-file ...` [cannot substitute variables in the `.env` file](https://stackoverflow.com/questions/63714506/variable-substitution-in-env-file-for-docker-run-env-file), leading to replicated configuration parameters such as ports and URLs.
 - Any changes made to the configuration parameters must therefore be checked for inconsistencies. 
-- **We advise against using separate Docker containers - Use  `docker compose --env-file ...` together with the `.env.docker` file and variable substitution instead.**
+- **We advise against using separate Docker containers. Use  `docker compose --env-file ...` together with the `.env.docker` file and variable substitution instead.**
 
 ## Execute Containers
 - Execute all commands in the root directory of this repository `cnd-joboffers/`.
