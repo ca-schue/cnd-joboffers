@@ -61,6 +61,15 @@ jobs:
         with:
           name: auth-service-jar
 
+      - name: Debug LS
+        run: pwd
+
+      - name: Debug LS
+        run: ls
+
+      - name: Debug LS
+        run: ls -la
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
