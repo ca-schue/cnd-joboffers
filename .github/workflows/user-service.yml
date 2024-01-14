@@ -12,7 +12,7 @@ defaults:
     working-directory: ./userservice
 
 jobs:
-  build-x-unit-test-x-docker-push:
+  jar-build-x-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout user-service
@@ -35,8 +35,36 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Execute Gradle bootJar build
-        run: ./gradlew clean bootJar integrationTest --info
+      - name: Build bootJar
+        run: ./gradlew bootJar --info
+
+      - name: Execute unit tests
+        run: ./gradlew test --info
+
+      - name: Archive Jar
+        uses: actions/upload-artifact@v3
+        with:
+          name: user-service-jar
+          path: |
+            userservice/build
+
+
+  docker-build-x-push:
+    needs: jar-build-x-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Dockerfile
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            userservice/Dockerfile
+          sparse-checkout-cone-mode: false
+
+      - name: Download Jar
+        uses: actions/download-artifact@v3
+        with:
+          name: user-service-jar
+          path: ./userservice/build
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3

@@ -29,6 +29,12 @@ tasks.register('integrationTest', Test) {
 	useJUnitPlatform()
 }
 
+tasks.register('testReport', TestReport) {
+	destinationDir = file("$buildDir/reports/allTests")
+	testResults.from += "$buildDir/test-results/integrationTest/binary"
+	testResults.from += subprojects*.test
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
@@ -119,4 +125,7 @@ subprojects {
 		enabled = false
 	}
 }
+
+test.finalizedBy testReport
+integrationTest.finalizedBy testReport
 

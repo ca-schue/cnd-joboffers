@@ -18,6 +18,7 @@ jar {
     }
 }
 
+
 test {
     useJUnitPlatform() {
         exclude "**/IntegrationTests.class"
@@ -26,6 +27,12 @@ test {
 
 tasks.register('integrationTest', Test) {
     useJUnitPlatform()
+}
+
+tasks.register('testReport', TestReport) {
+    destinationDir = file("$buildDir/reports/allTests")
+    testResults.from += "$buildDir/test-results/integrationTest/binary"
+    testResults.from += subprojects*.test
 }
 
 dependencies {
@@ -101,4 +108,7 @@ subprojects {
         enabled = false
     }
 }
+
+test.finalizedBy testReport
+integrationTest.finalizedBy testReport
 
