@@ -12,7 +12,7 @@ defaults:
     working-directory: ./userservice
 
 jobs:
-  build-x-test:
+  jar-build-x-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout user-service
@@ -35,8 +35,8 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Execute Gradle bootJar build
-        run: ./gradlew clean bootJar integrationTest --info
+      - name: Execute Gradle bootJar build + test
+        run: ./gradlew bootJar test --info
 
       - name: Archive Jar
         uses: actions/upload-artifact@v3
@@ -45,8 +45,8 @@ jobs:
           path: |
             userservice/build
 
-  docker:
-    needs: build-x-test
+  docker-build-x-push:
+    needs: jar-build-x-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Dockerfile
