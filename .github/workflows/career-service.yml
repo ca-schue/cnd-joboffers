@@ -2,7 +2,7 @@ name: career-service-pipeline
 
 on:
   push:
-    branches: "*"
+    branches: main
     paths:
       - .github/workflows/career-service.yml
       - careerservice/**

@@ -2,7 +2,7 @@ name: notification-service-pipeline
 
 on:
   push:
-    branches: "*"
+    branches: main
     paths:
       - .github/workflows/notification-service.yml
       - notificationservice/**

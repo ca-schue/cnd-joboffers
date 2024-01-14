@@ -2,7 +2,7 @@ name: frontend-pipeline
 
 on:
   push:
-    branches: "*"
+    branches: main
     paths:
       - .github/workflows/frontend.yml
       - frontend/**

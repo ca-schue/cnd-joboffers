@@ -2,7 +2,7 @@ name: user-service-pipeline
 
 on:
   push:
-    branches: "*"
+    branches: main
     paths:
       - .github/workflows/user-service.yml
       - userservice/**
