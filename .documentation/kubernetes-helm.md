@@ -1,40 +1,45 @@
 
 # Run the Application on a Kubernetes Cluster using Helm
 
- ## Running on Windows:
-
-### Prerequisites:
-
-1. Running Kubernetes Cluster
-
-- Tested on: Kubernetes in Desktop Docker on Windows
-
-2. CLI Tools installed: Kubectl & Helm
-
-- Kubectl: [Doku](https://kubernetes.io/docs/tasks/tools/)
-
-- Helm: [Doku](https://helm.sh/docs/intro/install/)
-
-3. Install ingress controller in kubernetes cluster
-
-- Example: [Doku](https://kubernetes.github.io/ingress-nginx/deploy/)
-
-- Command tested: `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml`
-
-4. Execute `mkdirs.sh` to create the `volumes` folder.
-
-5. Adjust the configuration in `values.yaml` in the `./helm` folder
-
-- Everything should be already configured. Only value that must be changed is `localConfig.mountBasePath`, which is the path to the `volumes` folder created in the previous step
+1. Set up a Kubernetes Cluster
+   - Tested on: Kubernetes in Desktop Docker on Windows
+     
+2. Install the CLI Tools Kubectl & Helm
+   - Kubectl: [Doku](https://kubernetes.io/docs/tasks/tools/)
+   - Helm: [Doku](https://helm.sh/docs/intro/install/)
+     
+3. Install NGINX ingress controller for the cluster. (Command for [Docker Desktop on Windows](https://kubernetes.github.io/ingress-nginx/deploy/))
+   ```
+   kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+   ```
+   
+4. Create folders for the local volumes in the repository root.
+   ```
+   ./mkdirs.sh
+   ```
+   
+6. Customize the `values.yaml` configuration inside the `./helm` folder
+   - *Important:* Value `localConfig.mountBasePath` must be set to the `volumes` directory created in previous step 4.
+   - Everything else is preconfigured for the application to be ready for use. 
 
   
 
 ### Installing Application with Helm Chart
 
-1. Go to root folder and type command `helm install joboffers helm/.`
+1. Install the Helm chart in root folder:
+   ```
+   helm install joboffers helm/.
+   ```
 
-2. Now type in `kubectl get pods` and you should see the list of pods being created. If pods are stuck at pending, it is due to low resources on the host computer. Deleting the deployment with ´helm delete joboffers´ and reinstalling often fixes the problem.
+3. Monitor the creation of the Kubernetes Pods in the cluster:
+   ```
+   kubectl get pods
+   ```
+   *Note:* When computer resources are low, Pods can get stuck at startup. Reinstalling the Helm chart can fix this problem.
 
-3. After all pods have started, go to `http://localhost`. You should now see the homepage
+5. Once all Pods are running, you will see the homepage at `http://localhost` (with the preconfigured values.yaml).
 
-4. Cleanup can be done with `helm delete joboffers`
+6. To clean up the Kubernetes application, uninstall the Helm chart.
+   ```
+   helm delete joboffers
+   ```
