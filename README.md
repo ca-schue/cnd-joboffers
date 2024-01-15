@@ -114,10 +114,10 @@ This results in the following role development of the actor:
 ![Actor role evolution](./.documentation/figures/actor-role-evolution.svg)
 
 ## Run this application ...
-- ... [locally 'bare metal' (un-containerized)](.documentation/bare-metal.md)
+- ... [locally un-containerized 'bare metal'](.documentation/bare-metal.md)
 - ... [locally as seperated Docker containers](.documentation/docker-seperated.md)
-- ... [locally using Docker Compose](.documentation/docker-compose.md)
-- ... [on a Kubernetes cluster using Helm](.documentation/kubernetes-helm.md)
+- ... [locally using Docker Compose (recommended)](.documentation/docker-compose.md)
+- ... [on a Kubernetes cluster using Helm (recommended)](.documentation/kubernetes-helm.md)
 
 ## System architecture
 
