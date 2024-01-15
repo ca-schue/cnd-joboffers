@@ -60,7 +60,7 @@ class CompanyMongoRepositoryImpl implements CompanyRepository {
             var savedEntity = repository.save(dao);
             return companyDaoMapper.toCompany(savedEntity);
         } catch (DuplicateKeyException e) {
-            throw new CompanyAlreadyExistsException("Company with id " + company.getId().toString() + " already exists.");
+            throw new CompanyAlreadyExistsException("Company with name " + company.getDetails().name() + " already exists (id=" + company.getId() + ").");
         }
     }
 

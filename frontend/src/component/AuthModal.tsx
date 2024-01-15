@@ -97,12 +97,20 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
                             })
                     }).catch(error => {
                         setLoading(false)
-                        setError(error.details)
-                    })
+                        if(error.status != undefined && error.status == 502) {
+                            setError("Backend not ready.")
+                        } else {
+                            setError(error.details)
+                        }
+                })
             })
             .catch(error => {
                 setLoading(false)
-                setError(error.details)
+                if(error.status != undefined && error.status == 502) {
+                    setError("Backend not ready.")
+                } else {
+                    setError(error.details)
+                }
             });
 
     }
@@ -141,7 +149,13 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
             })
             .catch(error => {
                 setLoading(false)
-                setError(error.details)
+                if(error.status != undefined && error.status == 502) {
+                    setError("Backend not ready.")
+                } else if(error.status != undefined && error.status == 401) {
+                    setError("Wrong credentials.")
+                } else {
+                    setError(error.details)
+                }
             });
     }
 
@@ -166,7 +180,11 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
             })
             .catch(error => {
                 setLoading(false)
-                setError(error.details)
+                if(error.status != undefined && error.status == 502) {
+                    setError("Backend not ready.")
+                } else {
+                    setError(error.details)
+                }
             })
     };
 
@@ -194,7 +212,11 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
             })
             .catch(error => {
                 setLoading(false)
-                setError(error.details)
+                if(error.status != undefined && error.status == 502) {
+                    setError("Backend not ready.")
+                } else {
+                    setError(error.details)
+                }
             });
     };
 

@@ -69,7 +69,7 @@ class UserMongoRepositoryImpl implements UserRepository {
         } catch (UserNotFoundByIdException e) {
             try {
                 this.findUserByEmail(dao.profile().email());
-                throw new UserAlreadyExistsException("User profile already linked to this account.");
+                throw new UserAlreadyExistsException("E-Mail already in use by another user profile.");
             } catch (UserNotFoundByEmailException ex) {
                 UserDAO savedDao = repository.save(dao);
                 return userDaoMapper.toUser(savedDao);
