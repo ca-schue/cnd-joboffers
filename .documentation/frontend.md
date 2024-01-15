@@ -1,4 +1,6 @@
-# Auth Service:
+# Frontend:
+
+In order to demonstrate the functions of the backend microservices from the application user's perspective, a front-end was written in React. This is provided by a Node.JS HTTP server.
 
 ## Required Env Vars:
 ```  
