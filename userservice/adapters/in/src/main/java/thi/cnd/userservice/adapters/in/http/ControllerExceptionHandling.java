@@ -15,6 +15,17 @@ import org.zalando.problem.spring.web.advice.security.SecurityAdviceTrait;
 @ControllerAdvice
 public class ControllerExceptionHandling implements ProblemHandling, SecurityAdviceTrait {
 
+    @ExceptionHandler(value = {HttpErrorException.class})
+    public ResponseEntity<Problem> httpErrorException(HttpErrorException e) {
+        return toResponseEntity(
+                Problem.builder()
+                        .withStatus(Status.valueOf(e.getHttpStatusCode()))
+                        .withTitle(e.getHttpStatusPhrase())
+                        .withDetail(e.getErrorDetails())
+                        .build()
+        );
+    }
+
     @ExceptionHandler
     public ResponseEntity<Problem> defaultExceptionHandler(Exception e) {
         return toResponseEntity(

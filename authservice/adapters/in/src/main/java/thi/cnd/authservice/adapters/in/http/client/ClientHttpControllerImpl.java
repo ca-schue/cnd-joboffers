@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
+import thi.cnd.authservice.adapters.in.http.HttpErrorException;
 import thi.cnd.authservice.api.generated.ClientManagementApi;
 import thi.cnd.authservice.api.generated.model.ClientCreationRequestDTO;
 import thi.cnd.authservice.api.generated.model.ClientCreationResponseDTO;
@@ -30,9 +30,9 @@ class ClientHttpControllerImpl implements ClientManagementApi {
            ClientWithPlaintextPassword clientWithPlaintextPassword = service.createNewClient(requestDTO.getName(), audiences, requestDTO.getScopes());
             return ResponseEntity.ok(mapper.toDTO(clientWithPlaintextPassword));
         } catch (ClientAlreadyExistsException e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+            throw new HttpErrorException(HttpStatus.CONFLICT, e.getMessage());
         } catch (ConstraintViolationException e4) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
+            throw new HttpErrorException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
@@ -42,7 +42,7 @@ class ClientHttpControllerImpl implements ClientManagementApi {
             service.deleteClient(name);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (ClientNotFoundByNameException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new HttpErrorException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
@@ -52,7 +52,7 @@ class ClientHttpControllerImpl implements ClientManagementApi {
             ClientWithPlaintextPassword clientWithNewPlaintextPassword = service.setNewRandomPassword(clientId);
             return ResponseEntity.ok(mapper.toDTO(clientWithNewPlaintextPassword));
         } catch (ClientNotFoundByNameException e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+            throw new HttpErrorException(HttpStatus.CONFLICT, e.getMessage());
         }
     }
 

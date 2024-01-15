@@ -96,13 +96,9 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
                                 console.log("No user fetched");
                             })
                     }).catch(error => {
-                    setLoading(false)
-                    if (error.statusCode == 409) {
-                        setError("Account mit dieser Email existiert bereits.")
-                    }else {
+                        setLoading(false)
                         setError(error.details)
-                    }
-                })
+                    })
             })
             .catch(error => {
                 setLoading(false)
@@ -170,13 +166,7 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
             })
             .catch(error => {
                 setLoading(false)
-                if (error.statusCode == 406) {
-                    setError("Passwort muss mindestens einen Groß- und Kleinbuchstaben, eine Zahl und ein Sonderzeichen beinhalten.")
-                } else if (error.statusCode == 409) {
-                    setError("Account mit dieser Email existiert bereits.")
-                }else {
-                    setError(error.details)
-                }
+                setError(error.details)
             })
     };
 

@@ -7,9 +7,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 import thi.cnd.userservice.adapters.generated.rest.CompanyApi;
 import thi.cnd.userservice.adapters.generated.rest.model.*;
+import thi.cnd.userservice.adapters.in.http.HttpErrorException;
 import thi.cnd.userservice.domain.exceptions.*;
 import thi.cnd.userservice.domain.model.company.*;
 import thi.cnd.userservice.domain.model.user.UserId;
@@ -41,13 +41,13 @@ class CompanyHttpControllerImpl implements CompanyApi {
             );
             return ResponseEntity.ok(companyDtoMapper.toCompanyDTO(company));
         } catch (UserNotFoundByIdException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new HttpErrorException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (CompanyAlreadyExistsException | UserAlreadyOwnerOfCompanyException e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+            throw new HttpErrorException(HttpStatus.CONFLICT, e.getMessage());
         } catch (InvalidArgumentException e4) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e4.getMessage());
+            throw new HttpErrorException(HttpStatus.BAD_REQUEST, e4.getMessage());
         } catch (ConstraintViolationException e5) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
+            throw new HttpErrorException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
@@ -58,7 +58,7 @@ class CompanyHttpControllerImpl implements CompanyApi {
             companyService.deleteCompanyById(new CompanyId(companyId));
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (CompanyNotFoundByIdException | UserNotFoundByIdException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new HttpErrorException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
@@ -69,7 +69,7 @@ class CompanyHttpControllerImpl implements CompanyApi {
             Company company = companyService.findCompanyById(new CompanyId(companyId));
             return ResponseEntity.ok(companyDtoMapper.toCompanyDTO(company));
         } catch (CompanyNotFoundByIdException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new HttpErrorException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
@@ -80,7 +80,7 @@ class CompanyHttpControllerImpl implements CompanyApi {
             Company company = companyService.findCompanyById(new CompanyId(companyId));
             return ResponseEntity.ok(companyDtoMapper.toPublicProfileDTO(company));
         } catch (CompanyNotFoundByIdException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new HttpErrorException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
@@ -91,9 +91,9 @@ class CompanyHttpControllerImpl implements CompanyApi {
             userService.inviteUserToCompany(new CompanyId(companyId), requestDTO.getUserProfileEmail());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (UserNotFoundByEmailException | UserNotFoundByIdException | CompanyNotFoundByIdException e1) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e1.getMessage());
+            throw new HttpErrorException(HttpStatus.NOT_FOUND, e1.getMessage());
         } catch (UserAlreadyMemberOfCompanyException e2) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, e2.getMessage());
+            throw new HttpErrorException(HttpStatus.CONFLICT, e2.getMessage());
         }
     }
 
@@ -103,9 +103,9 @@ class CompanyHttpControllerImpl implements CompanyApi {
             Company subscribedCompany = companyService.subscribeToPartnerProgram(CompanyId.of(companyId.toString()));
             return ResponseEntity.ok(companyDtoMapper.toCompanyDTO(subscribedCompany));
         } catch (CompanyAlreadyPartnerProgramSubscriberException e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+            throw new HttpErrorException(HttpStatus.CONFLICT, e.getMessage());
         } catch (CompanyNotFoundByIdException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new HttpErrorException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
@@ -132,11 +132,11 @@ class CompanyHttpControllerImpl implements CompanyApi {
                     );
             return ResponseEntity.ok(companyDtoMapper.toCompanyDTO(company));
         } catch (CompanyNotFoundByIdException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new HttpErrorException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (InvalidArgumentException e2) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e2.getMessage());
+            throw new HttpErrorException(HttpStatus.BAD_REQUEST, e2.getMessage());
         } catch (ConstraintViolationException e3) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
+            throw new HttpErrorException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
@@ -153,9 +153,9 @@ class CompanyHttpControllerImpl implements CompanyApi {
             );
             return ResponseEntity.ok(companyDtoMapper.toCompanyDTO(company));
         } catch (CompanyNotFoundByIdException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new HttpErrorException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (ConstraintViolationException e4) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
+            throw new HttpErrorException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 }

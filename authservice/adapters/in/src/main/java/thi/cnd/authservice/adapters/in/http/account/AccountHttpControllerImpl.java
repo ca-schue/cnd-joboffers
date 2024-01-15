@@ -42,9 +42,9 @@ class AccountHttpControllerImpl implements AccountManagementApi {
             return ResponseEntity.ok(accountDtoMapper.toLoginResponseDTO(internalAccountDTO, accountJwt));
         } catch (AccountAlreadyExistsException ex) {
             throw new HttpErrorException(HttpStatus.CONFLICT, ex.getMessage());
-        } catch (InvalidPasswordException e) {
+        } catch (InvalidPasswordException | InvalidEmailException e) {
             throw new HttpErrorException(HttpStatus.UNAUTHORIZED, e.getMessage());
-        } catch (ConstraintViolationException | InvalidEmailException e4) {
+        } catch (ConstraintViolationException e4) {
             throw new HttpErrorException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
