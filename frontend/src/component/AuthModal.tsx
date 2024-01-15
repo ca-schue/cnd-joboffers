@@ -145,7 +145,7 @@ function AuthModal({isOpen, hideModal}: ModalDialogProps) {
             })
             .catch(error => {
                 setLoading(false)
-                setError(error.message)
+                setError(error.details)
             });
     }
 

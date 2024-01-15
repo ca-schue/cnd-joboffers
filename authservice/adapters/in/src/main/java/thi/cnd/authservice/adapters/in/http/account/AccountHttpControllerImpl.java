@@ -1,6 +1,7 @@
 package thi.cnd.authservice.adapters.in.http.account;
 
 import jakarta.validation.ConstraintViolationException;
+import thi.cnd.authservice.adapters.in.http.HttpErrorException;
 import thi.cnd.authservice.adapters.in.http.basicAuthAccountLogin.InternalAccountDetails;
 import thi.cnd.authservice.adapters.in.http.oidcAccountLogin.AuthenticatedOidcIdToken;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 import thi.cnd.authservice.api.generated.AccountManagementApi;
 import thi.cnd.authservice.api.generated.model.*;
 import thi.cnd.authservice.domain.AccountService;
@@ -41,11 +41,11 @@ class AccountHttpControllerImpl implements AccountManagementApi {
             InternalAccountDTO internalAccountDTO = accountDtoMapper.toInternalDTO(registeredInternalAccount);
             return ResponseEntity.ok(accountDtoMapper.toLoginResponseDTO(internalAccountDTO, accountJwt));
         } catch (AccountAlreadyExistsException ex) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, ex.getMessage());
+            throw new HttpErrorException(HttpStatus.CONFLICT, ex.getMessage());
         } catch (InvalidPasswordException e) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+            throw new HttpErrorException(HttpStatus.UNAUTHORIZED, e.getMessage());
         } catch (ConstraintViolationException | InvalidEmailException e4) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
+            throw new HttpErrorException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
@@ -55,13 +55,13 @@ class AccountHttpControllerImpl implements AccountManagementApi {
             accountService.updateInternalAccountPassword(new AccountId(accountId), internalAccountPasswordUpdateRequestDTO.getNewPlaintextPassword());
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (WrongProviderException e1) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, e1.getMessage());
+            throw new HttpErrorException(HttpStatus.CONFLICT, e1.getMessage());
         } catch (AccountNotFoundByIdException e2) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e2.getMessage());
+            throw new HttpErrorException(HttpStatus.NOT_FOUND, e2.getMessage());
         } catch (InvalidPasswordException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+            throw new HttpErrorException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (ConstraintViolationException e4) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
+            throw new HttpErrorException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
@@ -72,11 +72,11 @@ class AccountHttpControllerImpl implements AccountManagementApi {
             InternalAccount internalAccount = accountService.updateInternalAccountEmail(new AccountId(accountId), internalAccountEmailUpdateRequestDTO.getNewEmail());
             return ResponseEntity.ok(accountDtoMapper.toInternalDTO(internalAccount));
         } catch (EmailAlreadyInUserException | WrongProviderException e1) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, e1.getMessage());
+            throw new HttpErrorException(HttpStatus.CONFLICT, e1.getMessage());
         } catch (AccountNotFoundByIdException | InvalidEmailException e2) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e2.getMessage());
+            throw new HttpErrorException(HttpStatus.BAD_REQUEST, e2.getMessage());
         } catch (ConstraintViolationException e4) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
+            throw new HttpErrorException(HttpStatus.BAD_REQUEST, "Please enter valid inputs.");
         }
     }
 
@@ -104,7 +104,7 @@ class AccountHttpControllerImpl implements AccountManagementApi {
             try {
                 oidcAccount = accountService.registerNewOidcAccount(authenticatedOidcIdToken.getSubject());
             } catch (AccountAlreadyExistsException e) {
-                throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+                throw new HttpErrorException(HttpStatus.CONFLICT, e.getMessage());
             }
         }
         AccessToken accountAccessToken = accountService.mintAccountAccessToken(oidcAccount);
@@ -125,9 +125,9 @@ class AccountHttpControllerImpl implements AccountManagementApi {
             accountService.deleteAccount(new AccountId(accountId));
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (AccountNotFoundByIdException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new HttpErrorException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (AccountStillVerifiedException e2) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, e2.getMessage());
+            throw new HttpErrorException(HttpStatus.FORBIDDEN, e2.getMessage());
         }
     }
 
