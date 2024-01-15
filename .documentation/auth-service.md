@@ -1,10 +1,10 @@
 # Auth Service
 
-- Implements external and internal authentication and authorization across the application using JWT
+- Implements external (Google OIDC) and internal (username, password) authentication and authorization across the application using JWT
 - Orchestrates distribution of JWK to services. Allows validation of JWT issued and signed by the Auth Service
 - Manages persisting account and client data.
 - Synchronizes accounts with user profiles by processing asynchronous User Service events.
-
+- *Note:* As the OIDC client has not been submitted for verification by Google, only one OIDC account can exist.
 ## Noteworthy Use Cases
 
 <details xmlns="http://www.w3.org/1999/html">
