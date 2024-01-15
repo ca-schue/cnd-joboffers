@@ -38,8 +38,10 @@
    *Note:* When computer resources are low, Pods can get stuck at startup. Reinstalling the Helm chart can fix this problem.
 
 5. Once all Pods are running, you will see the homepage at `http://localhost` (with the preconfigured values.yaml).
+   
+   *Note:* Even if the pod status is `Running`, the services may not yet be ready. It is recommended to wait ~5 min or to check the service status in the pod logs.
 
-6. To clean up the Kubernetes application, uninstall the Helm chart.
+7. To clean up the Kubernetes application, uninstall the Helm chart.
    ```
    helm delete joboffers
    ```
