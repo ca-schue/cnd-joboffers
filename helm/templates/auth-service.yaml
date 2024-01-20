@@ -40,9 +40,5 @@ spec:
                 name: auth-service-secret-config
           ports:
             - containerPort: {{ .port }}
-          resources:
-            limits:
-              memory: "1Gi"
-              cpu: "100m"
       restartPolicy: Always
 {{- end }}

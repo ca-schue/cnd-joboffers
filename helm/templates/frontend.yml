@@ -43,9 +43,5 @@ spec:
                 name: frontend-secret-config
           ports:
             - containerPort: {{ .port }}
-          resources:
-            limits:
-              memory: "4Gi"
-              cpu: "1.0"
       restartPolicy: Always
 {{- end }}

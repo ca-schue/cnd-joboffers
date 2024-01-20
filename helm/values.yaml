@@ -10,7 +10,7 @@ localConfig:
   #
   # For Docker Desktop + Mac you can use the absolute path of the volumes folder.
   # Just make sure the parent folder is in the configured shared folders of Docker Desktop (/Users/* is shared by default; See Docker Desktop settings)
-  mountBasePath: " /run/desktop/mnt/host/d/Dev/carl-repo/cnd-joboffers/volumes"
+  mountBasePath: "/Users/thalmaier/work/cnd-joboffers/volumes"
 
 microservices:
   authService:
